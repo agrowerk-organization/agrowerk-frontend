@@ -379,7 +379,7 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para ma
 Para dúvidas ou sugestões, entre em contato:
 
 - 📧 Email: douglasholanda3195@gmail.com
-- 💼 LinkedIn: [Seu perfil](https://www.linkedin.com/in/douglas-holanda-113519269/)
+- 💼 LinkedIn: [Douglas Holanda](https://www.linkedin.com/in/douglas-holanda-113519269/)
 
 ---
 
