@@ -1,0 +1,7 @@
+version: '3.9'
+
+services:
+  agrowerk-frontend:
+  build: .
+  ports:
+    -"4200:80"
