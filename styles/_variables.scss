@@ -1,0 +1,67 @@
+/* AGROWERK - Design Tokens */
+
+/* Typography */
+
+$font-family-primary: 'Inter', sans-serif;
+$font-url: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap';
+
+/* Font sizes */
+
+$font-size-text: 1.3rem;
+$font-size-links: 1.35rem;
+$font-size-buttons: 1.6rem;
+$font-size-links-hover: 1.6rem;
+$font-size-buttons-hover: 1.8rem;
+
+/* Font Weights */
+
+$weight-medium: 500;
+$weight-semibold: 600;
+$weight-bold: 700;
+$weight-extrabold: 800;
+$weight-text-links: $weight-semibold;
+$weight-text-buttons: $weight-bold;
+$weight-text-links-hover: $weight-semibold;
+$weight-text-buttons-hover: $weight-extrabold;
+
+/* Color Palette */
+
+/* Brand Colors */
+$primary-color: #2E7D32;
+$secondary-color: #F57C00;
+$tertiary-color: #110808;
+$quartenary-color: #f89e0e;
+$accent-color: #1976D2;
+
+/* Status */
+
+$success-color: #388E3C;
+$warning-color: #F9A825;
+$error-color: #D32F2F;
+$card-badge-color: #D80700;
+
+/* Neutral Colors */
+
+$primary-neutral-color: #F5F5F5;
+$secondary-neutral-color: #424242;
+$background-color: #1a4d2e;
+
+/* Button Colors */
+
+$button-main-color: #2F8F46;
+$button-hover-color: #256D3A;
+$button-second-color: #51B456;
+$button-second-hover-color: #1D691F;
+
+/* Footer colors */
+
+$footer-text-primary: #F5F5F5;
+$footer-text-secondary: rgba(245, 245, 245, 0.8);
+$footer-heading: #F9A825;
+$footer-link-color: rgba(255, 255, 255, 0.7);
+$footer-link-hover: #F57C00;
+$footer-icon-color: rgba(255, 255, 255, 0.8);
+$footer-icon-hover: #F9A825;
+$footer-border: rgba(255, 255, 255, 0.12);
+$footer-input-bg: rgba(255, 255, 255, 0.1);
+$footer-input-border: rgba(255, 255, 255, 0.25);

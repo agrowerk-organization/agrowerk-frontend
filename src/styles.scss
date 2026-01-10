@@ -1,1 +1,13 @@
-/* You can add global styles to this file, and also import other style files */
+/* AGROWERK - Global styles entry point */
+
+/* Variables first */
+@import 'styles/variables';
+
+/* Mixins */
+@import 'styles/mixins';
+
+/* Resets */
+@import 'styles/reset';
+
+/*Main styles and CSS custom properties*/
+@import 'styles/main';

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NavbarSection } from './navbar.section';
+import { FaqSection } from './faq.section';
 
-describe('NavbarSection', () => {
-  let component: NavbarSection;
-  let fixture: ComponentFixture<NavbarSection>;
+describe('FaqSection', () => {
+  let component: FaqSection;
+  let fixture: ComponentFixture<FaqSection>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NavbarSection]
+      imports: [FaqSection]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(NavbarSection);
+    fixture = TestBed.createComponent(FaqSection);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });
