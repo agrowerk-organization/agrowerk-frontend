@@ -103,6 +103,11 @@ npm start
 # ou
 ng serve
 ```
+Ou caso prefira no Docker: 
+
+```docker
+docker compose up --build
+```
 
 A aplicação estará disponível em: `http://localhost:4200`
 
