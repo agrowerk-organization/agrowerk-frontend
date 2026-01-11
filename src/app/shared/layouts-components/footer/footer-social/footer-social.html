@@ -1,0 +1,55 @@
+<div class="flex flex-col lg:flex-row items-center justify-between gap-8 pt-8 border-t border-footer-border">
+    
+    <div class="flex flex-col items-center lg:items-start gap-4">
+      <h4 class="text-footer-heading text-base font-bold uppercase tracking-wide">Conecte-se</h4>
+      
+      <div class="flex gap-4">
+        <a href="https://linkedin.com/company/agrowerk" target="_blank" rel="noopener noreferrer" 
+           class="w-12 h-12 flex items-center justify-center rounded-full bg-footer-input-bg text-neutral-100 transition-all hover:bg-footer-heading hover:text-primary-dark hover:scale-110">
+          <fa-icon [icon]="icons.LINKEDIN" size="xl"></fa-icon>
+        </a>
+        
+        <a href="https://instagram.com/agrowerk" target="_blank" rel="noopener noreferrer" 
+           class="w-12 h-12 flex items-center justify-center rounded-full bg-footer-input-bg text-neutral-100 transition-all hover:bg-footer-heading hover:text-primary-dark hover:scale-110">
+          <fa-icon [icon]="icons.INSTAGRAM" size="xl"></fa-icon>
+        </a>
+
+        <a href="https://t.me/agrowerk" target="_blank" rel="noopener noreferrer" 
+           class="w-12 h-12 flex items-center justify-center rounded-full bg-footer-input-bg text-neutral-100 transition-all hover:bg-footer-heading hover:text-primary-dark hover:scale-110">
+          <fa-icon [icon]="icons.TELEGRAM" size="xl"></fa-icon>
+        </a>
+
+        <a href="https://youtube.com/@agrowerk" target="_blank" rel="noopener noreferrer" 
+           class="w-12 h-12 flex items-center justify-center rounded-full bg-footer-input-bg text-neutral-100 transition-all hover:bg-footer-heading hover:text-primary-dark hover:scale-110">
+          <fa-icon [icon]="icons.YOUTUBE" size="xl"></fa-icon>
+        </a>
+      </div>
+    </div>
+
+    <app-footer-apps></app-footer-apps>
+  
+    <div class="flex flex-col items-center lg:items-start gap-3">
+      <p class="text-footer-text-primary font-medium">
+        Receba atualizações semanais
+      </p>
+      
+      <form (submit)="subscribeNewsletter($event)" class="flex gap-2 w-full max-w-sm">
+        <input 
+          type="email" 
+          placeholder="email@gmail.com" 
+          [(ngModel)]="newsletterEmail"
+          name="email"
+          required
+          class="flex-1 px-4 py-2 bg-footer-input-bg border border-footer-input-border rounded-lg 
+                text-footer-text-primary placeholder:text-footer-text-secondary  
+                focus:outline-none focus:ring-1 focus:ring-footer-heading transition-shadow"
+        />
+        <button 
+          type="submit"
+          class="px-5 py-2 bg-footer-heading text-background font-bold rounded-lg transition-all hover:bg-footer-link-hover hover:scale-105"
+        >
+          <fa-icon [icon]="icons.PAPERPLANE"></fa-icon>
+        </button>
+      </form>
+    </div>
+</div>

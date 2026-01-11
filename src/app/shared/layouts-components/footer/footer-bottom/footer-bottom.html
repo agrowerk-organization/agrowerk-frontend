@@ -1,0 +1,37 @@
+<div class="flex flex-col lg:flex-row items-center
+            justify-between gap-4 pt-4 border-footer-border
+            text-center lg:text-left">
+
+    <p class="text-footer-text-secondary ">
+        @ {{ currentYear }} AgroWerk. Todos os direitos reservados.
+    </p>
+
+    <div class="flex items-center gap-3 text-footer-link ">
+        <button 
+            (click)="goToPrivacy()"
+            class="translation-colors hover:text-footer-link-hover"
+            >
+            Política de privacidade
+        </button>
+        <span class="text-footer-text-secondary">•</span>
+        <button 
+            (click)="goToTerms()"
+            class="transition-colors hover:text-footer-link-hover"
+            >
+            Termos de Uso
+            </button>
+        <span class="text-footer-text-secondary">•</span>
+        <button 
+            (click)="goToCookies()"
+            class="transition-colors hover:text-footer-link-hover"
+            >
+            Cookies
+        </button>
+    </div>
+
+    <p class="text-footer-text-secondary italic">
+        Planejamento holístico de inventário com um dispositivo na mão.
+    </p>
+
+</div>
+            
