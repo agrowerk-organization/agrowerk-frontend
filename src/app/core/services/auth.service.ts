@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, map, of, tap } from 'rxjs';
 import { Router } from '@angular/router';
@@ -17,7 +17,9 @@ export class AuthService {
   private isLoggedSubject = new BehaviorSubject<boolean>(false);
   public isLogged$ = this.isLoggedSubject.asObservable();
 
-  constructor(private http: HttpClient, private router : Router) {}
+  private http = inject(HttpClient);
+  private router = inject(Router);
+
 
   login(credentials: LoginRequest): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(`${this.apiUrl}/login`, credentials, {

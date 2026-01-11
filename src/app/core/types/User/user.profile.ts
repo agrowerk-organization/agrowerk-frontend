@@ -1,0 +1,1 @@
+export type UserProfile = 'producer' | 'supplier_admin' | 'system_admin';

@@ -1,0 +1,75 @@
+<div class="relative w-full lg:w-auto">
+  @if (!isLoggedIn()) {
+    <button
+    class="flex items-center justify-center gap-2 w-full lg:w-auto px-6 py-3 text-[1rem] font-semibold bg-button-main text-neutral-primary rounded-lg transition-all 
+    hover:bg-button-main-hover hover:shadow-lg hover:scale-105 cursor-pointer"      (click)="toggleLoginDropdown()"
+      [attr.aria-expanded]="showLoginDropdown()"
+    >
+      <fa-icon [icon]="icons.USERTIE"></fa-icon>
+      Área de acesso
+      <fa-icon 
+        [icon]="icons.CHEVRONDOWN"
+        class="transition-transform duration-300"
+        [class.rotate-180]="showLoginDropdown()"
+      ></fa-icon>
+    </button>
+
+    @if (showLoginDropdown()) {
+      <ul class="absolute top-[calc(100%+0.5rem)] left-0 right-0 lg:right-auto lg:left-auto lg:min-w-[220px] bg-primary rounded-lg shadow-lg py-2 z-[1010]">
+        @for (profile of loginProfiles; track profile.role) {
+          <li
+            class="flex items-center gap-2 px-4 py-2 text-[1rem] font-medium text-neutral-primary cursor-pointer transition-all hover:bg-[rgba(255,255,255,0.15)] hover:scale-105 cursor-pointer"
+            (click)="goToLoginAs(profile.role); toggleLoginDropdown()"
+            (keyword.enter)="goToLoginAs(profile.role); toggleLoginDropdown()"
+            role="button"
+            tabindex="0"
+          >
+            <fa-icon [icon]="icons[profile.icon]"></fa-icon>
+            {{ profile.label }}
+          </li>
+        }
+      </ul>
+    }
+  }
+
+  @if (isLoggedIn()) {
+    <button
+    class="flex items-center justify-center gap-2 w-full lg:w-auto px-6 py-3 text-[1rem] font-semibold bg-button-main text-neutral-primary rounded-lg transition-all 
+    hover:bg-button-main-hover hover:shadow-lg hover:scale-105 cursor-pointer"      
+    (click)="toggleProfileDropdown()"
+    >
+      <fa-icon [icon]="icons.USER"></fa-icon>
+      Perfil
+      <fa-icon 
+        [icon]="icons.CHEVRONDOWN"
+        class="transition-transform duration-300"
+        [class.rotate-180]="showProfileDropdown()"
+      ></fa-icon>
+    </button>
+
+    @if (showProfileDropdown()) {
+      <ul class="absolute top-[calc(100%+0.5rem)] left-0 right-0 lg:right-auto lg:left-auto lg:min-w-[220px] bg-primary rounded-lg shadow-lg py-2 z-[1010]">
+        <li
+          class="flex items-center gap-2 px-4 py-2 text-[1rem] font-medium text-neutral-primary cursor-pointer transition-all hover:bg-[rgba(255,255,255,0.15)] hover:scale-105 cursor-pointer"
+          (click)="goToProfile(); toggleProfileDropdown()"
+          (keyword.enter)="goToProfile(); toggleProfileDropdown()"
+          role="button"
+          tabindex="0"
+        >
+          <fa-icon [icon]="icons.USER"></fa-icon>
+          Perfil
+        </li>
+        <li
+          class="flex items-center gap-2 px-4 py-2 text-[1rem] font-medium text-neutral-primary cursor-pointer transition-all hover:bg-[rgba(255,255,255,0.15)] hover:scale-105 cursor-pointer"
+          (click)="logout(); toggleProfileDropdown()"
+          (keyword.enter)="logout(); toggleLoginDropdown()"
+          role="button"
+          tabindex="0"
+        >
+          <fa-icon [icon]="icons.RIGHTTOBRACKET"></fa-icon>
+          Sair
+        </li>
+      </ul>
+    }
+  }
+</div>

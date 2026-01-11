@@ -1,1 +1,36 @@
-<p>navbar.section works!</p>
+<nav 
+  class="flex items-center justify-between px-6 py-4 bg-neutral-primary shadow-[0_2px_8px_rgba(46,125,50,0.3)] relative z-[1000] w-full h-[90px] backdrop-blur-[10px] lg:px-12 lg:h-[100px]"
+>
+  <div class="flex items-center z-[1001]">
+    <a routerLink="/" class="block">
+      <img 
+        ngSrc="assets/images/agrowerk.png" 
+        alt="Logo Agrowerk" 
+        width="120" 
+        height="120" 
+        priority
+        class="w-27 h-27 lg:w-34 lg:h-34"
+      />
+    </a>
+  </div>
+
+  <div class="hidden lg:flex flex-1 items-center justify-end gap-8">
+    <app-navbar-links [isOpen]="false"></app-navbar-links>
+    <app-navbar-auth [isLoggedIn]="isLoggedIn()"></app-navbar-auth>
+  </div>
+
+  <app-navbar-mobile-toggle
+    [isOpen]="openMenu()"
+    (menuToggle)="openMenu.set(!openMenu())"
+  ></app-navbar-mobile-toggle>
+
+  <div 
+    class="fixed top-[90px] left-0 right-0 bg-neutral-primary shadow-lg -translate-x-full transition-transform duration-300 lg:hidden"
+    [class.translate-x-0]="openMenu()"
+  >
+    <div class="flex flex-col p-6 gap-4">
+      <app-navbar-links [isOpen]="openMenu()"></app-navbar-links>
+      <app-navbar-auth [isLoggedIn]="isLoggedIn()"></app-navbar-auth>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,20 @@
+<button
+  class="w-[50px] h-[50px] flex flex-col items-center justify-center gap-[3px] bg-primary border-none cursor-pointer p-2 z-[1002] rounded-lg transition-transform duration-300 hover:scale-105 lg:hidden cursor-pointer"
+  (click)="menuToggle.emit()"
+  [attr.aria-label]="isOpen() ? 'Close menu' : 'Open menu'"
+  [attr.aria-expanded]="isOpen()">
+  <span
+    class="w-[35px] h-1 rounded-[3px] bg-neutral-primary transition-all duration-300"
+    [class.translate-y-[7px]]="isOpen()"
+    [class.rotate-45]="isOpen()">
+  </span>
+  <span
+    class="w-[35px] h-1 rounded-[3px] bg-neutral-primary transition-all duration-300"
+    [class.opacity-0]="isOpen()">
+  </span>
+  <span
+    class="w-[35px] h-1 rounded-[3px] bg-neutral-primary transition-all duration-300"
+    [class.-translate-y-[7px]]="isOpen()"
+    [class.-rotate-45]="isOpen()">
+  </span>
+</button>
