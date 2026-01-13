@@ -1,6 +1,10 @@
 @import "tailwindcss";
 
 @theme {
+  /* ============================================
+     LIGHT MODE (default)
+     ============================================ */
+  
   /* Cores custom */
   --color-primary: #2E7D32;
   --color-primary-dark: #1a4d2e;
@@ -40,15 +44,58 @@
   --color-footer-input-bg: rgba(255, 255, 255, 0.1);
   --color-footer-input-border: rgba(255, 255, 255, 0.25);
 
+  /* ============================================
+     DARK MODE
+     ============================================ */
+  
+  /* Cores custom - Dark */
+  --color-primary-dm: #4CAF50;           /* Verde mais claro para contraste */
+  --color-primary-dark-dm: #66BB6A;      /* Verde ainda mais claro */
+  --color-secondary-dm: #FF9800;         /* Laranja mais vibrante */
+  --color-tertiary-dm: #E8E8E8;          /* Invertido para textos claros */
+  --color-quartenary-dm: #FFB74D;        /* Amarelo/laranja mais suave */
+  --color-accent-dm: #42A5F5;            /* Azul mais claro */
+  
+  /* Status Colors - Dark */
+  --color-success-dm: #66BB6A;           /* Verde mais claro */
+  --color-warning-dm: #FFB74D;           /* Amarelo mais suave */
+  --color-error-dm: #EF5350;             /* Vermelho mais claro */
+  --color-card-badge-dm: #FF5252;        /* Vermelho vibrante */
+  
+  /* Neutral Colors - Dark */
+  --color-neutral-primary-dm: #1E1E1E;   /* Fundo escuro principal */
+  --color-neutral-secondary-dm: #E0E0E0; /* Texto claro */
+  
+  /* Background - Dark */
+  --color-background-dm: #121212;        /* Preto suave (Google Material) */
+  
+  /* Button Colors - Dark */
+  --color-button-main-dm: #4CAF50;       /* Verde vibrante */
+  --color-button-main-hover-dm: #66BB6A; /* Verde mais claro no hover */
+  --color-button-second-dm: #388E3C;     /* Verde médio */
+  --color-button-second-hover-dm: #4CAF50; /* Verde claro no hover */
+  
+  /* Footer Colors - Dark */
+  --color-footer-text-primary-dm: #E0E0E0;
+  --color-footer-text-secondary-dm: rgba(224, 224, 224, 0.7);
+  --color-footer-heading-dm: #FFB74D;    /* Amarelo mais suave */
+  --color-footer-link-dm: rgba(224, 224, 224, 0.6);
+  --color-footer-link-hover-dm: #FF9800;
+  --color-footer-icon-dm: rgba(224, 224, 224, 0.5);
+  --color-footer-icon-hover-dm: #FFB74D;
+  --color-footer-border-dm: rgba(255, 255, 255, 0.08);
+  --color-footer-input-bg-dm: rgba(255, 255, 255, 0.05);
+  --color-footer-input-border-dm: rgba(255, 255, 255, 0.15);
+
   /* Font Family  */
   --font-family-sans: Inter, sans-serif;
 
   /* Font Sizes */
-  --font-size-text: 1rem; /* 16px */
+  --font-size-text: 1rem;
   --line-height-text: 1.5;
-  --font-size-links: 1.5rem; /* 18px */
+  --font-size-links: 1.5rem;
   --line-height-links: 1.5;
-  --font-size-buttons: 1rem; /* 16px */
+  --font-size-buttons: 1rem;
   --line-height-buttons: 1.4;
   --font-size-links-hover: 1.125rem; 
   --line-height-links-hover: 1.5;
@@ -62,7 +109,92 @@
   --font-weight-extrabold: 800;
 
   /* Footer Tipography */
-  --font-size-footer-title: 1rem;       /* 16px */
-  --font-size-footer-links: 1.125rem;   /* 18px  */
+  --font-size-footer-title: 1rem;
+  --font-size-footer-links: 1.125rem;
   --font-size-footer-subtext: 0.875rem;
+}
+
+/* Dark Mode Application */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-primary: var(--color-primary-dm);
+    --color-primary-dark: var(--color-primary-dark-dm);
+    --color-secondary: var(--color-secondary-dm);
+    --color-tertiary: var(--color-tertiary-dm);
+    --color-quartenary: var(--color-quartenary-dm);
+    --color-accent: var(--color-accent-dm);
+    
+    --color-success: var(--color-success-dm);
+    --color-warning: var(--color-warning-dm);
+    --color-error: var(--color-error-dm);
+    --color-card-badge: var(--color-card-badge-dm);
+    
+    --color-neutral-primary: var(--color-neutral-primary-dm);
+    --color-neutral-secondary: var(--color-neutral-secondary-dm);
+    
+    --color-background: var(--color-background-dm);
+    
+    --color-button-main: var(--color-button-main-dm);
+    --color-button-main-hover: var(--color-button-main-hover-dm);
+    --color-button-second: var(--color-button-second-dm);
+    --color-button-second-hover: var(--color-button-second-hover-dm);
+    
+    --color-footer-text-primary: var(--color-footer-text-primary-dm);
+    --color-footer-text-secondary: var(--color-footer-text-secondary-dm);
+    --color-footer-heading: var(--color-footer-heading-dm);
+    --color-footer-link: var(--color-footer-link-dm);
+    --color-footer-link-hover: var(--color-footer-link-hover-dm);
+    --color-footer-icon: var(--color-footer-icon-dm);
+    --color-footer-icon-hover: var(--color-footer-icon-hover-dm);
+    --color-footer-border: var(--color-footer-border-dm);
+    --color-footer-input-bg: var(--color-footer-input-bg-dm);
+    --color-footer-input-border: var(--color-footer-input-border-dm);
+  }
+}
+
+/* Manual Dark Mode Toggle */
+[data-theme="dark"] {
+  --color-primary: var(--color-primary-dm);
+  --color-primary-dark: var(--color-primary-dark-dm);
+  --color-secondary: var(--color-secondary-dm);
+  --color-tertiary: var(--color-tertiary-dm);
+  --color-quartenary: var(--color-quartenary-dm);
+  --color-accent: var(--color-accent-dm);
+  
+  --color-success: var(--color-success-dm);
+  --color-warning: var(--color-warning-dm);
+  --color-error: var(--color-error-dm);
+  --color-card-badge: var(--color-card-badge-dm);
+  
+  --color-neutral-primary: var(--color-neutral-primary-dm);
+  --color-neutral-secondary: var(--color-neutral-secondary-dm);
+  
+  --color-background: var(--color-background-dm);
+  
+  --color-button-main: var(--color-button-main-dm);
+  --color-button-main-hover: var(--color-button-main-hover-dm);
+  --color-button-second: var(--color-button-second-dm);
+  --color-button-second-hover: var(--color-button-second-hover-dm);
+  
+  --color-footer-text-primary: var(--color-footer-text-primary-dm);
+  --color-footer-text-secondary: var(--color-footer-text-secondary-dm);
+  --color-footer-heading: var(--color-footer-heading-dm);
+  --color-footer-link: var(--color-footer-link-dm);
+  --color-footer-link-hover: var(--color-footer-link-hover-dm);
+  --color-footer-icon: var(--color-footer-icon-dm);
+  --color-footer-icon-hover: var(--color-footer-icon-hover-dm);
+  --color-footer-border: var(--color-footer-border-dm);
+  --color-footer-input-bg: var(--color-footer-input-bg-dm);
+  --color-footer-input-border: var(--color-footer-input-border-dm);
+}
+
+@keyframes fadeInUp {
+  from {
+      opacity: 0;
+      transform: translateY(30px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
 }
