@@ -20,6 +20,7 @@ module.exports = {
             
             'neutral-primary': 'var(--color-neutral-primary)',
             'neutral-secondary': 'var(--color-neutral-secondary)',
+            'neutral-tertiary': 'var(--color-neutral-tertiary)',
             
             'background': 'var(--color-background)',
             

@@ -1,37 +1,42 @@
+html, body {
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden; 
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh; 
+}
+
 @import "tailwindcss";
 
 @theme {
-  /* ============================================
-     DARK MODE
-     ============================================ */
-  /* Cores custom - Dark */
-  --color-primary: #4CAF50; 
-  --color-primary-dark: #66BB6A; 
-  --color-secondary: #FF9800; 
-  --color-tertiary: #E8E8E8; 
+  /* Suas variáveis... (mantém tudo igual) */
+  --color-primary: #4CAF50;
+  --color-primary-dark: #66BB6A;
+  --color-secondary: #FF9800;
+  --color-tertiary: #E8E8E8;
   --color-quartenary: #FFB74D;
-  --color-accent: #42A5F5; 
+  --color-accent: #42A5F5;
   
-  /* Status Colors - Dark */
-  --color-success: #66BB6A; 
-  --color-warning: #FFB74D; 
+  --color-success: #66BB6A;
+  --color-warning: #FFB74D;
   --color-error: #EF5350;
-  --color-card-badge: #FF5252; 
+  --color-card-badge: #FF5252;
   
-  /* Neutral Colors - Dark */
-  --color-neutral-primary: #1E1E1E; 
-  --color-neutral-secondary: #E0E0E0; 
+  --color-neutral-primary: #1E1E1E;
+  --color-neutral-secondary: #E0E0E0;
+  --color-neutral-tertiary: #FFFFFF;
   
-  /* Background - Dark */
   --color-background: #121212;
   
-  /* Button Colors - Dark */
-  --color-button-main: #4CAF50; 
-  --color-button-main-hover: #66BB6A; /*  */
-  --color-button-second: #388E3C; 
+  --color-button-main: #4CAF50;
+  --color-button-main-hover: #66BB6A;
+  --color-button-second: #388E3C;
   --color-button-second-hover: #4CAF50;
   
-  /* Footer Colors - Dark */
   --color-footer-text-primary: #E0E0E0;
   --color-footer-text-secondary: rgba(224, 224, 224, 0.8);
   --color-footer-heading: #FFB74D;
@@ -42,53 +47,9 @@
   --color-footer-border: rgba(255, 255, 255, 0.08);
   --color-footer-input-bg: rgba(255, 255, 255, 0.05);
   --color-footer-input-border: rgba(255, 255, 255, 0.15);
-
-  /* ============================================
-     LIGHT MODE 
-     ============================================ */
-  /* Cores custom - Light  */
-  --color-primary-lm: #2E7D32;
-  --color-primary-dark-lm: #1a4d2e;
-  --color-secondary-lm: #F57C00;
-  --color-tertiary-lm: #110808;
-  --color-quartenary-lm: #f89e0e;
-  --color-accent-lm: #1976D2;
   
-  /* Status Colors - Light */
-  --color-success-lm: #388E3C;
-  --color-warning-lm: #F9A825;
-  --color-error-lm: #D32F2F;
-  --color-card-badge-lm: #D80700;
-  
-  /* Neutral Colors - Light */
-  --color-neutral-primary-lm: #F5F5F5;
-  --color-neutral-secondary-lm: #424242;
-  
-  /* Background - Light */
-  --color-background-lm: #1a4d2e;  
-  
-  /* Button Colors - Light */
-  --color-button-main-lm: #2F8F46;
-  --color-button-main-hover-lm: #256D3A;
-  --color-button-second-lm: #51B456;
-  --color-button-second-hover-lm: #1D691F;
-  
-  /* Footer Colors - Light */
-  --color-footer-text-primary-lm: #F5F5F5;
-  --color-footer-text-secondary-lm: rgba(245, 245, 245, 0.8);
-  --color-footer-heading-lm: #F9A825;
-  --color-footer-link-lm: rgba(255, 255, 255, 0.7);
-  --color-footer-link-hover-lm: #F57C00;
-  --color-footer-icon-lm: rgba(255, 255, 255, 0.5);
-  --color-footer-icon-hover-lm: #F9A825;
-  --color-footer-border-lm: rgba(255, 255, 255, 0.12);
-  --color-footer-input-bg-lm: rgba(255, 255, 255, 0.1);
-  --color-footer-input-border-lm: rgba(255, 255, 255, 0.25);
-
-  /* Font Family */
   --font-family-sans: Inter, sans-serif;
   
-  /* Font Sizes */
   --font-size-text: 1rem;
   --line-height-text: 1.5;
   --font-size-links: 1.5rem;
@@ -100,50 +61,16 @@
   --font-size-buttons-hover: 1.0625rem;
   --line-height-buttons-hover: 1.4;
   
-  /* Font Weights */
   --font-weight-medium: 500;
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
   --font-weight-extrabold: 800;
   
-  /* Footer Tipography */
   --font-size-footer-title: 1rem;
   --font-size-footer-links: 1.125rem;
   --font-size-footer-subtext: 0.875rem;
 }
 
-/* Manual Light Mode Toggle */
-[data-theme="light"] {
-  --color-primary: var(--color-primary-lm);
-  --color-primary-dark: var(--color-primary-dark-lm);
-  --color-secondary: var(--color-secondary-lm);
-  --color-tertiary: var(--color-tertiary-lm);
-  --color-quartenary: var(--color-quartenary-lm);
-  --color-accent: var(--color-accent-lm);
-  --color-success: var(--color-success-lm);
-  --color-warning: var(--color-warning-lm);
-  --color-error: var(--color-error-lm);
-  --color-card-badge: var(--color-card-badge-lm);
-  --color-neutral-primary: var(--color-neutral-primary-lm);
-  --color-neutral-secondary: var(--color-neutral-secondary-lm);
-  --color-background: var(--color-background-lm);
-  --color-button-main: var(--color-button-main-lm);
-  --color-button-main-hover: var(--color-button-main-hover-lm);
-  --color-button-second: var(--color-button-second-lm);
-  --color-button-second-hover: var(--color-button-second-hover-lm);
-  --color-footer-text-primary: var(--color-footer-text-primary-lm);
-  --color-footer-text-secondary: var(--color-footer-text-secondary-lm);
-  --color-footer-heading: var(--color-footer-heading-lm);
-  --color-footer-link: var(--color-footer-link-lm);
-  --color-footer-link-hover: var(--color-footer-link-hover-lm);
-  --color-footer-icon: var(--color-footer-icon-lm);
-  --color-footer-icon-hover: var(--color-footer-icon-hover-lm);
-  --color-footer-border: var(--color-footer-border-lm);
-  --color-footer-input-bg: var(--color-footer-input-bg-lm);
-  --color-footer-input-border: var(--color-footer-input-border-lm);
-}
-
-/* Animação (igual ao original) */
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -152,5 +79,60 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  body {
+    overflow-x: hidden;
+  }
+}
+/* ============================================
+   CUSTOM SCROLLBAR - AgroWerk Theme
+   ============================================ */
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-primary) var(--color-background);
+}
+
+/* Webkit Browsers */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--color-primary) 0%, var(--color-button-second) 100%);
+  border-radius: 10px;
+  border: 2px solid var(--color-background);
+  transition: all 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary-dark);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 10px rgba(76, 175, 80, 0.4);
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: var(--color-button-second);
+}
+
+@media (max-width: 768px) {
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    border: 1px solid var(--color-background);
   }
 }

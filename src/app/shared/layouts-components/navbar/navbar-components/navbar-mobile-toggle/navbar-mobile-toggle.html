@@ -1,5 +1,5 @@
 <button
-  class="w-[50px] h-[50px] flex flex-col items-center justify-center gap-[3px] bg-primary border-none cursor-pointer p-2 z-[1002] rounded-lg transition-transform duration-300 hover:scale-105 lg:hidden cursor-pointer"
+  class="w-[50px] h-[50px] flex flex-col items-center justify-center gap-[3px] bg-primary border-none cursor-pointer p-2 z-[1002] rounded-lg transition-transform duration-300 hover:scale-105 lg:hidden cursor-pointer pointer-events-auto"
   (click)="menuToggle.emit()"
   [attr.aria-label]="isOpen() ? 'Close menu' : 'Open menu'"
   [attr.aria-expanded]="isOpen()">

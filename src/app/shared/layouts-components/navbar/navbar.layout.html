@@ -1,16 +1,17 @@
 <nav 
   class="flex items-center justify-between px-6 py-4 bg-neutral-primary shadow-[0_2px_8px_rgba(46,125,50,0.3)] relative z-[1000] w-full h-[90px] backdrop-blur-[10px] lg:px-12 lg:h-[100px]"
 >
-  <div class="absolute inset-0 
-  bg-gradient-to-br from-emerald-900/40 via-green-900/30 to-transparent">
-  </div>
+  <div class="absolute inset-0 z-[998] pointer-events-none">
+      <div class="absolute inset-0 
+      bg-gradient-to-br from-emerald-900/40 via-green-900/30 to-transparent">
+      </div>
 
-  <div class="absolute inset-0 opacity-10" 
-  style="background-image: url('seu-pattern'); background-size: 400px;"></div>
+      <div class="absolute inset-0 opacity-10" 
+      style="background-image: url('seu-pattern'); background-size: 400px;"></div>
 
-  <div class="absolute -top-40 -right-40 w-96 h-96 
-  bg-emerald-500/10 rounded-full blur-3xl"></div>
-
+      <div class="absolute -top-40 -right-40 w-96 h-96 
+      bg-emerald-500/10 rounded-full blur-3xl"></div>
+    </div>
   <div class="flex items-center z-[1001]">
     <a routerLink="/" class="block">
       <img 
@@ -31,7 +32,7 @@
 
   <app-navbar-mobile-toggle
     [isOpen]="openMenu()"
-    (menuToggle)="openMenu.set(!openMenu())"
+    (menuToggle)="toggleMenu()"
   ></app-navbar-mobile-toggle>
 
   <div 

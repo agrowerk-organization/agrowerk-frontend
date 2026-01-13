@@ -1,4 +1,4 @@
-import { Component, inject, OnDestroy, OnInit, signal } from '@angular/core';
+import { Component, HostListener, inject, OnDestroy, OnInit, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Subscription, filter } from 'rxjs';
 import { Router, NavigationEnd } from '@angular/router';
@@ -22,13 +22,9 @@ import { NavbarMobileToggle } from './navbar-components/navbar-mobile-toggle/nav
 export class NavbarLayout implements OnInit, OnDestroy {
   private router = inject(Router);
   private authService = inject(AuthService);
-
-  isLoggedIn = toSignal(this.authService?.isLogged$, { initialValue: false});
-
+  isLoggedIn = toSignal(this.authService?.isLogged$, { initialValue: false });
   openMenu = signal(false);
-
   private routerSubscription!: Subscription;
-
 
   ngOnInit(): void {
     this.routerSubscription = this.router.events.pipe(
@@ -46,5 +42,29 @@ export class NavbarLayout implements OnInit, OnDestroy {
 
   goToHome() {
     this.router.navigate(['/']);
+  }
+
+  toggleMenu() {
+    this.openMenu.update(open => !open);
+  }
+
+  closeMenu() {
+    this.openMenu.set(false);
+  }
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent) {
+    const target = event.target as HTMLElement;
+    if (!target.closest('nav') && this.openMenu()) {
+      this.closeMenu();
+    }
+  }
+
+  @HostListener('document:touchend', ['$event'])
+  onDocumentTouch(event: TouchEvent) {
+    const target = event.target as HTMLElement;
+    if (!target.closest('nav') && this.openMenu()) {
+      this.closeMenu();
+    }
   }
 }
