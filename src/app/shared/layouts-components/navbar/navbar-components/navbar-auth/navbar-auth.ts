@@ -58,9 +58,13 @@ export class NavbarAuth {
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent) {
     const target = event.target as HTMLElement;
-    const clickedInside = target.closest('.relative');
+    
+    const isLoginTrigger = target.closest('button')?.textContent?.includes('Área de acesso') || 
+                           target.closest('ul')?.querySelector('li')?.textContent?.includes('Produtor'); 
+    const isProfileTrigger = target.closest('button')?.textContent?.includes('Perfil') || 
+                             target.closest('ul')?.querySelector('li')?.textContent?.includes('Sair');
 
-    if (!clickedInside) {
+    if (!isLoginTrigger && !isProfileTrigger) {
       this.showLoginDropdown.set(false);
       this.showProfileDropdown.set(false);
     }
