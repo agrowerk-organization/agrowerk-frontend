@@ -1,0 +1,24 @@
+<div class="absolute inset-0 -z-20 bg-gradient-to-br from-[var(--color-primary-dark)] via-[var(--color-background)] to-[var(--color-primary)]"></div>  <!-- Fundo base verde, usa vars dm auto -->
+
+<div class="absolute inset-0 -z-10">
+  <div class="absolute top-0 left-0 w-full h-full bg-gradient-radial from-[var(--color-secondary)/30] via-transparent to-transparent animate-pulse-slow"></div>  <!-- Aumentei /30 pra visível -->
+  <div class="absolute bottom-0 right-0 w-full h-full bg-gradient-radial from-[var(--color-success)/25] via-transparent to-transparent animate-pulse-slow" style="animation-delay: 1.5s;"></div>
+</div>
+
+<div class="absolute inset-0 -z-10 opacity-150">  
+  <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+        <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(var(--color-secondary-rgb), 0.2)" stroke-width="1"/>  
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#grid)" />
+  </svg>
+</div>
+
+<div class="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
+  <div class="particle animate-float"></div>  
+  <div class="particle animate-float-delayed"></div>
+  <div class="particle animate-float" style="animation-delay: 6s;"></div>
+  <div class="particle animate-float-delayed" style="animation-delay: 9s;"></div>
+</div>

@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { FooterLink } from '../../../../core/ui/footer/footer.link';
+import { FooterLink } from '../../../../../core/ui/footer/footer.link';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @Component({

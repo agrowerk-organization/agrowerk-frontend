@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { ICONS_FOOTER } from '../../../../core/ui/icons/icons.footer';
+import { ICONS_FOOTER } from '../../../../../core/ui/icons/icons.footer';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
 import { FooterApps } from "../footer-apps/footer-apps";

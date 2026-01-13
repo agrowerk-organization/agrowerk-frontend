@@ -1,0 +1,33 @@
+<article class="relative min-h-screen w-full bg-gradient-to-br border border-[var(--primary-neutral-color)] from-primary-dark via-background to-primary flex items-center justify-center px-4 py-16">
+    <app-pattern></app-pattern>
+    <app-mesh-gradient></app-mesh-gradient>
+    <div class="relative z-10 w-full max-w-6xl mx-auto space-y-6">  
+          <div class="bg-gradient-to-br from-neutral-primary/95 to-neutral-primary/90 backdrop-blur-sm rounded-3xl p-8 shadow-2xl animate-fadeInUp border border-primary/10">
+            <h1 class="text-[clamp(2rem,5vw,3rem)] font-extrabold text-quartenary leading-tight mb-4">
+              Suas safras agrícolas com
+              <span class="block mt-2 bg-gradient-to-r from-secondary via-warning to-secondary bg-clip-text text-transparent animate-pulse">
+                mais produtividade
+              </span>
+            </h1>
+            <p class="text-[clamp(1.125rem,2.5vw,1.25rem)] font-medium text-neutral-secondary leading-relaxed max-w-xl">
+              Planeje, monitore e otimize seu inventário de acordo com o planejamento de sua produção.
+            </p>
+          </div>
+          <div class="animate-fadeInUp" style="animation-delay: 0.1s;">
+            <app-badge [badges]="badges"></app-badge>
+          </div>
+          <div class="animate-fadeInUp" style="animation-delay: 0.2s;">
+            <app-steps [steps]="steps"></app-steps>
+          </div>
+          <div class="animate-fadeInUp" style="animation-delay: 0.3s;">
+            <app-actions [actions]="actions"></app-actions>
+          </div>
+          <div class="animate-fadeInUp" style="animation-delay: 0.4s;">
+            <app-trust [trusts]="trusts"></app-trust>
+          </div>
+        </div>
+    <div class="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
+      <div class="absolute top-20 left-10 w-72 h-72 bg-primary/20 rounded-full blur-3xl"></div>
+      <div class="absolute bottom-20 right-10 w-96 h-96 bg-secondary/10 rounded-full blur-3xl"></div>
+    </div>
+  </article>

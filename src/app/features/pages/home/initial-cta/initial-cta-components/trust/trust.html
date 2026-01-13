@@ -1,0 +1,21 @@
+<div class="flex items-center justify-center gap-6 flex-wrap 
+            pt-6 mt-6 border-t border-primary/20 
+            animate-fadeInUp" 
+     style="animation-delay: 0.4s;">
+  
+  @for (trust of trusts; track $index) {
+    <div class="flex items-center gap-2 text-sm text-neutral-secondary">
+      <fa-icon 
+        class="text-lg text-secondary"
+        [icon]="trust.icon">
+      </fa-icon>
+      
+      <span>
+        <strong class="text-secondary font-bold">
+          {{ trust.quantity }}
+        </strong>
+        {{ trust.subtitle }}
+      </span>
+    </div>
+  }
+</div>
