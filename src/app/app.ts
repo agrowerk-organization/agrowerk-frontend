@@ -6,7 +6,7 @@ import { MainLayoutComponent } from "./core/layouts/main-layout/main-layout.comp
   standalone: true,
   imports: [MainLayoutComponent],
   templateUrl: './app.html',
-  styleUrl: './app.scss'
+  styleUrl: './app.css'
 })
 export class App {
   protected readonly title = signal('agrowerk-frontend');

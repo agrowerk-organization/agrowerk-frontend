@@ -11,7 +11,7 @@
               [href]="link.url" 
               target="_blank" 
               rel="noopener noreferrer"
-              class="flex items-center gap-2 text-footer-link transition-colors hover:text-footer-link-hover cursor-pointer"
+              class="flex items-center gap-2 text-footer-link transition-colors hover:text-footer-link-hover text-footer-text-primary cursor-pointer"
             >
               <fa-icon [icon]="link.icon" class="text-xs"></fa-icon>
               {{ link.label }}
@@ -20,7 +20,7 @@
             <button
               (click)="link.action?.()"
               (keydown.enter)="link.action?.()"
-              class="flex items-center gap-2 text-footer-link transition-colors hover:text-footer-link-hover text-left w-full cursor-pointer"
+              class="flex items-center gap-2 text-footer-link transition-colors hover:text-footer-link-hover text-footer-text-primary text-left w-full cursor-pointer"
             >
               <fa-icon [icon]="link.icon" class="text-xs"></fa-icon>
               {{ link.label }}

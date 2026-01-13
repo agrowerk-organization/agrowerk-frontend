@@ -5,17 +5,19 @@ import { FooterBottom } from './footer-components/footer-bottom/footer-bottom';
 import { FooterLink } from '../../../core/ui/footer/footer.link';
 import { FooterSocial } from './footer-components/footer-social/footer-social';
 import { ICONS_FOOTER } from '../../../core/ui/icons/icons.footer';
+import { Pattern } from "./footer-components/pattern/pattern";
 
 @Component({
   selector: 'app-footer',
   standalone: true,
   imports: [
-    FooterBrand, 
-    FooterLinks, 
+    FooterBrand,
+    FooterLinks,
     FooterBottom,
     FooterSocial,
-    FooterBottom
-  ],
+    FooterBottom,
+    Pattern
+],
   templateUrl: './footer.layout.html'
 })
 export class FooterLayout {
