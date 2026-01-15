@@ -1,15 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { Content } from '../../../../core/ui/initial-cta/content.initial-cta';
-import { ICONS_INITIAL_CTA } from '../../../../core/ui/icons/icons.initial-cta';
+import { Content } from '../../../../../core/ui/types/initial-cta/content.initial-cta';
+import { ICONS_INITIAL_CTA } from '../../../../../core/ui/icons/icons.initial-cta';
 import { Router } from '@angular/router';
-import { BadgeIndex } from '../../../../core/ui/badge/badge';
+import { BadgeIndex } from '../../../../../core/ui/types/badge/badge';
 import { Badge } from "./initial-cta-components/badge/badge";
 import { Steps } from "./initial-cta-components/steps/steps";
 import { Actions } from "./initial-cta-components/actions/actions";
 import { Trust } from "./initial-cta-components/trust/trust";
-import { MeshGradient } from "./initial-cta-components/mesh-gradient/mesh-gradient";
-import { Pattern } from "./initial-cta-components/pattern/pattern";
+import { MeshGradient } from "../../../../../shared/components/mesh-gradient/mesh-gradient";
+import { Pattern } from "../../../../../shared/components/pattern/pattern";
 
 @Component({
   selector: 'app-initial-cta',

@@ -13,7 +13,6 @@ body {
 @import "tailwindcss";
 
 @theme {
-  /* Suas variáveis... (mantém tudo igual) */
   --color-primary: #4CAF50;
   --color-primary-dark: #66BB6A;
   --color-secondary: #FF9800;
@@ -134,3 +133,4 @@ body {
     border: 1px solid var(--color-background);
   }
 }
+

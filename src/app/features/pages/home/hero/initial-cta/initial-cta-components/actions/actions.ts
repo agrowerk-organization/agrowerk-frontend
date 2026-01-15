@@ -1,14 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { Content } from '../../../../../../core/ui/initial-cta/content.initial-cta';
+import { Content } from '../../../../../../../core/ui/types/initial-cta/content.initial-cta';
 
 @Component({
-  selector: 'app-trust',
+  selector: 'app-actions',
   standalone: true,
   imports: [CommonModule, FontAwesomeModule],
-  templateUrl: './trust.html'
+  templateUrl: './actions.html',
 })
-export class Trust {
-  @Input() trusts!: Content[];
+export class Actions {
+  @Input() actions!: Content[];
 }

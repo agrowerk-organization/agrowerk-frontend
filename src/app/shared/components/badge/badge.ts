@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
-import { BadgeIndex } from '../../../core/ui/badge/badge';
+import { BadgeIndex } from '../../../core/ui/types/badge/badge';
 
 @Component({
   selector: 'app-badge',

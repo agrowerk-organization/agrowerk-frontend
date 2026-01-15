@@ -1,14 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { BadgeIndex } from '../../../../../../core/ui/badge/badge';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { Content } from '../../../../../../../core/ui/types/initial-cta/content.initial-cta';
 
 @Component({
-  selector: 'app-badge',
+  selector: 'app-trust',
   standalone: true,
   imports: [CommonModule, FontAwesomeModule],
-  templateUrl: './badge.html'
+  templateUrl: './trust.html'
 })
-export class Badge {
-  @Input() badges!: BadgeIndex[];
+export class Trust {
+  @Input() trusts!: Content[];
 }

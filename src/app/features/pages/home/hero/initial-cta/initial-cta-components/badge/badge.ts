@@ -1,14 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
+import { BadgeIndex } from '../../../../../../../core/ui/types/badge/badge';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { Content } from '../../../../../../core/ui/initial-cta/content.initial-cta';
 
 @Component({
-  selector: 'app-steps',
+  selector: 'app-badge',
   standalone: true,
   imports: [CommonModule, FontAwesomeModule],
-  templateUrl: './steps.html'
+  templateUrl: './badge.html'
 })
-export class Steps {
-  @Input() steps!: Content[];
+export class Badge {
+  @Input() badges!: BadgeIndex[];
 }
