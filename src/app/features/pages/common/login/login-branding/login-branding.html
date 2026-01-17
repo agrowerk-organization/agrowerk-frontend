@@ -1,0 +1,48 @@
+<article class="relative w-full h-full min-h-screen bg-[var(--color-background)] from-[var(--color-primary)] via-[var(--color-button-second)] to-[#2E7D32] overflow-hidden flex flex-col items-center justify-center p-12">
+  
+    <div class="absolute inset-0 pointer-events-none opacity-20">
+      <div class="absolute top-10 left-10 w-32 h-32 border-2 border-white/20 rounded-full animate-pulse"></div>
+      <div class="absolute bottom-20 right-20 w-24 h-24 border-2 border-white/20 rounded-full animate-pulse delay-1000"></div>
+      <div class="absolute top-1/2 left-1/4 w-16 h-16 border-2 border-white/20 rounded-full animate-pulse delay-2000"></div>
+    </div>
+    
+    <div class="absolute inset-0 pointer-events-none">
+      <app-mesh-gradient></app-mesh-gradient>
+    </div>
+    <div class="absolute inset-0 pointer-events-none">
+      <app-pattern></app-pattern>
+    </div>
+  
+    <div class="relative z-10 w-full max-w-xl text-center flex flex-col items-center space-y-1">
+      
+      <div class="animate-[fadeInUp_0.6s_ease-out]">
+        <img 
+          ngSrc="assets/images/agrowerk.png" 
+          alt="AgroWerk Logo" 
+          width="150" 
+          height="64"
+          priority
+          class="h-50 w-auto mx-auto drop-shadow-2xl" 
+        />
+      </div>
+  
+      <div class="space-y-4 animate-[fadeInUp_0.8s_ease-out]">
+        <h1 class="text-title lg:text-5xl font-extrabold text-white leading-tight">
+          Gerencie suas safras com
+          <span class="block text-[var(--color-secondary)] mt-2">inteligência</span>
+        </h1>
+        <p class="text-2xl text-[var(--color-neutral-secondary)] font-medium max-w-md mx-auto">
+          Planejamento completo, integração inteligente e conforme a legislação
+        </p>
+      </div>
+  
+      <div class="w-full animate-[fadeInUp_1s_ease-out]">
+        <app-feature-pillar [featurePillars]="featurePillars"></app-feature-pillar>
+      </div>
+  
+      <div class="w-full animate-[fadeInUp_1.2s_ease-out]">
+        <app-feature-statistic [statistics]="statistics"></app-feature-statistic>
+      </div>
+    </div>
+  
+  </article>

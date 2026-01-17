@@ -49,15 +49,16 @@ body {
   
   --font-family-sans: Inter, sans-serif;
   
-  --font-size-text: 1rem;
+  --size-text: 1rem;
   --line-height-text: 1.5;
-  --font-size-links: 1.5rem;
+  --size-title: 2.0rem;
+  --size-links: 1.5rem;
   --line-height-links: 1.5;
-  --font-size-buttons: 1rem;
+  --size-buttons: 1rem;
   --line-height-buttons: 1.4;
-  --font-size-links-hover: 1.125rem;
+  --size-links-hover: 1.125rem;
   --line-height-links-hover: 1.5;
-  --font-size-buttons-hover: 1.0625rem;
+  --size-buttons-hover: 1.0625rem;
   --line-height-buttons-hover: 1.4;
   
   --font-weight-medium: 500;

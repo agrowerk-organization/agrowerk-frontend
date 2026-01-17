@@ -1,0 +1,126 @@
+<article class="flex items-center justify-center min-h-screen bg-[var(--color-background)] p-6 relative overflow-hidden">
+    <div class="absolute -top-[10%] -right-[10%] w-[400px] h-[400px] bg-[var(--color-primary)]/10 blur-[120px] rounded-full animate-pulse"></div>
+    <div class="absolute -bottom-[10%] -left-[10%] w-[350px] h-[350px] bg-[var(--color-primary-dark)]/8 blur-[100px] rounded-full animate-pulse" style="animation-delay: 1s;"></div>
+    
+    <div class="w-full max-w-md space-y-8 animate-[fadeInUp_0.6s_ease-out] z-10">
+        <div class="lg:hidden text-center mb-8">
+            <img src="assets/logo-dark.svg" alt="AgroWerk Logo" class="h-12 mx-auto drop-shadow-lg" />
+        </div>
+        
+        <div class="backdrop-blur-xl bg-[var(--color-primary)]/8 rounded-2xl shadow-2xl border border-[var(--color-primary)]/20 p-8 hover:border-[var(--color-primary)]/40 transition-all duration-500 hover:shadow-[var(--color-primary)]/10">
+            <div class="text-center mb-8">
+                <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-button-second)] mb-4 shadow-lg shadow-[var(--color-primary)]/20">
+                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-extrabold text-[var(--color-neutral-secondary)] mb-2">
+                    Bem-vindo de volta
+                </h2>
+                <p class="text-size-text text-gray-400">
+                    Acesse sua conta para continuar
+                </p>
+            </div>
+            
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-5">
+                <app-form-input
+                    label="E-mail"
+                    type="email"
+                    placeholder="seu@email.com"
+                    [control]="loginForm.get('email')"
+                    errorMessage="Por favor, insira um e-mail válido">
+                </app-form-input>
+                
+                <app-form-input
+                    label="Senha"
+                    type="password"
+                    placeholder="••••••••"
+                    [control]="loginForm.get('password')"
+                    errorMessage="A senha deve ter no mínimo 8 caracteres">
+                </app-form-input>
+                
+                <div class="flex items-center justify-between mt-4">
+                    <div class="flex items-center justify-between">
+                        <label class="flex items-center space-x-2 cursor-pointer group">
+                          <input 
+                            type="checkbox" 
+                            formControlName="rememberMe"
+                            class="appearance-none w-5 h-5 rounded border border-white/10 bg-white/5 
+                                   checked:bg-[var(--color-primary)] checked:border-[var(--color-primary)]
+                                   focus:ring-2 focus:ring-[var(--color-primary)]/30 focus:ring-offset-0 
+                                   outline-none cursor-pointer transition-all duration-200
+                                   relative after:content-[''] after:absolute after:hidden 
+                                   checked:after:block after:left-[6px] after:top-[2px] 
+                                   after:w-[6px] after:h-[10px] after:border-white 
+                                   after:border-r-2 after:border-b-2 after:rotate-45" 
+                          />
+                          <span class="text-size-text text-gray-400 group-hover:text-[var(--color-neutral-secondary)] transition-colors select-none">
+                            Lembrar-me
+                          </span>
+                        </label>
+                      </div>
+                    
+                    <a 
+                        routerLink="/recovery-password" 
+                        class="text-size-text font-semibold text-[var(--color-primary)] hover:text-[var(--color-primary-dark)] transition-all hover:underline decoration-2 underline-offset-4">
+                        Esqueceu a senha?
+                    </a>
+                </div>
+                
+                @if (errorMessage()) {
+                    <div class="bg-[var(--color-error)]/10 border border-[var(--color-error)]/50 text-[var(--color-error)] px-4 py-3 rounded-lg text-sm flex items-center space-x-2 animate-[fadeInUp_0.3s_ease-out]">
+                        <svg class="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+                        </svg>
+                        <span>{{ errorMessage() }}</span>
+                    </div>
+                }
+                
+                <app-form-button
+                    label="Entrar"
+                    loadingLabel="Entrando..."
+                    [isLoading]="isLoading()"
+                    [disabled]="loginForm.invalid">
+                </app-form-button>
+                
+                <div class="relative my-6">
+                    <div class="absolute inset-0 flex items-center">
+                        <div class="w-full border-t border-[var(--color-neutral-secondary)]/10"></div>
+                    </div>
+                    <div class="relative flex justify-center text-size-text">
+                        <span class="px-4 bg-[var(--color-background)] text-neutral-secondary/80 font-medium">
+                            Ou continue com
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="flex items-center justify-center w-full gap-3">
+
+                    <app-auth-social-form
+                        [authSocialWays]="authSocialWays"
+                        >
+                    </app-auth-social-form>
+                
+                </div>
+                
+                <div class="text-center pt-2">
+                    <p class="text-size-text text-neutral-secondary/80">
+                        Não tem uma conta?
+                        <a 
+                            routerLink="/cadastro" 
+                            class="text-size-text font-semibold text-[var(--color-primary)] hover:text-[var(--color-primary-dark)] transition-all ml-1 hover:underline decoration-2 underline-offset-4">
+                            Cadastre-se gratuitamente
+                        </a>
+                    </p>
+                </div>
+            </form>
+        </div>
+        
+        <p class="text-center text-size-text/10 text-neutral-secondary/70 mt-6">
+            Ao continuar, você concorda com nossos 
+            <a href="#" class="text-[var(--color-primary)] hover:text-[var(--color-primary-dark)] transition-colors">Termos de Uso</a> 
+            e 
+            <a href="#" class="text-[var(--color-primary)] hover:text-[var(--color-primary-dark)] transition-colors">Política de Privacidade</a>
+        </p>
+    </div>
+</article>

@@ -8,7 +8,7 @@
   },
   "include": [
     "src/**/*.ts"
-  ],
+, "src/app/core/ui/types/login/pillar"  ],
   "exclude": [
     "src/**/*.spec.ts"
   ]
