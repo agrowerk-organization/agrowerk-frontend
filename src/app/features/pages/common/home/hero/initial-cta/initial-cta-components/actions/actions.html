@@ -3,7 +3,8 @@
       <button
         class="group relative w-full flex items-center justify-between gap-3 
                py-4 px-6 rounded-2xl font-bold text-base 
-               transition-all duration-300 overflow-hidden"
+               transition-all duration-300 overflow-hidden
+               cursor-pointer"
         [ngClass]="{
           'bg-gradient-to-br from-button-main to-button-second text-neutral-primary shadow-lg hover:shadow-2xl hover:-translate-y-1 active:translate-y-0': action.type === 'primary',
           'bg-neutral-primary text-primary border-2 border-primary hover:bg-primary hover:text-neutral-primary hover:shadow-lg hover:-translate-y-1': action.type === 'secondary'

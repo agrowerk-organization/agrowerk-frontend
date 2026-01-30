@@ -1,0 +1,11 @@
+<div class="stat-card bg-neutral-primary/60 rounded-xl p-6 border border-primary/60 hover:border-primary/40 transition-all duration-300 hover:scale-105 group">
+    <div class="flex items-center justify-between">
+      <div>
+        <p class="text-sm text-neutral-secondary mb-1">{{ label() }}</p>
+        <p class="text-3xl font-extrabold text-primary group-hover:text-primary-dark transition-colors">{{ value() }}</p>
+      </div>
+      <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+        <fa-icon [icon]="icon()" class="text-2xl text-primary"></fa-icon>
+      </div>
+    </div>
+</div>

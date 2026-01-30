@@ -1,7 +1,7 @@
 <div class="grid gap-4 animate-fadeInUp" style="animation-delay: 0.2s;">
     @for (step of steps; track $index) {
       <div class="group flex gap-4 p-4 bg-neutral-primary rounded-2xl 
-                  border border-primary/20
+                  border border-primary/70
                   transition-all duration-300 
                   hover:border-primary hover:shadow-xl hover:-translate-y-1">
         
@@ -21,7 +21,7 @@
           <h4 class="text-base font-bold text-primary mb-1 leading-tight">
             {{ step.title }}
           </h4>
-          <p class="text-sm text-neutral-secondary leading-relaxed">
+          <p class="text-base text-neutral-secondary leading-relaxed">
             {{ step.subtitle }}
           </p>
         </div>

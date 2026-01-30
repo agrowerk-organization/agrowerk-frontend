@@ -1,0 +1,7 @@
+<div class="hidden lg:block relative w-12 h-1">
+    <div class="absolute inset-0 transition-all duration-500 origin-left"
+         [ngClass]="isPassed() ? 'bg-primary scale-x-100' : 'bg-neutral-secondary/30 scale-x-50'"></div>
+    <div class="absolute right-0 top-1/2 -translate-y-1/2 w-0 h-0 border-l-8 border-t-4 border-b-4 border-l-primary transition-all duration-500"
+         [ngClass]="isPassed() ? 'opacity-100' : 'opacity-30'">
+    </div>
+</div>

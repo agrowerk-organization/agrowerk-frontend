@@ -1,0 +1,51 @@
+<div class="phase-details animate-fadeInUp bg-neutral-primary/40 backdrop-blur-md rounded-3xl p-8 lg:p-12 border border-primary/60">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+      <div class="flex flex-col h-full">
+        <div>
+          <h4 class="text-2xl font-bold text-primary mb-6 flex items-center gap-3">
+            <fa-icon [icon]="phase().icon"></fa-icon> Funcionalidades
+          </h4>
+          <ul class="space-y-4">
+            @for (feature of phase().features; track feature) {
+              <li class="flex items-start gap-3 group">
+                <div class="w-6 h-6 bg-primary/20 rounded-full flex items-center justify-center mt-1">
+                  <div class="w-2 h-2 bg-primary rounded-full"></div>
+                </div>
+                <span class="text-neutral-secondary group-hover:text-neutral-tertiary">{{ feature }}</span>
+              </li>
+            }
+          </ul>
+        </div>
+  
+        <div class="mt-auto pt-10">
+          <div class="bg-black/20 rounded-xl p-4 border border-primary/50">
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-xl font-medium text-neutral-secondary tracking-wider">Monitoramento de Safra</span>
+              <div class="flex gap-1">
+                <div class="w-4 h-4 bg-primary rounded-full animate-ping"></div>
+                <span class="text-sm text-primary font-bold">Live</span>
+              </div>
+            </div>
+            
+            <div class="flex items-end gap-2 h-24 cursor-pointer">
+              @for (bar of [40, 70, 45, 90, 65, 80, 55]; track $index) {
+                <div 
+                  class="flex-1 bg-gradient-to-t from-primary/20 to-primary rounded-t-sm transition-all duration-1000 ease-out border border-primary/10"
+                  [style.height.%]="bar">
+                </div>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div>
+        <h4 class="text-2xl font-bold text-primary mb-6">Resultados Reais</h4>
+        <div class="grid grid-cols-1 gap-6">
+          @for (stat of phase().stats; track stat.label) {
+            <app-stat-card [label]="stat.label" [value]="stat.value" [icon]="stat.icon"></app-stat-card>
+          }
+        </div>
+      </div>
+    </div>
+</div>

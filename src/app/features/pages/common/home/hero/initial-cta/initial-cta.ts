@@ -56,7 +56,7 @@ export class InitialCta {
     },
     {
       title: 'Maximize sua produção',
-      subtitle: 'Tecnologia de ponta para obter resultados reais.',
+      subtitle: 'Marketplace de barter para maximizar sua produção.',
       icon: this.icons.CHART_LINE
     }
   ];
