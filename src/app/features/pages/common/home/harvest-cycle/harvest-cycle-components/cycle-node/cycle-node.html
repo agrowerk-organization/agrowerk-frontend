@@ -1,0 +1,75 @@
+<div 
+    class="absolute cursor-pointer transition-all duration-500 z-10 focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-full group"
+    role="button"
+    [attr.aria-label]="'Selecionar ' + node().label"
+    [attr.aria-pressed]="isSelected()"
+    tabindex="0"
+    [style.top]="position().y"
+    [style.left]="position().x"
+    [style.width.px]="isMobile() ? (isSelected() ? 80 : 64) : (isSelected() ? 120 : 96)"
+    [style.height.px]="isMobile() ? (isSelected() ? 80 : 64) : (isSelected() ? 120 : 96)"
+    [style.transform]="'translate(-50%, -50%)'"
+    (click)="nodeClick.emit(node().id)"
+    (keydown.enter)="nodeClick.emit(node().id)"
+    (keydown.space)="nodeClick.emit(node().id); $event.preventDefault()"
+    (mouseenter)="nodeHover.emit(node().id)"
+    (mouseleave)="nodeHover.emit(null)">
+
+    <div 
+        class="w-full h-full rounded-full flex items-center justify-center transition-all duration-500 relative overflow-hidden"
+        [class.scale-110]="isSelected()"
+        [class.shadow-2xl]="isSelected()"
+        [class.shadow-lg]="!isSelected()"
+        [style]="getGlassStyle()">
+        
+        @if (isSelected()) {
+          <div class="absolute inset-0 rounded-full animate-pulse" 
+               [style.box-shadow]="'0 0 30px ' + node().color + '80, 0 0 60px ' + node().color + '40'">
+          </div>
+        }
+        
+        <div class="absolute inset-0 rounded-full border-2 transition-all duration-500"
+             [style.border-color]="isSelected() ? 'rgba(255, 255, 255, 0.5)' : 'rgba(255, 255, 255, 0.2)'">
+        </div>
+        
+        <div class="absolute inset-x-0 top-0 h-1/2 rounded-t-full opacity-30"
+             style="background: linear-gradient(to bottom, rgba(255, 255, 255, 0.4), transparent)">
+        </div>
+        
+        <fa-icon 
+            [icon]="emoji()" 
+            class="relative z-10 text:sm md:text-4xl text-neutral-secondary drop-shadow-lg transition-all duration-300"
+            [class.text-4xl]="!isSelected() && !isMobile()"
+            [class.text-6xl]="isSelected() && !isMobile()"
+            [class.text-3xl]="!isSelected() && isMobile()"
+            [class.text-4xl]="isSelected() && isMobile()"
+            [class.scale-110]="isHovered()"
+            aria-hidden="true">
+        </fa-icon>
+    </div>
+    
+    <div class="absolute left-1/2 -translate-x-1/2 whitespace-nowrap hidden md:block" [style.top]="labelPosition()">
+        <div class="px-3 py-1.5 rounded-lg backdrop-blur-md bg-black/20 border border-white/20 shadow-lg">
+            <p class="text-sm font-bold text-neutral-secondary text-center drop-shadow-md">
+                {{ node().label }}
+            </p>
+        </div>
+    </div>
+
+    @if (isSelected() || isHovered()) {
+      <svg 
+          class="absolute top-1/2 left-1/2 pointer-events-none transition-all duration-500"
+          [class.opacity-80]="isSelected()"
+          [class.opacity-40]="!isSelected() && isHovered()"
+          [style.width.px]="lineLength()"
+          [style.height.px]="3"
+          [style.transform]="lineTransform()"
+          [style.filter]="'drop-shadow(0 0 6px ' + node().color + ')'">
+          <line x1="0" y1="1.5" [attr.x2]="lineLength()" y2="1.5" 
+              [attr.stroke]="node().color" 
+              stroke-width="3" 
+              stroke-dasharray="8,6" 
+              stroke-linecap="round" />
+      </svg>
+    }
+</div>

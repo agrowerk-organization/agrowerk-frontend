@@ -6,16 +6,19 @@ import { ICONS_DIGITAL_HARVEST } from '../../../../../core/ui/icons/icons.digita
 import { PhaseConnector } from './digital-harvest-components/phase-connector/phase-connector';
 import { PhaseDetails } from './digital-harvest-components/phase-details/phase-details';
 import { PhaseCard } from './digital-harvest-components/phase-card/phase-card';
+import { Title } from "../../../../../shared/components/title/title";
+import { Subtitle } from "../../../../../shared/components/subtitle/subtitle";
 
 
 @Component({
   selector: 'app-digital-harvest',
   standalone: true,
-  imports: [CommonModule, FontAwesomeModule, PhaseConnector, PhaseDetails, PhaseCard],
+  imports: [CommonModule, FontAwesomeModule, PhaseConnector, PhaseDetails, PhaseCard, Title, Subtitle],
   templateUrl: './digital-harvest.html',
   styleUrls: ['./digital-harvest.css']
 })
-export class DigitalHarvestTimelineComponent implements OnInit {
+
+export class DigitalHarvest implements OnInit {
   // Icons
   icons = ICONS_DIGITAL_HARVEST;
 

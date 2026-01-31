@@ -1,0 +1,112 @@
+<div class="w-full rounded-3xl p-6 md:p-8 transition-all duration-500 hover:scale-[1.02] relative overflow-hidden group" 
+     [style]="getGlassContainerStyle()"
+     style="animation: fadeInRight 0.5s ease-out;">
+  
+  <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+       [style.background]="'radial-gradient(circle at top right, ' + node().color + '15, transparent 70%)'">
+  </div>
+  
+  <div class="absolute inset-x-0 top-0 h-px bg-emerald-500 from-transparent via-primary/40 to-transparent"></div>
+  
+  <div class="relative z-10">
+    
+    <div class="flex items-start gap-4 mb-6">
+      <div class="flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-all duration-500 relative overflow-hidden"
+           [style]="getGlassIconStyle()">
+        
+        <div class="absolute inset-0 rounded-2xl opacity-50"
+             [style.box-shadow]="'inset 0 0 20px ' + node().color + '40'">
+        </div>
+        
+        <div class="absolute inset-x-0 top-0 h-1/2 rounded-t-2xl opacity-30"
+             style="background: linear-gradient(to bottom, rgba(255, 255, 255, 0.4), transparent)">
+        </div>
+        
+        <fa-icon 
+          [icon]="emoji()" 
+          class="relative z-10 text-white drop-shadow-lg text-3xl md:text-4xl"
+          aria-hidden="true">
+        </fa-icon>
+      </div>
+      
+      <div class="flex-1">
+        <h3 class="text-2xl md:text-3xl font-bold mb-2 drop-shadow-sm" [style.color]="node().color">
+          {{ node().label }}
+        </h3>
+        <p class="text-sm md:text-base text-neutral-secondary font-medium leading-relaxed">
+          {{ node().description }}
+        </p>
+      </div>
+    </div>
+    
+    @if (node().metrics && node().metrics!.length > 0) {
+      <div class="grid grid-cols-2 gap-4 mb-6">
+        @for (metric of node().metrics; track metric.label) {
+          <div class="relative overflow-hidden rounded-2xl p-4 transition-all duration-500 hover:shadow-xl hover:-translate-y-1 cursor-default group/metric border border-4"
+               [style]="getGlassMetricStyle()">
+            
+            <div class="absolute inset-0 opacity-0 group-hover/metric:opacity-100 transition-opacity duration-500"
+                 [style.background]="'radial-gradient(circle at center, ' + node().color + '20, transparent)'">
+            </div>
+            
+            <div class="absolute -right-3 -bottom-3 opacity-[0.3] text-6xl pointer-events-none transition-all duration-500 group-hover/metric:scale-110 group-hover/metric:rotate-12 border-2"
+                 [style.color]="node().color">
+              <fa-icon [icon]="getMetricIcon(metric.label)"></fa-icon>
+            </div>
+            
+            <div class="relative z-10">
+              <p class="text-xs font-bold uppercase tracking-wider mb-2 opacity-80"
+                 [style.color]="node().color">
+                {{ metric.label }}
+              </p>
+              <p class="text-2xl md:text-3xl font-extrabold drop-shadow-sm" 
+                 [style.color]="node().color">
+                {{ metric.value }}
+              </p>
+            </div>
+            
+            <div class="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent"></div>
+          </div>
+        }
+      </div>
+    }
+    
+    <div class="flex gap-3 pt-2">
+      <button 
+        class="flex-1 px-4 py-3 rounded-xl text-sm font-bold text-white shadow-lg transition-all duration-300 relative overflow-hidden group/btn cursor-pointer"
+        [style.background-color]="node().color">
+        
+        <div class="absolute inset-0 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"
+             style="background: linear-gradient(to bottom, rgba(255, 255, 255, 0.2), transparent)">
+        </div>
+        
+        <span class="relative z-10 text:sm md:text-2xl flex items-center justify-center gap-2">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+          </svg>
+          Ver Detalhes
+        </span>
+      </button>
+      
+      <button 
+        class="px-4 py-3 rounded-xl text-sm font-bold border-2 transition-all duration-300 relative overflow-hidden group/btn cursor-pointer"
+        [style.border-color]="node().color"
+        [style.color]="node().color"
+        [style]="getGlassButtonStyle()">
+        
+        <div class="absolute inset-0 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"
+             [style.background]="node().color + '15'">
+        </div>
+        
+        <span class="relative z-10 text:sm md:text-2xl flex items-center justify-center gap-2">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+          </svg>
+          Relatório
+        </span>
+      </button>
+    </div>
+    
+  </div>
+</div>

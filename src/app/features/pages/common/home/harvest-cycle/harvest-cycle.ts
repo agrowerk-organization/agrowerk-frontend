@@ -1,243 +1,161 @@
-/*import { Component } from '@angular/core';
-
-@Component({
-  selector: 'app-harvest-cycle',
-  imports: [],
-  templateUrl: './harvest-cycle.html',
-  styleUrl: './harvest-cycle.css',
-})
-export class HarvestCycle {
-
-} */
-
-import { Component, signal } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from "@angular/router";
-
-interface CycleNode {
-  id: string;
-  label: string;
-  description: string;
-  color: string;
-  angle: number; 
-  metrics?: {
-    label: string;
-    value: string;
-  }[];
-}
+import { Cycle } from '../../../../../core/ui/types/cycle/cycle';
+import { CycleNode } from './harvest-cycle-components/cycle-node/cycle-node';
+import { CenterHub } from './harvest-cycle-components/center-hub/center-hub';
+import { NodeDetails } from './harvest-cycle-components/node-details/node-details';
+import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { ICONS_HARVEST_CYCLE } from '../../../../../core/ui/icons/icons.harvest-cycle';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { Title } from "../../../../../shared/components/title/title";
+import { Subtitle } from '../../../../../shared/components/subtitle/subtitle';
 
 @Component({
   selector: 'app-harvest-cycle-diagram',
   standalone: true,
-  imports: [CommonModule, RouterLink],
-  template: `
-    <div class="relative w-full max-w-4xl mx-auto aspect-square">
-      <!-- Center Hub -->
-      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
-        <div class="w-32 h-32 rounded-full flex items-center justify-center shadow-green-lg cursor-pointer hover:scale-110 transition-transform duration-300"
-          (click)="selectNode(null)"
-          (keydown.enter)="selectNode(null)"
-          role="button"
-          tabindex="0">
-          <div class="text-center">
-            <svg class="w-12 h-12 mx-auto text-neutral-tertiary mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-            </svg>
-            <p class="text-xs font-bold text-neutral-tertiary">AgroWerk</p>
-          </div>
-        </div>
-      </div>
-
-      @for (node of cycleNodes; track node.id) {
-        <div 
-          class="absolute w-24 h-24 cursor-pointer transition-all duration-300 hover:scale-125 z-10"
-          [style.top.%]="getNodePosition(node.angle).y"
-          [style.left.%]="getNodePosition(node.angle).x"
-          [class]="selectedNode() === node.id ? 'scale-125' : 'scale-100'"
-          (click)="selectNode(node.id)"
-          (keyword.enter)="selectNode(node.id)"
-          role="button"
-          tabindex="0"
-          (mouseenter)="hoveredNode.set(node.id)"
-          (mouseleave)="hoveredNode.set(null)"
-        >
-          <div 
-            class="w-full h-full rounded-full flex items-center justify-center shadow-lg border-4 transition-all duration-300"
-            [style.background-color]="node.color"
-            [class]="selectedNode() === node.id ? 'border-neutral-tertiary' : 'border-transparent'"
-          >
-            <span class="text-2xl">{{ getNodeEmoji(node.id) }}</span>
-          </div>
-          
-          <!-- Label -->
-          <div class="absolute -bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap">
-            <p class="text-xs font-semibold text-neutral-tertiary text-center">{{ node.label }}</p>
-          </div>
-
-          <!-- Connecting Line to Center -->
-          <svg 
-            class="absolute top-1/2 left-1/2 pointer-events-none transition-opacity duration-300"
-            [class]="selectedNode() === node.id || hoveredNode() === node.id ? 'opacity-100' : 'opacity-20'"
-            [style.width.px]="getConnectionLength()"
-            [style.height.px]="getConnectionLength()"
-            [style.transform]="getConnectionTransform(node.angle)"
-          >
-            <line 
-              x1="0" 
-              y1="0" 
-              [attr.x2]="getConnectionLength()" 
-              [attr.y2]="getConnectionLength()" 
-              stroke="currentColor"
-              [attr.stroke]="node.color"
-              stroke-width="2"
-              stroke-dasharray="5,5"
-            />
-          </svg>
-        </div>
-      }
-
-      <!-- Details Panel -->
-      @if (selectedNode()) {
-        <div class="absolute -bottom-40 left-0 right-0 mx-auto max-w-md rounded-2xl p-6 border border-primary/30 animate-fadeInUp">
-          @for (node of cycleNodes; track node.id) {
-            @if (selectedNode() === node.id) {
-              <h3 class="text-xl font-bold text-primary mb-2">{{ node.label }}</h3>
-              <p class="text-sm text-neutral-secondary mb-4">{{ node.description }}</p>
-              
-              @if (node.metrics) {
-                <div class="grid grid-cols-2 gap-3">
-                  @for (metric of node.metrics; track metric.label) {
-                    <div class="bg-neutral-primary/50 rounded-lg p-3">
-                      <p class="text-xs text-neutral-secondary">{{ metric.label }}</p>
-                      <p class="text-lg font-bold text-primary">{{ metric.value }}</p>
-                    </div>
-                  }
-                </div>
-              }
-            }
-          }
-        </div>
-      }
-
-      <!-- Rotation Animation -->
-      <div class="absolute inset-0 border-2 border-dashed border-primary/20 rounded-full animate-spin-slow"></div>
-    </div>
-  `,
-  styles: [`
-    @keyframes spin-slow {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-    
-    .animate-spin-slow {
-      animation: spin-slow 60s linear infinite;
-    }
-  `]
+  imports: [
+    CommonModule,
+    FontAwesomeModule,
+    CycleNode,
+    CenterHub,
+    NodeDetails,
+    Title,
+    Subtitle
+],
+  templateUrl: './harvest-cycle.html',
+  styleUrl: './harvest-cycle.css'
 })
-export class HarvestCycleDiagramComponent {
-  selectedNode = signal<string | null>('safra');
-  hoveredNode = signal<string | null>(null);
 
-  cycleNodes: CycleNode[] = [
+export class HarvestCycle {
+  selectedNode = signal<number | null>(null); 
+  hoveredNode = signal<number | null>(null);
+
+  icons = ICONS_HARVEST_CYCLE;
+
+  cycleNodes: Cycle[] = [
     {
-      id: 'safra',
-      label: 'Planejamento',
-      description: 'Organize o calendário de plantio e defina metas de produção',
-      color: '#4CAF50',
-      angle: 0,
-      metrics: [
-        { label: 'Safras ativas', value: '320' },
-        { label: 'Hectares', value: '15k+' }
-      ]
-    },
-    {
-      id: 'plantio',
+      id: 1,
       label: 'Plantio',
       description: 'Registre o início da safra e vincule insumos utilizados',
       color: '#66BB6A',
-      angle: 60,
+      angle: 0,
       metrics: [
         { label: 'Em plantio', value: '85' },
         { label: 'Sementes', value: '12 ton' }
       ]
     },
     {
-      id: 'manejo',
+      id: 2,
       label: 'Manejo',
       description: 'Controle aplicações, irrigação e monitoramento contínuo',
       color: '#81C784',
-      angle: 120,
+      angle: 60,
       metrics: [
         { label: 'Alertas', value: '24' },
         { label: 'Aplicações', value: '156' }
       ]
     },
     {
-      id: 'colheita',
+      id: 3,
       label: 'Colheita',
       description: 'Rastreie a produção por lote e calcule produtividade',
       color: '#FFB74D',
-      angle: 180,
+      angle: 120,
       metrics: [
         { label: 'Em colheita', value: '42' },
         { label: 'Produtividade', value: '+40%' }
       ]
     },
     {
-      id: 'estoque',
+      id: 4,
       label: 'Estoque',
       description: 'Armazene e monitore a produção colhida em tempo real',
       color: '#FF9800',
-      angle: 240,
+      angle: 180,
       metrics: [
         { label: 'Armazenado', value: '3.5k ton' },
         { label: 'Disponível', value: '2.1k ton' }
       ]
     },
     {
-      id: 'barter',
+      id: 5,
       label: 'Negociação',
       description: 'Troque produção por insumos no marketplace barter',
       color: '#F57C00',
-      angle: 300,
+      angle: 240,
       metrics: [
         { label: 'Ofertas ativas', value: '87' },
         { label: 'Negociadas', value: 'R$ 2.5M' }
       ]
+    },
+    {
+      id: 6,
+      label: 'Planejamento',
+      description: 'Organize o calendário de plantio e defina metas de produção',
+      color: '#4CAF50',
+      angle: 300,
+      metrics: [
+        { label: 'Safras ativas', value: '320' },
+        { label: 'Hectares', value: '15k+' }
+      ]
     }
   ];
 
-  selectNode(nodeId: string | null): void {
+  selectedNodeData = computed(() => {
+    return this.cycleNodes.find(node => node.id === this.selectedNode());
+  })
+
+  selectNode(nodeId: number | null): void {
     this.selectedNode.set(nodeId);
   }
+  
+  getEmoji(label: string): IconDefinition {
+    const emojis: Record<string, IconDefinition> = {
+      'Planejamento': this.icons.CLIPBOARD_LIST,
+      'Plantio': this.icons.SEEDLING,
+      'Manejo': this.icons.TRACTOR,
+      'Colheita': this.icons.WHEAT_AWN,
+      'Estoque': this.icons.BOX,
+      'Negociação': this.icons.HANDSHAKE
+    };
+    return emojis[label] ?? this.icons.GEAR;
+  }
 
-  getNodePosition(angle: number): { x: number, y: number } {
-    const radius = 35; // Percentage from center
-    const radian = (angle - 90) * (Math.PI / 180);
+  getGlassContainerStyle(): Record<string, string> {
+    // Usamos o verde principal como base para o estado inicial
+    const baseColor = '#4CAF50'; 
     
     return {
-      x: 50 + radius * Math.cos(radian) - 12, // -12 to center the node (24/2)
-      y: 50 + radius * Math.sin(radian) - 12
+      'background': 'rgba(13, 20, 15, 0.9)', // Obsidian Glass (Escuro)
+      'backdrop-filter': 'blur(24px) saturate(160%)',
+      '-webkit-backdrop-filter': 'blur(24px) saturate(160%)',
+      'border': `1.5px solid ${baseColor}80`, // Borda neon verde semitransparente
+      'box-shadow': `0 12px 40px rgba(0, 0, 0, 0.5), 0 0 20px ${baseColor}15`,
+      'border-radius': '24px'
     };
   }
 
-  getConnectionLength(): number {
-    return 200; // Approximate distance from center to node
-  }
-
-  getConnectionTransform(angle: number): string {
-    return `translate(-50%, -50%) rotate(${angle - 90}deg)`;
-  }
-
-  getNodeEmoji(nodeId: string): string {
-    const emojis: Record<string, string> = {
-      'safra': '📋',
-      'plantio': '🌱',
-      'manejo': '🚜',
-      'colheita': '🌾',
-      'estoque': '📦',
-      'barter': '🤝'
+  getQuickButtonStyle(color: string): Record<string, string> {
+    return {
+      'background': 'rgba(13, 20, 15, 0.85)',
+      'backdrop-filter': 'blur(12px) saturate(150%)',
+      '-webkit-backdrop-filter': 'blur(12px) saturate(150%)',
+      'border': `1px solid ${color}`,
+      'color': color,
+      'box-shadow': `0 4px 15px rgba(0, 0, 0, 0.4), 0 0 10px ${color}33`,
+      'border-radius': '12px',
+      'font-weight': '700',
+      'transition': 'all 0.3s ease'
     };
-    return emojis[nodeId] || '⚙️';
   }
+
+  hexToRgb(hex: string): { r: number; g: number; b: number } {
+    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+      r: parseInt(result[1], 16),
+      g: parseInt(result[2], 16),
+      b: parseInt(result[3], 16)
+    } : { r: 0, g: 0, b: 0 };
+  }
+
 }
