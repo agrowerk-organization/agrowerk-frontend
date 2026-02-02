@@ -1,0 +1,53 @@
+<section class="benefits-by-role-section relative py-2">
+
+    <div class="text-center mb-16 animate-fadeInUp">        
+        <app-title
+          firstSegment="Benefícios"
+          secondSegment="Exclusivos"
+          >
+        </app-title>
+
+        <app-subtitle text="Soluções inteligentes projetadas para otimizar cada etapa de sua jornada laboral."></app-subtitle>
+    </div>  
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+      <app-role-tab-button 
+        label="Sou Produtor" 
+        [icon]="TAB_ICONS.producer" 
+        [activeRole]="activeRole() === 'producer'"
+        (clicked)="selectRole('producer')">
+      </app-role-tab-button>
+  
+      <app-role-tab-button 
+        label="Sou Fornecedor" 
+        [icon]="TAB_ICONS.supplier" 
+        [activeRole]="activeRole() === 'supplier'"
+        (clicked)="selectRole('supplier')">
+      </app-role-tab-button>
+    </div>
+  
+    <div class="benefits-content max-w-7xl mx-auto">
+      
+      <div class="text-center mb-4 animate-fadeInUp">
+        <h3 class="text-4xl font-bold text-primary">
+          <fa-icon [icon]="currentBenefits().icon" class="text-primary mr-3"></fa-icon>
+          {{ currentBenefits().title }}
+        </h3>
+        <p class="text-lg text-neutral-secondary mt-3">{{ currentBenefits().subtitle }}</p>
+      </div>
+  
+      <div class="md:hidden">
+        <app-carousel [items]="currentBenefits().benefits">
+          <ng-template #itemTemplate let-benefit>
+            <app-benefit-card [benefit]="benefit" class="w-full"></app-benefit-card>
+          </ng-template>
+        </app-carousel>
+      </div>
+  
+      <div class="hidden md:grid grid-cols-2 gap-8">
+        @for (benefit of currentBenefits().benefits; track benefit.id) {
+          <app-benefit-card [benefit]="benefit"></app-benefit-card>
+        }
+      </div>
+  
+    </div>
+  </section>

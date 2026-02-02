@@ -1,4 +1,5 @@
-<div class="w-full min-h-screen p-4 md:p-8 md:p-8 bg-gradient-to-br from-primary-50 to-primary-100"> <div class="w-full max-w-7xl mx-auto">
+<div class="w-full min-h-screen p-4 md:p-8 md:p-8 bg-gradient-to-br from-primary-50 to-primary-100"> 
+  <div class="w-full max-w-7xl mx-auto">
       
     <div class="text-center mb-8 lg:mb-12">
       <app-title
@@ -11,7 +12,7 @@
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
       
       <div class="order-2 lg:order-1 flex items-center justify-center">
-        <div class="relative w-full mt-6 max-w-lg aspect-square">
+        <div class="relative w-full mt-6 max-w-2xl aspect-square">
           
           <div class="absolute inset-0 border-2 border-dashed rounded-full transition-all duration-300 opacity-90"
                style="animation: spin 60s linear infinite; border-color: rgb(11, 180, 11);
@@ -36,11 +37,11 @@
       
       <div class="order-1 lg:order-2 flex items-center justify-center lg:justify-start">
         @if (selectedNodeData(); as selected) {
-          <div class="w-full max-w-md lg:max-w-lg">
+          <div class="w-full max-w-md lg:max-w-2xl">
             <app-node-details [node]="selected" />
           </div>
         } @else {
-          <div class="w-full max-w-md lg:max-w-lg rounded-3xl p-8 transition-all duration-500 hover:scale-[1.02] relative overflow-hidden group"
+          <div class="w-full max-w-md lg:max-w-3xl rounded-3xl p-8 transition-all duration-500 hover:scale-[1.02] relative overflow-hidden group"
                [style]="getGlassContainerStyle()">
             
             <div class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent"></div>
@@ -55,7 +56,7 @@
                 Gerencie seu <span class="text-primary">Ciclo Completo</span>
               </h3>
               
-              <p class="text-white/60 mb-8 text-sm md:text-base leading-relaxed font-medium">
+              <p class="text-neutral-secondary/80 mb-8 text-base md:text-xl leading-relaxed font-medium">
                 Selecione uma etapa no diagrama ao lado para acessar métricas, 
                 ações rápidas e o status da sua produção em tempo real.
               </p>
@@ -64,10 +65,10 @@
                 @for (node of cycleNodes.slice(0, 6); track node.id) {
                   <button 
                     (click)="selectNode(node.id)"
-                    class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold transition-all duration-300 hover:-translate-y-1 active:scale-95 border cursor-pointer"
+                    class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xl font-bold transition-all duration-300 hover:-translate-y-1 active:scale-95 border cursor-pointer"
                     [style]="getQuickButtonStyle(node.color)">
                     
-                    <fa-icon [icon]="getEmoji(node.label)" class="text-sm md:text-xl"></fa-icon>
+                    <fa-icon [icon]="getEmoji(node.label)" class="text-xl md:text-xl"></fa-icon>
                     {{ node.label }}
                   </button>
                 }

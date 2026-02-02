@@ -39,8 +39,9 @@
     position: absolute;
     width: 4px;
     height: 4px;
-    background: rgba(var(--color-secondary-rgb), 0.5);  
+    background: rgba(76, 175, 79, 0.6);  
     border-radius: 50%;
+    filter: blur(1px);
     animation: float 15s infinite ease-in-out;
   }
   .particle-1 { top: 20%; left: 20%; animation-delay: 0s; }

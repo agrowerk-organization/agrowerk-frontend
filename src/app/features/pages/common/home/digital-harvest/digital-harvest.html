@@ -1,4 +1,4 @@
-<section class="relative py-20 overflow-hidden">
+<section class="relative py-2 overflow-hidden">
     <div class="absolute inset-0 opacity-5">
       <div class="absolute inset-0" style="background-image: repeating-linear-gradient(45deg, transparent, transparent 35px, var(--color-primary) 35px, var(--color-primary) 37px);"></div>
     </div>
@@ -41,16 +41,6 @@
         @if (phases[activePhase()]; as currentPhase) {
           <app-phase-details [phase]="currentPhase"></app-phase-details>
         }
-      </div>
-  
-      <div class="text-center mt-16">
-        <p class="text-lg text-neutral-secondary mb-4">
-          Pronto para otimizar toda sua operação?
-        </p>
-        <button class="px-8 py-4 bg-gradient-to-r from-primary to-primary-dark text-neutral-primary text-lg font-bold rounded-full hover:shadow-green-lg transition-all duration-300 hover:scale-105 group">
-          Começar Gratuitamente
-          <span class="inline-block ml-2 transition-transform duration-300 group-hover:translate-x-2">→</span>
-        </button>
       </div>
     </div>
   </section>

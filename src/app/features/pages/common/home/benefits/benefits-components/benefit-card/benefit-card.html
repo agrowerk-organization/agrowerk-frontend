@@ -1,0 +1,59 @@
+<div 
+  class="benefit-card group relative overflow-hidden transition-all duration-500 hover:-translate-y-2"
+  [style.animation-delay]="delay()"
+  [style.background]="'rgba(13, 20, 15, 0.9)'"
+  [style.backdrop-filter]="'blur(24px) saturate(160%)'"
+  [style.border]="'2px solid #4CAF5080'"
+  [style.box-shadow]="'0 12px 40px rgba(0, 0, 0, 0.5), 0 0 20px #4CAF5015'"
+  [style.border-radius]="'24px'"
+>
+  <div class="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+  <div class="relative z-10 p-8">
+    <div class="flex items-start gap-4 mb-4">
+      
+      <div 
+        class="flex-shrink-0 w-14 h-14 flex items-center justify-center transition-all duration-300 group-hover:scale-110"
+        [style.background]="'rgba(13, 20, 15, 0.85)'"
+        [style.backdrop-filter]="'blur(12px) saturate(150%)'"
+        [style.border]="'1px solid #4CAF50'"
+        [style.box-shadow]="'0 4px 15px rgba(0, 0, 0, 0.4), 0 0 10px #4CAF5033'"
+        [style.border-radius]="'12px'"
+      >
+        <fa-icon 
+          [icon]="benefit().icon" 
+          class="text-2xl text-primary transition-transform duration-500 group-hover:rotate-[360deg]"
+        ></fa-icon>
+      </div>
+
+      <div class="flex-1">
+        <h4 class="text-xl font-bold text-neutral-tertiary mb-1 group-hover:text-primary transition-colors duration-300">
+          {{ benefit().title }}
+        </h4>
+        
+        @if (benefit().metric) {
+          <div 
+            class="inline-flex items-center gap-2 px-3 py-1"
+            [style.background]="'rgba(13, 20, 15, 0.85)'"
+            [style.border]="'1px solid #66BB6A'"
+            [style.box-shadow]="'0 4px 15px rgba(0, 0, 0, 0.4), 0 0 10px #66BB6A33'"
+            [style.border-radius]="'12px'"
+          >
+            <span class="text-lg font-bold text-success">{{ benefit().metric?.value }}</span>
+            <span class="text-xs text-neutral-secondary font-bold uppercase tracking-wider">{{ benefit().metric?.label }}</span>
+          </div>
+        }
+      </div>
+    </div>
+
+    <p class="text-base text-neutral-secondary leading-relaxed opacity-90">
+      {{ benefit().description }}
+    </p>
+
+    <div class="absolute bottom-4 right-4 opacity-0 group-hover:opacity-40 transition-all duration-300 group-hover:translate-x-2">
+      <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+      </svg>
+    </div>
+  </div>
+</div>

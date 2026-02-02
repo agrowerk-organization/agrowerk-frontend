@@ -122,14 +122,13 @@ export class HarvestCycle {
   }
 
   getGlassContainerStyle(): Record<string, string> {
-    // Usamos o verde principal como base para o estado inicial
     const baseColor = '#4CAF50'; 
     
     return {
-      'background': 'rgba(13, 20, 15, 0.9)', // Obsidian Glass (Escuro)
+      'background': 'rgba(13, 20, 15, 0.9)',
       'backdrop-filter': 'blur(24px) saturate(160%)',
       '-webkit-backdrop-filter': 'blur(24px) saturate(160%)',
-      'border': `1.5px solid ${baseColor}80`, // Borda neon verde semitransparente
+      'border': `1.5px solid ${baseColor}80`,
       'box-shadow': `0 12px 40px rgba(0, 0, 0, 0.5), 0 0 20px ${baseColor}15`,
       'border-radius': '24px'
     };
