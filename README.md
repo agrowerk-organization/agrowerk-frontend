@@ -4,23 +4,28 @@
 
 [![Angular](https://img.shields.io/badge/Angular-21-DD0031?style=for-the-badge&logo=angular&logoColor=white)](https://angular.io/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.x-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![SCSS](https://img.shields.io/badge/SCSS-CC6699?style=for-the-badge&logo=sass&logoColor=white)](https://sass-lang.com/)
+![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](LICENSE)
 
 ## 📋 Sobre o Projeto
-
-**AgroWerk Frontend** é uma aplicação web moderna que oferece interface intuitiva para o sistema de gestão de inventário agrícola, conectando produtores rurais, fornecedores e administradores através de dashboards personalizados e funcionalidades específicas para cada perfil.
+**AgroWerk Frontend** é uma aplicação web moderna que oferece interface intuitiva para o sistema integrado de gestão empresarial para agricultura em diferentes escalas de produção, fornecendo funcionalidades de gestão e planejamento de safras, adequações de inventários conforme safras e interações em barter agrícola, permitindo a conexão entre produtores rurais, fornecedores e administradores através de dashboards personalizados e funcionalidades específicas para cada perfil.
 
 ### ✨ Principais Funcionalidades
-
-- 🔐 **Sistema de Autenticação** com JWT e guards de rota
+- 🔐 **Sistema de Autenticação** com JWT, HTTP only cookies e guards de rota
 - 📊 **Dashboards Personalizados** para cada tipo de usuário
-- 🌾 **Gestão de Propriedades** - interface completa para produtores
+- 🌾 **Gestão de Propriedades Rurais** - interface completa para cadastro e administração
+- 🌱 **Planejamento de Safras** - cronograma e gestão completa do ciclo produtivo
+- 📅 **Gestão de Safras** - acompanhamento de plantio, desenvolvimento e colheita
+- 🤝 **Operações de Barter Agrícola** - negociação e gestão de trocas insumo-produto
+- 🎯 **Controle de Lotes (Batches)** - rastreabilidade e gestão de qualidade
 - 📦 **Controle de Estoque** - visualização em tempo real e movimentações
+- 🔄 **Gestão de Movimentações** - histórico completo de entrada/saída de insumos
 - 🏭 **Portal de Fornecedores** - gestão de insumos e especialidades
+- 🏷️ **Categorização de Insumos** - organização por tipo e aplicação
+- 👥 **Gestão Multi-tenant** - isolamento de dados por organização
 - 🎨 **Design Responsivo** - funciona perfeitamente em desktop, tablet e mobile
 - ⚡ **Performance Otimizada** - lazy loading e estratégias de cache
-- 🔄 **Interceptors HTTP** - tratamento centralizado de requisições
+- 🔄 **Interceptors HTTP** - tratamento centralizado de requisições e refresh automático
 - 🎯 **Type Safety** - tipagem forte com TypeScript
 
 ## 🚀 Tecnologias Utilizadas
@@ -28,19 +33,16 @@
 ### Core
 - **Angular 21** - Framework principal
 - **TypeScript 5.x** - Linguagem de programação
-- **RxJS** - Programação reativa
+- **Signals** - Programação reativa
 - **Angular Router** - Gerenciamento de rotas
 
 ### Estilização
-- **SCSS/Sass** - Pré-processador CSS
-- **CSS Grid & Flexbox** - Layouts responsivos
-- **Angular Material** (opcional) - Componentes UI
+- **Tailwind CSS** - Framework CSS
 
 ### Ferramentas & Build
 - **Angular CLI** - Ferramentas de desenvolvimento
 - **Webpack** - Module bundler (via Angular CLI)
 - **ESLint** - Linting de código
-- **Prettier** - Formatação de código
 
 ### Segurança
 - **Auth Guards** - Proteção de rotas
