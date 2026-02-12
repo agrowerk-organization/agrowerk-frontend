@@ -1,0 +1,62 @@
+<div 
+  class="testimonial-card group rounded-3xl p-6 sm:p-10 lg:p-14 relative overflow-hidden transition-all duration-500 hover:-translate-y-2
+        min-h-[420px] sm:min-h-[380px] lg:min-h-[360px]"
+  [style.background]="'rgba(13, 20, 15, 0.9)'"
+  [style.backdrop-filter]="'blur(24px) saturate(160%)'"
+  [style.border]="'2px solid #4CAF5080'"
+  [style.box-shadow]="'0 12px 40px rgba(0, 0, 0, 0.5), 0 0 20px #4CAF5015'"
+  [style.border-radius]="'24px'"
+>
+
+  <div class="mb-4 sm:mb-6">
+    <fa-icon [icon]="icons.QUOTE_LEFT" class="text-3xl sm:text-5xl text-primary/70"></fa-icon>
+  </div>
+
+  <blockquote class="text-base sm:text-xl lg:text-2xl text-neutral-tertiary font-medium leading-relaxed mb-6 sm:mb-8">
+    "{{ testimonial().quote }}"
+  </blockquote>
+
+  <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 sm:gap-6">
+
+    <div class="flex items-center gap-3 sm:gap-4">
+      <div class="w-14 h-14 sm:w-20 sm:h-20 lg:w-32 lg:h-32 shrink-0 bg-gradient-to-br from-primary to-primary-dark rounded-full flex 
+                  items-center justify-center text-neutral-tertiary font-bold text-base sm:text-xl overflow-hidden">
+        @if (testimonial().author.avatar) {
+          <img [src]="testimonial().author.avatar" [alt]="testimonial().author.name" class="w-full h-full object-cover" />
+        } @else {
+          {{ avatarFallback() }}
+        }
+      </div>
+
+      <div>
+        <p class="text-lg sm:text-2xl font-bold text-neutral-tertiary">{{ testimonial().author.name }}</p>
+        <p class="text-sm sm:text-lg text-neutral-secondary">{{ testimonial().author.role }}</p>
+        <p class="text-sm sm:text-lg text-primary">{{ testimonial().author.property }} • {{ testimonial().author.location }}</p>
+      </div>
+    </div>
+
+    <div class="flex flex-wrap align-center justify-center gap-3 sm:gap-4">
+      @if (testimonial().metrics.productivity) {
+        <app-testimonial-metric 
+          label="Produtividade" 
+          [value]="testimonial().metrics.productivity" 
+          type="success">
+        </app-testimonial-metric>
+      }
+      @if (testimonial().metrics.savings) {
+        <app-testimonial-metric 
+          label="Economia" 
+          [value]="testimonial().metrics.savings" 
+          type="warning">
+        </app-testimonial-metric>
+      }
+    </div>
+  </div>
+
+  <div class="flex items-center justify-center gap-1 mt-4 sm:mt-6">
+    @for (star of stars(); track $index) {
+      <fa-icon [icon]="icons.STAR" class="text-quartenary text-base sm:text-xl text-center"></fa-icon>
+    }
+  </div>
+
+</div>

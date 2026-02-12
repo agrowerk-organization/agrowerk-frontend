@@ -1,0 +1,82 @@
+.testimonials-section {
+  position: relative;
+}
+
+.testimonial-card {
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(76, 175, 80, 0.15);
+  }
+}
+
+.metric-badge {
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+button[aria-label*="Ver depoimento"] {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  &:hover {
+    transform: scale(1.2);
+  }
+}
+
+fa-icon[icon="icons.quote"] {
+  animation: float-subtle 6s ease-in-out infinite;
+}
+
+@keyframes float-subtle {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+fa-icon[icon="icons.star"] {
+  animation: shine 2s ease-in-out infinite;
+  animation-delay: calc(var(--star-index, 0) * 0.1s);
+}
+
+@keyframes shine {
+  0%, 100% {
+    opacity: 1;
+    filter: brightness(1);
+  }
+  50% {
+    opacity: 0.8;
+    filter: brightness(1.2);
+  }
+}
+
+@media (max-width: 1024px) {
+  .testimonial-card {
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 640px) {
+  blockquote {
+    font-size: 1.125rem;
+  }
+  
+  .metric-badge {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .testimonial-card,
+  .metric-badge,
+  fa-icon {
+    animation: none !important;
+    transition: none !important;
+  }
+}

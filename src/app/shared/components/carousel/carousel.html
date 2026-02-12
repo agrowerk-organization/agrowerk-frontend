@@ -6,9 +6,9 @@
 
         <div class="flex transition-transform duration-500 ease-in-out"
             style="will-change: transforme"
-            [style.transform]="'translateX(-' + (currentIndex * 100) + '%)'">
+            [style.transform]="'translateX(-' + (currentIndex() * 100) + '%)'">
         
-            @for (item of items; track $index) {
+            @for (item of items(); track $index) {
                 <div class="min-w-full w-full flex justify-center items-center py-4 md:py-2">
                     <ng-container *ngTemplateOutlet="itemTemplate; context: { $implicit: item }"></ng-container>
                 </div>
@@ -20,12 +20,12 @@
 
     <div class="flex justify-center items-center gap-2.5 mt-2.5 pb-2.5">
 
-        @for (item of items; track $index; let i = $index) {
+        @for (item of items(); track $index; let i = $index) {
             <button 
             class="w-2.5 h-2.5 rounded-full border-0 bg-gray-400 opacity-40 cursor-pointer transition-all duration-300 p-0
                    hover:opacity-70 hover:scale-110
                    [&.active]:bg-green-600 [&.active]:opacity-100 [&.active]:scale-125"
-            [class.active]="i === currentIndex"
+            [class.active]="i === currentIndex()"
             (click)="goToSlide(i)"
             [attr.aria-label]="'Go to slide ' + (i + 1)">
           </button>

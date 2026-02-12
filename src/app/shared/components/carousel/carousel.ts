@@ -1,5 +1,14 @@
+import { 
+  Component, 
+  input, 
+  signal, 
+  effect, 
+  OnDestroy, 
+  ContentChild, 
+  TemplateRef, 
+  AfterViewInit 
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit, OnDestroy, ContentChild, ChangeDetectorRef, AfterViewInit, TemplateRef, inject } from '@angular/core';
 
 @Component({
   selector: 'app-carousel',
@@ -7,27 +16,29 @@ import { Component, Input, OnInit, OnDestroy, ContentChild, ChangeDetectorRef, A
   imports: [CommonModule],
   templateUrl: './carousel.html'
 })
-export class Carousel<T> implements OnInit, OnDestroy, AfterViewInit {
+export class Carousel<T> implements OnDestroy, AfterViewInit {
+  readonly items = input<T[]>([]);
+  readonly autoplayDelay = input<number>(3500);
+  readonly showAutoplay = input<boolean>(true);
 
-  @Input() items: T[] = [];
-  @Input() autoplayDelay = 3500;
-  @Input() showAutoplay = true;
-  @ContentChild(TemplateRef) itemTemplate!: TemplateRef<{ $implicit: T}>
+  @ContentChild(TemplateRef) itemTemplate!: TemplateRef<{ $implicit: T }>;
 
-  currentIndex = 0;
+  readonly currentIndex = signal<number>(0);
 
-  private autoplayInterval: number | undefined;
+  private autoplayInterval: ReturnType<typeof setInterval> | undefined;
   private touchStartX = 0;
-  private touchEndX = 0;
 
-  private cdr = inject(ChangeDetectorRef);
-
-  ngOnInit(): void {
-    this.currentIndex = 0;
+  constructor() {
+    effect(() => {
+      const count = this.items().length;
+      if (count > 0 && this.currentIndex() >= count) {
+        this.currentIndex.set(0);
+      }
+    }, { allowSignalWrites: true });
   }
 
   ngAfterViewInit(): void {
-    if (this.showAutoplay && this.items.length > 1) {
+    if (this.showAutoplay() && this.items().length > 1) {
       this.startAutoplay();
     }
   }
@@ -37,22 +48,21 @@ export class Carousel<T> implements OnInit, OnDestroy, AfterViewInit {
   }
 
   next(): void {
-    this.currentIndex = (this.currentIndex + 1) % this.items.length;
-    this.cdr.detectChanges();
+    const count = this.items().length;
+    if (count <= 1) return;
+    this.currentIndex.update((val) => (val + 1) % count);
     this.resetAutoplay();
   }
 
   prev(): void {
-    this.currentIndex = this.currentIndex === 0
-      ? this.items.length - 1
-      : this.currentIndex - 1;
-    this.cdr.detectChanges();
+    const count = this.items().length;
+    if (count <= 1) return;
+    this.currentIndex.update((val) => (val === 0 ? count - 1 : val - 1));
     this.resetAutoplay();
   }
 
   goToSlide(index: number): void {
-    this.currentIndex = index;
-    this.cdr.detectChanges(); 
+    this.currentIndex.set(index);
     this.resetAutoplay();
   }
 
@@ -61,15 +71,13 @@ export class Carousel<T> implements OnInit, OnDestroy, AfterViewInit {
   }
 
   onTouchEnd(event: TouchEvent): void {
-    this.touchEndX = event.changedTouches[0].screenX;
-    this.handleSwipe();
-  }
+    const touch = event.changedTouches[0];
+    if (!touch) return;
+    const touchEndX = touch.screenX;
+    const diff = this.touchStartX - touchEndX;
+    const threshold = 50;
 
-  private handleSwipe(): void {
-    const swipeThreshold = 50;
-    const diff = this.touchStartX - this.touchEndX;
-
-    if (Math.abs(diff) > swipeThreshold) {
+    if (Math.abs(diff) > threshold) {
       if (diff > 0) {
         this.next();
       } else {
@@ -79,21 +87,21 @@ export class Carousel<T> implements OnInit, OnDestroy, AfterViewInit {
   }
 
   private startAutoplay(): void {
-    this.autoplayInterval = window.setInterval(() => {
+    this.stopAutoplay();
+    this.autoplayInterval = setInterval(() => {
       this.next();
-    }, this.autoplayDelay);
+    }, this.autoplayDelay());
   }
 
   private stopAutoplay(): void {
-    if (this.autoplayInterval) {
-      window.clearInterval(this.autoplayInterval);
+    if (this.autoplayInterval !== undefined) {
+      clearInterval(this.autoplayInterval);
       this.autoplayInterval = undefined;
     }
   }
 
   private resetAutoplay(): void {
-    if (this.showAutoplay) {
-      this.stopAutoplay();
+    if (this.showAutoplay()) {
       this.startAutoplay();
     }
   }

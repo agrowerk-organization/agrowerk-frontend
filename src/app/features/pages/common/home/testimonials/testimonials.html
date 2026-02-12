@@ -1,0 +1,32 @@
+<article class="testimonials-section relative py-10 sm:py-16 overflow-hidden">
+
+    <div class="absolute inset-0 opacity-5 pointer-events-none">
+      <div class="absolute top-2 left-10 w-64 h-64 bg-primary rounded-full blur-3xl"></div>
+      <div class="absolute bottom-10 right-10 w-96 h-96 bg-secondary rounded-full blur-3xl"></div>
+    </div>
+  
+    <div class="container mx-auto px-4 lg:px-8 relative z-10">
+  
+      <div class="text-center mb-4 sm:mb-6 animate-fadeInUp">
+        <app-title [firstSegment]="'O Que Nossos'" [secondSegment]="'Clientes Dizem'"></app-title>
+        <app-subtitle [text]="'Histórias reais de quem transformou suas operações com o AgroWerk'"></app-subtitle>
+      </div>
+  
+      <app-carousel [items]="testimonials">
+        <ng-template let-item>
+          <div class="max-w-4xl w-full"> 
+            <app-testimonial-card [testimonial]="item"></app-testimonial-card>
+          </div>
+        </ng-template>
+      </app-carousel>
+  
+      <div class="text-center mt-3 sm:mt-7">
+        <p class="text-lg text-neutral-secondary flex items-center justify-center gap-2">
+          <img src="assets/svgs/star.svg" alt="Star" width="32" height="32" class="inline-block">
+          Avaliação média: <strong class="text-secondary text-lg">4.9/5</strong> • 
+          <strong class="text-secondary text-lg">500+</strong> avaliações verificadas
+        </p>
+      </div>
+  
+    </div>
+</article>

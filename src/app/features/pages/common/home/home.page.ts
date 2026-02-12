@@ -5,10 +5,11 @@ import { Pattern } from '../../../../shared/components/pattern/pattern';
 import { DigitalHarvest } from './digital-harvest/digital-harvest';
 import { HarvestCycle } from './harvest-cycle/harvest-cycle';
 import { Benefits } from "./benefits/benefits";
+import { Testimonials } from "./testimonials/testimonials";
 
 @Component({
   selector: 'app-home.page',
-  imports: [Hero, MeshGradient, Pattern, DigitalHarvest, HarvestCycle, Benefits],
+  imports: [Hero, MeshGradient, Pattern, DigitalHarvest, HarvestCycle, Benefits, Testimonials],
   templateUrl: './home.page.html',
   styleUrl: './home.page.scss',
 })

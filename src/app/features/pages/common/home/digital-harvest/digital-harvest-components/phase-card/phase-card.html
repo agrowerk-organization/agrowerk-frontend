@@ -1,23 +1,27 @@
-<div class="timeline-phase relative cursor-pointer transition-all duration-500"
-         [ngClass]="isActive() ? 'scale-105' : 'opacity-70 hover:opacity-100'"
-         (click)="selected.emit()"
-         (keydown.enter)="selected.emit()"
-         role="button"
-         tabindex="0">
-      <div class="bg-gradient-to-br p-6 rounded-2xl border-2 transition-all duration-300"
-           [ngClass]="isActive() ? 'border-primary shadow-green' : 'border-neutral-secondary/30'"
-           [class]="'bg-gradient-to-br ' + phase().bgGradient">
-        
-        <div class="flex items-center justify-center w-16 h-16 bg-neutral-primary/20 rounded-full mb-4 mx-auto">
-          <fa-icon [icon]="phase().icon" class="text-3xl transition-transform"
-                   [ngClass]="isActive() ? 'text-neutral-tertiary scale-110' : 'text-neutral-secondary'"></fa-icon>
-        </div>
+<div class="phase-card p-4 px-6 relative cursor-pointer transition-all duration-500"
+     [ngClass]="isActive() ? 'scale-105' : 'opacity-70 hover:opacity-100'"
+     (click)="selected.emit()"
+     (keydown.enter)="selected.emit()"
+     role="button"
+     tabindex="0">
 
-        <h3 class="text-xl font-bold text-neutral-tertiary text-center mb-2">{{ phase().title }}</h3>
-        <p class="text-base text-neutral-secondary text-center">{{ phase().subtitle }}</p>
+  <div class="rounded-3xl p-6 relative overflow-hidden transition-all duration-300"
+       [style.background]="'rgba(13, 20, 15, 0.9)'"
+       [style.backdropFilter]="'blur(24px) saturate(160%)'"
+       [style.border]="isActive() ? '2px solid #4CAF50' : '2px solid #4CAF5080'"
+       [style.boxShadow]="isActive() ? '0 12px 40px rgba(0,0,0,0.5), 0 0 20px #4CAF5030' : '0 12px 40px rgba(0,0,0,0.5), 0 0 20px #4CAF5015'">
 
-        @if (isActive()) {
-          <div class="absolute -bottom-3 left-1/2 -translate-x-1/2 w-6 h-6 bg-primary rounded-full animate-pulse"></div>
-        }
-      </div>
+    <div class="flex items-center justify-center w-16 h-16 bg-white/5 rounded-full mb-4 mx-auto">
+      <fa-icon [icon]="phase().icon" class="text-3xl transition-transform"
+               [ngClass]="isActive() ? 'text-neutral-tertiary scale-110' : 'text-neutral-secondary'"></fa-icon>
+    </div>
+
+    <h3 class="text-xl font-bold text-neutral-tertiary text-center mb-2">{{ phase().title }}</h3>
+    <p class="text-base text-neutral-secondary text-center">{{ phase().subtitle }}</p>
+
+    @if (isActive()) {
+      <div class="absolute -bottom-3 left-1/2 -translate-x-1/2 w-6 h-6 bg-primary rounded-full animate-pulse"></div>
+    }
+
+  </div>
 </div>
