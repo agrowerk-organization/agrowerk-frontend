@@ -4,7 +4,7 @@ import { Content } from '../../../../../../core/ui/types/initial-cta/content.ini
 import { ICONS_INITIAL_CTA } from '../../../../../../core/ui/icons/icons.initial-cta';
 import { Router } from '@angular/router';
 import { BadgeIndex } from '../../../../../../core/ui/types/badge/badge';
-import { Badge } from "./initial-cta-components/badge/badge";
+import { Badge } from "../../../../../../shared/components/badge/badge";
 import { Steps } from "./initial-cta-components/steps/steps";
 import { Actions } from "./initial-cta-components/actions/actions";
 import { Trust } from "./initial-cta-components/trust/trust";

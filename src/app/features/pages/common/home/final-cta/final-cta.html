@@ -1,1 +1,47 @@
-<p>final-cta works!</p>
+<article class="final-cta-section relative py-6 overflow-hidden">
+  
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
+      <div class="shape shape-3"></div>
+      <div class="shape shape-4"></div>
+      <div class="absolute inset-0 opacity-10 bg-grid-cta"></div>
+    </div>
+  
+    <div class="container mx-auto px-4 lg:px-8 relative z-10 text-center max-w-4xl">
+
+        <app-title
+          [firstSegment]="'Pronto para Revolucionar sua'"
+          [secondSegment]="'Produção Agrícola'"
+        ></app-title>
+  
+      <app-subtitle text="Otimizamos o seu processo de plantio para maximizar o lucro da sua operação."></app-subtitle>
+  
+
+    <div class="animate-fadeInUp mt-10" style="animation-delay: 0.1s;">
+        <app-badge [badges]="badges"></app-badge>
+    </div>
+  
+    @if (isMobile()) {
+      <app-carousel [items]="trustBadges">
+        <ng-template #itemTemplate let-badge>
+          <app-icons [icon]="badge.icon" [label]="badge.label" [sublabel]="badge.description"></app-icons>
+        </ng-template>
+      </app-carousel>
+    } @else {
+        <div class="grid grid-cols-3 gap-8 mt-10 pt-10 opacity-80 hover:opacity-100 transition-opacity">
+            @for (badge of trustBadges; track badge.label) {
+            <app-icons [icon]="badge.icon" [label]="badge.label" [sublabel]="badge.description"></app-icons>
+            }
+        </div>
+    }
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 mt-2 pt-2 border-t border-neutral-tertiary/10">
+        @for (stat of stats; track stat.label) {
+          <div class="stat-item">
+            <p class="text-4xl font-extrabold text-secondary">{{ stat.value }}</p>
+            <p class="text-xl text-secondary/90">{{ stat.label }}</p>
+          </div>
+        }
+      </div>
+    </div>
+</article>

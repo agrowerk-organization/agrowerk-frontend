@@ -1,0 +1,36 @@
+<div class="group relative flex flex-col items-center justify-center gap-3
+    rounded-3xl border-3 border-primary/90 p-6 overflow-hidden w-64 min-h-[220px]
+    transition-all duration-500 hover:-translate-y-2 hover:scale-105
+    hover:border-primary/90 hover:shadow-2xl"
+    style="
+        background: rgba(13, 20, 15, 0.9);
+        backdrop-filter: blur(24px) saturate(160%);
+        box-shadow: 0 8px 12px rgba(76,175,80,0.2), 0 0 0 1px rgba(76,175,80,0.1), inset 0 1px 0 rgba(255,255,255,0.05);
+    ">
+
+    <div class="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500
+            bg-gradient-to-br from-primary/10 to-transparent pointer-events-none"></div>
+
+    <div class="relative z-10 w-16 h-16 rounded-full flex items-center justify-center
+        bg-primary/20 border border-primary/30
+        group-hover:bg-primary/60 group-hover:border-primary/60
+        transition-all duration-500 group-hover:scale-110 group-hover:-rotate-3">
+        <fa-icon [icon]="icon()" class="text-2xl text-primary
+            drop-shadow-[0_0_6px_rgba(76,175,80,0.5)]
+            group-hover:drop-shadow-[0_0_12px_rgba(76,175,80,0.9)]
+            transition-all duration-500">
+        </fa-icon>
+    </div>
+
+    <p class="relative z-10 text-2xl font-bold text-center text-neutral-200
+        group-hover:text-white transition-colors duration-300">
+        {{ label() }}
+    </p>
+
+    @if (sublabel()) {
+    <p class="relative z-10 text-xl font-light italic text-center text-primary/70
+    group-hover:text-primary/90 transition-colors duration-300 -mt-2">
+    {{ sublabel() }}
+    </p>
+    }
+</div>

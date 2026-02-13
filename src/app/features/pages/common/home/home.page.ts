@@ -7,10 +7,11 @@ import { HarvestCycle } from './harvest-cycle/harvest-cycle';
 import { Benefits } from "./benefits/benefits";
 import { Testimonials } from "./testimonials/testimonials";
 import { Statistics } from "./statistics/statistics";
+import { FinalCta } from "./final-cta/final-cta";
 
 @Component({
   selector: 'app-home.page',
-  imports: [Hero, MeshGradient, Pattern, DigitalHarvest, HarvestCycle, Benefits, Testimonials, Statistics],
+  imports: [Hero, MeshGradient, Pattern, DigitalHarvest, HarvestCycle, Benefits, Testimonials, Statistics, FinalCta],
   templateUrl: './home.page.html',
   styleUrl: './home.page.scss',
 })

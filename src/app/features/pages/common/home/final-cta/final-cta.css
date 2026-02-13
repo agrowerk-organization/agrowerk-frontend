@@ -1,0 +1,68 @@
+@reference "tailwindcss";
+
+.bg-grid-cta {
+    background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 60px 60px;
+    animation: grid-flow 20s linear infinite;
+}
+  
+@keyframes grid-flow {
+    from { background-position: 0 0; }
+    to { background-position: 60px 60px; }
+}
+  
+.shape {
+    position: absolute;
+    opacity: 0.1;
+    animation: float-shape 25s ease-in-out infinite;
+    background: var(--color-secondary);
+}
+  
+.shape-1 { top: 10%; left: 5%; width: 200px; height: 200px; clip-path: polygon(50% 0%, 0% 100%, 100% 100%); }
+.shape-2 { top: 60%; right: 10%; width: 150px; height: 150px; border-radius: 50%; }
+  
+@keyframes float-shape {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    50% { transform: translate(30px, -50px) rotate(180deg); }
+}
+  
+.headline-highlight {
+    display: inline-block;
+    background: var(--color-secondary);
+    color: var(color-primary); 
+    padding: 0.2rem 1rem;
+    border-radius: 0.5rem;
+    transform: rotate(-1deg);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+  
+.cta-primary {
+    @apply px-10 py-5 bg-white text-xl text-lg font-bold rounded-full 
+        hover:scale-105 transition-all shadow-xl active:scale-95;
+    animation: pulse-glow 2s infinite;
+}
+  
+.cta-secondary {
+    @apply px-10 py-5 border-2 border-white text-white text-lg font-semibold 
+        rounded-full hover:bg-white hover:text-2xl transition-all;
+}
+  
+@keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 0 rgba(255,255,255,0); }
+    50% { box-shadow: 0 0 20px rgba(255,255,255,0.4); }
+}
+  
+.cta-badge, h2, p, .stat-item {
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+  
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.stat-item:nth-child(1) { animation-delay: 0.1s; }
+.stat-item:nth-child(2) { animation-delay: 0.2s; }
+.stat-item:nth-child(3) { animation-delay: 0.3s; }
