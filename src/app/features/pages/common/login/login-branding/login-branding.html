@@ -27,17 +27,21 @@
       </div>
   
       <div class="space-y-4 animate-[fadeInUp_0.8s_ease-out]">
-        <h1 class="text-title lg:text-5xl font-extrabold text-white leading-tight">
-          Gerencie suas safras com
-          <span class="block text-[var(--color-secondary)] mt-2">inteligência</span>
-        </h1>
-        <p class="text-2xl text-[var(--color-neutral-secondary)] font-medium max-w-md mx-auto">
-          Planejamento completo, integração inteligente e conforme a legislação
-        </p>
+
+        <app-title
+          [firstSegment]="'Gerencie suas Safras com'"
+          [secondSegment]="'Inteligência'"
+        ></app-title>
+
+        <app-subtitle
+          [text]="'Planejamento completo, integração inteligente e conforme a legislação'"
+        ></app-subtitle>
       </div>
   
-      <div class="w-full animate-[fadeInUp_1s_ease-out]">
-        <app-feature-pillar [featurePillars]="featurePillars"></app-feature-pillar>
+      <div class="grid grid-cols-3 gap-28 mt-10 pt-10 opacity-80 hover:opacity-100 transition-opacity">
+        @for (badge of trustBadges; track badge.label) {
+        <app-icons [icon]="badge.icon" [label]="badge.label" [sublabel]="badge.description"></app-icons>
+        }
       </div>
   
       <div class="w-full animate-[fadeInUp_1.2s_ease-out]">

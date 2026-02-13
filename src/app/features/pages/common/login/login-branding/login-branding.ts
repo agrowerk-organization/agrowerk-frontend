@@ -1,40 +1,36 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Component } from '@angular/core';
-import { Pillar } from '../../../../../core/ui/types/login/pillar/pillar';
 import { MeshGradient } from "../../../../../shared/components/mesh-gradient/mesh-gradient";
 import { Pattern } from "../../../../../shared/components/pattern/pattern";
-import { FeaturePillar } from "./feature-pillar/feature-pillar";
 import {  FeatureStatistic } from "./feature-statistic/feature-statistic";
 import { Statistic } from '../../../../../core/ui/types/login/statistic/statistic';
+import { Title } from "../../../../../shared/components/title/title";
+import { Subtitle } from "../../../../../shared/components/subtitle/subtitle";
+import { Icons } from "../../../../../shared/components/icons/icons";
+import { ICONS_LOGIN } from '../../../../../core/ui/icons/icons.login';
 
 @Component({
   selector: 'app-login-branding',
   standalone: true,
-  imports: [CommonModule, NgOptimizedImage, MeshGradient, Pattern, FeaturePillar, FeatureStatistic],
+  imports: [
+    CommonModule,
+    NgOptimizedImage,
+    MeshGradient,
+    Pattern, 
+    FeatureStatistic,
+    Title, 
+    Subtitle, 
+    Icons],
   templateUrl: './login-branding.html'
 })
 export class LoginBranding {
 
+  icons = ICONS_LOGIN;
 
-  featurePillars: Pillar[] = [
-    {
-      id: 1,
-      title: 'Planejamento completo',
-      description: 'Organize toda sua produção da forma adequada.',
-      icon: 'assets/svgs/clipboard.svg'
-    },
-    {
-      id: 2,
-      title: 'Integração inteligente',
-      description: 'Conecte todas as pontas soltas em seu inventário.',
-      icon: 'assets/svgs/lightning.svg'
-    },
-    { 
-      id: 3,
-      title: 'Conforme a legislação',
-      description: 'Total conformidade com normas e regulamentações.',
-      icon: 'assets/svgs/shield.svg'
-    }
+  trustBadges = [
+    { icon : this.icons.CLIPBOARD, label : 'Planejamento completo', description: 'Organize toda sua produção de forma adequada' },
+    { icon : this.icons.LIGHTNING, label : 'Integração inteligente', description: 'Conecte todas as pontas soltas em sua produção' }, 
+    { icon : this.icons.SHIELD_ALT, label: 'Conforme a legislação',  description: 'Total conformidade com normas e regulamentações' }
   ];
 
   statistics: Statistic[] = [

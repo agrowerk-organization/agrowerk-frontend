@@ -65,7 +65,7 @@ export class FinalCta implements OnInit{
     { icon : this.icons.SHIELD_ALT, label : 'LGPD', description: 'Dados seguros' },
     { icon : this.icons.LEAF, label : 'PRONAF', description: 'Agricultura familiar' },
     { icon : this.icons.CERTIFICATE, label: 'ISO 27001',  description: 'Certificado de qualidade' }
-  ]
+  ];
 
   stats = [
     { value: '500', label: 'Propriedades ativas' },

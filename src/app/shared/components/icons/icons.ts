@@ -11,5 +11,6 @@ import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 export class Icons {
   icon = input.required<IconDefinition>();
   label = input.required<string>();
+  description = input<string>();
   sublabel = input<string>();
 }

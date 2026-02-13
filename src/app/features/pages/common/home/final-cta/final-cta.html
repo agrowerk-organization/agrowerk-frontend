@@ -10,12 +10,12 @@
   
     <div class="container mx-auto px-4 lg:px-8 relative z-10 text-center max-w-4xl">
 
-        <app-title
-          [firstSegment]="'Pronto para Revolucionar sua'"
-          [secondSegment]="'Produção Agrícola'"
-        ></app-title>
+    <app-title
+        [firstSegment]="'Pronto para Revolucionar sua'"
+        [secondSegment]="'Produção Agrícola'"
+    ></app-title>
   
-      <app-subtitle text="Otimizamos o seu processo de plantio para maximizar o lucro da sua operação."></app-subtitle>
+    <app-subtitle text="Otimizamos o seu processo de plantio para maximizar o lucro da sua operação."></app-subtitle>
   
 
     <div class="animate-fadeInUp mt-10" style="animation-delay: 0.1s;">
@@ -25,13 +25,13 @@
     @if (isMobile()) {
       <app-carousel [items]="trustBadges">
         <ng-template #itemTemplate let-badge>
-          <app-icons [icon]="badge.icon" [label]="badge.label" [sublabel]="badge.description"></app-icons>
+          <app-icons [icon]="badge.icon" [label]="badge.label" [description]="badge.description"></app-icons>
         </ng-template>
       </app-carousel>
     } @else {
         <div class="grid grid-cols-3 gap-8 mt-10 pt-10 opacity-80 hover:opacity-100 transition-opacity">
             @for (badge of trustBadges; track badge.label) {
-            <app-icons [icon]="badge.icon" [label]="badge.label" [sublabel]="badge.description"></app-icons>
+            <app-icons [icon]="badge.icon" [label]="badge.label" [description]="badge.description"></app-icons>
             }
         </div>
     }
