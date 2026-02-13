@@ -6,10 +6,11 @@ import { DigitalHarvest } from './digital-harvest/digital-harvest';
 import { HarvestCycle } from './harvest-cycle/harvest-cycle';
 import { Benefits } from "./benefits/benefits";
 import { Testimonials } from "./testimonials/testimonials";
+import { Statistics } from "./statistics/statistics";
 
 @Component({
   selector: 'app-home.page',
-  imports: [Hero, MeshGradient, Pattern, DigitalHarvest, HarvestCycle, Benefits, Testimonials],
+  imports: [Hero, MeshGradient, Pattern, DigitalHarvest, HarvestCycle, Benefits, Testimonials, Statistics],
   templateUrl: './home.page.html',
   styleUrl: './home.page.scss',
 })

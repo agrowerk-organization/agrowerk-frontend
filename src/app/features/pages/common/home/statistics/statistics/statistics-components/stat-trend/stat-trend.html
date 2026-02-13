@@ -1,0 +1,7 @@
+<div class="flex items-center gap-2 mt-4">
+    <div class="flex items-center justify-center gap-1 bg-success/20 px-3 py-1 rounded-full pulse-subtle">
+      <fa-icon [icon]="icon" class="text-success text-xs"></fa-icon>
+      <span class="text-lg font-semibold text-success">{{ trend().value }}</span>
+    </div>
+    <span class="text-lg text-neutral-secondary">{{ trend().label }}</span>
+</div> 

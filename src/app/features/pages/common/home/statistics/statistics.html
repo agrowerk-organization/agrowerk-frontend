@@ -1,1 +1,29 @@
-<p>statistics works!</p>
+<article class="statistics-section relative py-20 overflow-hidden">
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+      @for (p of [1,2,3,4]; track p) {
+        <div [class]="'particle particle-' + p"></div>
+      }
+    </div>
+  
+    <div class="container mx-auto px-4 relative z-10">
+      <div class="text-center mb-16 animate-fadeInUp">
+        <app-title [firstSegment]="'Números Que'" [secondSegment]="'Impressionam'"></app-title>
+        <app-subtitle [text]="'Temos resultados que comprovam'"></app-subtitle>
+      </div>
+  
+      @if (isMobile()) {
+        <app-carousel [items]="statistics">
+          <ng-template #itemTemplate let-stat>
+            <div class="px-2"> <app-stat-card [stat]="stat" [index]="statistics.indexOf(stat)"></app-stat-card>
+            </div>
+          </ng-template>
+        </app-carousel>
+      } @else {
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          @for (stat of statistics; track stat.id; let i = $index) {
+            <app-stat-card [stat]="stat" [index]="i"></app-stat-card>
+          }
+        </div>
+      }
+    </div>
+</article>

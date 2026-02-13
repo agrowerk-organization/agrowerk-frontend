@@ -1,0 +1,46 @@
+.particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: var(--color-primary);
+    border-radius: 50%;
+    opacity: 0.3;
+    animation: float-particle 20s ease-in-out infinite;
+}
+  
+.particle-1 { top: 10%; left: 10%; animation-delay: 0s; animation-duration: 18s; }
+.particle-2 { top: 20%; right: 15%; animation-delay: 4s; animation-duration: 22s; }
+.particle-3 { bottom: 30%; left: 20%; animation-delay: 8s; animation-duration: 25s; }
+.particle-4 { bottom: 15%; right: 25%; animation-delay: 12s; animation-duration: 20s; }
+  
+@keyframes float-particle {
+    0%, 100% { transform: translate(0, 0); opacity: 0.3; }
+    25% { transform: translate(30px, -40px); opacity: 0.6; }
+    50% { transform: translate(-20px, -80px); opacity: 0.8; }
+    75% { transform: translate(40px, -40px); opacity: 0.6; }
+}
+  
+.text-gradient {
+    background-size: 200% auto;
+    animation: gradient-shift 3s ease infinite;
+}
+  
+@keyframes gradient-shift {
+    0%, 100% { background-position: 0% center; }
+    50% { background-position: 100% center; }
+}
+  
+@media (max-width: 640px) {
+    .particle { display: none; }
+}
+  
+.shadow-green-lg {
+    box-shadow: 0 10px 40px rgba(76, 175, 80, 0.3);
+}
+  
+@media (prefers-reduced-motion: reduce) {
+    .particle, .stat-card, fa-icon, .text-gradient {
+      animation: none !important;
+      transition: none !important;
+    }
+}
