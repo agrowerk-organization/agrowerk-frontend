@@ -1,6 +1,6 @@
 import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
 
 export interface BadgeIndex {
-    icon: IconDefinition,
+    icon?: IconDefinition,
     text: string;
 }

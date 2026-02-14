@@ -2,16 +2,13 @@ import { CommonModule } from '@angular/common';
 import { Component, input } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
-
 @Component({
-  selector: 'app-breadcrumb',
+  selector: 'app-loading-state',
   standalone: true,
   imports: [CommonModule, FontAwesomeModule],
-  templateUrl: './breadcrumb.html',
+  templateUrl: './loading-state.html'
 })
-export class Breadcrumb {
-  icon = input.required<IconDefinition>();
-  main = input.required<string>();
-  pageName = input.required<string>();
-  subPageName = input.required<string>();
+export class LoadingState {
+  loadingIcon = input.required<IconDefinition>();
+  message = input.required<string>();
 }

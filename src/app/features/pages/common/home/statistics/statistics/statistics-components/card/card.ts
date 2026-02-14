@@ -6,13 +6,13 @@ import { StatisticsHome } from '../../../../../../../../core/ui/types/statistics
 import { StatTrend } from '../stat-trend/stat-trend';
 
 @Component({
-  selector: 'app-stat-card',
+  selector: 'app-card',
   standalone: true,
   imports: [CommonModule, FontAwesomeModule, Counter, StatTrend],
-  templateUrl: './stat-card.html',
-  styleUrl: './stat-card.css',
+  templateUrl: './card.html',
+  styleUrl: './card.css',
 })
-export class StatCard {
+export class Card {
   stat = input.required<StatisticsHome>();
   index = input.required<number>();
 

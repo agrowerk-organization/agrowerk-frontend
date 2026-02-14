@@ -14,14 +14,14 @@
       @if (isMobile()) {
         <app-carousel [items]="statistics">
           <ng-template #itemTemplate let-stat>
-            <div class="px-2"> <app-stat-card [stat]="stat" [index]="statistics.indexOf(stat)"></app-stat-card>
+            <div class="px-2"> <app-card [stat]="stat" [index]="statistics.indexOf(stat)"></app-card>
             </div>
           </ng-template>
         </app-carousel>
       } @else {
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           @for (stat of statistics; track stat.id; let i = $index) {
-            <app-stat-card [stat]="stat" [index]="i"></app-stat-card>
+            <app-card [stat]="stat" [index]="i"></app-card>
           }
         </div>
       }

@@ -27,68 +27,68 @@ export class FooterLayout {
     {
       label: 'Lei Geral de Proteção de Dados',
       icon: this.icons.DATABASE,
-      url: 'https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm',
-      external: true
+      url: '/leis/lgpd',
+      external: false
     }, 
     {
       label: 'Lei da Agricultura Familiar',
       icon: this.icons.USERS,
-      url: 'https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2006/lei/l11326.htm',
-      external: true
+      url: '/leis/agricultura-familiar',
+      external: false
     },
     {
       label: 'PRONAF',
       icon: this.icons.HANDHOLDINGDOLLAR,
-      url: 'https://www.gov.br/pt-br/servicos/acessar-o-programa-nacional-de-fortalecimento-da-agricultura-familiar-pronaf',
-      external: true
+      url: '/leis/pronaf',
+      external: false
     },
     {
       label: 'Lei da Mata Atlântica',
       icon: this.icons.TREE,
-      url: 'https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2006/lei/l11428.htm',
-      external: true
+      url: '/leis/mata-atlantica',
+      external: false
     },
     {
       label: 'Código Florestal',
       icon: this.icons.SCALEBALANCED,
-      url: 'https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2012/lei/l12651.htm',
-      external: true
+      url: '/leis/codigo-florestal',
+      external: false
     },
     {
       label: 'Serviços ambientais',
       icon: this.icons.LEAF,
-      url: 'https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2021/lei/l14119.htm',
-      external: true
+      url: '/leis/servicos-ambientais',
+      external: false
     },
     {
       label: 'Agricultura Urbana e Periurbana',
       icon: this.icons.BUILDINGWHEAT,
-      url: 'https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2024/lei/L14935.htm',
-      external: true
+      url: '/leis/agricultura-urbana',
+      external: false
     },
     {
       label: 'Fundo Garantidor de Operações',
       icon: this.icons.SHIELDHALVED,
-      url: 'https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2024/lei/L15034.htm',
-      external: true
+      url: '/leis/fundo-garantidor',
+      external: false
     },
     {
       label: 'Programa de Aquisição de Alimentos',
       icon: this.icons.BASKETSHOOPING,
-      url: 'https://www.gov.br/secom/pt-br/acesso-a-informacao/comunicabr/lista-de-acoes-e-programas/programa-de-aquisicao-de-alimentos-paa',
-      external: true
+      url: '/leis/paa',
+      external: false
     },
     {
       label: 'Coopera Mais Brasil',
       icon: this.icons.HANDSHAKE,
-      url: 'https://agenciagov.ebc.com.br/noticias/202404/coopera-mais-brasil-fortalecera-o-cooperativismo-na-agricultura-familiar',
-      external: true
+      url: '/leis/coopera-mais',
+      external: false
     },
     {
       label: 'Assistência Técnica e Extensão Rural',
       icon: this.icons.CHALKBOARDUSER,
-      url: 'https://www.gov.br/agricultura/pt-br/assuntos/ater',
-      external: true
+      url: '/leis/ater',
+      external: false
     },
   ];
 

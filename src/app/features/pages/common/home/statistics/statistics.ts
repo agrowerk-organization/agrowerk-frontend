@@ -4,7 +4,7 @@ import  { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ICONS_STATISTICS_HOME } from '../../../../../core/ui/icons/icons.statistics-home';
 import { StatisticsHome } from '../../../../../core/ui/types/statistics-home/statistics-home';
-import { StatCard } from './statistics/statistics-components/stat-card/stat-card';
+import { Card } from './statistics/statistics-components/card/card';
 import { Title } from "../../../../../shared/components/title/title";
 import { Subtitle } from "../../../../../shared/components/subtitle/subtitle";
 import { Carousel } from '../../../../../shared/components/carousel/carousel';
@@ -14,7 +14,7 @@ import { Carousel } from '../../../../../shared/components/carousel/carousel';
   imports: [
     CommonModule, 
     FontAwesomeModule, 
-    StatCard, 
+    Card, 
     Title, 
     Subtitle,
     Carousel

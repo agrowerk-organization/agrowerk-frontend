@@ -1,0 +1,23 @@
+<button 
+  [disabled]="disabled()"
+  (click)="handleAction()"
+  class="w-[300px] px-6 py-3 rounded-2xl text-sm font-bold transition-all duration-300 relative overflow-hidden group/btn border-2 hover:scale-105 cursor-pointer" 
+  [ngClass]="{
+    'border-primary/40 text-primary bg-primary/5 shadow-[0_0_15px_rgba(76,175,80,0.1)]': variant() === 'primary',
+    'border-quartenary/40 text-quartenary bg-quartenary/5 shadow-[0_0_15px_rgba(255,179,0,0.1)]': variant() === 'secondary',
+    'border-white/20 text-white bg-white/5': variant() === 'outline'
+  }"
+>
+  <div class="absolute inset-0 opacity-0 group-hover/btn:opacity-10 transition-opacity duration-300"
+       [ngClass]="{
+         'bg-primary': variant() === 'primary',
+         'bg-quartenary': variant() === 'secondary',
+         'bg-white': variant() === 'outline'
+       }">
+  </div>
+
+  <span class="relative z-10 flex items-center justify-center gap-3 text-2xl">
+    @if (icon()) { <fa-icon [icon]="icon()!" class="text-2xl"></fa-icon> }
+    <ng-content></ng-content>
+  </span>
+</button>

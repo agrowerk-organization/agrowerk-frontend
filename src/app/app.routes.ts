@@ -5,6 +5,10 @@ export const routes: Routes = [
       loadComponent: () => import('./features/pages/common/login/login').then(page => page.Login)
     },
     {
+      path: 'leis/:slug',
+      loadComponent: () => import('./features/pages/common/laws/laws').then(page => page.Laws)
+    },
+    {
       path: '',
       loadComponent: () => import('./core/layouts/main-layout/main-layout.component').then(component => component.MainLayoutComponent),
       children: [

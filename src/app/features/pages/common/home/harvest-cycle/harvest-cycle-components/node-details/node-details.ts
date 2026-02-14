@@ -68,7 +68,7 @@ export class NodeDetails {
     const color = this.node().color;
     return {
       'background': 'rgba(255, 255, 255, 0.03)',
-      'border': `1px solid ${color}40`, // Borda da cor do nó com 25% de opacidade
+      'border': `1px solid ${color}40`,
       'border-radius': '16px'
     };
   }

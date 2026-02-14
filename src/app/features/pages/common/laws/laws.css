@@ -1,0 +1,54 @@
+
+.law-content ::ng-deep {
+    color: var(--color-primary) !important; 
+}
+
+.law-content ::ng-deep p, 
+.law-content ::ng-deep li,
+.law-content ::ng-deep span {
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-size: 1.1rem; 
+}
+
+.law-content ::ng-deep h1 {
+    color: var(--color-quartenary) !important;
+    font-weight: 800;
+    font-size: 2.5rem;
+    margin-bottom: 1.0rem;
+}
+
+.law-content ::ng-deep h2, 
+.law-content ::ng-deep h3, 
+.law-content ::ng-deep h4 {
+    color: var(--color-primary) !important;
+    font-weight: 800;
+    font-size: 2.0rem;
+    margin-top: 1.0rem;
+    margin-bottom: 1.0rem;
+}
+
+.law-content ::ng-deep strong {
+    color: var(--color-primary) !important; 
+}
+
+@media print {
+    app-navbar, app-footer, .app-breadcrumb, app-badge, 
+    .grid, .mt-10, app-pattern, app-mesh-gradient {
+      display: none !important;
+    }
+  
+    .max-w-7xl {
+      max-width: 100% !important;
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+  
+    .law-content {
+      color: var(--color-tertiary) !important;
+      background: var(--color-secondary) !important;
+    }
+  
+    .law-content * {
+      color: var(--color-secondary) !important;
+    }
+  }
