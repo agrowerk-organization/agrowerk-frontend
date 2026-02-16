@@ -1,11 +1,12 @@
 import { Component, input } from '@angular/core';
 import { ICONS_NAVBAR } from '../../../../../core/ui/icons/icons.navbar';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-navbar-links',
   standalone: true,
-  imports: [FontAwesomeModule],
+  imports: [FontAwesomeModule, RouterLink, RouterLinkActive],
   templateUrl: './navbar-links.html',
 })
 export class NavbarLinks {

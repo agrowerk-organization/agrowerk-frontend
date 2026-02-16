@@ -1,0 +1,20 @@
+<div class="min-h-screen">
+
+    <app-navbar class="relative z-50"></app-navbar>
+    <div class="fixed inset-0 -z-10 pointer-events-none">
+        <app-mesh-gradient></app-mesh-gradient>
+        <app-pattern></app-pattern>
+    </div>
+  
+    <section class="relative  py-20">
+      <div class="container mx-auto px-4 lg:px-8">
+        <div class="max-w-4xl mx-auto text-center">
+            <app-breadcrumb [icon]="icons.HOME" main="Agrowerk" pageName="Sobre Nós" subPageName=""></app-breadcrumb>
+            <app-title [firstSegment]="'Transformando o Agronegócio'" [secondSegment]="'Com Tecnologia'"></app-title>
+            <app-subtitle [text]="'Conectando produtores e fornecedores para criar um agronegócio mais eficiente, sustentável e lucrativo'"></app-subtitle>
+         
+        </div>
+      </div>
+</section>
+
+<app-footer></app-footer>

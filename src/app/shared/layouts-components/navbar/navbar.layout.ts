@@ -1,7 +1,7 @@
 import { Component, HostListener, inject, OnDestroy, OnInit, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Subscription, filter } from 'rxjs';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router, NavigationEnd, RouterLink } from '@angular/router';
 import { NgOptimizedImage } from '@angular/common';
 import { AuthService } from '../../../core/services/auth.service';
 import { NavbarLinks } from './navbar-components/navbar-links/navbar-links';
@@ -15,7 +15,8 @@ import { NavbarMobileToggle } from './navbar-components/navbar-mobile-toggle/nav
     NgOptimizedImage,
     NavbarLinks,
     NavbarAuth,
-    NavbarMobileToggle
+    NavbarMobileToggle,
+    RouterLink
   ],
   templateUrl: './navbar.layout.html'
 })

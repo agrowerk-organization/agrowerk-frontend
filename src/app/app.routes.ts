@@ -5,6 +5,22 @@ export const routes: Routes = [
       loadComponent: () => import('./features/pages/common/login/login').then(page => page.Login)
     },
     {
+      path: 'how-it-works', 
+      loadComponent: () => import('./features/pages/common/how-it-works/how-it-works').then(page => page.HowItWorks)
+    },
+    {
+      path: 'plans',
+      loadComponent: () => import('./features/pages/common/plans/plans').then(page => page.Plans)
+    },
+    {
+      path: 'about-us',
+      loadComponent: () => import('./features/pages/common/about-us/about-us').then(page => page.AboutUs)
+    },
+    {
+      path: 'help-and-support', 
+      loadComponent: () => import('./features/pages/common/help-and-support/help-and-support').then(page => page.HelpAndSupport)
+    },
+    {
       path: 'leis/:slug',
       loadComponent: () => import('./features/pages/common/laws/laws').then(page => page.Laws)
     },
