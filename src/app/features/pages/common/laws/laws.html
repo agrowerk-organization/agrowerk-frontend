@@ -1,10 +1,8 @@
-<div class="min-h-screen relative">
-    <app-navbar></app-navbar>
-    
-    <div class="fixed inset-0 -z-10">
-      <app-pattern></app-pattern>
-      <app-mesh-gradient></app-mesh-gradient>
-    </div>
+<div class="relative min-h-screen bg-gradient-to-br from-neutral-primary/95 
+            to-neutral-primary/90 backdrop-blur-sm rounded-3xl p-8 shadow-2xl">
+ 
+  <app-mesh-gradient class="absolute inset-0 -z-10"></app-mesh-gradient>
+  <app-pattern class="absolute inset-0 -z-10"></app-pattern>
   
     @if (loading()) {
       <app-loading-state [loadingIcon]="icons.SPINNER" message="Carregando conteúdo da lei..."></app-loading-state>
@@ -80,5 +78,4 @@
       </div> 
     } 
     
-    <app-footer></app-footer>
 </div>

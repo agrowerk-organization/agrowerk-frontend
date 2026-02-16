@@ -8,8 +8,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ICONS_LAWS } from '../../../../core/ui/icons/icons.laws';
 import { ErrorState } from '../../../../shared/components/error-state/error-state';
 import { LoadingState } from '../../../../shared/components/loading-state/loading-state';
-import { NavbarLayout } from "../../../../shared/layouts-components/navbar/navbar.layout";
-import { FooterLayout } from "../../../../shared/layouts-components/footer/footer.layout";
 import { MeshGradient } from '../../../../shared/components/mesh-gradient/mesh-gradient';
 import { Pattern } from '../../../../shared/components/pattern/pattern';
 import { Button } from './laws-components/buttons/button';
@@ -27,8 +25,6 @@ import { BadgeIndex } from '../../../../core/ui/types/badge/badge';
     FontAwesomeModule,
     LoadingState,
     ErrorState,
-    NavbarLayout,
-    FooterLayout,
     MeshGradient,
     Pattern,
     GlassCard,

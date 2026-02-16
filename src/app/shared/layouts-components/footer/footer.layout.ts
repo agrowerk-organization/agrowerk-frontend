@@ -28,67 +28,56 @@ export class FooterLayout {
       label: 'Lei Geral de Proteção de Dados',
       icon: this.icons.DATABASE,
       url: '/leis/lgpd',
-      external: false
     }, 
     {
       label: 'Lei da Agricultura Familiar',
       icon: this.icons.USERS,
       url: '/leis/agricultura-familiar',
-      external: false
     },
     {
       label: 'PRONAF',
       icon: this.icons.HANDHOLDINGDOLLAR,
       url: '/leis/pronaf',
-      external: false
     },
     {
       label: 'Lei da Mata Atlântica',
       icon: this.icons.TREE,
       url: '/leis/mata-atlantica',
-      external: false
     },
     {
       label: 'Código Florestal',
       icon: this.icons.SCALEBALANCED,
       url: '/leis/codigo-florestal',
-      external: false
     },
     {
       label: 'Serviços ambientais',
       icon: this.icons.LEAF,
       url: '/leis/servicos-ambientais',
-      external: false
     },
     {
       label: 'Agricultura Urbana e Periurbana',
       icon: this.icons.BUILDINGWHEAT,
       url: '/leis/agricultura-urbana',
-      external: false
     },
     {
       label: 'Fundo Garantidor de Operações',
       icon: this.icons.SHIELDHALVED,
       url: '/leis/fundo-garantidor',
-      external: false
     },
     {
       label: 'Programa de Aquisição de Alimentos',
       icon: this.icons.BASKETSHOOPING,
       url: '/leis/paa',
-      external: false
     },
     {
       label: 'Coopera Mais Brasil',
       icon: this.icons.HANDSHAKE,
       url: '/leis/coopera-mais',
-      external: false
     },
     {
       label: 'Assistência Técnica e Extensão Rural',
       icon: this.icons.CHALKBOARDUSER,
       url: '/leis/ater',
-      external: false
     },
   ];
 

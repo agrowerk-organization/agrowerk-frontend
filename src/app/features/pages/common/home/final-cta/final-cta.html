@@ -29,13 +29,13 @@
         </ng-template>
       </app-carousel>
     } @else {
-        <div class="grid grid-cols-3 gap-8 mt-10 pt-10 opacity-80 hover:opacity-100 transition-opacity">
+        <div class="grid grid-cols-3 place-items-center items-center gap-8 mt-10 pt-10 opacity-80 hover:opacity-100 transition-opacity">
             @for (badge of trustBadges; track badge.label) {
             <app-icons [icon]="badge.icon" [label]="badge.label" [description]="badge.description"></app-icons>
             }
         </div>
     }
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 mt-2 pt-2 border-t border-neutral-tertiary/10">
+      <div class="w-full grid grid-cols-1 sm:grid-cols-3 place-items-center items-center gap-6 mt-2 pt-6 border-t border-neutral-tertiary/10">
         @for (stat of stats; track stat.label) {
           <div class="stat-item">
             <p class="text-4xl font-extrabold text-secondary">{{ stat.value }}</p>

@@ -5,5 +5,4 @@ export interface FooterLink {
     icon: IconDefinition,
     action?: () => void,
     url?: string,
-    external?: boolean
 }
