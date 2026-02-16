@@ -3,7 +3,7 @@ import { Component, signal, computed } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { UserRole } from '../../../../../core/ui/types/benefit/user-role';
 import { RoleBenefit } from '../../../../../core/ui/types/benefit/benefit-role';
-import { ICONS_BENEFITS } from '../../../../../core/ui/icons/icons.benefits';
+import { ICONS_BENEFITS } from '../../../../../core/ui/icons/icons-home/icons.benefits';
 import { BenefitCard } from './benefits-components/benefit-card/benefit-card';
 import { RoleTabButton } from './benefits-components/role-tab-button/role-tab-button';
 import { Carousel } from '../../../../../shared/components/carousel/carousel';

@@ -1,11 +1,11 @@
-<div class="relative min-h-screen bg-gradient-to-br from-neutral-primary/95 
+<div class="relative min-h-screen bg-gradient-to-br from-neutral-primary/95 overflow-hidden
             to-neutral-primary/90 backdrop-blur-sm rounded-3xl p-8 shadow-2xl">
  
   <app-mesh-gradient class="absolute inset-0 -z-10"></app-mesh-gradient>
   <app-pattern class="absolute inset-0 -z-10"></app-pattern>
 
   
-    <section class="relative  py-20">
+    <section class="relative py-6">
       <div class="container mx-auto px-4 lg:px-8">
         <div class="max-w-4xl mx-auto text-center">
             <app-breadcrumb [icon]="icons.HOME" main="Agrowerk" pageName="Sobre Nós" subPageName=""></app-breadcrumb>
@@ -14,5 +14,64 @@
          
         </div>
       </div>
-</section>
+    </section>
+
+    <app-mission-vision
+      [mission]="'Transformar a gestão agrícola com tecnologia de ponta e conectar os diversos atores da cadeia produtiva para criar um agronegócio mais eficiente, sustentável e lucrativo.'"
+      [vision]="'Ser a plataforma líder em gestão agrícola com tecnologia da informação no Brasil, reconhecida pela inovação, qualidade e sustentabilidade.'"
+    ></app-mission-vision>
+
+    <div class="text-center text-secondary mt-12">
+      <app-text-title
+        [title]="'Nossos Valores'"
+        [subtitle]="'E como os geramos.'">
+      </app-text-title>
+      <app-values-grid [values]="values"></app-values-grid>
+   </div>
+
+   <section class="py-6">
+      <div class="container mx-auto px-4 lg:px-8">
+        <div class="text-center mb-3">
+          <app-text-title
+            [title]="'Nossa História'"
+            [subtitle]="'Nossa jornada até aqui'">
+          </app-text-title>
+        </div>
+        <app-timeline
+          [milestones]="milestones"
+        ></app-timeline>
+      </div>
+    </section>
+
+    <section class="py-6 w-full">
+      <div class="container mx-auto px-4 lg:px-8">
+        <div class="text-center mb-3">
+          <app-text-title
+            [title]="'Nossa Equipe'"
+            [subtitle]="'Conheça as pessoas por trás do AgroWerk'">
+          ></app-text-title>
+        </div>
+        <app-team [team]="team"></app-team>
+        </div>
+    </section>
+
+    <section class="py-6">
+      <div class="container mx-auto px-4 lg:px-8">
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
+          @for (stat of stats; track stat.label) {
+            <div class="text-center">
+              <div class="text-5xl font-extrabold text-primary mb-2">{{ stat.value }}</div>
+              <p class="text-2xl text-neutral-secondary">{{ stat.label }}</p>
+            </div>
+          }
+        </div>
+      </div>
+    </section>
+  
+    <section class="py-6 w-full justify-center items-center">
+      <div class="animate-fadeInUp" style="animation-delay: 0.3s;">
+        <app-actions [width]="'580px'" [mobileWidth]="'300px'" [actions]="actions"></app-actions>
+    </div>
+    </section>
+</div>
 

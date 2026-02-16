@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { ICONS_FINAL_CTA } from '../../../../../core/ui/icons/icons.final-cta';
+import { ICONS_FINAL_CTA } from '../../../../../core/ui/icons/icons-home/icons.final-cta';
 import { Title } from '../../../../../shared/components/title/title';
 import { Subtitle } from '../../../../../shared/components/subtitle/subtitle';
 import { Badge } from '../../../../../shared/components/badge/badge';

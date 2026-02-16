@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit, signal } from '@angular/core';
 import  { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { ICONS_STATISTICS_HOME } from '../../../../../core/ui/icons/icons.statistics-home';
+import { ICONS_STATISTICS_HOME } from '../../../../../core/ui/icons/icons-home/icons.statistics-home';
 import { StatisticsHome } from '../../../../../core/ui/types/statistics-home/statistics-home';
 import { Card } from './statistics/statistics-components/card/card';
 import { Title } from "../../../../../shared/components/title/title";

@@ -5,7 +5,7 @@ import { Subtitle } from "../../../../shared/components/subtitle/subtitle";
 import { MeshGradient } from "../../../../shared/components/mesh-gradient/mesh-gradient";
 import { Pattern } from "../../../../shared/components/pattern/pattern";
 import { Breadcrumb } from '../../../../shared/components/breadcrumb/breadcrumb';
-import { ICONS_ABOUT_US } from '../../../../core/ui/icons/icons.about-us';
+import { ICONS_ABOUT_US } from '../../../../core/ui/icons/icons-about-us/icons.about-us';
 
 @Component({
   selector: 'app-help-and-support',

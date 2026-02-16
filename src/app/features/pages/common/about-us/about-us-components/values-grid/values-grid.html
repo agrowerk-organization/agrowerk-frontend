@@ -1,0 +1,23 @@
+@if (isMobile()) {
+    <app-carousel [items]="values()">
+      <ng-template #itemTemplate let-value>
+        <div class="flex justify-center w-full p-4">
+          <app-card-pages 
+            [icons]="value.icon" 
+            [title]="value.label" 
+            [description]="value.description">
+          </app-card-pages>
+        </div>
+      </ng-template>
+    </app-carousel>
+  } @else {
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto px-4">
+      @for (value of values(); track value.label) {
+        <app-card-pages 
+          [icons]="value.icon" 
+          [title]="value.label" 
+          [description]="value.description">
+        </app-card-pages>
+      }
+    </div>
+  }

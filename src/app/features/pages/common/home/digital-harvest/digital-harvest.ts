@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TimelinePhase } from '../../../../../core/ui/types/timeline-phase/timeline-phase';
-import { ICONS_DIGITAL_HARVEST } from '../../../../../core/ui/icons/icons.digital-harvest';
+import { ICONS_DIGITAL_HARVEST } from '../../../../../core/ui/icons/icons-home/icons.digital-harvest';
 import { PhaseConnector } from './digital-harvest-components/phase-connector/phase-connector';
 import { PhaseDetails } from './digital-harvest-components/phase-details/phase-details';
 import { PhaseCard } from './digital-harvest-components/phase-card/phase-card';

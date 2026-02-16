@@ -4,7 +4,7 @@ import { Title } from "../../../../../shared/components/title/title";
 import { Subtitle } from "../../../../../shared/components/subtitle/subtitle";
 import { Carousel } from '../../../../../shared/components/carousel/carousel';
 import { Testimonial } from '../../../../../core/ui/types/testimonial/testimonial';
-import { ICONS_TESTIMONIALS } from '../../../../../core/ui/icons/icons.testimonials';
+import { ICONS_TESTIMONIALS } from '../../../../../core/ui/icons/icons-home/icons.testimonials';
 import { TestimonialCard } from './testimonials-components/testimonial-card/testimonial-card';
 
 @Component({

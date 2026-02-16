@@ -1,7 +1,7 @@
 import { Component, input, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FaIconComponent } from "@fortawesome/angular-fontawesome";
-import { ICONS_TESTIMONIALS } from '../../../../../../../core/ui/icons/icons.testimonials';
+import { ICONS_TESTIMONIALS } from '../../../../../../../core/ui/icons/icons-home/icons.testimonials';
 
 @Component({
   selector: 'app-testimonial-metric',

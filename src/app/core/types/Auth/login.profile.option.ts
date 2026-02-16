@@ -1,4 +1,4 @@
-import { ICONS_NAVBAR } from "../../ui/icons/icons.navbar";
+import { ICONS_NAVBAR } from "../../ui/icons/icons-layouts/icons.navbar";
 import { UserProfile } from "../User/user.profile";
 
 export interface LoginProfileOption {

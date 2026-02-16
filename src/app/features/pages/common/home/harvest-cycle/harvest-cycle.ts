@@ -5,7 +5,7 @@ import { CycleNode } from './harvest-cycle-components/cycle-node/cycle-node';
 import { CenterHub } from './harvest-cycle-components/center-hub/center-hub';
 import { NodeDetails } from './harvest-cycle-components/node-details/node-details';
 import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
-import { ICONS_HARVEST_CYCLE } from '../../../../../core/ui/icons/icons.harvest-cycle';
+import { ICONS_HARVEST_CYCLE } from '../../../../../core/ui/icons/icons-home/icons.harvest-cycle';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { Title } from "../../../../../shared/components/title/title";
 import { Subtitle } from '../../../../../shared/components/subtitle/subtitle';

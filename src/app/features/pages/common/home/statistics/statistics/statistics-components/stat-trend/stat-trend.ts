@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, input } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { ICONS_STATISTICS_HOME } from '../../../../../../../../core/ui/icons/icons.statistics-home';
+import { ICONS_STATISTICS_HOME } from '../../../../../../../../core/ui/icons/icons-home/icons.statistics-home';
 
 @Component({
   selector: 'app-stat-trend',

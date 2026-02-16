@@ -1,0 +1,50 @@
+<div class="group relative flex flex-col items-center p-8 rounded-[2.5rem] 
+            bg-[#0d140f]/80 backdrop-blur-xl border-2 border-primary/70 shadow-[0_20px_50px_rgba(76,175,80,0.2)]
+            transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(76,175,80,0.2)]
+            w-full max-w-[400px] h-[580px]">
+  
+  <div class="absolute inset-0 rounded-[2.5rem] bg-gradient-to-b from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+
+  <div class="relative w-36 h-36 mb-6 p-1 rounded-full bg-gradient-to-tr from-primary to-secondary group-hover:rotate-6 transition-transform duration-500">
+    <div class="w-full h-full rounded-full overflow-hidden border-4 border-[#0d140f] bg-neutral-800">
+      @if (avatar()) {
+        <img [src]="avatar()" [alt]="name()" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+      } @else {
+        <div class="w-full h-full flex items-center justify-center text-secondary text-4xl font-black">
+          {{ getInitials(name()) }}
+        </div>
+      }
+    </div>
+  </div>
+
+  <h3 class="text-2xl font-bold text-white mb-1 tracking-tight">{{name() }}</h3>
+  <span class="px-3 py-1 text-xs font-bold uppercase tracking-[0.2em] text-primary bg-primary/10 rounded-full mb-4">
+    {{ role() }}
+  </span>
+  
+  <p class="w-full h-full text-neutral-secondary text-xl leading-relaxed text-center mb-6 line-clamp-6">
+    {{ bio() }}
+  </p>
+
+  <div class="mt-auto flex gap-4">
+    @if (linkedin) {
+      <a [href]="linkLinkedIn()" target="_blank" 
+         class="group w-20 h-20 flex items-center justify-center rounded-xl bg-white/5 transition-all duration-300 hover:bg-primary">
+        
+        <fa-icon [icon]="linkedin" 
+                 class="text-4xl text-primary transition-colors duration-300 group-hover:text-tertiary">
+        </fa-icon>
+      </a>
+    }
+  
+    @if (github) {
+      <a [href]="linkGitHub()" target="_blank" 
+         class="group w-20 h-20 flex items-center justify-center rounded-xl bg-white/5 transition-all duration-300 hover:bg-primary">
+        
+        <fa-icon [icon]="github" 
+                 class="text-4xl text-primary transition-colors duration-300 group-hover:text-tertiary">
+        </fa-icon>
+      </a>
+    }
+  </div>
+</div>

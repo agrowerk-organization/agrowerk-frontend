@@ -1,14 +1,17 @@
-<div class="flex flex-col gap-3 animate-fadeInUp" style="animation-delay: 0.3s;">
-    @for (action of actions; track $index) {
+<div class="flex flex-col sm:flex-row items-center justify-center gap-6 animate-fadeInUp" style="animation-delay: 0.3s;">
+    @for (action of actions(); track $index) {
       <button
-        class="group relative w-full flex items-center justify-between gap-3 
+        [style.--btn-width]="width()"
+        [style.--btn-mobile-width]="mobileWidth()"
+        class="group relative flex items-center justify-between gap-3 
                py-4 px-6 rounded-2xl font-bold text-2xl 
                transition-all duration-300 overflow-hidden
-               cursor-pointer"
+               cursor-pointer w-[var(--btn-mobile-width)] sm:w-[var(--btn-width)]"
         [ngClass]="{
           'bg-gradient-to-br from-button-main to-button-second text-neutral-primary shadow-lg hover:shadow-2xl hover:-translate-y-1 active:translate-y-0': action.type === 'primary',
           'bg-neutral-primary text-primary border-2 border-primary hover:bg-primary hover:text-neutral-primary hover:shadow-lg hover:-translate-y-1': action.type === 'secondary'
         }"
+        
         (click)="action.action">
         
         @if (action.type === 'primary') {

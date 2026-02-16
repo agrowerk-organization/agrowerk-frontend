@@ -7,7 +7,7 @@ import { Statistic } from '../../../../../core/ui/types/login/statistic/statisti
 import { Title } from "../../../../../shared/components/title/title";
 import { Subtitle } from "../../../../../shared/components/subtitle/subtitle";
 import { Icons } from "../../../../../shared/components/icons/icons";
-import { ICONS_LOGIN } from '../../../../../core/ui/icons/icons.login';
+import { ICONS_LOGIN } from '../../../../../core/ui/icons/icons-login/icons.login';
 
 @Component({
   selector: 'app-login-branding',

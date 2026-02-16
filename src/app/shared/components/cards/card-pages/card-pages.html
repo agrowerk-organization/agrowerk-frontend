@@ -1,0 +1,16 @@
+<div class="stat-card group flex flex-col items-center justify-center rounded-3xl p-6 relative overflow-hidden 
+    w-full w-[250px] h-[300px] transition-all duration-500 shadow-[0_20px_40px_-15px_rgba(76,175,80,0.4)]
+    hover:-translate-y-2 hover:scale-105 hover:shadow-[0_20px_40px_-15px_rgba(76,175,80,0.4)]
+    border-2 border-primary/60 hover:border-primary/90
+    bg-[#0d140f]/90 backdrop-blur-[24px] saturate-[160%]">
+    
+    <div class="w-16 h-16 bg-secondary/20 mt-4 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+        <fa-icon [icon]="icons()" class="text-3xl text-secondary"></fa-icon>
+    </div>
+
+    <h3 class="text-2xl font-bold text-neutral-tertiary mb-4 text-center">{{ title() }}</h3>
+    <p class="text-neutral-secondary text-lg text-center leading-relaxed">{{ description() }}</p>
+    
+    <div class="absolute inset-0 pointer-events-none bg-gradient-to-tr from-white/5 to-transparent 
+            opacity-0 group-hover:opacity-100 transition-opacity"></div>
+</div>

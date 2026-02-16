@@ -1,0 +1,33 @@
+@if (isMobile()) {
+    <app-carousel [items]="team()">
+        <ng-template #itemTemplate let-member>
+            <div class="flex justify-center w-full">
+                <app-card-person 
+                    [avatar]="member.avatar"
+                    [name]="member.name"
+                    [role]="member.role"
+                    [bio]="member.bio"
+                    [linkLinkedIn]="member.linkedin"
+                    [linkGitHub]="member.github"
+                >
+                </app-card-person>
+            </div>
+        </ng-template>
+    </app-carousel>
+} @else {        
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto px-4">
+
+        @for (member of team(); track member.name) {
+                <app-card-person 
+                    [avatar]="member.avatar"
+                    [name]="member.name"
+                    [role]="member.role"
+                    [bio]="member.bio"
+                    [linkLinkedIn]="member.linkedin"
+                    [linkGitHub]="member.github"
+                >
+                </app-card-person>
+        }            
+    </div>
+
+}
