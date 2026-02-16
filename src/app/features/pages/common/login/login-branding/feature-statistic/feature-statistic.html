@@ -1,10 +1,11 @@
 <div class="grid grid-cols-3 gap-4 mt-10 pt-8 border-t border-white/10 animate-[fadeInUp_1.2s_ease-out]">
-  @for (stat of statistics(); track stat.label) {
+  @for (stat of statistics(); track stat.label; let i = $index) {
     <div class="text-center group">
       <div class="text-2xl lg:text-3xl font-black text-[var(--color-neutral-secondary)] group-hover:text-[var(--color-secondary)] transition-colors">
-        {{ getFormattedStatistic(stat) }}
+        {{ getFormattedStatistic(i, stat.suffix) }}
       </div>
-      <div class="text-[var(--color-neutral-secondary)]/80 text-size-text uppercase tracking-widest font-bold mt-1">
+      
+      <div class="text-[var(--color-neutral-secondary)]/80 text-xs uppercase tracking-widest font-bold mt-1">
         {{ stat.label }}
       </div>
     </div>

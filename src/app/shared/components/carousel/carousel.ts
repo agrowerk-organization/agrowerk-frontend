@@ -1,12 +1,7 @@
-import { 
-  Component, 
-  input, 
-  signal, 
-  effect, 
-  OnDestroy, 
-  ContentChild, 
-  TemplateRef, 
-  AfterViewInit 
+import {
+  Component, input, signal, effect,
+  OnDestroy, ContentChild, TemplateRef,
+  AfterViewInit, NgZone, inject
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -25,8 +20,10 @@ export class Carousel<T> implements OnDestroy, AfterViewInit {
 
   readonly currentIndex = signal<number>(0);
 
+  private ngZone = inject(NgZone);
   private autoplayInterval: ReturnType<typeof setInterval> | undefined;
   private touchStartX = 0;
+  private isAutoPlaying = false;
 
   constructor() {
     effect(() => {
@@ -47,11 +44,11 @@ export class Carousel<T> implements OnDestroy, AfterViewInit {
     this.stopAutoplay();
   }
 
-  next(): void {
+  next(fromUser = false): void {
     const count = this.items().length;
     if (count <= 1) return;
     this.currentIndex.update((val) => (val + 1) % count);
-    this.resetAutoplay();
+    if (fromUser) this.resetAutoplay();
   }
 
   prev(): void {
@@ -72,25 +69,33 @@ export class Carousel<T> implements OnDestroy, AfterViewInit {
 
   onTouchEnd(event: TouchEvent): void {
     const touch = event.changedTouches[0];
-    if (!touch) return;
-    const touchEndX = touch.screenX;
-    const diff = this.touchStartX - touchEndX;
+    
+    if (!touch) {
+      return;
+    }
+  
+    const diff = this.touchStartX - touch.screenX;
     const threshold = 50;
-
+  
     if (Math.abs(diff) > threshold) {
       if (diff > 0) {
-        this.next();
+        this.next(true);
       } else {
         this.prev();
       }
     }
   }
-
   private startAutoplay(): void {
-    this.stopAutoplay();
-    this.autoplayInterval = setInterval(() => {
-      this.next();
-    }, this.autoplayDelay());
+    this.stopAutoplay(); 
+    this.ngZone.runOutsideAngular(() => {
+      this.autoplayInterval = setInterval(() => {
+        this.isAutoPlaying = true;
+        this.ngZone.run(() => {
+          this.next(false); 
+          this.isAutoPlaying = false;
+        });
+      }, this.autoplayDelay());
+    });
   }
 
   private stopAutoplay(): void {
@@ -101,7 +106,7 @@ export class Carousel<T> implements OnDestroy, AfterViewInit {
   }
 
   private resetAutoplay(): void {
-    if (this.showAutoplay()) {
+    if (this.showAutoplay() && !this.isAutoPlaying) {
       this.startAutoplay();
     }
   }

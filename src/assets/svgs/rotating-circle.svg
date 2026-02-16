@@ -1,0 +1,12 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <circle
+    cx="50"
+    cy="50"
+    r="48"
+    fill="none"
+    stroke="rgb(11, 180, 11)"
+    stroke-width="0.5"
+    stroke-dasharray="3 2"
+    filter="drop-shadow(0 0 2px rgba(0,206,7,0.89))"
+  />
+</svg>

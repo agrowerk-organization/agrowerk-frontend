@@ -14,7 +14,7 @@
       @if (isMobile()) {
         <app-carousel [items]="statistics">
           <ng-template #itemTemplate let-stat>
-            <div class="px-2"> <app-card [stat]="stat" [index]="statistics.indexOf(stat)"></app-card>
+            <div class="flex justify-center w-full"> <app-card [stat]="stat" [index]="statistics.indexOf(stat)"></app-card>
             </div>
           </ng-template>
         </app-carousel>

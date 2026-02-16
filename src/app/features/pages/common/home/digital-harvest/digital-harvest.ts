@@ -1,4 +1,4 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, OnDestroy, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TimelinePhase } from '../../../../../core/ui/types/timeline-phase/timeline-phase';
@@ -18,11 +18,12 @@ import { Subtitle } from "../../../../../shared/components/subtitle/subtitle";
   styleUrls: ['./digital-harvest.css']
 })
 
-export class DigitalHarvest implements OnInit {
-  // Icons
+export class DigitalHarvest implements OnInit, OnDestroy {
   icons = ICONS_DIGITAL_HARVEST;
 
   activePhase = signal(0);
+
+  private rotationInterval: ReturnType<typeof setInterval> | undefined;
 
   phases: TimelinePhase[] = [
     {
@@ -85,7 +86,10 @@ export class DigitalHarvest implements OnInit {
   ];
 
   ngOnInit(): void {
-    // Auto-rotate through phases every 5 seconds
+    this.startAutoRotation();
+  }
+
+  ngOnDestroy(): void {
     this.startAutoRotation();
   }
 

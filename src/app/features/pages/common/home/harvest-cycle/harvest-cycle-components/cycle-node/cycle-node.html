@@ -23,7 +23,7 @@
         [style]="getGlassStyle()">
         
         @if (isSelected()) {
-          <div class="absolute inset-0 rounded-full animate-pulse" 
+          <div class="absolute inset-0 rounded-full transition-opacity duration-500" 
                [style.box-shadow]="'0 0 30px ' + node().color + '80, 0 0 60px ' + node().color + '40'">
           </div>
         }

@@ -1,58 +1,71 @@
 import { CommonModule } from '@angular/common';
-import { Component, input, OnInit, OnDestroy } from '@angular/core';
+import { Component, input, OnInit, OnDestroy, signal, ChangeDetectionStrategy } from '@angular/core';
 import { Statistic } from '../../../../../../core/ui/types/login/statistic/statistic';
 
 @Component({
   selector: 'app-feature-statistic',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './feature-statistic.html'
+  templateUrl: './feature-statistic.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FeatureStatistic implements OnInit, OnDestroy {
-  // Signals para Inputs (Angular 17.1+)
-  statistics = input.required<Statistic[]>();
-  animationDelay = input<number>(500); 
-  animationSpeed = input<number>(30); 
+  readonly statistics = input.required<Statistic[]>();
+  readonly animationDelay = input<number>(500);
 
-  private counterIntervals: ReturnType<typeof setInterval>[] = [];
+  readonly displayValues = signal<number[]>([]);
+
+  private animationIds: number[] = [];
+  private timeoutId: ReturnType<typeof setTimeout> | undefined;
 
   ngOnInit(): void {
-    this.statistics().forEach(statistic => {
-      if (statistic.current === undefined) {
-        statistic.current = 0;
-      }
-    });
-
-    this.startCounterAnimations();
+    this.displayValues.set(this.statistics().map(() => 0));
+    
+    this.timeoutId = setTimeout(() => {
+      this.startAnimations();
+    }, this.animationDelay());
   }
 
   ngOnDestroy(): void {
-    this.counterIntervals.forEach(interval => clearInterval(interval));
+    if (this.timeoutId) {
+      clearTimeout(this.timeoutId);
+    }
+    this.animationIds.forEach(id => cancelAnimationFrame(id));
   }
 
-  private startCounterAnimations(): void {
-    setTimeout(() => {
-      this.statistics().forEach((statistic) => {
-        const increment = Math.max(statistic.value / 50, 1);
+  private startAnimations(): void {
+    const stats = this.statistics();
+    
+    stats.forEach((statistic, index) => {
+      const duration = 1500;
+      const startTime = performance.now();
+      const targetValue = statistic.value;
+
+      const tick = (now: number): void => {
+        const elapsed = now - startTime;
+        const progress = Math.min(elapsed / duration, 1);
         
-        const interval = setInterval(() => {
-          if (statistic.current !== undefined) {
-            statistic.current += increment;
-            
-            if (statistic.current >= statistic.value) {
-              statistic.current = statistic.value;
-              clearInterval(interval);
-            }
-          }
-        }, this.animationSpeed()); 
-        
-        this.counterIntervals.push(interval);
-      });
-    }, this.animationDelay()); 
+        const easedProgress = 1 - Math.pow(1 - progress, 3);
+        const currentValue = Math.floor(easedProgress * targetValue);
+
+        this.displayValues.update(values => {
+          const updated = [...values];
+          updated[index] = currentValue;
+          return updated;
+        });
+
+        if (progress < 1) {
+          this.animationIds[index] = requestAnimationFrame(tick);
+        }
+      };
+
+      this.animationIds[index] = requestAnimationFrame(tick);
+    });
   }
 
-  getFormattedStatistic(statistic: Statistic): string {
-    const value = Math.floor(statistic.current || 0);
-    return `${value}${statistic.suffix}`;
+  getFormattedStatistic(index: number, suffix: string): string {
+    const values = this.displayValues();
+    const val = values[index] ?? 0;
+    return `${val}${suffix}`;
   }
 }

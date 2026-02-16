@@ -75,7 +75,7 @@ export class Statistics implements OnInit{
     },
     {
       id: 4,
-      label: 'Economizados em Barter',
+      label: 'Negociados em Barter',
       value: 2.5,
       prefix: 'R$ ',
       suffix: 'M',
@@ -83,7 +83,7 @@ export class Statistics implements OnInit{
       color: 'secondary',
       trend: {
         value: '+22%',
-        label: 'vs mês anterior'
+        label: 'este mês'
       }
     }
   ];
