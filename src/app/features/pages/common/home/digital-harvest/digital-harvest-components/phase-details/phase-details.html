@@ -2,7 +2,7 @@
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
       <div class="flex flex-col h-full">
         <div>
-          <h4 class="text-2xl font-bold text-primary mb-6 flex items-center gap-3">
+          <h4 class="text-xl sm:text-3xl font-bold text-primary mb-6 flex items-center gap-3">
             <fa-icon [icon]="phase().icon"></fa-icon> Funcionalidades
           </h4>
           <ul class="space-y-4">
@@ -11,7 +11,7 @@
                 <div class="w-6 h-6 bg-primary/20 rounded-full flex items-center justify-center mt-1">
                   <div class="w-2 h-2 bg-primary rounded-full"></div>
                 </div>
-                <span class="text-neutral-secondary group-hover:text-neutral-tertiary">{{ feature }}</span>
+                <span class="text-lg sm:text-2xl text-neutral-secondary group-hover:text-neutral-tertiary">{{ feature }}</span>
               </li>
             }
           </ul>
@@ -22,7 +22,7 @@
             <div class="flex items-center justify-between mb-4">
               <span class="text-xl font-medium text-neutral-secondary tracking-wider">Monitoramento de Safra</span>
               <div class="flex gap-1">
-                <div class="w-4 h-4 bg-primary rounded-full animate-ping"></div>
+                <div class="flex flex-col sm:flex-row w-4 h-4 bg-primary rounded-full animate-ping"></div>
                 <span class="text-sm text-primary font-bold">Live</span>
               </div>
             </div>
@@ -40,7 +40,7 @@
       </div>
   
       <div>
-        <h4 class="text-2xl font-bold text-primary mb-6">Resultados Reais</h4>
+        <h4 class="text-xl sm:text-3xl font-bold text-primary mb-6">Resultados Reais</h4>
         <div class="grid grid-cols-1 gap-6">
           @for (stat of phase().stats; track stat.label) {
             <app-stat-card [label]="stat.label" [value]="stat.value" [icon]="stat.icon"></app-stat-card>

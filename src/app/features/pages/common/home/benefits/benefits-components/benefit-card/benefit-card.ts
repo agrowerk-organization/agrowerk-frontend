@@ -7,7 +7,10 @@ import { Benefit } from '../../../../../../../core/ui/types/benefit/benefit';
   selector: 'app-benefit-card',
   standalone: true,
   imports: [CommonModule, FontAwesomeModule],
-  templateUrl: './benefit-card.html'
+  templateUrl: './benefit-card.html',
+  host: {
+    class: 'block w-full'
+  }
 })
 
 export class BenefitCard {

@@ -16,8 +16,8 @@
                [ngClass]="isActive() ? 'text-neutral-tertiary scale-110' : 'text-neutral-secondary'"></fa-icon>
     </div>
 
-    <h3 class="text-xl font-bold text-neutral-tertiary text-center mb-2">{{ phase().title }}</h3>
-    <p class="text-base text-neutral-secondary text-center">{{ phase().subtitle }}</p>
+    <h3 class="text-2xl font-bold text-neutral-tertiary text-center mb-2">{{ phase().title }}</h3>
+    <p class="text-xl text-neutral-secondary text-center">{{ phase().subtitle }}</p>
 
     @if (isActive()) {
       <div class="absolute -bottom-3 left-1/2 -translate-x-1/2 w-6 h-6 bg-primary rounded-full animate-pulse"></div>
