@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 360" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="480" y2="360" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0d2818"/><stop offset="100%" stop-color="#071510"/>
+    </linearGradient>
+    <linearGradient id="card" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a3a24"/><stop offset="100%" stop-color="#0f2318"/>
+    </linearGradient>
+    <linearGradient id="obtn" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#f59e0b"/><stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+    <filter id="cs"><feDropShadow dx="0" dy="6" stdDeviation="14" flood-color="#000" flood-opacity="0.6"/></filter>
+    <filter id="gg"><feDropShadow dx="0" dy="0" stdDeviation="8" flood-color="#4ade80" flood-opacity="0.5"/></filter>
+    <filter id="og"><feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#f59e0b" flood-opacity="0.6"/></filter>
+  </defs>
+
+  <rect width="480" height="360" fill="url(#bg)" rx="16"/>
+  <!-- Gold pattern -->
+  <g opacity="0.1" stroke="#c8960c" stroke-width="0.8" fill="none">
+    <polygon points="24,0 48,24 24,48 0,24"/><polygon points="72,0 96,24 72,48 48,24"/>
+    <polygon points="120,0 144,24 120,48 96,24"/><polygon points="168,0 192,24 168,48 144,24"/>
+    <polygon points="216,0 240,24 216,48 192,24"/><polygon points="264,0 288,24 264,48 240,24"/>
+    <polygon points="312,0 336,24 312,48 288,24"/><polygon points="360,0 384,24 360,48 336,24"/>
+    <polygon points="408,0 432,24 408,48 384,24"/><polygon points="456,0 480,24 456,48 432,24"/>
+    <polygon points="24,48 48,72 24,96 0,72"/><polygon points="72,48 96,72 72,96 48,72"/>
+    <polygon points="120,48 144,72 120,96 96,72"/><polygon points="168,48 192,72 168,96 144,72"/>
+    <polygon points="216,48 240,72 216,96 192,72"/><polygon points="264,48 288,72 264,96 240,72"/>
+    <polygon points="312,48 336,72 312,96 288,72"/><polygon points="360,48 384,72 360,96 336,72"/>
+    <polygon points="408,48 432,72 408,96 384,72"/>
+    <polygon points="24,96 48,120 24,144 0,120"/><polygon points="72,96 96,120 72,144 48,120"/>
+    <polygon points="120,96 144,120 120,144 96,120"/><polygon points="168,96 192,120 168,144 144,120"/>
+    <polygon points="216,96 240,120 216,144 192,120"/><polygon points="264,96 288,120 264,144 240,120"/>
+    <polygon points="312,96 336,120 312,144 288,120"/><polygon points="360,96 384,120 360,144 336,120"/>
+    <polygon points="24,144 48,168 24,192 0,168"/><polygon points="72,144 96,168 72,192 48,168"/>
+    <polygon points="120,144 144,168 120,192 96,168"/><polygon points="168,144 192,168 168,192 144,168"/>
+    <polygon points="216,144 240,168 216,192 192,168"/><polygon points="264,144 288,168 264,192 240,168"/>
+    <polygon points="312,144 336,168 312,192 288,168"/><polygon points="360,144 384,168 360,192 336,168"/>
+    <polygon points="24,192 48,216 24,240 0,216"/><polygon points="72,192 96,216 72,240 48,216"/>
+    <polygon points="120,192 144,216 120,240 96,216"/><polygon points="168,192 192,216 168,240 144,216"/>
+    <polygon points="216,192 240,216 216,240 192,216"/><polygon points="264,192 288,216 264,240 240,216"/>
+    <polygon points="312,192 336,216 312,240 288,216"/><polygon points="360,192 384,216 360,240 336,216"/>
+    <polygon points="24,240 48,264 24,288 0,264"/><polygon points="72,240 96,264 72,288 48,264"/>
+    <polygon points="120,240 144,264 120,288 96,264"/><polygon points="168,240 192,264 168,288 144,264"/>
+    <polygon points="216,240 240,264 216,288 192,264"/><polygon points="264,240 288,264 264,288 240,264"/>
+    <polygon points="312,240 336,264 312,288 288,264"/>
+    <polygon points="24,288 48,312 24,336 0,312"/><polygon points="72,288 96,312 72,336 48,312"/>
+    <polygon points="120,288 144,312 120,336 96,312"/><polygon points="168,288 192,312 168,336 144,312"/>
+    <polygon points="216,288 240,312 216,336 192,312"/><polygon points="264,288 288,312 264,336 240,312"/>
+    <polygon points="312,288 336,312 312,336 288,312"/>
+  </g>
+
+  <!-- Main form card -->
+  <rect x="52" y="24" width="288" height="312" rx="16" fill="url(#card)" filter="url(#cs)" stroke="#2d5a3d" stroke-width="1.5"/>
+  <rect x="52" y="24" width="288" height="4" rx="2" fill="url(#obtn)"/>
+
+  <!-- PASSO badge -->
+  <rect x="68" y="40" width="72" height="22" rx="11" fill="#f59e0b" fill-opacity="0.15" stroke="#f59e0b" stroke-width="1"/>
+  <text x="104" y="55" font-family="Georgia,serif" font-size="10" fill="#f59e0b" text-anchor="middle" font-weight="bold">PASSO 1</text>
+
+  <!-- Title -->
+  <text x="196" y="90" font-family="Georgia,serif" font-size="16" font-weight="bold" fill="#f59e0b" text-anchor="middle">Cadastro de</text>
+  <text x="196" y="110" font-family="Georgia,serif" font-size="16" font-weight="bold" fill="#f59e0b" text-anchor="middle">Fornecedor</text>
+
+  <!-- Building icon -->
+  <circle cx="196" cy="162" r="36" fill="#0a1e12" stroke="#f59e0b" stroke-width="2" filter="url(#og)"/>
+  <rect x="181" y="150" width="30" height="24" fill="#f59e0b" opacity="0.35"/>
+  <rect x="185" y="143" width="22" height="10" fill="#f59e0b" opacity="0.6"/>
+  <rect x="188" y="161" width="7" height="13" fill="#f59e0b"/>
+  <rect x="199" y="161" width="7" height="13" fill="#f59e0b"/>
+  <rect x="182" y="153" width="5" height="5" fill="#0a1e12" rx="1"/>
+  <rect x="205" y="153" width="5" height="5" fill="#0a1e12" rx="1"/>
+  <!-- verified badge -->
+  <circle cx="224" cy="138" r="14" fill="#4ade80" filter="url(#gg)"/>
+  <path d="M218 138 L222 142 L230 132" stroke="#0d2818" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Fields -->
+  <text x="68" y="222" font-family="Georgia,serif" font-size="9" fill="#5a8a6e">Razão Social</text>
+  <rect x="68" y="226" width="256" height="28" rx="8" fill="#0a1e12" stroke="#2d5a3d" stroke-width="1.5"/>
+  <text x="82" y="244" font-family="Georgia,serif" font-size="11" fill="#e5e7eb">AgroInsumos Brasil Ltda.</text>
+  <circle cx="306" cy="240" r="8" fill="#4ade80" fill-opacity="0.15" stroke="#4ade80" stroke-width="1"/>
+  <path d="M302 240 L306 244 L311 236" stroke="#4ade80" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <text x="68" y="268" font-family="Georgia,serif" font-size="9" fill="#5a8a6e">CNPJ</text>
+  <rect x="68" y="272" width="256" height="28" rx="8" fill="#0a1e12" stroke="#2d5a3d" stroke-width="1.5"/>
+  <text x="82" y="290" font-family="Georgia,serif" font-size="11" fill="#e5e7eb">12.345.678/0001-90</text>
+  <circle cx="306" cy="286" r="8" fill="#4ade80" fill-opacity="0.15" stroke="#4ade80" stroke-width="1"/>
+  <path d="M302 286 L306 290 L311 282" stroke="#4ade80" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <text x="68" y="314" font-family="Georgia,serif" font-size="9" fill="#5a8a6e">Segmento</text>
+  <rect x="68" y="318" width="256" height="28" rx="8" fill="#0a1e12" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="82" y="336" font-family="Georgia,serif" font-size="11" fill="#f59e0b">Fertilizantes e Defensivos</text>
+  <text x="312" y="336" font-family="Georgia,serif" font-size="12" fill="#f59e0b">▾</text>
+
+  <!-- Side: Verification card -->
+  <rect x="354" y="24" width="110" height="130" rx="14" fill="url(#card)" filter="url(#cs)" stroke="#4ade80" stroke-width="1.5"/>
+  <rect x="354" y="24" width="110" height="4" rx="2" fill="url(#gbtn)"/>
+  <text x="409" y="52" font-family="Georgia,serif" font-size="10" font-weight="bold" fill="#4ade80" text-anchor="middle">Verificação</text>
+  <circle cx="409" cy="92" r="28" fill="#0a1e12" stroke="#4ade80" stroke-width="2" filter="url(#gg)"/>
+  <path d="M396 92 L405 101 L423 80" stroke="#4ade80" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="409" y="130" font-family="Georgia,serif" font-size="10" fill="#f59e0b" text-anchor="middle">⚡ em 24h</text>
+  <text x="409" y="144" font-family="Georgia,serif" font-size="9" fill="#5a8a6e" text-anchor="middle">Processo rápido</text>
+
+  <!-- Side: Docs card -->
+  <rect x="354" y="168" width="110" height="168" rx="14" fill="url(#card)" filter="url(#cs)" stroke="#2d5a3d" stroke-width="1.5"/>
+  <rect x="354" y="168" width="110" height="4" rx="2" fill="url(#obtn)"/>
+  <text x="409" y="192" font-family="Georgia,serif" font-size="10" font-weight="bold" fill="#f59e0b" text-anchor="middle">Documentação</text>
+  <g font-family="Georgia,serif" font-size="9">
+    <text x="366" y="214" fill="#4ade80">✓</text><text x="380" y="214" fill="#8ab49a">CNPJ ativo</text>
+    <text x="366" y="232" fill="#4ade80">✓</text><text x="380" y="232" fill="#8ab49a">Contrato social</text>
+    <text x="366" y="250" fill="#4ade80">✓</text><text x="380" y="250" fill="#8ab49a">Certificações</text>
+    <text x="366" y="268" fill="#5a8a6e">○</text><text x="380" y="268" fill="#5a8a6e">Alvará</text>
+    <text x="366" y="286" fill="#5a8a6e">○</text><text x="380" y="286" fill="#5a8a6e">Referências</text>
+  </g>
+  <!-- Progress bar -->
+  <rect x="366" y="300" width="86" height="6" rx="3" fill="#0a1e12"/>
+  <rect x="366" y="300" width="56" height="6" rx="3" fill="#f59e0b" filter="url(#og)"/>
+  <text x="409" y="324" font-family="Georgia,serif" font-size="9" fill="#5a8a6e" text-anchor="middle">3 de 5 enviados</text>
+</svg>

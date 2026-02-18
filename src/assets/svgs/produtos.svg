@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 360" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="480" y2="360" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0d2818"/><stop offset="100%" stop-color="#071510"/>
+    </linearGradient>
+    <linearGradient id="card" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a3a24"/><stop offset="100%" stop-color="#0f2318"/>
+    </linearGradient>
+    <linearGradient id="obtn" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#f59e0b"/><stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+    <filter id="cs"><feDropShadow dx="0" dy="6" stdDeviation="12" flood-color="#000" flood-opacity="0.6"/></filter>
+    <filter id="gg"><feDropShadow dx="0" dy="0" stdDeviation="5" flood-color="#4ade80" flood-opacity="0.4"/></filter>
+    <filter id="og"><feDropShadow dx="0" dy="0" stdDeviation="5" flood-color="#f59e0b" flood-opacity="0.5"/></filter>
+  </defs>
+
+  <rect width="480" height="360" fill="url(#bg)" rx="16"/>
+  <!-- Gold pattern -->
+  <g opacity="0.1" stroke="#c8960c" stroke-width="0.8" fill="none">
+    <polygon points="24,0 48,24 24,48 0,24"/><polygon points="72,0 96,24 72,48 48,24"/>
+    <polygon points="120,0 144,24 120,48 96,24"/><polygon points="168,0 192,24 168,48 144,24"/>
+    <polygon points="216,0 240,24 216,48 192,24"/><polygon points="264,0 288,24 264,48 240,24"/>
+    <polygon points="312,0 336,24 312,48 288,24"/><polygon points="360,0 384,24 360,48 336,24"/>
+    <polygon points="408,0 432,24 408,48 384,24"/><polygon points="456,0 480,24 456,48 432,24"/>
+    <polygon points="24,48 48,72 24,96 0,72"/><polygon points="72,48 96,72 72,96 48,72"/>
+    <polygon points="120,48 144,72 120,96 96,72"/><polygon points="168,48 192,72 168,96 144,72"/>
+    <polygon points="216,48 240,72 216,96 192,72"/><polygon points="264,48 288,72 264,96 240,72"/>
+    <polygon points="312,48 336,72 312,96 288,72"/><polygon points="360,48 384,72 360,96 336,72"/>
+    <polygon points="408,48 432,72 408,96 384,72"/>
+    <polygon points="24,96 48,120 24,144 0,120"/><polygon points="72,96 96,120 72,144 48,120"/>
+    <polygon points="120,96 144,120 120,144 96,120"/><polygon points="168,96 192,120 168,144 144,120"/>
+    <polygon points="216,96 240,120 216,144 192,120"/><polygon points="264,96 288,120 264,144 240,120"/>
+    <polygon points="312,96 336,120 312,144 288,120"/><polygon points="360,96 384,120 360,144 336,120"/>
+    <polygon points="24,144 48,168 24,192 0,168"/><polygon points="72,144 96,168 72,192 48,168"/>
+    <polygon points="120,144 144,168 120,192 96,168"/><polygon points="168,144 192,168 168,192 144,168"/>
+    <polygon points="216,144 240,168 216,192 192,168"/><polygon points="264,144 288,168 264,192 240,168"/>
+    <polygon points="312,144 336,168 312,192 288,168"/>
+    <polygon points="24,192 48,216 24,240 0,216"/><polygon points="72,192 96,216 72,240 48,216"/>
+    <polygon points="120,192 144,216 120,240 96,216"/><polygon points="168,192 192,216 168,240 144,216"/>
+    <polygon points="216,192 240,216 216,240 192,216"/><polygon points="264,192 288,216 264,240 240,216"/>
+    <polygon points="312,192 336,216 312,240 288,216"/>
+    <polygon points="24,240 48,264 24,288 0,264"/><polygon points="72,240 96,264 72,288 48,264"/>
+    <polygon points="120,240 144,264 120,288 96,264"/><polygon points="168,240 192,264 168,288 144,264"/>
+    <polygon points="216,240 240,264 216,288 192,264"/><polygon points="264,240 288,264 264,288 240,264"/>
+    <polygon points="24,288 48,312 24,336 0,312"/><polygon points="72,288 96,312 72,336 48,312"/>
+    <polygon points="120,288 144,312 120,336 96,312"/><polygon points="168,288 192,312 168,336 144,312"/>
+    <polygon points="216,288 240,312 216,336 192,312"/><polygon points="264,288 288,312 264,336 240,312"/>
+  </g>
+
+  <!-- Header -->
+  <text x="24" y="30" font-family="Georgia,serif" font-size="14" font-weight="bold" fill="#f59e0b">Catálogo de Produtos</text>
+  <rect x="372" y="14" width="84" height="26" rx="8" fill="url(#obtn)" filter="url(#og)"/>
+  <text x="414" y="31" font-family="Georgia,serif" font-size="10" font-weight="bold" fill="#0d2818" text-anchor="middle">+ Novo Produto</text>
+
+  <!-- Card 1: Fertilizante NPK -->
+  <rect x="24" y="44" width="210" height="138" rx="12" fill="url(#card)" filter="url(#cs)" stroke="#2d5a3d" stroke-width="1.5"/>
+  <rect x="24" y="44" width="210" height="68" rx="12" fill="#0a1e12"/>
+  <rect x="24" y="96" width="210" height="16" fill="#0a1e12"/>
+  <circle cx="129" cy="78" r="28" fill="#1a3a24" stroke="#f59e0b" stroke-width="1.5" filter="url(#og)"/>
+  <text x="129" y="87" font-family="Georgia,serif" font-size="28" text-anchor="middle">🧪</text>
+  <!-- In stock badge -->
+  <rect x="30" y="50" width="66" height="18" rx="6" fill="#4ade80" fill-opacity="0.2" stroke="#4ade80" stroke-width="1"/>
+  <text x="63" y="62" font-family="Georgia,serif" font-size="8" fill="#4ade80" text-anchor="middle">● Em Estoque</text>
+
+  <text x="34" y="132" font-family="Georgia,serif" font-size="11" font-weight="bold" fill="#e5e7eb">Fertilizante NPK</text>
+  <text x="34" y="146" font-family="Georgia,serif" font-size="9" fill="#5a8a6e">20-10-10 • Granulado</text>
+  <text x="34" y="162" font-family="Georgia,serif" font-size="15" font-weight="bold" fill="#f59e0b">R$ 2,40 <tspan font-size="9" fill="#5a8a6e">/kg</tspan></text>
+  <rect x="34" y="166" width="190" height="5" rx="2" fill="#0a1e12"/>
+  <rect x="34" y="166" width="135" height="5" rx="2" fill="#4ade80" filter="url(#gg)"/>
+  <text x="224" y="172" font-family="Georgia,serif" font-size="8" fill="#4ade80" text-anchor="end">8.400 kg</text>
+
+  <!-- Card 2: Semente Soja -->
+  <rect x="246" y="44" width="210" height="138" rx="12" fill="url(#card)" filter="url(#cs)" stroke="#2d5a3d" stroke-width="1.5"/>
+  <rect x="246" y="44" width="210" height="68" rx="12" fill="#0a1e12"/>
+  <rect x="246" y="96" width="210" height="16" fill="#0a1e12"/>
+  <circle cx="351" cy="78" r="28" fill="#1a3a24" stroke="#4ade80" stroke-width="1.5" filter="url(#gg)"/>
+  <text x="351" y="87" font-family="Georgia,serif" font-size="28" text-anchor="middle">🌱</text>
+  <rect x="252" y="50" width="64" height="18" rx="6" fill="#f59e0b" fill-opacity="0.2" stroke="#f59e0b" stroke-width="1"/>
+  <text x="284" y="62" font-family="Georgia,serif" font-size="8" fill="#f59e0b" text-anchor="middle">🔥 Promoção</text>
+
+  <text x="256" y="132" font-family="Georgia,serif" font-size="11" font-weight="bold" fill="#e5e7eb">Semente Soja RR</text>
+  <text x="256" y="146" font-family="Georgia,serif" font-size="9" fill="#5a8a6e">Variedade M7739 IPRO</text>
+  <text x="256" y="162" font-family="Georgia,serif" font-size="15" font-weight="bold" fill="#f59e0b">R$ 190 <tspan font-size="9" fill="#5a8a6e">/sc</tspan></text>
+  <rect x="256" y="166" width="190" height="5" rx="2" fill="#0a1e12"/>
+  <rect x="256" y="166" width="95" height="5" rx="2" fill="#f59e0b" filter="url(#og)"/>
+  <text x="446" y="172" font-family="Georgia,serif" font-size="8" fill="#f59e0b" text-anchor="end">1.200 sc</text>
+
+  <!-- Card 3: Herbicida -->
+  <rect x="24" y="196" width="210" height="138" rx="12" fill="url(#card)" filter="url(#cs)" stroke="#f87171" stroke-width="1.5"/>
+  <rect x="24" y="196" width="210" height="68" rx="12" fill="#0a1e12"/>
+  <rect x="24" y="248" width="210" height="16" fill="#0a1e12"/>
+  <circle cx="129" cy="230" r="28" fill="#1a3a24" stroke="#f87171" stroke-width="1.5"/>
+  <text x="129" y="239" font-family="Georgia,serif" font-size="28" text-anchor="middle">💧</text>
+  <rect x="30" y="202" width="82" height="18" rx="6" fill="#f87171" fill-opacity="0.2" stroke="#f87171" stroke-width="1"/>
+  <text x="71" y="214" font-family="Georgia,serif" font-size="8" fill="#f87171" text-anchor="middle">⚠ Estoque Baixo</text>
+
+  <text x="34" y="284" font-family="Georgia,serif" font-size="11" font-weight="bold" fill="#e5e7eb">Herbicida Glifosato</text>
+  <text x="34" y="298" font-family="Georgia,serif" font-size="9" fill="#5a8a6e">480g/L • 20L</text>
+  <text x="34" y="314" font-family="Georgia,serif" font-size="15" font-weight="bold" fill="#f59e0b">R$ 82 <tspan font-size="9" fill="#5a8a6e">/lt</tspan></text>
+  <rect x="34" y="318" width="190" height="5" rx="2" fill="#0a1e12"/>
+  <rect x="34" y="318" width="28" height="5" rx="2" fill="#f87171"/>
+  <text x="224" y="324" font-family="Georgia,serif" font-size="8" fill="#f87171" text-anchor="end">15%</text>
+
+  <!-- Card 4: Inoculante -->
+  <rect x="246" y="196" width="210" height="138" rx="12" fill="url(#card)" filter="url(#cs)" stroke="#2d5a3d" stroke-width="1.5"/>
+  <rect x="246" y="196" width="210" height="68" rx="12" fill="#0a1e12"/>
+  <rect x="246" y="248" width="210" height="16" fill="#0a1e12"/>
+  <circle cx="351" cy="230" r="28" fill="#1a3a24" stroke="#a78bfa" stroke-width="1.5"/>
+  <text x="351" y="239" font-family="Georgia,serif" font-size="28" text-anchor="middle">🔬</text>
+  <rect x="252" y="202" width="46" height="18" rx="6" fill="#a78bfa" fill-opacity="0.2" stroke="#a78bfa" stroke-width="1"/>
+  <text x="275" y="214" font-family="Georgia,serif" font-size="8" fill="#a78bfa" text-anchor="middle">Novo</text>
+
+  <text x="256" y="284" font-family="Georgia,serif" font-size="11" font-weight="bold" fill="#e5e7eb">Inoculante Turfa</text>
+  <text x="256" y="298" font-family="Georgia,serif" font-size="9" fill="#5a8a6e">Bradyrhizobium 109 UFC</text>
+  <text x="256" y="314" font-family="Georgia,serif" font-size="15" font-weight="bold" fill="#f59e0b">R$ 45 <tspan font-size="9" fill="#5a8a6e">/dose</tspan></text>
+  <rect x="256" y="318" width="190" height="5" rx="2" fill="#0a1e12"/>
+  <rect x="256" y="318" width="150" height="5" rx="2" fill="#a78bfa"/>
+  <text x="446" y="324" font-family="Georgia,serif" font-size="8" fill="#a78bfa" text-anchor="end">79%</text>
+
+  <!-- Footer bar -->
+  <text x="240" y="350" font-family="Georgia,serif" font-size="9" fill="#5a8a6e" text-anchor="middle">Exibindo 4 de 128 produtos • Preços atualizados em tempo real</text>
+</svg>

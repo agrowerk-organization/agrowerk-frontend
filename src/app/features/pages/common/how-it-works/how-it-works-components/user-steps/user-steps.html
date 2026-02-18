@@ -1,0 +1,89 @@
+<div class="container mx-auto px-4 lg:px-8">
+      
+    @for (step of currentSteps(); track step.number; let i = $index; let isLast = $last) {
+      <div class="max-w-6xl mx-auto mb-20 last:mb-0 animate-fadeInUp" [style.animation-delay]="i * 0.1 + 's'">
+        
+        <div 
+          class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
+          [class.lg:grid-flow-dense]="i % 2 === 1"
+        >
+          
+          <div [class.lg:col-start-2]="i % 2 === 1">
+            <div class="inline-flex items-center gap-3 mb-6">
+              <div 
+                class="w-16 h-16 rounded-2xl flex items-center justify-center bg-primary/70"
+                 ><fa-icon 
+                  [icon]="step.icon" 
+                  class="text-3xl text-neutral-tertiary"
+                  ></fa-icon>
+              </div>
+              <div>
+                <span class="text-sm font-bold text-secondary uppercase">Passo {{ step.number }}</span>
+                <h2 class="text-3xl font-extrabold text-secondary">
+                  {{ step.title }}
+                </h2>
+              </div>
+            </div>
+
+            <p class="text-lg sm:text-2xl text-neutral-secondary mb-6 leading-relaxed">
+              {{ step.description }}
+            </p>
+
+            <ul class="space-y-3 mb-8">
+              @for (feature of step.features; track feature) {
+                <li class="flex items-start gap-3 group">
+                  <fa-icon 
+                    [icon]="icons.CHECK_CIRCLE" 
+                    class="text-xl text-primary mt-0.5 group-hover:scale-110 transition-transform"
+                  ></fa-icon>
+                  <span class="text-lg sm:text-xl text-neutral-tertiary font-medium">{{ feature }}</span>
+                </li>
+              }
+            </ul>
+
+            @if (step.number === 1) {
+              <app-button-pages
+                [icon]="icons.ARROW_RIGHT"
+                [text]="'Criar Conta'"
+                [action]="handleAction"
+                [width]="'400'"
+              ></app-button-pages>
+            }
+          </div>
+
+          <div 
+            class="bg-primary/5 backdrop-blur-md rounded-3xl p-8 border-2 border-primary/60
+                   shadow-xl hover:shadow-primary transition-shadow duration-300"
+            [class.lg:col-start-1]="i % 2 === 1"
+          >
+            @if (step.image) {
+              <img 
+                [src]="step.image" 
+                [alt]="step.title"
+                class="w-full h-auto rounded-2xl object-contain"
+              >
+            } @else {
+              <div class="aspect-video bg-gradient-to-br from-neutral-primary to-neutral-secondary rounded-2xl flex items-center justify-center">
+                <fa-icon 
+                  [icon]="step.icon" 
+                  class="text-8xl text-quartenary opacity-2"
+                ></fa-icon>
+              </div>
+            }
+          </div>
+
+        </div>
+
+        @if (!isLast) {
+          <div class="flex justify-center my-12">
+            <fa-icon 
+              [icon]="icons.ARROW_RIGHT" 
+              class="text-4xl text-primary rotate-90 animate-bounce"
+            ></fa-icon>
+          </div>
+        }
+
+      </div>
+    }
+
+</div>

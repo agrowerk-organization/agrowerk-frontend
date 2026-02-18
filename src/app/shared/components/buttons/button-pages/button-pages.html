@@ -1,0 +1,21 @@
+<button
+    [style.--btn-width]="width()"
+    class="group relative flex items-center justify-between gap-3 
+            py-4 px-6 rounded-2xl font-bold text-2xl 
+            transition-all duration-300 overflow-hidden
+            cursor-pointer w-[var(--btn-width)]
+            bg-gradient-to-br from-button-main to-button-second text-neutral-primary shadow-lg 
+            border border:primary hover:shadow-2xl hover:-translate-y-1 active:translate-y-0"
+
+    (click)="action()()">
+
+    <span class="relative z-10 text-2xl text-neutral-primary">
+        {{ text() }}
+    </span>
+
+    <fa-icon
+        class="relative z-10 text-2xl transition-transform duration-300 
+                group-hover:translate-x-2"
+        [icon]="icon()">
+    </fa-icon>
+</button>

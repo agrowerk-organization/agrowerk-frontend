@@ -1,0 +1,35 @@
+{
+    "legislationLinks": [
+      { "label": "Lei Geral de Proteção de Dados", "iconKey": "DATABASE", "url": "/leis/lgpd" },
+      { "label": "Lei da Agricultura Familiar", "iconKey": "USERS", "url": "/leis/agricultura-familiar" },
+      { "label": "PRONAF", "iconKey": "HANDHOLDINGDOLLAR", "url": "/leis/pronaf" },
+      { "label": "Lei da Mata Atlântica", "iconKey": "TREE", "url": "/leis/mata-atlantica" },
+      { "label": "Código Florestal", "iconKey": "SCALEBALANCED", "url": "/leis/codigo-florestal" },
+      { "label": "Serviços ambientais", "iconKey": "LEAF", "url": "/leis/servicos-ambientais" },
+      { "label": "Agricultura Urbana e Periurbana", "iconKey": "BUILDINGWHEAT", "url": "/leis/agricultura-urbana" },
+      { "label": "Fundo Garantidor de Operações", "iconKey": "SHIELDHALVED", "url": "/leis/fundo-garantidor" },
+      { "label": "Programa de Aquisição de Alimentos", "iconKey": "BASKETSHOOPING", "url": "/leis/paa" },
+      { "label": "Coopera Mais Brasil", "iconKey": "HANDSHAKE", "url": "/leis/coopera-mais" },
+      { "label": "Assistência Técnica e Extensão Rural", "iconKey": "CHALKBOARDUSER", "url": "/leis/ater" }
+    ],
+    "companyLinks": [
+      { "label": "Sobre nós", "iconKey": "INFOCIRCLE", "target": "aboutUs" },
+      { "label": "Trabalhe conosco", "iconKey": "BRIEFCASE", "target": "workWithUs" },
+      { "label": "Blog", "iconKey": "NEWSPAPER", "target": "blog" },
+      { "label": "Parceiros", "iconKey": "HANDSHAKE", "target": "partners" }
+    ],
+    "productLinks": [
+      { "label": "Funcionalidades", "iconKey": "ROCKET", "target": "features" },
+      { "label": "Roadmap", "iconKey": "MAP", "target": "roadmap" },
+      { "label": "Nossa metodologia", "iconKey": "CHARTLINE", "target": "methodology" },
+      { "label": "Termos de uso", "iconKey": "FILECONTRACT", "target": "terms" },
+      { "label": "Colabore com o desenvolvimento", "iconKey": "COMPUTER", "target": "code" }
+    ],
+    "supportLinks": [
+      { "label": "Central de ajuda", "iconKey": "CIRCLEQUESTION", "target": "helpCenter" },
+      { "label": "Denuncie aqui", "iconKey": "FLAG", "target": "complaints" },
+      { "label": "Documentação", "iconKey": "BOOK", "target": "docs" },
+      { "label": "Contato", "iconKey": "ENVELOPE", "target": "contact" },
+      { "label": "Saúde do sistema", "iconKey": "SERVER", "target": "health" }
+    ]
+}

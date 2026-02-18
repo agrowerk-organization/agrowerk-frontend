@@ -2,7 +2,7 @@ import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
 
 export interface FooterLink {
     label: string,
-    icon: IconDefinition,
+    icon?: IconDefinition,
     action?: () => void,
     url?: string,
 }

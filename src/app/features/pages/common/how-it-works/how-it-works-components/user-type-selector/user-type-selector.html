@@ -1,0 +1,18 @@
+<div class="container mx-auto px-4 lg:px-8">
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-8">
+      
+      @for (userType of userTypes(); track userType.id) {
+        <button
+          (click)="onSelect(userType.id)"
+          [class]="activeId() === userType.id 
+            ? 'bg-gradient-to-r from-primary to-primary-dark text-neutral-tertiary shadow-lg shadow-primary scale-105' 
+            : 'bg-neutral-primary border-2 border-primary text-neutral-tertiary hover:border-primary'"
+          class="flex flex-row  items-center justify-center gap-4 px-8 py-4 rounded-2xl font-bold text-lg 
+                transition-all duration-300 hover:scale-105 min-w-[300px] max-h-[60px]"
+        >
+          <fa-icon [icon]="userType.icon" class="text-2xl mr-3"></fa-icon>
+          <h2 class="text-lg sm:text-2xl font-bold">{{ userType.title }}</h2>
+        </button>
+      }
+    </div>
+</div>

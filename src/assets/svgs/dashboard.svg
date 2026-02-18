@@ -1,0 +1,166 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 360" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="480" y2="360" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0d2818"/><stop offset="100%" stop-color="#071510"/>
+    </linearGradient>
+    <linearGradient id="card" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a3a24"/><stop offset="100%" stop-color="#0f2318"/>
+    </linearGradient>
+    <linearGradient id="obtn" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#f59e0b"/><stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+    <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#4ade80" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#4ade80" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="chartGrad2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#f59e0b" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="cs"><feDropShadow dx="0" dy="6" stdDeviation="14" flood-color="#000" flood-opacity="0.6"/></filter>
+    <filter id="gg"><feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#4ade80" flood-opacity="0.5"/></filter>
+    <filter id="og"><feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#f59e0b" flood-opacity="0.6"/></filter>
+  </defs>
+
+  <rect width="480" height="360" fill="url(#bg)" rx="16"/>
+
+  <!-- Gold diamond pattern -->
+  <g opacity="0.08" stroke="#c8960c" stroke-width="0.8" fill="none">
+    <polygon points="24,0 48,24 24,48 0,24"/><polygon points="72,0 96,24 72,48 48,24"/>
+    <polygon points="120,0 144,24 120,48 96,24"/><polygon points="168,0 192,24 168,48 144,24"/>
+    <polygon points="216,0 240,24 216,48 192,24"/><polygon points="264,0 288,24 264,48 240,24"/>
+    <polygon points="312,0 336,24 312,48 288,24"/><polygon points="360,0 384,24 360,48 336,24"/>
+    <polygon points="408,0 432,24 408,48 384,24"/><polygon points="456,0 480,24 456,48 432,24"/>
+    <polygon points="24,48 48,72 24,96 0,72"/><polygon points="72,48 96,72 72,96 48,72"/>
+    <polygon points="120,48 144,72 120,96 96,72"/><polygon points="168,48 192,72 168,96 144,72"/>
+    <polygon points="216,48 240,72 216,96 192,72"/><polygon points="264,48 288,72 264,96 240,72"/>
+    <polygon points="312,48 336,72 312,96 288,72"/><polygon points="360,48 384,72 360,96 336,72"/>
+    <polygon points="408,48 432,72 408,96 384,72"/>
+    <polygon points="24,96 48,120 24,144 0,120"/><polygon points="72,96 96,120 72,144 48,120"/>
+    <polygon points="120,96 144,120 120,144 96,120"/><polygon points="168,96 192,120 168,144 144,120"/>
+    <polygon points="216,96 240,120 216,144 192,120"/><polygon points="264,96 288,120 264,144 240,120"/>
+    <polygon points="312,96 336,120 312,144 288,120"/><polygon points="360,96 384,120 360,144 336,120"/>
+    <polygon points="24,144 48,168 24,192 0,168"/><polygon points="72,144 96,168 72,192 48,168"/>
+    <polygon points="120,144 144,168 120,192 96,168"/><polygon points="168,144 192,168 168,192 144,168"/>
+    <polygon points="216,144 240,168 216,192 192,168"/><polygon points="264,144 288,168 264,192 240,168"/>
+    <polygon points="312,144 336,168 312,192 288,168"/><polygon points="360,144 384,168 360,192 336,168"/>
+    <polygon points="24,192 48,216 24,240 0,216"/><polygon points="72,192 96,216 72,240 48,216"/>
+    <polygon points="120,192 144,216 120,240 96,216"/><polygon points="168,192 192,216 168,240 144,216"/>
+    <polygon points="216,192 240,216 216,240 192,216"/><polygon points="264,192 288,216 264,240 240,216"/>
+    <polygon points="312,192 336,216 312,240 288,216"/>
+    <polygon points="24,240 48,264 24,288 0,264"/><polygon points="72,240 96,264 72,288 48,264"/>
+    <polygon points="120,240 144,264 120,288 96,264"/><polygon points="168,240 192,264 168,288 144,264"/>
+    <polygon points="216,240 240,264 216,288 192,264"/><polygon points="264,240 288,264 264,288 240,264"/>
+    <polygon points="312,240 336,264 312,288 288,264"/>
+    <polygon points="24,288 48,312 24,336 0,312"/><polygon points="72,288 96,312 72,336 48,312"/>
+    <polygon points="120,288 144,312 120,336 96,312"/><polygon points="168,288 192,312 168,336 144,312"/>
+    <polygon points="216,288 240,312 216,336 192,312"/><polygon points="264,288 288,312 264,336 240,312"/>
+    <polygon points="312,288 336,312 312,336 288,312"/>
+  </g>
+
+  <!-- Header -->
+  <text x="24" y="30" font-family="Georgia,serif" font-size="15" font-weight="bold" fill="#f59e0b">Dashboard — Safra 2024/25</text>
+  <rect x="368" y="14" width="88" height="22" rx="11" fill="#0a1e12" stroke="#4ade80" stroke-width="1"/>
+  <circle cx="382" cy="25" r="4" fill="#4ade80" filter="url(#gg)"/>
+  <text x="420" y="29" font-family="Georgia,serif" font-size="9" fill="#4ade80" text-anchor="middle">Ao vivo</text>
+
+  <!-- KPI cards row -->
+  <!-- KPI 1 -->
+  <rect x="24" y="40" width="102" height="68" rx="10" fill="url(#card)" filter="url(#cs)" stroke="#2d5a3d" stroke-width="1"/>
+  <text x="34" y="60" font-family="Georgia,serif" font-size="9" fill="#5a8a6e">Produção Total</text>
+  <text x="34" y="84" font-family="Georgia,serif" font-size="20" font-weight="bold" fill="#4ade80">4.820</text>
+  <text x="34" y="98" font-family="Georgia,serif" font-size="9" fill="#5a8a6e">sacas</text>
+  <text x="116" y="60" font-family="Georgia,serif" font-size="10" fill="#4ade80" text-anchor="end">↑12%</text>
+
+  <!-- KPI 2 -->
+  <rect x="134" y="40" width="102" height="68" rx="10" fill="url(#card)" filter="url(#cs)" stroke="#2d5a3d" stroke-width="1"/>
+  <text x="144" y="60" font-family="Georgia,serif" font-size="9" fill="#5a8a6e">Receita Bruta</text>
+  <text x="144" y="84" font-family="Georgia,serif" font-size="18" font-weight="bold" fill="#f59e0b">R$723k</text>
+  <text x="144" y="98" font-family="Georgia,serif" font-size="9" fill="#5a8a6e">este ano</text>
+  <text x="226" y="60" font-family="Georgia,serif" font-size="10" fill="#4ade80" text-anchor="end">↑8%</text>
+
+  <!-- KPI 3 -->
+  <rect x="244" y="40" width="102" height="68" rx="10" fill="url(#card)" filter="url(#cs)" stroke="#2d5a3d" stroke-width="1"/>
+  <text x="254" y="60" font-family="Georgia,serif" font-size="9" fill="#5a8a6e">Produtividade</text>
+  <text x="254" y="84" font-family="Georgia,serif" font-size="17" font-weight="bold" fill="#e5e7eb">62 sc/ha</text>
+  <text x="254" y="98" font-family="Georgia,serif" font-size="9" fill="#5a8a6e">média</text>
+  <text x="336" y="60" font-family="Georgia,serif" font-size="10" fill="#4ade80" text-anchor="end">↑5%</text>
+
+  <!-- KPI 4 - Barter highlight -->
+  <rect x="354" y="40" width="102" height="68" rx="10" fill="#f59e0b" fill-opacity="0.12" stroke="#f59e0b" stroke-width="1.5" filter="url(#og)"/>
+  <text x="364" y="60" font-family="Georgia,serif" font-size="9" fill="#f59e0b">Economia Barter</text>
+  <text x="364" y="84" font-family="Georgia,serif" font-size="18" font-weight="bold" fill="#f59e0b">R$22k</text>
+  <text x="364" y="98" font-family="Georgia,serif" font-size="9" fill="#d97706">economizados</text>
+
+  <!-- Main chart -->
+  <rect x="24" y="120" width="286" height="170" rx="12" fill="url(#card)" filter="url(#cs)" stroke="#2d5a3d" stroke-width="1"/>
+  <text x="36" y="142" font-family="Georgia,serif" font-size="11" font-weight="bold" fill="#f59e0b">Produção Mensal (sacas)</text>
+
+  <!-- Chart gridlines -->
+  <g stroke="#2d5a3d" stroke-width="0.5">
+    <line x1="40" y1="158" x2="298" y2="158"/>
+    <line x1="40" y1="178" x2="298" y2="178"/>
+    <line x1="40" y1="198" x2="298" y2="198"/>
+    <line x1="40" y1="218" x2="298" y2="218"/>
+    <line x1="40" y1="238" x2="298" y2="238"/>
+    <line x1="40" y1="268" x2="298" y2="268"/>
+  </g>
+  <!-- Y labels -->
+  <g font-family="Georgia,serif" font-size="8" fill="#5a8a6e" text-anchor="end">
+    <text x="38" y="161">1200</text><text x="38" y="181">900</text>
+    <text x="38" y="201">600</text><text x="38" y="221">300</text><text x="38" y="241">0</text>
+  </g>
+
+  <!-- Area chart - Safra 24/25 -->
+  <path d="M54 238 L86 224 L118 206 L150 194 L182 182 L214 172 L246 165 L278 158 L278 268 L54 268 Z" fill="url(#chartGrad)"/>
+  <path d="M54 238 L86 224 L118 206 L150 194 L182 182 L214 172 L246 165 L278 158" stroke="#4ade80" stroke-width="2.5" fill="none" stroke-linecap="round" filter="url(#gg)"/>
+
+  <!-- Area chart - Safra 23/24 -->
+  <path d="M54 248 L86 240 L118 232 L150 226 L182 218 L214 212 L246 207 L278 204 L278 268 L54 268 Z" fill="url(#chartGrad2)"/>
+  <path d="M54 248 L86 240 L118 232 L150 226 L182 218 L214 212 L246 207 L278 204" stroke="#f59e0b" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-dasharray="5,3"/>
+
+  <!-- Glow dots -->
+  <circle cx="278" cy="158" r="5" fill="#4ade80" filter="url(#gg)"/>
+  <circle cx="182" cy="182" r="4" fill="#4ade80"/>
+  <circle cx="86" cy="224" r="4" fill="#4ade80"/>
+
+  <!-- X labels -->
+  <g font-family="Georgia,serif" font-size="8" fill="#5a8a6e" text-anchor="middle">
+    <text x="54" y="280">Set</text><text x="86" y="280">Out</text><text x="118" y="280">Nov</text>
+    <text x="150" y="280">Dez</text><text x="182" y="280">Jan</text><text x="214" y="280">Fev</text>
+    <text x="246" y="280">Mar</text><text x="278" y="280">Abr</text>
+  </g>
+  <!-- Legend -->
+  <line x1="36" y1="284" x2="58" y2="284" stroke="#4ade80" stroke-width="2.5"/>
+  <text x="63" y="287" font-family="Georgia,serif" font-size="8" fill="#8ab49a">2024/25</text>
+  <line x1="116" y1="284" x2="138" y2="284" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="143" y="287" font-family="Georgia,serif" font-size="8" fill="#8ab49a">2023/24</text>
+
+  <!-- Right: bar chart -->
+  <rect x="320" y="120" width="136" height="170" rx="12" fill="url(#card)" filter="url(#cs)" stroke="#2d5a3d" stroke-width="1"/>
+  <text x="332" y="142" font-family="Georgia,serif" font-size="11" font-weight="bold" fill="#f59e0b">Por Propriedade</text>
+
+  <text x="332" y="162" font-family="Georgia,serif" font-size="9" fill="#5a8a6e">Fazenda A</text>
+  <rect x="332" y="165" width="112" height="10" rx="4" fill="#0a1e12"/>
+  <rect x="332" y="165" width="90" height="10" rx="4" fill="#4ade80" filter="url(#gg)"/>
+  <text x="444" y="173" font-family="Georgia,serif" font-size="8" fill="#4ade80" text-anchor="end">80%</text>
+
+  <text x="332" y="190" font-family="Georgia,serif" font-size="9" fill="#5a8a6e">Fazenda B</text>
+  <rect x="332" y="193" width="112" height="10" rx="4" fill="#0a1e12"/>
+  <rect x="332" y="193" width="67" height="10" rx="4" fill="#f59e0b"/>
+  <text x="444" y="201" font-family="Georgia,serif" font-size="8" fill="#f59e0b" text-anchor="end">60%</text>
+
+  <text x="332" y="218" font-family="Georgia,serif" font-size="9" fill="#5a8a6e">Fazenda C</text>
+  <rect x="332" y="221" width="112" height="10" rx="4" fill="#0a1e12"/>
+  <rect x="332" y="221" width="101" height="10" rx="4" fill="#a78bfa"/>
+  <text x="444" y="229" font-family="Georgia,serif" font-size="8" fill="#a78bfa" text-anchor="end">90%</text>
+
+  <text x="332" y="246" font-family="Georgia,serif" font-size="9" fill="#5a8a6e">Fazenda D</text>
+  <rect x="332" y="249" width="112" height="10" rx="4" fill="#0a1e12"/>
+  <rect x="332" y="249" width="50" height="10" rx="4" fill="#f87171"/>
+  <text x="444" y="257" font-family="Georgia,serif" font-size="8" fill="#f87171" text-anchor="end">45%</text>
+
+  <!-- Export btn -->
+  <rect x="332" y="272" width="112" height="26" rx="8" fill="#f59e0b" fill-opacity="0.15" stroke="#f59e0b" stroke-width="1"/>
+  <text x="388" y="289" font-family="Georgia,serif" font-size="9" fill="#f59e0b" text-anchor="middle">↓ Exportar Relatório</text>
+</svg>

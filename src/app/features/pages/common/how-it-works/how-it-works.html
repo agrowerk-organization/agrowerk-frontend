@@ -5,14 +5,45 @@
   <app-pattern class="absolute inset-0 -z-10"></app-pattern>
 
   
-    <section class="relative  py-20">
-      <div class="container mx-auto px-4 lg:px-8">
-        <div class="max-w-4xl mx-auto text-center">
-            <app-breadcrumb [icon]="icons.HOME" main="Agrowerk" pageName="Como Funciona" subPageName=""></app-breadcrumb>
-            <app-title [firstSegment]="'Transforme sua Produção'" [secondSegment]="'em Passos Simples'"></app-title>
-            <app-subtitle [text]="'Do clima ao marketplace de trocas, tudo integrado numa plataforma simples'"></app-subtitle>
-         
-        </div>
+  <section class="relative  py-2">
+    <div class="container mx-auto px-4 lg:px-8">
+      <div class="max-w-4xl mx-auto text-center">
+          <app-breadcrumb main="Agrowerk" pageName="Como Funciona" subPageName=""></app-breadcrumb>
+          <app-title [firstSegment]="'Transforme sua Produção'" [secondSegment]="'em Passos Simples'"></app-title>
+          <app-subtitle [text]="'Do clima ao marketplace de trocas, tudo integrado numa plataforma simples'"></app-subtitle>
+        
       </div>
-</section>
+    </div>
+  </section>
+
+  <section class="relative py-2">
+
+    <div class="flex items-center justify-center mt-4 mb-4">
+      <app-text-title
+        [title]="'Escolha seu perfil'"
+        [subtitle]="''"
+      ></app-text-title>
+    </div>
+
+    <app-user-type-selector
+      [userTypes]="userTypes()"
+      [activeId]="activeUserType()"
+      (typeChanged)="selectUserType($event)"
+    ></app-user-type-selector>
+
+    @if (currentUserType(); as active) {
+      <p class="text-2xl font-medium text-center text-neutral-secondary mt-6">
+        {{ active.description }}
+      </p>
+    }
+  </section>
+
+  <section class="relative py-2">
+    <app-user-steps [currentSteps]="currentStep()"></app-user-steps>
+  </section>
+
+  <section class="relative py-2 mt-10 mb-10">
+    <app-faq-preview></app-faq-preview>
+  </section>
+</div>
 

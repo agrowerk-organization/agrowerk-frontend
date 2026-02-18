@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 360" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="480" y2="360" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0d2818"/><stop offset="100%" stop-color="#071510"/>
+    </linearGradient>
+    <linearGradient id="card" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a3a24"/><stop offset="100%" stop-color="#0f2318"/>
+    </linearGradient>
+    <linearGradient id="obtn" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#f59e0b"/><stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+    <linearGradient id="gbtn" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#22c55e"/><stop offset="100%" stop-color="#16a34a"/>
+    </linearGradient>
+    <filter id="cs"><feDropShadow dx="0" dy="6" stdDeviation="14" flood-color="#000" flood-opacity="0.6"/></filter>
+    <filter id="gg"><feDropShadow dx="0" dy="0" stdDeviation="5" flood-color="#4ade80" flood-opacity="0.4"/></filter>
+    <filter id="og"><feDropShadow dx="0" dy="0" stdDeviation="5" flood-color="#f59e0b" flood-opacity="0.5"/></filter>
+  </defs>
+
+  <rect width="480" height="360" fill="url(#bg)" rx="16"/>
+  <!-- Gold pattern -->
+  <g opacity="0.1" stroke="#c8960c" stroke-width="0.8" fill="none">
+    <polygon points="24,0 48,24 24,48 0,24"/><polygon points="72,0 96,24 72,48 48,24"/>
+    <polygon points="120,0 144,24 120,48 96,24"/><polygon points="168,0 192,24 168,48 144,24"/>
+    <polygon points="216,0 240,24 216,48 192,24"/><polygon points="264,0 288,24 264,48 240,24"/>
+    <polygon points="312,0 336,24 312,48 288,24"/><polygon points="360,0 384,24 360,48 336,24"/>
+    <polygon points="408,0 432,24 408,48 384,24"/><polygon points="456,0 480,24 456,48 432,24"/>
+    <polygon points="24,48 48,72 24,96 0,72"/><polygon points="72,48 96,72 72,96 48,72"/>
+    <polygon points="120,48 144,72 120,96 96,72"/><polygon points="168,48 192,72 168,96 144,72"/>
+    <polygon points="216,48 240,72 216,96 192,72"/><polygon points="264,48 288,72 264,96 240,72"/>
+    <polygon points="312,48 336,72 312,96 288,72"/><polygon points="360,48 384,72 360,96 336,72"/>
+    <polygon points="24,96 48,120 24,144 0,120"/><polygon points="72,96 96,120 72,144 48,120"/>
+    <polygon points="120,96 144,120 120,144 96,120"/><polygon points="168,96 192,120 168,144 144,120"/>
+    <polygon points="216,96 240,120 216,144 192,120"/><polygon points="264,96 288,120 264,144 240,120"/>
+    <polygon points="312,96 336,120 312,144 288,120"/><polygon points="360,96 384,120 360,144 336,120"/>
+    <polygon points="24,144 48,168 24,192 0,168"/><polygon points="72,144 96,168 72,192 48,168"/>
+    <polygon points="120,144 144,168 120,192 96,168"/><polygon points="168,144 192,168 168,192 144,168"/>
+    <polygon points="216,144 240,168 216,192 192,168"/><polygon points="264,144 288,168 264,192 240,168"/>
+    <polygon points="312,144 336,168 312,192 288,168"/>
+    <polygon points="24,192 48,216 24,240 0,216"/><polygon points="72,192 96,216 72,240 48,216"/>
+    <polygon points="120,192 144,216 120,240 96,216"/><polygon points="168,192 192,216 168,240 144,216"/>
+    <polygon points="216,192 240,216 216,240 192,216"/><polygon points="264,192 288,216 264,240 240,216"/>
+    <polygon points="312,192 336,216 312,240 288,216"/>
+    <polygon points="24,240 48,264 24,288 0,264"/><polygon points="72,240 96,264 72,288 48,264"/>
+    <polygon points="120,240 144,264 120,288 96,264"/><polygon points="168,240 192,264 168,288 144,264"/>
+    <polygon points="216,240 240,264 216,288 192,264"/><polygon points="264,240 288,264 264,288 240,264"/>
+    <polygon points="24,288 48,312 24,336 0,312"/><polygon points="72,288 96,312 72,336 48,312"/>
+    <polygon points="120,288 144,312 120,336 96,312"/><polygon points="168,288 192,312 168,336 144,312"/>
+    <polygon points="216,288 240,312 216,336 192,312"/><polygon points="264,288 288,312 264,336 240,312"/>
+  </g>
+
+  <!-- Header -->
+  <text x="24" y="30" font-family="Georgia,serif" font-size="14" font-weight="bold" fill="#f59e0b">Propostas Recebidas</text>
+  <rect x="374" y="14" width="82" height="24" rx="12" fill="#4ade80" fill-opacity="0.15" stroke="#4ade80" stroke-width="1" filter="url(#gg)"/>
+  <circle cx="386" cy="26" r="4" fill="#4ade80"/>
+  <text x="418" y="30" font-family="Georgia,serif" font-size="9" fill="#4ade80" text-anchor="middle">3 novas</text>
+
+  <!-- Proposal 1 - Barter high value -->
+  <rect x="24" y="44" width="432" height="86" rx="12" fill="url(#card)" filter="url(#cs)" stroke="#4ade80" stroke-width="1.5"/>
+  <rect x="24" y="44" width="6" height="86" rx="3" fill="#4ade80"/>
+  <circle cx="58" cy="87" r="26" fill="#0a1e12" stroke="#4ade80" stroke-width="1.5" filter="url(#gg)"/>
+  <text x="58" y="95" font-family="Georgia,serif" font-size="24" text-anchor="middle">👨‍🌾</text>
+  <!-- Info -->
+  <text x="96" y="66" font-family="Georgia,serif" font-size="12" font-weight="bold" fill="#e5e7eb">Fazenda Santa Clara — João Mendes</text>
+  <rect x="96" y="70" width="60" height="16" rx="6" fill="#4ade80" fill-opacity="0.15" stroke="#4ade80" stroke-width="1"/>
+  <text x="126" y="82" font-family="Georgia,serif" font-size="8" fill="#4ade80" text-anchor="middle">🔄 Barter</text>
+  <rect x="164" y="70" width="54" height="16" rx="6" fill="#f59e0b" fill-opacity="0.15" stroke="#f59e0b" stroke-width="1"/>
+  <text x="191" y="82" font-family="Georgia,serif" font-size="8" fill="#f59e0b" text-anchor="middle">⭐ 4.8</text>
+  <text x="96" y="100" font-family="Georgia,serif" font-size="10" fill="#8ab49a">Oferece 200 sc soja → Kit NPK 500kg + Herbicida 40L</text>
+  <text x="96" y="116" font-family="Georgia,serif" font-size="9" fill="#5a8a6e">Soja: R$150/sc = R$30.000 • Seus produtos: ~R$28.400 • Ganho: R$1.600</text>
+  <!-- Actions -->
+  <rect x="354" y="56" width="92" height="28" rx="8" fill="url(#gbtn)" filter="url(#gg)"/>
+  <text x="400" y="74" font-family="Georgia,serif" font-size="10" font-weight="bold" fill="white" text-anchor="middle">✓ Aceitar</text>
+  <rect x="354" y="92" width="92" height="28" rx="8" fill="#0a1e12" stroke="#2d5a3d" stroke-width="1"/>
+  <text x="400" y="110" font-family="Georgia,serif" font-size="10" fill="#8ab49a" text-anchor="middle">Contraproposta</text>
+
+  <!-- Proposal 2 - Cash -->
+  <rect x="24" y="144" width="432" height="86" rx="12" fill="url(#card)" filter="url(#cs)" stroke="#f59e0b" stroke-width="1.5"/>
+  <rect x="24" y="144" width="6" height="86" rx="3" fill="#f59e0b"/>
+  <circle cx="58" cy="187" r="26" fill="#0a1e12" stroke="#f59e0b" stroke-width="1.5" filter="url(#og)"/>
+  <text x="58" y="195" font-family="Georgia,serif" font-size="24" text-anchor="middle">👩‍🌾</text>
+  <text x="96" y="166" font-family="Georgia,serif" font-size="12" font-weight="bold" fill="#e5e7eb">Granja São José — Maria Costa</text>
+  <rect x="96" y="170" width="60" height="16" rx="6" fill="#f59e0b" fill-opacity="0.15" stroke="#f59e0b" stroke-width="1"/>
+  <text x="126" y="182" font-family="Georgia,serif" font-size="8" fill="#f59e0b" text-anchor="middle">💳 Compra</text>
+  <rect x="164" y="170" width="54" height="16" rx="6" fill="#f59e0b" fill-opacity="0.15" stroke="#f59e0b" stroke-width="1"/>
+  <text x="191" y="182" font-family="Georgia,serif" font-size="8" fill="#f59e0b" text-anchor="middle">⭐ 4.6</text>
+  <text x="96" y="200" font-family="Georgia,serif" font-size="10" fill="#8ab49a">Solicitando 80L Herbicida Glifosato + 2 ton Fertilizante</text>
+  <text x="96" y="216" font-family="Georgia,serif" font-size="9" fill="#5a8a6e">Pagamento: 30 dias • Valor total: R$ 11.560 • Frete CIF</text>
+  <rect x="354" y="156" width="92" height="28" rx="8" fill="url(#obtn)" filter="url(#og)"/>
+  <text x="400" y="174" font-family="Georgia,serif" font-size="10" font-weight="bold" fill="#0d2818" text-anchor="middle">✓ Aceitar</text>
+  <rect x="354" y="192" width="92" height="28" rx="8" fill="#0a1e12" stroke="#2d5a3d" stroke-width="1"/>
+  <text x="400" y="210" font-family="Georgia,serif" font-size="10" fill="#8ab49a" text-anchor="middle">Negociar</text>
+
+  <!-- Proposal 3 - Pending -->
+  <rect x="24" y="244" width="432" height="86" rx="12" fill="url(#card)" filter="url(#cs)" stroke="#2d5a3d" stroke-width="1.5"/>
+  <rect x="24" y="244" width="6" height="86" rx="3" fill="#5a8a6e"/>
+  <circle cx="58" cy="287" r="26" fill="#0a1e12" stroke="#5a8a6e" stroke-width="1.5"/>
+  <text x="58" y="295" font-family="Georgia,serif" font-size="24" text-anchor="middle">🧑‍🌾</text>
+  <text x="96" y="266" font-family="Georgia,serif" font-size="12" font-weight="bold" fill="#e5e7eb">Sítio Boa Vista — Pedro Lima</text>
+  <rect x="96" y="270" width="60" height="16" rx="6" fill="#4ade80" fill-opacity="0.1" stroke="#4ade80" stroke-width="1"/>
+  <text x="126" y="282" font-family="Georgia,serif" font-size="8" fill="#4ade80" text-anchor="middle">🔄 Barter</text>
+  <rect x="164" y="270" width="66" height="16" rx="6" fill="#0a1e12" stroke="#2d5a3d" stroke-width="1"/>
+  <text x="197" y="282" font-family="Georgia,serif" font-size="8" fill="#5a8a6e" text-anchor="middle">Novo cliente</text>
+  <text x="96" y="300" font-family="Georgia,serif" font-size="10" fill="#8ab49a">Troca de 120 sc milho por Semente Soja 600 kg</text>
+  <text x="96" y="316" font-family="Georgia,serif" font-size="9" fill="#5a8a6e">Milho: R$60/sc = R$7.200 • Sementes: R$6.800 • Pendente análise</text>
+  <rect x="354" y="256" width="92" height="28" rx="8" fill="url(#obtn)"/>
+  <text x="400" y="274" font-family="Georgia,serif" font-size="10" font-weight="bold" fill="#0d2818" text-anchor="middle">Analisar</text>
+  <rect x="354" y="292" width="92" height="28" rx="8" fill="#0a1e12" stroke="#2d5a3d" stroke-width="1"/>
+  <text x="400" y="310" font-family="Georgia,serif" font-size="10" fill="#8ab49a" text-anchor="middle">Recusar</text>
+
+  <!-- Summary bar -->
+  <text x="240" y="348" font-family="Georgia,serif" font-size="9" fill="#5a8a6e" text-anchor="middle">Valor total em propostas: R$ 49.160 • 2 barter • 1 compra direta</text>
+</svg>

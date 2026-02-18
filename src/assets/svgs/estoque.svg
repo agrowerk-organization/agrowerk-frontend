@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 360" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="480" y2="360" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0d2818"/><stop offset="100%" stop-color="#071510"/>
+    </linearGradient>
+    <linearGradient id="card" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a3a24"/><stop offset="100%" stop-color="#0f2318"/>
+    </linearGradient>
+    <linearGradient id="obtn" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#f59e0b"/><stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+    <filter id="cs"><feDropShadow dx="0" dy="6" stdDeviation="14" flood-color="#000" flood-opacity="0.6"/></filter>
+    <filter id="gg"><feDropShadow dx="0" dy="0" stdDeviation="5" flood-color="#4ade80" flood-opacity="0.4"/></filter>
+    <filter id="og"><feDropShadow dx="0" dy="0" stdDeviation="5" flood-color="#f59e0b" flood-opacity="0.5"/></filter>
+    <filter id="rg"><feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#f87171" flood-opacity="0.5"/></filter>
+  </defs>
+
+  <rect width="480" height="360" fill="url(#bg)" rx="16"/>
+
+  <!-- Gold diamond pattern -->
+  <g opacity="0.1" stroke="#c8960c" stroke-width="0.8" fill="none">
+    <polygon points="24,0 48,24 24,48 0,24"/><polygon points="72,0 96,24 72,48 48,24"/>
+    <polygon points="120,0 144,24 120,48 96,24"/><polygon points="168,0 192,24 168,48 144,24"/>
+    <polygon points="216,0 240,24 216,48 192,24"/><polygon points="264,0 288,24 264,48 240,24"/>
+    <polygon points="312,0 336,24 312,48 288,24"/><polygon points="360,0 384,24 360,48 336,24"/>
+    <polygon points="408,0 432,24 408,48 384,24"/><polygon points="456,0 480,24 456,48 432,24"/>
+    <polygon points="24,48 48,72 24,96 0,72"/><polygon points="72,48 96,72 72,96 48,72"/>
+    <polygon points="120,48 144,72 120,96 96,72"/><polygon points="168,48 192,72 168,96 144,72"/>
+    <polygon points="216,48 240,72 216,96 192,72"/><polygon points="264,48 288,72 264,96 240,72"/>
+    <polygon points="312,48 336,72 312,96 288,72"/><polygon points="360,48 384,72 360,96 336,72"/>
+    <polygon points="408,48 432,72 408,96 384,72"/>
+    <polygon points="24,96 48,120 24,144 0,120"/><polygon points="72,96 96,120 72,144 48,120"/>
+    <polygon points="120,96 144,120 120,144 96,120"/><polygon points="168,96 192,120 168,144 144,120"/>
+    <polygon points="216,96 240,120 216,144 192,120"/><polygon points="264,96 288,120 264,144 240,120"/>
+    <polygon points="312,96 336,120 312,144 288,120"/><polygon points="360,96 384,120 360,144 336,120"/>
+    <polygon points="408,96 432,120 408,144 384,120"/>
+    <polygon points="24,144 48,168 24,192 0,168"/><polygon points="72,144 96,168 72,192 48,168"/>
+    <polygon points="120,144 144,168 120,192 96,168"/><polygon points="168,144 192,168 168,192 144,168"/>
+    <polygon points="216,144 240,168 216,192 192,168"/><polygon points="264,144 288,168 264,192 240,168"/>
+    <polygon points="312,144 336,168 312,192 288,168"/><polygon points="360,144 384,168 360,192 336,168"/>
+    <polygon points="24,192 48,216 24,240 0,216"/><polygon points="72,192 96,216 72,240 48,216"/>
+    <polygon points="120,192 144,216 120,240 96,216"/><polygon points="168,192 192,216 168,240 144,216"/>
+    <polygon points="216,192 240,216 216,240 192,216"/><polygon points="264,192 288,216 264,240 240,216"/>
+    <polygon points="312,192 336,216 312,240 288,216"/><polygon points="360,192 384,216 360,240 336,216"/>
+    <polygon points="24,240 48,264 24,288 0,264"/><polygon points="72,240 96,264 72,288 48,264"/>
+    <polygon points="120,240 144,264 120,288 96,264"/><polygon points="168,240 192,264 168,288 144,264"/>
+    <polygon points="216,240 240,264 216,288 192,264"/><polygon points="264,240 288,264 264,288 240,264"/>
+    <polygon points="312,240 336,264 312,288 288,264"/><polygon points="360,240 384,264 360,288 336,264"/>
+    <polygon points="24,288 48,312 24,336 0,312"/><polygon points="72,288 96,312 72,336 48,312"/>
+    <polygon points="120,288 144,312 120,336 96,312"/><polygon points="168,288 192,312 168,336 144,312"/>
+    <polygon points="216,288 240,312 216,336 192,312"/><polygon points="264,288 288,312 264,336 240,312"/>
+    <polygon points="312,288 336,312 312,336 288,312"/><polygon points="360,288 384,312 360,336 336,312"/>
+  </g>
+
+  <!-- Header bar -->
+  <rect x="24" y="16" width="432" height="44" rx="10" fill="url(#card)" filter="url(#cs)" stroke="#2d5a3d" stroke-width="1"/>
+  <text x="44" y="43" font-family="Georgia,serif" font-size="14" font-weight="bold" fill="#f59e0b">🏭  Controle de Estoque</text>
+  <rect x="376" y="24" width="72" height="28" rx="8" fill="url(#obtn)" filter="url(#og)"/>
+  <text x="412" y="42" font-family="Georgia,serif" font-size="10" font-weight="bold" fill="#0d2818" text-anchor="middle">+ Entrada</text>
+
+  <!-- Item 1: Sementes -->
+  <rect x="24" y="72" width="204" height="90" rx="12" fill="url(#card)" filter="url(#cs)" stroke="#2d5a3d" stroke-width="1.5"/>
+  <rect x="24" y="72" width="204" height="4" rx="2" fill="#4ade80"/>
+  <circle cx="60" cy="110" r="22" fill="#0a1e12" stroke="#4ade80" stroke-width="1.5" filter="url(#gg)"/>
+  <ellipse cx="60" cy="110" rx="8" ry="10" fill="#4ade80" opacity="0.4"/>
+  <ellipse cx="60" cy="108" rx="5" ry="7" fill="#4ade80"/>
+  <text x="92" y="100" font-family="Georgia,serif" font-size="11" font-weight="bold" fill="#e5e7eb">Sementes Soja</text>
+  <text x="92" y="113" font-family="Georgia,serif" font-size="9" fill="#5a8a6e">Disponível</text>
+  <text x="92" y="130" font-family="Georgia,serif" font-size="16" font-weight="bold" fill="#4ade80">1.240 <tspan font-size="10" fill="#5a8a6e">kg</tspan></text>
+  <rect x="34" y="148" width="184" height="6" rx="3" fill="#0a1e12"/>
+  <rect x="34" y="148" width="132" height="6" rx="3" fill="#4ade80" filter="url(#gg)"/>
+  <text x="218" y="154" font-family="Georgia,serif" font-size="8" fill="#4ade80" text-anchor="end">71%</text>
+
+  <!-- Item 2: Fertilizantes -->
+  <rect x="240" y="72" width="216" height="90" rx="12" fill="url(#card)" filter="url(#cs)" stroke="#f87171" stroke-width="1.5"/>
+  <rect x="240" y="72" width="216" height="4" rx="2" fill="#f87171"/>
+  <circle cx="276" cy="110" r="22" fill="#0a1e12" stroke="#f87171" stroke-width="1.5" filter="url(#rg)"/>
+  <rect x="268" y="100" width="16" height="18" rx="4" fill="#f87171" opacity="0.4"/>
+  <rect x="272" y="97" width="8" height="6" rx="1" fill="#f87171" opacity="0.7"/>
+  <rect x="268" y="122" width="4" height="8" fill="#f87171" opacity="0.5"/>
+  <rect x="280" y="122" width="4" height="8" fill="#f87171" opacity="0.5"/>
+  <text x="308" y="100" font-family="Georgia,serif" font-size="11" font-weight="bold" fill="#e5e7eb">Fertilizantes</text>
+  <text x="308" y="113" font-family="Georgia,serif" font-size="9" fill="#f87171">⚠ Estoque crítico</text>
+  <text x="308" y="130" font-family="Georgia,serif" font-size="16" font-weight="bold" fill="#f87171">180 <tspan font-size="10" fill="#5a8a6e">kg</tspan></text>
+  <rect x="250" y="148" width="196" height="6" rx="3" fill="#0a1e12"/>
+  <rect x="250" y="148" width="38" height="6" rx="3" fill="#f87171" filter="url(#rg)"/>
+  <text x="446" y="154" font-family="Georgia,serif" font-size="8" fill="#f87171" text-anchor="end">19%</text>
+
+  <!-- Item 3: Defensivos -->
+  <rect x="24" y="176" width="204" height="90" rx="12" fill="url(#card)" filter="url(#cs)" stroke="#2d5a3d" stroke-width="1.5"/>
+  <rect x="24" y="176" width="204" height="4" rx="2" fill="#a78bfa"/>
+  <circle cx="60" cy="214" r="22" fill="#0a1e12" stroke="#a78bfa" stroke-width="1.5"/>
+  <rect x="52" y="205" width="16" height="18" rx="4" fill="#a78bfa" opacity="0.4"/>
+  <rect x="56" y="202" width="6" height="5" rx="1" fill="#a78bfa" opacity="0.7"/>
+  <path d="M68 210 Q74 210 74 214" stroke="#a78bfa" stroke-width="1.5" fill="none"/>
+  <circle cx="74" cy="214" r="2" fill="#a78bfa"/>
+  <text x="92" y="204" font-family="Georgia,serif" font-size="11" font-weight="bold" fill="#e5e7eb">Defensivos</text>
+  <text x="92" y="217" font-family="Georgia,serif" font-size="9" fill="#5a8a6e">Disponível</text>
+  <text x="92" y="234" font-family="Georgia,serif" font-size="16" font-weight="bold" fill="#a78bfa">46 <tspan font-size="10" fill="#5a8a6e">litros</tspan></text>
+  <rect x="34" y="252" width="184" height="6" rx="3" fill="#0a1e12"/>
+  <rect x="34" y="252" width="140" height="6" rx="3" fill="#a78bfa"/>
+  <text x="218" y="258" font-family="Georgia,serif" font-size="8" fill="#a78bfa" text-anchor="end">76%</text>
+
+  <!-- Item 4: Combustível -->
+  <rect x="240" y="176" width="216" height="90" rx="12" fill="url(#card)" filter="url(#cs)" stroke="#2d5a3d" stroke-width="1.5"/>
+  <rect x="240" y="176" width="216" height="4" rx="2" fill="#f59e0b"/>
+  <circle cx="276" cy="214" r="22" fill="#0a1e12" stroke="#f59e0b" stroke-width="1.5" filter="url(#og)"/>
+  <path d="M276 204 Q268 212 268 218 Q268 226 276 226 Q284 226 284 218 Q284 212 276 204Z" fill="#f59e0b" opacity="0.7"/>
+  <ellipse cx="276" cy="218" rx="5" ry="4" fill="#0d2818" opacity="0.5"/>
+  <text x="308" y="204" font-family="Georgia,serif" font-size="11" font-weight="bold" fill="#e5e7eb">Combustível</text>
+  <text x="308" y="217" font-family="Georgia,serif" font-size="9" fill="#5a8a6e">Disponível</text>
+  <text x="308" y="234" font-family="Georgia,serif" font-size="16" font-weight="bold" fill="#f59e0b">2.500 <tspan font-size="10" fill="#5a8a6e">litros</tspan></text>
+  <rect x="250" y="252" width="196" height="6" rx="3" fill="#0a1e12"/>
+  <rect x="250" y="252" width="152" height="6" rx="3" fill="#f59e0b" filter="url(#og)"/>
+  <text x="446" y="258" font-family="Georgia,serif" font-size="8" fill="#f59e0b" text-anchor="end">78%</text>
+
+  <!-- Alert panel -->
+  <rect x="24" y="280" width="432" height="64" rx="12" fill="url(#card)" filter="url(#cs)" stroke="#f87171" stroke-width="1.5"/>
+  <rect x="24" y="280" width="5" height="64" rx="3" fill="#f87171"/>
+  <text x="42" y="302" font-family="Georgia,serif" font-size="11" font-weight="bold" fill="#f87171">🔔  Alertas de Estoque</text>
+  <text x="42" y="317" font-family="Georgia,serif" font-size="10" fill="#8ab49a">Fertilizantes abaixo do mínimo (200kg) • Reposição urgente recomendada</text>
+  <text x="42" y="330" font-family="Georgia,serif" font-size="10" fill="#8ab49a">Sementes: vencimento em 45 dias — lote S-2024-08</text>
+  <rect x="374" y="291" width="70" height="30" rx="8" fill="url(#obtn)" filter="url(#og)"/>
+  <text x="409" y="310" font-family="Georgia,serif" font-size="10" font-weight="bold" fill="#0d2818" text-anchor="middle">Repor</text>
+</svg>

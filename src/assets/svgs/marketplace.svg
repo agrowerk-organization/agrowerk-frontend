@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 360" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="480" y2="360" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0d2818"/><stop offset="100%" stop-color="#071510"/>
+    </linearGradient>
+    <linearGradient id="card" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a3a24"/><stop offset="100%" stop-color="#0f2318"/>
+    </linearGradient>
+    <linearGradient id="obtn" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#f59e0b"/><stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+    <linearGradient id="gbtn" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#22c55e"/><stop offset="100%" stop-color="#16a34a"/>
+    </linearGradient>
+    <filter id="cs"><feDropShadow dx="0" dy="6" stdDeviation="14" flood-color="#000" flood-opacity="0.6"/></filter>
+    <filter id="gg"><feDropShadow dx="0" dy="0" stdDeviation="8" flood-color="#4ade80" flood-opacity="0.5"/></filter>
+    <filter id="og"><feDropShadow dx="0" dy="0" stdDeviation="8" flood-color="#f59e0b" flood-opacity="0.6"/></filter>
+  </defs>
+
+  <rect width="480" height="360" fill="url(#bg)" rx="16"/>
+
+  <!-- Gold diamond pattern -->
+  <g opacity="0.1" stroke="#c8960c" stroke-width="0.8" fill="none">
+    <polygon points="24,0 48,24 24,48 0,24"/><polygon points="72,0 96,24 72,48 48,24"/>
+    <polygon points="120,0 144,24 120,48 96,24"/><polygon points="168,0 192,24 168,48 144,24"/>
+    <polygon points="216,0 240,24 216,48 192,24"/><polygon points="264,0 288,24 264,48 240,24"/>
+    <polygon points="312,0 336,24 312,48 288,24"/><polygon points="360,0 384,24 360,48 336,24"/>
+    <polygon points="408,0 432,24 408,48 384,24"/><polygon points="456,0 480,24 456,48 432,24"/>
+    <polygon points="24,48 48,72 24,96 0,72"/><polygon points="72,48 96,72 72,96 48,72"/>
+    <polygon points="120,48 144,72 120,96 96,72"/><polygon points="168,48 192,72 168,96 144,72"/>
+    <polygon points="216,48 240,72 216,96 192,72"/><polygon points="264,48 288,72 264,96 240,72"/>
+    <polygon points="312,48 336,72 312,96 288,72"/><polygon points="360,48 384,72 360,96 336,72"/>
+    <polygon points="408,48 432,72 408,96 384,72"/>
+    <polygon points="24,96 48,120 24,144 0,120"/><polygon points="72,96 96,120 72,144 48,120"/>
+    <polygon points="120,96 144,120 120,144 96,120"/><polygon points="168,96 192,120 168,144 144,120"/>
+    <polygon points="216,96 240,120 216,144 192,120"/><polygon points="264,96 288,120 264,144 240,120"/>
+    <polygon points="312,96 336,120 312,144 288,120"/><polygon points="360,96 384,120 360,144 336,120"/>
+    <polygon points="24,144 48,168 24,192 0,168"/><polygon points="72,144 96,168 72,192 48,168"/>
+    <polygon points="120,144 144,168 120,192 96,168"/><polygon points="168,144 192,168 168,192 144,168"/>
+    <polygon points="216,144 240,168 216,192 192,168"/><polygon points="264,144 288,168 264,192 240,168"/>
+    <polygon points="312,144 336,168 312,192 288,168"/><polygon points="360,144 384,168 360,192 336,168"/>
+    <polygon points="24,192 48,216 24,240 0,216"/><polygon points="72,192 96,216 72,240 48,216"/>
+    <polygon points="120,192 144,216 120,240 96,216"/><polygon points="168,192 192,216 168,240 144,216"/>
+    <polygon points="216,192 240,216 216,240 192,216"/><polygon points="264,192 288,216 264,240 240,216"/>
+    <polygon points="312,192 336,216 312,240 288,216"/><polygon points="360,192 384,216 360,240 336,216"/>
+    <polygon points="24,240 48,264 24,288 0,264"/><polygon points="72,240 96,264 72,288 48,264"/>
+    <polygon points="120,240 144,264 120,288 96,264"/><polygon points="168,240 192,264 168,288 144,264"/>
+    <polygon points="216,240 240,264 216,288 192,264"/><polygon points="264,240 288,264 264,288 240,264"/>
+    <polygon points="312,240 336,264 312,288 288,264"/><polygon points="360,240 384,264 360,288 336,264"/>
+    <polygon points="24,288 48,312 24,336 0,312"/><polygon points="72,288 96,312 72,336 48,312"/>
+    <polygon points="120,288 144,312 120,336 96,312"/><polygon points="168,288 192,312 168,336 144,312"/>
+    <polygon points="216,288 240,312 216,336 192,312"/><polygon points="264,288 288,312 264,336 240,312"/>
+    <polygon points="312,288 336,312 312,336 288,312"/><polygon points="360,288 384,312 360,336 336,312"/>
+  </g>
+
+  <!-- Title -->
+  <text x="240" y="36" font-family="Georgia,serif" font-size="16" font-weight="bold" fill="#f59e0b" text-anchor="middle">Marketplace Barter</text>
+  <text x="240" y="52" font-family="Georgia,serif" font-size="10" fill="#5a8a6e" text-anchor="middle">Troque produção por insumos • Sem intermediários</text>
+
+  <!-- Produtor card -->
+  <rect x="20" y="62" width="180" height="210" rx="14" fill="url(#card)" filter="url(#cs)" stroke="#4ade80" stroke-width="1.5"/>
+  <rect x="20" y="62" width="180" height="4" rx="2" fill="url(#gbtn)"/>
+  <rect x="20" y="66" width="180" height="44" rx="10" fill="#0a1e12"/>
+  <text x="110" y="93" font-family="Georgia,serif" font-size="12" font-weight="bold" fill="#4ade80" text-anchor="middle">👨‍🌾 Produtor</text>
+
+  <!-- Wheat icon -->
+  <circle cx="110" cy="153" r="34" fill="#0a1e12" stroke="#4ade80" stroke-width="1" filter="url(#gg)"/>
+  <text x="110" y="162" font-family="Georgia,serif" font-size="36" text-anchor="middle">🌾</text>
+
+  <text x="110" y="200" font-family="Georgia,serif" font-size="22" font-weight="bold" fill="#4ade80" text-anchor="middle">500 sc</text>
+  <text x="110" y="216" font-family="Georgia,serif" font-size="10" fill="#5a8a6e" text-anchor="middle">Soja • ≈ R$ 75.000</text>
+
+  <rect x="36" y="228" width="148" height="32" rx="10" fill="url(#gbtn)" filter="url(#gg)"/>
+  <text x="110" y="248" font-family="Georgia,serif" font-size="11" font-weight="bold" fill="white" text-anchor="middle">Ofereço em Troca</text>
+
+  <!-- Center exchange circle -->
+  <circle cx="240" cy="162" r="42" fill="#0a1e12" stroke="#f59e0b" stroke-width="2.5" filter="url(#og)"/>
+  <!-- Arrows -->
+  <path d="M218 154 L228 154 L228 146 L242 162 L228 178 L228 170 L218 170 Z" fill="#f59e0b" opacity="0.8"/>
+  <path d="M262 170 L252 170 L252 178 L238 162 L252 146 L252 154 L262 154 Z" fill="#f59e0b" opacity="0.8"/>
+  <text x="240" y="212" font-family="Georgia,serif" font-size="12" font-weight="bold" fill="#f59e0b" text-anchor="middle">BARTER</text>
+
+  <!-- Savings pill -->
+  <rect x="196" y="222" width="88" height="28" rx="14" fill="url(#obtn)" filter="url(#og)"/>
+  <text x="240" y="240" font-family="Georgia,serif" font-size="11" font-weight="bold" fill="#0d2818" text-anchor="middle">30% economia</text>
+
+  <!-- Fornecedor card -->
+  <rect x="280" y="62" width="180" height="210" rx="14" fill="url(#card)" filter="url(#cs)" stroke="#f59e0b" stroke-width="1.5"/>
+  <rect x="280" y="62" width="180" height="4" rx="2" fill="url(#obtn)"/>
+  <rect x="280" y="66" width="180" height="44" rx="10" fill="#0a1e12"/>
+  <text x="370" y="93" font-family="Georgia,serif" font-size="12" font-weight="bold" fill="#f59e0b" text-anchor="middle">🏭 Fornecedor</text>
+
+  <circle cx="370" cy="153" r="34" fill="#0a1e12" stroke="#f59e0b" stroke-width="1" filter="url(#og)"/>
+  <text x="370" y="162" font-family="Georgia,serif" font-size="36" text-anchor="middle">🧪</text>
+
+  <text x="370" y="200" font-family="Georgia,serif" font-size="14" font-weight="bold" fill="#f59e0b" text-anchor="middle">Kit Plantio</text>
+  <text x="370" y="216" font-family="Georgia,serif" font-size="10" fill="#5a8a6e" text-anchor="middle">Insumos • ≈ R$ 72.000</text>
+
+  <rect x="296" y="228" width="148" height="32" rx="10" fill="#f59e0b" fill-opacity="0.15" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="370" y="248" font-family="Georgia,serif" font-size="11" font-weight="bold" fill="#f59e0b" text-anchor="middle">Ofereço em Troca</text>
+
+  <!-- Bottom confirmation -->
+  <rect x="20" y="284" width="440" height="60" rx="12" fill="url(#card)" filter="url(#cs)" stroke="#4ade80" stroke-width="1.5"/>
+  <circle cx="54" cy="314" r="20" fill="#4ade80" fill-opacity="0.15" stroke="#4ade80" stroke-width="1.5" filter="url(#gg)"/>
+  <path d="M44 314 L51 321 L65 306" stroke="#4ade80" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="86" y="304" font-family="Georgia,serif" font-size="12" font-weight="bold" fill="#4ade80">Negociação Verificada pela Plataforma ✓</text>
+  <text x="86" y="318" font-family="Georgia,serif" font-size="10" fill="#8ab49a">Contrato digital gerado • Rastreabilidade completa • Crédito barter</text>
+  <rect x="380" y="292" width="68" height="36" rx="10" fill="url(#obtn)" filter="url(#og)"/>
+  <text x="414" y="314" font-family="Georgia,serif" font-size="11" font-weight="bold" fill="#0d2818" text-anchor="middle">Fechar</text>
+</svg>

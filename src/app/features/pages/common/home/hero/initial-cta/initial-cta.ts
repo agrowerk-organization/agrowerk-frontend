@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { Content } from '../../../../../../core/ui/types/generic/content.initial-cta';
 import { ICONS_INITIAL_CTA } from '../../../../../../core/ui/icons/icons-home/icons.initial-cta';
 import { Router } from '@angular/router';
@@ -8,97 +8,46 @@ import { Badge } from "../../../../../../shared/components/badge/badge";
 import { Steps } from "./initial-cta-components/steps/steps";
 import { Actions } from "../../../../../../shared/components/actions/actions";
 import { Trust } from "./initial-cta-components/trust/trust";
-import { MeshGradient } from "../../../../../../shared/components/mesh-gradient/mesh-gradient";
-import { Pattern } from "../../../../../../shared/components/pattern/pattern";
-
+import initialCtaData from '../../../../../../../assets/files/home/initial-cta.json';
+import { InitialCtaSchema, InitialCtaData } from '../../../../../../core/ui/schemas/initial-cta.schema';
 @Component({
   selector: 'app-initial-cta',
   standalone: true,
-  imports: [CommonModule, Badge, Steps, Actions, Trust, MeshGradient, Pattern],
+  imports: [CommonModule, Badge, Steps, Actions, Trust],
   templateUrl: './initial-cta.html'
 })
 export class InitialCta {
-
   private router = inject(Router);
-
   icons = ICONS_INITIAL_CTA;
+  private data: InitialCtaData = InitialCtaSchema.parse(initialCtaData);
 
-  badges: BadgeIndex[] = [
-    {
-      text: 'Planejamento completo',
-      icon: this.icons.CLIPBOARD_CHECK
-    },
-    {
-      text: 'Integração inteligente',
-      icon: this.icons.MICROCHIP
-    },
-    {
-      text: 'Conforme a legislação',
-      icon: this.icons.SCALE_BALANCED
-    }
-  ]
+  private actionMap: Record<string, () => void> = {
+    login: () => this.router.navigate(['/login']),
+    demonstration: () => this.router.navigate(['/demonstration']),
+  };
+  
+  badges = signal<BadgeIndex[]>(this.data.badges.map(b => ({
+    text: b.text,
+    icon: this.icons[b.iconKey as keyof typeof ICONS_INITIAL_CTA],
+  })));
 
-  steps: Content[] = [
-    {
-      title: 'Cadastre-se gratuitamente',
-      subtitle: 'Acesse todos os serviços em minutos.',
-      icon: this.icons.USER_PLUS
-    },
-    {
-      title: 'Gerencie seu inventário',
-      subtitle: 'Faça uma gestão inteligente do seu inventário.',
-      icon: this.icons.WAREHOUSE
-    },
-    {
-      title: 'Automatize seu trabalho',
-      subtitle: 'Use a tecnologia para automatizar seus processos.',
-      icon: this.icons.GEARS
-    },
-    {
-      title: 'Maximize sua produção',
-      subtitle: 'Marketplace de barter para maximizar sua produção.',
-      icon: this.icons.CHART_LINE
-    }
-  ];
+  steps = signal<Content[]>(this.data.steps.map(s => ({
+    title: s.title,
+    subtitle: s.subtitle,
+    icon: this.icons[s.iconKey as keyof typeof ICONS_INITIAL_CTA],
+  })));
 
-  actions: Content[] = [
-    {
-      title: 'Começar agora',
-      icon: this.icons.ARROW_RIGHT,
-      action: () => this.goToLogin(),
-      type: 'primary'
-    },
-    {
-      title: 'Ver demonstração',
-      icon: this.icons.PLAY_CIRCLE,
-      action: () => this.goToDemonstration(),
-      type: 'secondary'
-    }
-  ];
+  actions = signal<Content[]>(this.data.actions.map(a => ({
+    title: a.title,
+    type: a.type,
+    icon: this.icons[a.iconKey as keyof typeof ICONS_INITIAL_CTA],
+    action: this.actionMap[a.target],
+  })));
 
-  trusts: Content[] = [
-    {
-      subtitle: 'Agricultores',
-      quantity: 100,
-      icon: this.icons.USERS,
-    },
-    {
-      subtitle: 'Fornecedores',
-      quantity: 10,
-      icon: this.icons.INDUSTRY
-    }, 
-    {
-      subtitle: 'Avaliação',
-      quantity: 9.5,
-      icon: this.icons.STAR
-    }
-  ];
-
-  goToLogin() {
-    return this.router.navigate(['/login']);
-  }
-
-  goToDemonstration() {
-    return this.router.navigate(['/demonstration']);
-  }
+  trusts = signal<Content[]>(this.data.trusts.map(t => ({
+    subtitle: t.subtitle,
+    quantity: t.quantity,
+    icon: this.icons[t.iconKey as keyof typeof ICONS_INITIAL_CTA],
+  })));
 }
+

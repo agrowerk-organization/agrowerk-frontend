@@ -1,0 +1,15 @@
+<div class="container mx-auto px-4 lg:px-8">
+    <div class="w-full flex flex-col mx-auto items-center justify-center text-center">
+
+      <app-text-title
+         [title]="'Ainda tem dúvidas?'" 
+         [subtitle]="'Confira nossa central de ajuda com respostas para as perguntas mais comuns'"
+      ></app-text-title>
+      <app-button-pages 
+            [icon]="icon.QUESTION" 
+            [text]="'Ver FAQ Completo'" 
+            [action]="handleAction"
+            [width]="'360'"
+        ></app-button-pages>
+    </div>
+</div>

@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 360" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="480" y2="360" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0d2818"/><stop offset="100%" stop-color="#071510"/>
+    </linearGradient>
+    <linearGradient id="card" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a3a24"/><stop offset="100%" stop-color="#0f2318"/>
+    </linearGradient>
+    <linearGradient id="obtn" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#f59e0b"/><stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+    <filter id="cs"><feDropShadow dx="0" dy="6" stdDeviation="14" flood-color="#000" flood-opacity="0.6"/></filter>
+    <filter id="gg"><feDropShadow dx="0" dy="0" stdDeviation="8" flood-color="#4ade80" flood-opacity="0.5"/></filter>
+    <filter id="og"><feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#f59e0b" flood-opacity="0.6"/></filter>
+  </defs>
+
+  <rect width="480" height="360" fill="url(#bg)" rx="16"/>
+
+  <!-- Gold diamond pattern -->
+  <g opacity="0.1" stroke="#c8960c" stroke-width="0.8" fill="none">
+    <polygon points="24,0 48,24 24,48 0,24"/><polygon points="72,0 96,24 72,48 48,24"/>
+    <polygon points="120,0 144,24 120,48 96,24"/><polygon points="168,0 192,24 168,48 144,24"/>
+    <polygon points="216,0 240,24 216,48 192,24"/><polygon points="264,0 288,24 264,48 240,24"/>
+    <polygon points="312,0 336,24 312,48 288,24"/><polygon points="360,0 384,24 360,48 336,24"/>
+    <polygon points="408,0 432,24 408,48 384,24"/><polygon points="456,0 480,24 456,48 432,24"/>
+    <polygon points="24,48 48,72 24,96 0,72"/><polygon points="72,48 96,72 72,96 48,72"/>
+    <polygon points="120,48 144,72 120,96 96,72"/><polygon points="168,48 192,72 168,96 144,72"/>
+    <polygon points="216,48 240,72 216,96 192,72"/><polygon points="264,48 288,72 264,96 240,72"/>
+    <polygon points="312,48 336,72 312,96 288,72"/><polygon points="360,48 384,72 360,96 336,72"/>
+    <polygon points="408,48 432,72 408,96 384,72"/><polygon points="456,48 480,72 456,96 432,72"/>
+    <polygon points="24,96 48,120 24,144 0,120"/><polygon points="72,96 96,120 72,144 48,120"/>
+    <polygon points="120,96 144,120 120,144 96,120"/><polygon points="168,96 192,120 168,144 144,120"/>
+    <polygon points="216,96 240,120 216,144 192,120"/><polygon points="264,96 288,120 264,144 240,120"/>
+    <polygon points="312,96 336,120 312,144 288,120"/><polygon points="360,96 384,120 360,144 336,120"/>
+    <polygon points="408,96 432,120 408,144 384,120"/><polygon points="456,96 480,120 456,144 432,120"/>
+    <polygon points="24,144 48,168 24,192 0,168"/><polygon points="72,144 96,168 72,192 48,168"/>
+    <polygon points="120,144 144,168 120,192 96,168"/><polygon points="168,144 192,168 168,192 144,168"/>
+    <polygon points="216,144 240,168 216,192 192,168"/><polygon points="264,144 288,168 264,192 240,168"/>
+    <polygon points="312,144 336,168 312,192 288,168"/><polygon points="360,144 384,168 360,192 336,168"/>
+    <polygon points="408,144 432,168 408,192 384,168"/>
+    <polygon points="24,192 48,216 24,240 0,216"/><polygon points="72,192 96,216 72,240 48,216"/>
+    <polygon points="120,192 144,216 120,240 96,216"/><polygon points="168,192 192,216 168,240 144,216"/>
+    <polygon points="216,192 240,216 216,240 192,216"/><polygon points="264,192 288,216 264,240 240,216"/>
+    <polygon points="312,192 336,216 312,240 288,216"/><polygon points="360,192 384,216 360,240 336,216"/>
+    <polygon points="408,192 432,216 408,240 384,216"/>
+    <polygon points="24,240 48,264 24,288 0,264"/><polygon points="72,240 96,264 72,288 48,264"/>
+    <polygon points="120,240 144,264 120,288 96,264"/><polygon points="168,240 192,264 168,288 144,264"/>
+    <polygon points="216,240 240,264 216,288 192,264"/><polygon points="264,240 288,264 264,288 240,264"/>
+    <polygon points="312,240 336,264 312,288 288,264"/><polygon points="360,240 384,264 360,288 336,264"/>
+    <polygon points="408,240 432,264 408,288 384,264"/>
+    <polygon points="24,288 48,312 24,336 0,312"/><polygon points="72,288 96,312 72,336 48,312"/>
+    <polygon points="120,288 144,312 120,336 96,312"/><polygon points="168,288 192,312 168,336 144,312"/>
+    <polygon points="216,288 240,312 216,336 192,312"/><polygon points="264,288 288,312 264,336 240,312"/>
+    <polygon points="312,288 336,312 312,336 288,312"/><polygon points="360,288 384,312 360,336 336,312"/>
+    <polygon points="408,288 432,312 408,336 384,312"/>
+  </g>
+
+  <!-- Main card -->
+  <rect x="72" y="28" width="336" height="304" rx="16" fill="url(#card)" filter="url(#cs)" stroke="#2d5a3d" stroke-width="1.5"/>
+  <rect x="72" y="28" width="336" height="4" rx="2" fill="url(#obtn)"/>
+
+  <!-- PASSO badge -->
+  <rect x="88" y="44" width="72" height="22" rx="11" fill="#f59e0b" fill-opacity="0.15" stroke="#f59e0b" stroke-width="1"/>
+  <text x="124" y="59" font-family="Georgia,serif" font-size="10" fill="#f59e0b" text-anchor="middle" font-weight="bold">PASSO 1</text>
+
+  <!-- Title -->
+  <text x="240" y="96" font-family="Georgia,serif" font-size="18" font-weight="bold" fill="#f59e0b" text-anchor="middle">Cadastro Rápido</text>
+
+  <!-- Avatar with glow -->
+  <circle cx="240" cy="154" r="40" fill="#0d2818" stroke="#4ade80" stroke-width="2.5" filter="url(#gg)"/>
+  <circle cx="240" cy="141" r="14" fill="#4ade80"/>
+  <path d="M209 176 Q209 158 240 158 Q271 158 271 176" fill="#4ade80"/>
+  <!-- Verified -->
+  <circle cx="272" cy="126" r="14" fill="#f59e0b" filter="url(#og)"/>
+  <path d="M266 126 L271 131 L279 120" stroke="#0d2818" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Form fields -->
+  <rect x="96" y="204" width="288" height="30" rx="8" fill="#0a1e12" stroke="#2d5a3d" stroke-width="1.5"/>
+  <text x="114" y="223" font-family="Georgia,serif" font-size="11" fill="#5a8a6e">Nome do Produtor</text>
+  <circle cx="366" cy="219" r="8" fill="#4ade80" fill-opacity="0.15" stroke="#4ade80" stroke-width="1"/>
+  <path d="M362 219 L366 223 L371 215" stroke="#4ade80" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <rect x="96" y="242" width="288" height="30" rx="8" fill="#0a1e12" stroke="#2d5a3d" stroke-width="1.5"/>
+  <text x="114" y="261" font-family="Georgia,serif" font-size="11" fill="#5a8a6e">CPF / CNPJ</text>
+  <circle cx="366" cy="257" r="8" fill="#4ade80" fill-opacity="0.15" stroke="#4ade80" stroke-width="1"/>
+  <path d="M362 257 L366 261 L371 253" stroke="#4ade80" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <rect x="96" y="280" width="288" height="30" rx="8" fill="#0a1e12" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="114" y="299" font-family="Georgia,serif" font-size="11" fill="#f59e0b">📍 Localização GPS automática</text>
+
+  <!-- CTA -->
+  <rect x="112" y="320" width="256" height="38" rx="10" fill="url(#obtn)" filter="url(#og)"/>
+  <text x="240" y="343" font-family="Georgia,serif" font-size="13" font-weight="bold" fill="#0d2818" text-anchor="middle">Criar Conta Grátis ⚡</text>
+
+  <!-- Time badge -->
+  <rect x="296" y="12" width="140" height="24" rx="12" fill="#0d2818" stroke="#f59e0b" stroke-width="1"/>
+  <text x="366" y="28" font-family="Georgia,serif" font-size="9" fill="#f59e0b" text-anchor="middle">⚡ Pronto em menos de 5 min</text>
+</svg>

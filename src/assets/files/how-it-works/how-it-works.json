@@ -1,0 +1,146 @@
+{
+  "userTypes": [
+    {
+      "id": "producer",
+      "title": "Para Produtores",
+      "iconKey": "SEEDLING",
+      "description": "Gerencie sua produção do plantio ao lucro",
+      "steps": [
+        {
+          "number": 1,
+          "title": "Cadastro Rápido",
+          "description": "Crie sua conta e cadastre suas propriedades rurais em menos de 5 minutos. Processo simples e intuitivo.",
+          "iconKey": "USER_PLUS",
+          "color": "primary",
+          "features": [
+            "Cadastro sem burocracia",
+            "Múltiplas propriedades",
+            "Geolocalização automática",
+            "Documentos digitais"
+          ],
+          "image": "assets/svgs/cadastro.svg"
+        },
+        {
+          "number": 2,
+          "title": "Configure suas Safras",
+          "description": "Registre suas safras atuais e planeje as próximas. O sistema sugere datas ideais baseado em clima e solo.",
+          "iconKey": "SEEDLING",
+          "color": "success",
+          "features": [
+            "Calendário agrícola inteligente",
+            "Alertas climáticos por propriedade",
+            "Alertas de pragas e doenças",
+            "Controle de insumos por safra"
+          ],
+          "image": "assets/svgs/safras.svg"
+        },
+        {
+          "number": 3,
+          "title": "Gerencie seu Estoque",
+          "description": "Controle total de insumos, sementes, defensivos e produção. Alertas automáticos de estoque mínimo.",
+          "iconKey": "WAREHOUSE",
+          "color": "secondary",
+          "features": [
+            "Entrada e saída automatizadas",
+            "Rastreabilidade completa",
+            "Alertas de vencimento",
+            "Relatórios de consumo"
+          ],
+          "image": "assets/svgs/estoque.svg"
+        },
+        {
+          "number": 4,
+          "title": "Negocie no Marketplace",
+          "description": "Troque sua produção por insumos diretamente com fornecedores. Sem intermediários, mais economia.",
+          "iconKey": "HANDSHAKE",
+          "color": "quartenary",
+          "features": [
+            "Marketplace verificado",
+            "Negociação direta",
+            "Crédito barter",
+            "Economia até 30%"
+          ],
+          "image": "assets/svgs/marketplace.svg"
+        },
+        {
+          "number": 5,
+          "title": "Acompanhe Resultados",
+          "description": "Dashboard com KPIs, gráficos e relatórios. Tome decisões baseadas em dados reais da sua operação.",
+          "iconKey": "CHART_LINE",
+          "color": "accent",
+          "features": [
+            "Dashboards em tempo real",
+            "Análise de produtividade",
+            "Comparativo de safras",
+            "Exportação de relatórios"
+          ],
+          "image": "assets/svgs/dashboard.svg"
+        }
+      ]
+    },
+    {
+      "id": "supplier",
+      "title": "Para Fornecedores",
+      "iconKey": "INDUSTRY",
+      "description": "Expanda suas vendas e reduza custos operacionais",
+      "steps": [
+        {
+          "number": 1,
+          "title": "Cadastro de Empresa",
+          "description": "Registre sua empresa fornecedora com CNPJ e documentação. Verificação rápida em até 24h.",
+          "iconKey": "USER_PLUS",
+          "color": "primary",
+          "features": [
+            "Verificação empresarial",
+            "Múltiplas filiais",
+            "Catálogo de produtos",
+            "Certificações digitais"
+          ],
+          "image": "assets/svgs/cadastro_empresa.svg"
+        },
+        {
+          "number": 2,
+          "title": "Cadastre seus Produtos",
+          "description": "Monte seu catálogo de insumos, sementes e defensivos. Atualize preços e disponibilidade em tempo real.",
+          "iconKey": "WAREHOUSE",
+          "color": "success",
+          "features": [
+            "Catálogo ilimitado",
+            "Gestão de estoque",
+            "Preços dinâmicos",
+            "Promoções sazonais"
+          ],
+          "image": "assets/svgs/produtos.svg"
+        },
+        {
+          "number": 3,
+          "title": "Receba Propostas",
+          "description": "Produtores interessados enviam propostas de compra ou barter. Negocie diretamente pela plataforma.",
+          "iconKey": "HANDSHAKE",
+          "color": "secondary",
+          "features": [
+            "Propostas qualificadas",
+            "Trocas diretas e justas",
+            "Histórico de negociações",
+            "Contratos digitais"
+          ],
+          "image": "assets/svgs/propostas.svg"
+        },
+        {
+          "number": 4,
+          "title": "Gerencie Vendas",
+          "description": "Acompanhe pedidos, emita notas fiscais e rastreie entregas. Tudo integrado em um só lugar.",
+          "iconKey": "CHART_LINE",
+          "color": "quartenary",
+          "features": [
+            "Pipeline de vendas",
+            "Emissão de nota fiscal",
+            "Rastreamento de entregas",
+            "Controle financeiro"
+          ],
+          "image": "assets/svgs/vendas.svg"
+        }
+      ]
+    }
+  ]
+}

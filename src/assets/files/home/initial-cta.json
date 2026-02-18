@@ -1,0 +1,48 @@
+{
+    "badges": [
+      { "text": "Planejamento completo", "iconKey": "CLIPBOARD_CHECK" },
+      { "text": "Integração inteligente", "iconKey": "MICROCHIP" },
+      { "text": "Conforme a legislação", "iconKey": "SCALE_BALANCED" }
+    ],
+    "steps": [
+      {
+        "title": "Cadastre-se gratuitamente",
+        "subtitle": "Acesse todos os serviços em minutos.",
+        "iconKey": "USER_PLUS"
+      },
+      {
+        "title": "Gerencie seu inventário",
+        "subtitle": "Faça uma gestão inteligente do seu inventário.",
+        "iconKey": "WAREHOUSE"
+      },
+      {
+        "title": "Automatize seu trabalho",
+        "subtitle": "Use a tecnologia para automatizar seus processos.",
+        "iconKey": "GEARS"
+      },
+      {
+        "title": "Maximize sua produção",
+        "subtitle": "Marketplace de barter para maximizar sua produção.",
+        "iconKey": "CHART_LINE"
+      }
+    ],
+    "actions": [
+      {
+        "title": "Começar agora",
+        "iconKey": "ARROW_RIGHT",
+        "target": "login",
+        "type": "primary"
+      },
+      {
+        "title": "Ver demonstração",
+        "iconKey": "PLAY_CIRCLE",
+        "target": "demo",
+        "type": "secondary"
+      }
+    ],
+    "trusts": [
+      { "subtitle": "Agricultores", "quantity": 100, "iconKey": "USERS" },
+      { "subtitle": "Fornecedores", "quantity": 10, "iconKey": "INDUSTRY" },
+      { "subtitle": "Avaliação", "quantity": 9.5, "iconKey": "STAR" }
+    ]
+}

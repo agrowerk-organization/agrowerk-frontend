@@ -1,14 +1,15 @@
-/* To learn more about Typescript configuration file: https://www.typescriptlang.org/docs/handbook/tsconfig-json.html. */
-/* To learn more about Angular compiler options: https://angular.dev/reference/configs/angular-compiler-options. */
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./out-tsc/app",
+    "resolveJsonModule": true,
     "types": []
   },
   "include": [
-    "src/**/*.ts"
-, "src/app/core/ui/types/login/pillar"  ],
+    "src/**/*.ts",
+    "src/**/*.json",
+    "src/app/core/ui/types/login/pillar"
+  ],
   "exclude": [
     "src/**/*.spec.ts"
   ]

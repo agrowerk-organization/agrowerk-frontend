@@ -2,26 +2,26 @@
     
     <div class="relative flex items-center justify-center cursor-pointer group" routerLink="/">
         <div class="absolute inset-0 bg-primary blur-md opacity-0 group-hover:opacity-40 transition-opacity"></div>
-        <fa-icon [icon]="icon()" class="relative text-2xl text-primary"></fa-icon>
+        <fa-icon [icon]="icon" class="relative text-2xl text-primary"></fa-icon>
     </div>
     
     <div class="flex items-center gap-3">
         <h3 
             routerLink="/" 
-            class="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary/60 hover:from-primary hover:to-primary transition-all duration-300 cursor-pointer">
+            class="text-lg sm:text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary/60 hover:from-primary hover:to-primary transition-all duration-300 cursor-pointer">
             {{ main() }}
         </h3>
         
         @if (pageName()) {
             <span class="text-primary/30 font-light">//</span>
-            <h4 class="text-xl font-bold text-neutral-secondary hover:text-primary transition-colors duration-300 cursor-pointer">
+            <h4 class="text-sm sm:text-2xl font-bold text-neutral-secondary hover:text-primary transition-colors duration-300 cursor-pointer">
                 {{ pageName() }}
             </h4>
         }
         
         @if (subPageName()) {
             <span class="text-primary/30 font-light">//</span>
-            <h4 class="text-xl font-bold text-primary relative">
+            <h4 class="text-lg sm:text-2xl font-bold text-primary relative">
                 {{ subPageName() }}
                 <div class="absolute -bottom-1 left-0 right-0 h-[2px] bg-gradient-to-r from-primary to-transparent rounded-full"></div>
             </h4>

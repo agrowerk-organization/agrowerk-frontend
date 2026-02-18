@@ -14,7 +14,7 @@
   
     @if (lawContent() && !loading()) {
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <app-breadcrumb [icon]="icons.HOME" main="Agrowerk" pageName="Leis" [subPageName]="lawContent()!.slug"></app-breadcrumb>
+        <app-breadcrumb main="Agrowerk" pageName="Leis" [subPageName]="lawContent()!.slug"></app-breadcrumb>
   
         <div class="animate-fadeInUp mb-10" style="animation-delay: 0.1s;">
           <app-badge [badges]="badges()"></app-badge>
