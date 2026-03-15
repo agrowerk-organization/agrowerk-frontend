@@ -1,13 +1,37 @@
-import { Injectable } from '@angular/core';
-import { HttpInterceptorFn, HttpRequest, HttpHandlerFn } from '@angular/common/http';
+import { inject } from '@angular/core';
+import { catchError, switchMap, throwError } from 'rxjs';
+import { HttpInterceptorFn } from '@angular/common/http';
+import { Router } from '@angular/router';
 import { environment_development } from '../../../environment/environment.dev';
+import { AuthService } from '../services/auth.service';
 
-export const authInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown>, next: HttpHandlerFn) => {
-  if (req.url.startsWith(environment_development.apiUrl)) {  
-    const authReq = req.clone({
-      withCredentials: true
-    });
-    return next(authReq);
+export const authInterceptor: HttpInterceptorFn = (req, next) => {
+  const authService = inject(AuthService);
+  const router = inject(Router);
+
+  if (!req.url.startsWith(environment_development.apiUrl)) {
+    return next(req);
   }
-  return next(req);
+
+  const authReq = req.clone({ withCredentials: true });
+
+  return next(authReq).pipe(
+    catchError(error => {
+      // Token expirado — tenta refresh
+      if (error.status === 401 && 
+          !req.url.includes('/auth/refresh') &&
+          !req.url.includes('/auth/login')) {
+        
+        return authService.refreshToken().pipe(
+          switchMap(() => next(authReq)), 
+          catchError(() => {
+            authService.logout().subscribe();
+            router.navigate(['/']);
+            return throwError(() => error);
+          })
+        );
+      }
+      return throwError(() => error);
+    })
+  );
 };

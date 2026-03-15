@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { FormInput } from './form-input/form-input';
 import { FormButton } from '../../../../../shared/components/buttons/form-button/form-button';
 import { AuthService } from '../../../../../core/services/auth.service';
@@ -24,7 +24,6 @@ import { AuthSocial } from '../../../../../core/ui/types/auth-social/auth-social
 })
 export class LoginForm {
   private formBuilder = inject(FormBuilder);
-  private router = inject(Router);
   private authService = inject(AuthService);
 
   readonly isLoading = signal<boolean>(false);
@@ -65,8 +64,8 @@ export class LoginForm {
     const credentials = this.loginForm.getRawValue();
 
     this.authService.login(credentials).subscribe({
-      next: () => {
-        this.router.navigate(['/dashboard']);
+      next: (response) => {
+        this.authService.redirectByRole(response.role);
       },
       error: (error: HttpErrorResponse) => {
         this.isLoading.set(false);

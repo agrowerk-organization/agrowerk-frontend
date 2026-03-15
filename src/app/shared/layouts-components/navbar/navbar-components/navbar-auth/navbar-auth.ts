@@ -1,10 +1,10 @@
-import { Component, HostListener, inject, input, signal } from '@angular/core';
+import { Component, ElementRef, HostListener, inject, input, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { LoginProfileOption } from '../../../../../core/types/Auth/login.profile.option';
+import { LoginProfileOption } from '../../../../../core/types/auth/login.profile.option';
 import { ICONS_NAVBAR } from '../../../../../core/ui/icons/icons-layouts/icons.navbar';
 import { AuthService } from '../../../../../core/services/auth.service';
-import { UserProfile } from '../../../../../core/types/User/user.profile';
+import { UserProfile } from '../../../../../core/types/user/user.profile';
 
 @Component({
   selector: 'app-navbar-auth',
@@ -14,6 +14,7 @@ import { UserProfile } from '../../../../../core/types/User/user.profile';
 })
 export class NavbarAuth {
   private router = inject(Router);
+  private elementRef = inject(ElementRef);
   private authService = inject(AuthService);
 
   isLoggedIn = input<boolean>(false);
@@ -57,14 +58,7 @@ export class NavbarAuth {
 
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent) {
-    const target = event.target as HTMLElement;
-    
-    const isLoginTrigger = target.closest('button')?.textContent?.includes('Área de acesso') || 
-                           target.closest('ul')?.querySelector('li')?.textContent?.includes('Produtor'); 
-    const isProfileTrigger = target.closest('button')?.textContent?.includes('Perfil') || 
-                             target.closest('ul')?.querySelector('li')?.textContent?.includes('Sair');
-
-    if (!isLoginTrigger && !isProfileTrigger) {
+    if (!this.elementRef.nativeElement.contains(event.target)) {
       this.showLoginDropdown.set(false);
       this.showProfileDropdown.set(false);
     }

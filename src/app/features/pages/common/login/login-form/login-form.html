@@ -19,12 +19,12 @@
                 <h2 class="text-3xl font-extrabold text-[var(--color-neutral-secondary)] mb-2">
                     Bem-vindo de volta
                 </h2>
-                <p class="text-size-text text-gray-400">
+                <p class="text-xl text-gray-400">
                     Acesse sua conta para continuar
                 </p>
             </div>
             
-            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-5">
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-5 text-xl">
                 <app-form-input
                     label="E-mail"
                     type="email"
@@ -78,7 +78,7 @@
                     </div>
                 }
                 
-                <app-form-button
+                <app-form-button class="text-2xl text-bold"
                     label="Entrar"
                     loadingLabel="Entrando..."
                     [isLoading]="isLoading()"
@@ -106,11 +106,11 @@
                 </div>
                 
                 <div class="text-center pt-2">
-                    <p class="text-size-text text-neutral-secondary/80">
+                    <p class="text-xl text-neutral-secondary/80">
                         Não tem uma conta?
                         <a 
                             routerLink="/cadastro" 
-                            class="text-size-text font-semibold text-[var(--color-primary)] hover:text-[var(--color-primary-dark)] transition-all ml-1 hover:underline decoration-2 underline-offset-4">
+                            class="text-xl font-semibold text-[var(--color-primary)] hover:text-[var(--color-primary-dark)] transition-all ml-1 hover:underline decoration-2 underline-offset-4">
                             Cadastre-se gratuitamente
                         </a>
                     </p>
@@ -118,7 +118,7 @@
             </form>
         </div>
         
-        <p class="text-center text-size-text/10 text-neutral-secondary/70 mt-6">
+        <p class="text-center text-xl text-neutral-secondary/70 mt-6">
             Ao continuar, você concorda com nossos 
             <a href="#" class="text-[var(--color-primary)] hover:text-[var(--color-primary-dark)] transition-colors">Termos de Uso</a> 
             e 

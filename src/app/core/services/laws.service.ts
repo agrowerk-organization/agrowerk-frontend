@@ -1,7 +1,7 @@
 import { inject, Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { environment_development } from '../../../environment/environment.dev';
-import { LawResponse } from "../types/Law/law";
+import { LawResponse } from "../types/law/law";
 
 @Injectable({
     providedIn: 'root'

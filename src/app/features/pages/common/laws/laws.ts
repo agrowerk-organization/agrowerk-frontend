@@ -2,7 +2,7 @@ import { CommonModule, Location } from '@angular/common';
 import { Component, OnInit, inject, computed, signal } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
-import { LawResponse } from '../../../../core/types/Law/law';
+import { LawResponse } from '../../../../core/types/law/law';
 import { LawService } from '../../../../core/services/laws.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ICONS_LAWS } from '../../../../core/ui/icons/icons-laws/icons.laws';

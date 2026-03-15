@@ -1,5 +1,5 @@
 import { ICONS_NAVBAR } from "../../ui/icons/icons-layouts/icons.navbar";
-import { UserProfile } from "../User/user.profile";
+import { UserProfile } from "../user/user.profile";
 
 export interface LoginProfileOption {
     label: string,

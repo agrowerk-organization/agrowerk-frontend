@@ -14,7 +14,7 @@ import { ChangeDetectionStrategy } from '@angular/core';
   standalone: true,
   imports: [CommonModule, FontAwesomeModule],
   templateUrl: './cycle-node.html',
-  changeDetection: ChangeDetectionStrategy.OnPush // ✅ só re-renderiza quando input muda
+  changeDetection: ChangeDetectionStrategy.OnPush 
 })
 export class CycleNode implements OnInit, OnDestroy {
   node = input.required<Cycle>();
