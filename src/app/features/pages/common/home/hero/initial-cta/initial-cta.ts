@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
 import { Content } from '../../../../../../core/ui/types/generic/content.initial-cta';
-import { ICONS_INITIAL_CTA } from '../../../../../../core/ui/icons/icons-home/icons.initial-cta';
+import { ICONS_INITIAL_CTA } from '../../../../../../core/ui/icons/icons-common/icons-home/icons.initial-cta';
 import { Router } from '@angular/router';
 import { BadgeIndex } from '../../../../../../core/ui/types/badge/badge';
 import { Badge } from "../../../../../../shared/components/badge/badge";

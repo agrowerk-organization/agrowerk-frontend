@@ -1,0 +1,12 @@
+{
+    "trustBadges": [
+      { "iconKey": "CLIPBOARD", "label": "Planejamento completo", "description": "Organize toda sua produção de forma adequada" },
+      { "iconKey": "LIGHTNING", "label": "Integração inteligente", "description": "Conecte todas as pontas soltas em sua produção" },
+      { "iconKey": "SHIELD_ALT", "label": "Conforme a legislação", "description": "Total conformidade com normas e regulamentações" }
+    ],
+    "statistics": [
+      { "value": 500, "label": "Propriedades", "suffix": "+", "current": 0 },
+      { "value": 10000, "label": "Hectares", "suffix": "+", "current": 0 },
+      { "value": 99, "label": "Satisfação", "suffix": "%", "current": 0 }
+    ]
+}

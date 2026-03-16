@@ -1,0 +1,59 @@
+[
+    {
+      "id": "safra",
+      "title": "Gestão de Safras",
+      "subtitle": "Planeje e monitore sua produção",
+      "iconKey": "SEEDLING",
+      "color": "primary",
+      "bgGradient": "bg-gradient-to-br from-primary/90 to-primary/10",
+      "features": [
+        "Cronograma de plantio e colheita",
+        "Previsão climática em tempo real",
+        "Alertas inteligentes por fase",
+        "Rastreamento por lote (batch)"
+      ],
+      "stats": [
+        { "label": "Hectares", "value": "15.000+", "iconKey": "CHART_LINE" },
+        { "label": "Safras ativas", "value": "320", "iconKey": "CALENDAR_ALT" },
+        { "label": "Produtividade", "value": "+40%", "iconKey": "SEEDLING" }
+      ]
+    },
+    {
+      "id": "inventario",
+      "title": "Inventário Inteligente",
+      "subtitle": "Controle total do seu estoque",
+      "iconKey": "WAREHOUSE",
+      "color": "secondary",
+      "bgGradient": "bg-gradient-to-br from-primary/90 to-primary/10",
+      "features": [
+        "Monitoramento em tempo real",
+        "Alertas de estoque mínimo",
+        "Histórico completo de movimentações",
+        "Gestão multi-propriedade"
+      ],
+      "stats": [
+        { "label": "Insumos cadastrados", "value": "2.500+", "iconKey": "BOXES" },
+        { "label": "Movimentações/mês", "value": "8.400", "iconKey": "EXCHANGE_ALT" },
+        { "label": "Redução de perda", "value": "35%", "iconKey": "BELL" }
+      ]
+    },
+    {
+      "id": "barter",
+      "title": "Barter Marketplace",
+      "subtitle": "Negocie sem intermediários",
+      "iconKey": "HANDSHAKE",
+      "color": "quartenary",
+      "bgGradient": "bg-gradient-to-br from-primary/90 to-squartenary/70",
+      "features": [
+        "Troque produção por insumos",
+        "Marketplace seguro e auditado",
+        "Controle de créditos barter",
+        "Conexão direta produtor-fornecedor"
+      ],
+      "stats": [
+        { "label": "Negociações", "value": "1.200+", "iconKey": "HANDSHAKE" },
+        { "label": "Toneladas negociadas", "value": "3.500", "iconKey": "BOXES" },
+        { "label": "Economia média", "value": "R$ 2,5M", "iconKey": "COINS" }
+      ]
+    }
+]

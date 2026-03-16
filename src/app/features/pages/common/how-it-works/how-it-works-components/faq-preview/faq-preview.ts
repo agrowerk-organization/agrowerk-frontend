@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { ButtonPages } from "../../../../../../shared/components/buttons/button-pages/button-pages";
-import { ICONS_HOW_IT_WORKS } from '../../../../../../core/ui/icons/icons-how-it-works/icons.how-it-works';
+import { ICONS_HOW_IT_WORKS } from '../../../../../../core/ui/icons/icons-common/icons-how-it-works/icons.how-it-works';
 import { TextTitle } from "../../../../../../shared/components/text-title/text-title";
 
 @Component({

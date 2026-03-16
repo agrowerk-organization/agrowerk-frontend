@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { ICONS_INITIAL_CTA } from '../icons/icons-home/icons.initial-cta';
+import { ICONS_INITIAL_CTA } from '../icons/icons-common/icons-home/icons.initial-cta';
 
 const iconKeys = Object.keys(ICONS_INITIAL_CTA) as [string, ...string[]];
 

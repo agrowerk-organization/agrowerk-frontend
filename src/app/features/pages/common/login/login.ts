@@ -6,7 +6,7 @@ import { LoginForm } from './login-form/login-form';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule,LoginBranding, LoginForm],
+  imports: [CommonModule, LoginBranding, LoginForm],
   templateUrl: './login.html'
 })
 export class Login {

@@ -1,0 +1,39 @@
+[
+    {
+      "id": 1,
+      "label": "Produtores Ativos",
+      "value": 500,
+      "suffix": "+",
+      "iconKey": "USERS",
+      "color": "primary",
+      "trend": { "value": "+15%", "label": "este mês" }
+    },
+    {
+      "id": 2,
+      "label": "Hectares Gerenciados",
+      "value": 15000,
+      "suffix": "+",
+      "iconKey": "CHART_AREA",
+      "color": "success",
+      "trend": { "value": "+47%", "label": "este mês" }
+    },
+    {
+      "id": 3,
+      "label": "Toneladas Negociadas",
+      "value": 3500,
+      "suffix": "",
+      "iconKey": "BOXES",
+      "color": "quartenary",
+      "trend": { "value": "+9%", "label": "este mês" }
+    },
+    {
+      "id": 4,
+      "label": "Negociados em Barter",
+      "value": 2.5,
+      "prefix": "R$ ",
+      "suffix": "M",
+      "iconKey": "COINS",
+      "color": "secondary",
+      "trend": { "value": "+22%", "label": "este mês" }
+    }
+  ]

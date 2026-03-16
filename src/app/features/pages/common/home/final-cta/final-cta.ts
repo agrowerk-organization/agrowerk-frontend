@@ -2,13 +2,14 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { ICONS_FINAL_CTA } from '../../../../../core/ui/icons/icons-home/icons.final-cta';
+import { ICONS_FINAL_CTA } from '../../../../../core/ui/icons/icons-common/icons-home/icons.final-cta';
 import { Title } from '../../../../../shared/components/title/title';
 import { Subtitle } from '../../../../../shared/components/subtitle/subtitle';
 import { Badge } from '../../../../../shared/components/badge/badge';
 import { BadgeIndex } from '../../../../../core/ui/types/badge/badge';
 import { Icons } from '../../../../../shared/components/icons/icons';
 import { Carousel } from "../../../../../shared/components/carousel/carousel";
+import FINAL_CTA_DATA  from "../../../../../../assets/files/home/final-cta.json";
 
 @Component({
   selector: 'app-final-cta',
@@ -39,38 +40,18 @@ export class FinalCta implements OnInit{
     });
   }
 
-  trustSignals = [
-    'Sem cartão de crédito',
-    'Sem pagamento ou taxas',
-    'Cancele quando quiser',
-    'Suporte dedicado 24/7'
-  ];
+  trustSignals = FINAL_CTA_DATA.trustSignals;
 
-  badges: BadgeIndex[] = [
-    {
-      text: 'Sem pagamento ou taxas',
-      icon: this.icons.HAND_HOLDING_DOLLAR
-    },
-    {
-      text: 'Cancele quando quiser',
-      icon: this.icons.LOCK_OPEN
-    },
-    {
-      text: 'Suporte dedicado 24/7',
-      icon: this.icons.HEADSET
-    }
-  ];
+  stats = FINAL_CTA_DATA.stats;
 
-  trustBadges = [
-    { icon : this.icons.SHIELD_ALT, label : 'LGPD', description: 'Dados seguros' },
-    { icon : this.icons.LEAF, label : 'PRONAF', description: 'Agricultura familiar' },
-    { icon : this.icons.CERTIFICATE, label: 'ISO 27001',  description: 'Certificado de qualidade' }
-  ];
+  badges: BadgeIndex[] = FINAL_CTA_DATA.badges.map(badge => ({
+    ...badge,
+    icon: this.icons[badge.iconKey as keyof typeof ICONS_FINAL_CTA]
+  }));
 
-  stats = [
-    { value: '500', label: 'Propriedades ativas' },
-    { value: '15.000', label: 'Hectares gerenciados' },
-    { value: 'R$ 1,4M', label: 'Rodando em barter' }
-  ];
+  trustBadges = FINAL_CTA_DATA.trustBadges.map(badge => ({
+    ...badge,
+    icon: this.icons[badge.iconKey as keyof typeof ICONS_FINAL_CTA]
+  }));
 
 }

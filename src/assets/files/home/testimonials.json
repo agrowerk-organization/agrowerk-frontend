@@ -1,0 +1,56 @@
+[
+    {
+      "id": 1,
+      "quote": "O AgroWerk transformou completamente a gestão da minha fazenda. Economizei R$ 45 mil em apenas 6 meses com o marketplace barter. Nunca imaginei que seria tão fácil negociar diretamente com fornecedores!",
+      "author": {
+        "name": "João Silva",
+        "role": "Produtor Rural",
+        "property": "Fazenda Boa Vista",
+        "location": "Goiás, GO",
+        "avatar": "assets/images/agricultor1.jpg"
+      },
+      "metrics": {
+        "productivity": "+40%",
+        "savings": "R$ 45.000"
+      },
+      "rating": 5
+    },
+    {
+      "id": 2,
+      "quote": "Como fornecedora, o AgroWerk me deu acesso direto a centenas de produtores. Minhas vendas aumentaram 60% e consigo oferecer preços melhores sem intermediários. É uma revolução no agronegócio!",
+      "author": {
+        "name": "Maria Santos",
+        "role": "Fornecedora de Insumos",
+        "property": "AgroChem Distribuidora",
+        "location": "Mato Grosso, MT",
+        "avatar": "assets/images/agricultor1.jpg"
+      },
+      "metrics": {
+        "customMetric": {
+          "label": "Aumento em vendas",
+          "value": "+60%"
+        },
+        "savings": "R$ 120.000"
+      },
+      "rating": 5
+    },
+    {
+      "id": 3,
+      "quote": "A previsão de colheita com o AgroWerk é impressionante. Consegui planejar melhor meu estoque de insumos e reduzir desperdício em 35%. O sistema paga por si só!",
+      "author": {
+        "name": "Carlos Oliveira",
+        "role": "Produtor Rural",
+        "property": "Fazenda Esperança",
+        "location": "Paraná, PR",
+        "avatar": "assets/images/agricultor1.jpg"
+      },
+      "metrics": {
+        "productivity": "+35%",
+        "customMetric": {
+          "label": "Redução desperdício",
+          "value": "35%"
+        }
+      },
+      "rating": 5
+    }
+  ]

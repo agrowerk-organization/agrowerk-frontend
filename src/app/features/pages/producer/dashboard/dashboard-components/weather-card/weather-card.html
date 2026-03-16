@@ -1,0 +1,59 @@
+<div class="rounded-2xl p-5 bg-white/5
+            border border-white/10 backdrop-blur-md h-full">
+
+  <div class="flex items-center justify-between mb-4">
+    <h3 class="font-bold text-neutral-primary">Clima agora</h3>
+    @if (current()?.fromCache) {
+      <span class="text-xs text-neutral-secondary px-2 py-1
+                   rounded-full bg-white/5">
+        Cache
+      </span>
+    }
+  </div>
+
+  @if (current(); as w) {
+    <div class="flex items-center gap-4 mb-4">
+      <span class="text-5xl">{{ getIconPath() }}</span>
+      <div>
+        <p class="text-4xl font-bold text-neutral-primary">
+          {{ w.temperature | number:'1.0-0' }}°C
+        </p>
+        <p class="text-neutral-secondary text-sm">
+          {{ w.weatherDescription }}
+        </p>
+        <p class="text-neutral-secondary text-xs">
+          Sensação {{ w.feelsLike | number:'1.0-0' }}°C
+        </p>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-3 gap-3">
+      <div class="text-center p-2 rounded-lg bg-white/5">
+        <p class="text-xs text-neutral-secondary">Umidade</p>
+        <p class="font-bold text-neutral-primary">
+          {{ w.humidity }}%
+        </p>
+      </div>
+      <div class="text-center p-2 rounded-lg bg-white/5">
+        <p class="text-xs text-neutral-secondary">Vento</p>
+        <p class="font-bold text-neutral-primary">
+          {{ w.windSpeed | number:'1.0-0' }} km/h
+        </p>
+      </div>
+      <div class="text-center p-2 rounded-lg bg-white/5">
+        <p class="text-xs text-neutral-secondary">UV</p>
+        <p class="font-bold text-neutral-primary">
+          {{ w?.uvIndex ?? '—' }}
+        </p>
+      </div>
+    </div>
+
+  } @else {
+    <div class="flex items-center gap-3
+                text-neutral-secondary h-32
+                justify-center">
+      <fa-icon [icon]="icons.CLOUD_SUN" class="text-3xl opacity-50" />
+      <p class="text-sm">Clima não disponível</p>
+    </div>
+  }
+</div>

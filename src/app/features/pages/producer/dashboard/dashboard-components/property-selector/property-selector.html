@@ -1,0 +1,21 @@
+@if (showSelector()) {
+    <div class="flex items-center gap-3">
+      <span class="text-neutral-secondary text-sm">
+        Propriedade:
+      </span>
+      <select
+        (change)="onChange($event)"
+        class="px-4 py-2 rounded-lg bg-white/5
+               border border-white/20 text-neutral-primary
+               text-sm outline-none focus:border-button-main
+               transition-all cursor-pointer">
+        @for (prop of properties(); track prop.id) {
+          <option
+            [value]="prop.id"
+            [selected]="prop.id === activePropertyId()">
+            {{ prop.name }}
+          </option>
+        }
+      </select>
+    </div>
+}

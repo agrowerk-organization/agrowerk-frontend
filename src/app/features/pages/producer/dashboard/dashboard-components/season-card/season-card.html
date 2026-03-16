@@ -1,0 +1,64 @@
+<div class="rounded-2xl p-5 bg-white/5
+            border border-white/10 backdrop-blur-md h-full">
+
+  <div class="flex items-center justify-between mb-4">
+    <h3 class="font-bold text-neutral-primary">Safra ativa</h3>
+    <a routerLink="/producer/seasons"
+       class="text-xs text-button-main hover:underline">
+      Ver todas
+    </a>
+  </div>
+
+  @if (hasSeason(); as s) {
+    <div class="space-y-3">
+      <div class="flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-green-400
+                     animate-pulse flex-shrink-0"></span>
+        <p class="font-bold text-neutral-primary text-lg">
+          {{ season()!.name }}
+        </p>
+      </div>
+
+      <div class="grid grid-cols-2 gap-3">
+        <div class="p-3 rounded-lg bg-white/5">
+          <p class="text-xs text-neutral-secondary">Início</p>
+          <p class="font-semibold text-neutral-primary text-sm">
+            {{ season()!.startDate | date:'dd/MM/yyyy' }}
+          </p>
+        </div>
+        <div class="p-3 rounded-lg bg-white/5">
+          <p class="text-xs text-neutral-secondary">Término</p>
+          <p class="font-semibold text-neutral-primary text-sm">
+            {{ season()!.endDate | date:'dd/MM/yyyy' }}
+          </p>
+        </div>
+      </div>
+
+      <a routerLink="/producer/plantings"
+         class="flex items-center justify-between p-3
+                rounded-lg border border-button-main/30
+                bg-button-main/10 hover:bg-button-main/20
+                transition-all">
+        <span class="text-sm text-button-main font-semibold">
+          Ver plantios ativos
+        </span>
+        <fa-icon [icon]="icons.ARROW_RIGHT"
+                 class="text-button-main" />
+      </a>
+    </div>
+
+  } @else {
+    <div class="flex flex-col items-center justify-center
+                h-32 gap-3 text-center">
+      <fa-icon [icon]="icons.SEEDLING"
+               class="text-3xl text-neutral-secondary opacity-50" />
+      <p class="text-neutral-secondary text-sm">
+        Nenhuma safra ativa
+      </p>
+      <a routerLink="/producer/seasons"
+         class="text-xs text-button-main hover:underline">
+        Criar safra
+      </a>
+    </div>
+  }
+</div>

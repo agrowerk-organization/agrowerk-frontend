@@ -2,13 +2,13 @@ import { Component, OnDestroy, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TimelinePhase } from '../../../../../core/ui/types/timeline-phase/timeline-phase';
-import { ICONS_DIGITAL_HARVEST } from '../../../../../core/ui/icons/icons-home/icons.digital-harvest';
+import { ICONS_DIGITAL_HARVEST } from '../../../../../core/ui/icons/icons-common/icons-home/icons.digital-harvest';
 import { PhaseConnector } from './digital-harvest-components/phase-connector/phase-connector';
 import { PhaseDetails } from './digital-harvest-components/phase-details/phase-details';
 import { PhaseCard } from './digital-harvest-components/phase-card/phase-card';
 import { Title } from "../../../../../shared/components/title/title";
 import { Subtitle } from "../../../../../shared/components/subtitle/subtitle";
-
+import PHASES_DATA from './../../../../../../assets/files/home/digital-harvest.json';
 
 @Component({
   selector: 'app-digital-harvest',
@@ -23,67 +23,14 @@ export class DigitalHarvest implements OnInit, OnDestroy {
 
   activePhase = signal(0);
 
-  private rotationInterval: ReturnType<typeof setInterval> | undefined;
-
-  phases: TimelinePhase[] = [
-    {
-      id: 'safra',
-      title: 'Gestão de Safras',
-      subtitle: 'Planeje e monitore sua produção',
-      icon: this.icons.SEEDLING,
-      color: 'primary',
-      bgGradient: 'bg-gradient-to-br from-primary/90 to-primary/10',
-      features: [
-        'Cronograma de plantio e colheita',
-        'Previsão climática em tempo real',
-        'Alertas inteligentes por fase',
-        'Rastreamento por lote (batch)'
-      ],
-      stats: [
-        { label: 'Hectares', value: '15.000+', icon: this.icons.CHART_LINE },
-        { label: 'Safras ativas', value: '320', icon: this.icons.CALENDAR_ALT },
-        { label: 'Produtividade', value: '+40%', icon: this.icons.SEEDLING }
-      ]
-    },
-    {
-      id: 'inventario',
-      title: 'Inventário Inteligente',
-      subtitle: 'Controle total do seu estoque',
-      icon: this.icons.WAREHOUSE,
-      color: 'secondary',
-      bgGradient: 'bg-gradient-to-br from-primary/90 to-primary/10',
-      features: [
-        'Monitoramento em tempo real',
-        'Alertas de estoque mínimo',
-        'Histórico completo de movimentações',
-        'Gestão multi-propriedade'
-      ],
-      stats: [
-        { label: 'Insumos cadastrados', value: '2.500+', icon: this.icons.BOXES },
-        { label: 'Movimentações/mês', value: '8.400', icon: this.icons.EXCHANGE_ALT },
-        { label: 'Redução de perda', value: '35%', icon: this.icons.BELL }
-      ]
-    },
-    {
-      id: 'barter',
-      title: 'Barter Marketplace',
-      subtitle: 'Negocie sem intermediários',
-      icon: this.icons.HANDSHAKE,
-      color: 'quartenary',
-      bgGradient: 'bg-gradient-to-br from-primary/90 to-squartenary/70',
-      features: [
-        'Troque produção por insumos',
-        'Marketplace seguro e auditado',
-        'Controle de créditos barter',
-        'Conexão direta produtor-fornecedor'
-      ],
-      stats: [
-        { label: 'Negociações', value: '1.200+', icon: this.icons.HANDSHAKE },
-        { label: 'Toneladas negociadas', value: '3.500', icon: this.icons.BOXES },
-        { label: 'Economia média', value: 'R$ 2,5M', icon: this.icons.COINS }
-      ]
-    }
-  ];
+  phases: TimelinePhase[] = PHASES_DATA.map(phase => ({
+    ...phase,
+    icon: this.icons[phase.iconKey as keyof typeof ICONS_DIGITAL_HARVEST],
+    stats: phase.stats.map(stat => ({
+      ...stat,
+      icon: this.icons[stat.iconKey as keyof typeof ICONS_DIGITAL_HARVEST]
+    }))
+  }));
 
   ngOnInit(): void {
     this.startAutoRotation();

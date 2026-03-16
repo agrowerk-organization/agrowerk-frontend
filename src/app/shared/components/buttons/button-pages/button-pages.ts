@@ -13,5 +13,5 @@ export class ButtonPages {
   icon = input.required<IconDefinition>();
   text = input.required<string>();
   action = input.required<() => void>();
-  width = input.required<string>();
+  width = input<string>();
 }

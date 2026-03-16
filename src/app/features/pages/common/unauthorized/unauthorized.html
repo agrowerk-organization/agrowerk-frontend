@@ -1,29 +1,41 @@
-<div class="min-h-screen bg-primary flex flex-col 
+<div class="min-h-screen flex flex-col 
     items-center justify-center gap-8 p-8">
 
-    <img src="/assets/images/logo.png" alt="AgroWerk" class="w-24">
+    <app-mesh-gradient></app-mesh-gradient>
+    <app-pattern></app-pattern>
+
+    <div class="flex items-center z-[1001]">
+          <img 
+            ngSrc="assets/images/agrowerk.png" 
+            alt="Logo Agrowerk" 
+            width="40" 
+            height="40" 
+            priority
+            class="w-40 h-40 lg:w-56 lg:h-56 cursor-pointer hover:scale-110"
+          />
+    </div>
 
     <div class="text-center">
-        <h1 class="text-6xl font-bold text-button-main mb-4">403</h1>
-        <h2 class="text-2xl font-semibold text-neutral-primary mb-2">
+        <h1 class="text-8xl text-error font-bold text-button-main mb-4">403</h1>
+        <h2 class="text-2xl font-semibold text-error mb-2">
             Acesso negado
         </h2>
-        <p class="text-neutral-secondary">
+        <p class="text-2xl text-neutral-secondary">
             Você não tem permissão para acessar esta página.
         </p>
     </div>
 
     <div class="flex gap-4">
         <a routerLink="/"
-            class="px-6 py-3 bg-button-main text-neutral-primary 
+            class="px-6 py-3 bg-button-main text-2xl text-neutral-primary 
             rounded-lg font-semibold hover:bg-button-main-hover 
-            transition-all">
+            transition-all cursor-pointer">
                 Voltar ao início
         </a>
     <a routerLink="/login/producer"
         class="px-6 py-3 border border-button-main text-button-main 
-        rounded-lg font-semibold hover:bg-button-main 
-        hover:text-neutral-primary transition-all">
+        rounded-lg font-semibold hover:bg-button-main text-2xl
+        hover:text-neutral-primary transition-all cursor-pointer">
             Fazer login
         </a>
     </div>

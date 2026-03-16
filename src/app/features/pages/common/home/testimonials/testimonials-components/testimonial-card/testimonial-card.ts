@@ -3,7 +3,7 @@ import { Component, input, computed } from '@angular/core';
 import { Testimonial } from '../../../../../../../core/ui/types/testimonial/testimonial';
 import { TestimonialMetric } from '../testimonial-metric/testimonial-metric';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
-import { ICONS_TESTIMONIALS } from '../../../../../../../core/ui/icons/icons-home/icons.testimonials';
+import { ICONS_TESTIMONIALS } from '../../../../../../../core/ui/icons/icons-common/icons-home/icons.testimonials';
 @Component({
   selector: 'app-testimonial-card',
   standalone: true,

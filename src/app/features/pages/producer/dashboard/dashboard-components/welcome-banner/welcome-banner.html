@@ -1,0 +1,13 @@
+<!-- welcome-banner.html -->
+<div class="flex items-center justify-between">
+    <div>
+      <h1 class="text-2xl font-bold text-neutral-primary">
+        {{ greeting() }}, {{ firstName() }}! 🌱
+      </h1>
+      <p class="text-neutral-secondary text-sm mt-1">
+        {{ property().name }} —
+        {{ property().addressResponse.municipality }} •
+        {{ property().totalArea }} ha
+      </p>
+    </div>
+</div>

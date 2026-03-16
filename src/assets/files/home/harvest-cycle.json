@@ -1,0 +1,68 @@
+[
+    {
+      "id": 1,
+      "label": "Plantio",
+      "description": "Registre o início da safra e vincule insumos utilizados",
+      "color": "#66BB6A",
+      "angle": 0,
+      "metrics": [
+        { "label": "Em plantio", "value": "85" },
+        { "label": "Sementes", "value": "12 ton" }
+      ]
+    },
+    {
+      "id": 2,
+      "label": "Manejo",
+      "description": "Controle aplicações, irrigação e monitoramento contínuo",
+      "color": "#81C784",
+      "angle": 60,
+      "metrics": [
+        { "label": "Alertas", "value": "24" },
+        { "label": "Aplicações", "value": "156" }
+      ]
+    },
+    {
+      "id": 3,
+      "label": "Colheita",
+      "description": "Rastreie a produção por lote e calcule produtividade",
+      "color": "#FFB74D",
+      "angle": 120,
+      "metrics": [
+        { "label": "Em colheita", "value": "42" },
+        { "label": "Produtividade", "value": "+40%" }
+      ]
+    },
+    {
+      "id": 4,
+      "label": "Estoque",
+      "description": "Armazene e monitore a produção colhida em tempo real",
+      "color": "#FF9800",
+      "angle": 180,
+      "metrics": [
+        { "label": "Armazenado", "value": "3.5k ton" },
+        { "label": "Disponível", "value": "2.1k ton" }
+      ]
+    },
+    {
+      "id": 5,
+      "label": "Negociação",
+      "description": "Troque produção por insumos no marketplace barter",
+      "color": "#F57C00",
+      "angle": 240,
+      "metrics": [
+        { "label": "Ofertas ativas", "value": "87" },
+        { "label": "Negociadas", "value": "R$ 2.5M" }
+      ]
+    },
+    {
+      "id": 6,
+      "label": "Planejamento",
+      "description": "Organize o calendário de plantio e defina metas de produção",
+      "color": "#4CAF50",
+      "angle": 300,
+      "metrics": [
+        { "label": "Safras ativas", "value": "320" },
+        { "label": "Hectares", "value": "15k+" }
+      ]
+    }
+]

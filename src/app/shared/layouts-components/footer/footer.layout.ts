@@ -4,7 +4,7 @@ import { FooterBrand } from "./footer-components/footer-brand/footer-brand";
 import { FooterLinks } from "./footer-components/footer-links/footer-links";
 import { FooterBottom } from './footer-components/footer-bottom/footer-bottom';
 import { FooterSocial } from './footer-components/footer-social/footer-social';
-import { ICONS_FOOTER } from '../../../core/ui/icons/icons-layouts/icons.footer';
+import { ICONS_FOOTER } from '../../../core/ui/icons/icons-common/icons-layouts/icons.footer';
 import { Pattern } from "./footer-components/pattern/pattern";
 import footerData from '../../../../assets/files/footer/footer-links.json';
 import { FooterLink } from '../../../core/ui/types/footer/footer.link';

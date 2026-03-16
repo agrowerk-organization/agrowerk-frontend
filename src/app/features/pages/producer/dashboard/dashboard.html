@@ -1,1 +1,43 @@
-<p>dashboard works!</p>
+<div class="p-6 space-y-6 pb-[200px] lg:pb-6">
+
+    @if (loading()) {
+      <div class="flex items-center justify-center h-64">
+        <div class="animate-spin w-12 h-12 rounded-full
+                    border-4 border-button-main border-t-transparent">
+        </div>
+      </div>
+    }
+  
+    @else if (!hasProperty()) {
+      <app-onboarding-card />
+    }
+  
+    @else {
+      <app-welcome-banner
+        [name]="currentUser()?.name ?? ''"
+        [property]="activeProperty()!" />
+  
+      <app-property-selector
+        [properties]="properties()"
+        [activePropertyId]="activeProperty()!.id"
+        (propertyChange)="onPropertyChange($event)" />
+  
+      <app-alerts-card
+        [alerts]="weatherDashboard()?.activeAlerts ?? []" />
+  
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+  
+        <app-weather-card
+          [current]="weatherDashboard()?.current ?? null" />
+  
+        <app-season-card
+          [season]="activeSeason()" />
+  
+        <app-forecast-card
+          class="md:col-span-2"
+          [forecast]="weatherDashboard()?.dailyForecast ?? []" />
+  
+      </div>
+    }
+  
+</div>

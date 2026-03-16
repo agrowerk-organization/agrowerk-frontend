@@ -6,7 +6,7 @@ import { MeshGradient } from "../../../../shared/components/mesh-gradient/mesh-g
 import { Pattern } from "../../../../shared/components/pattern/pattern";
 import { Breadcrumb } from '../../../../shared/components/breadcrumb/breadcrumb';
 import { UserType } from '../../../../core/ui/types/user/user-type';
-import { ICONS_HOW_IT_WORKS } from '../../../../core/ui/icons/icons-how-it-works/icons.how-it-works';
+import { ICONS_HOW_IT_WORKS } from '../../../../core/ui/icons/icons-common/icons-how-it-works/icons.how-it-works';
 import { HowItWorksSchema } from '../../../../core/ui/schemas/how-it-works.schema';
 import howItWorksData from '../../../../../assets/files/how-it-works/how-it-works.json';
 import { UserTypeSelector } from "./how-it-works-components/user-type-selector/user-type-selector";

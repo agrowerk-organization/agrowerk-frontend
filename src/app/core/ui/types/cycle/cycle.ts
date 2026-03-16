@@ -4,6 +4,7 @@ export interface Cycle {
     description: string,
     color: string,
     angle: number,
+    route?: string,
     metrics?: {
       label: string;
       value: string;

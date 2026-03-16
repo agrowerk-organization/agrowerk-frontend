@@ -1,0 +1,80 @@
+{
+    "tabIcons": {
+      "producer": "TRACTOR",
+      "supplier": "WAREHOUSE"
+    },
+    "roleBenefits": {
+      "producer": {
+        "id": 1,
+        "title": "Para produtores rurais",
+        "subtitle": "Maximize sua produtividade e lucro",
+        "iconKey": "TRACTOR",
+        "benefits": [
+          {
+            "id": 1,
+            "title": "Reduza desperdicios",
+            "description": "Reduza desperdicios e aumente a produtividade.",
+            "iconKey": "WASTE",
+            "metric": { "value": "85%", "label": "menos desperdicio" }
+          },
+          {
+            "id": 2,
+            "title": "Economize custos",
+            "description": "Negocie diretamente no marketplace barter sem intermediários. Troque sua produção por insumos com economia real.",
+            "iconKey": "BARTER_PRODUCER",
+            "metric": { "value": "R$ 10.000", "label": "economia média" }
+          },
+          {
+            "id": 3,
+            "title": "Planeje sua produção",
+            "description": "Planeje melhor com estimativas precisas baseadas em clima, solo e histórico. Antecipe problemas antes que aconteçam.",
+            "iconKey": "SPROUT",
+            "metric": { "value": "78%", "label": "de precisão" }
+          },
+          {
+            "id": 4,
+            "title": "Observe em tempo real",
+            "description": "Visualize todos os KPIs da sua operação em um único lugar: estoque, safras, alertas e finanças integrados.",
+            "iconKey": "REAL_TIME",
+            "metric": { "value": "24/7", "label": "monitoramento" }
+          }
+        ]
+      },
+      "supplier": {
+        "id": 2,
+        "title": "Para fornecedores",
+        "subtitle": "Expanda seus negócios e reduza custos de operação",
+        "iconKey": "WAREHOUSE",
+        "benefits": [
+          {
+            "id": 1,
+            "title": "Acesse 100+ produtores ativos",
+            "description": "Conecte-se diretamente com uma base crescente de produtores qualificados em todo o Brasil sem intermediários.",
+            "iconKey": "USERS",
+            "metric": { "value": "100+", "label": "potenciais clientes" }
+          },
+          {
+            "id": 2,
+            "title": "Marketplace integrado",
+            "description": "Venda e troque produtos sem comissão de plataforma. Gerencie ofertas, negociações e contratos em um só lugar.",
+            "iconKey": "STORE",
+            "metric": { "value": "0%", "label": "de comissão" }
+          },
+          {
+            "id": 3,
+            "title": "Analise e planeje",
+            "description": "Entenda o que os produtores estão procurando com dashboards de demanda em tempo real e previsões de mercado.",
+            "iconKey": "MARKET_ANALYSIS",
+            "metric": { "value": "78%", "label": "de precisão" }
+          },
+          {
+            "id": 4,
+            "title": "Gestão de barter",
+            "description": "Controle total de operações de troca e créditos. Rastreie histórico, saldos e vencimentos automaticamente.",
+            "iconKey": "BARTER_MANAGEMENT",
+            "metric": { "value": "R$ 10.000", "label": "economia média" }
+          }
+        ]
+      }
+    }
+}

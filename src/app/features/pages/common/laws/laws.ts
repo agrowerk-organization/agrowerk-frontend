@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { LawResponse } from '../../../../core/types/law/law';
 import { LawService } from '../../../../core/services/laws.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { ICONS_LAWS } from '../../../../core/ui/icons/icons-laws/icons.laws';
+import { ICONS_LAWS } from '../../../../core/ui/icons/icons-common/icons-laws/icons.laws';
 import { ErrorState } from '../../../../shared/components/error-state/error-state';
 import { LoadingState } from '../../../../shared/components/loading-state/loading-state';
 import { MeshGradient } from '../../../../shared/components/mesh-gradient/mesh-gradient';

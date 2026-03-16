@@ -3,7 +3,7 @@ import { Component, input, signal, inject, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TeamMember } from '../../../../../../core/ui/types/about-us/team-member';
-import { ICONS_ABOUT_US } from '../../../../../../core/ui/icons/icons-about-us/icons.about-us';
+import { ICONS_ABOUT_US } from '../../../../../../core/ui/icons/icons-common/icons-about-us/icons.about-us';
 import { CardPerson } from "../../../../../../shared/components/cards/card-person/card-person";
 import { Carousel } from '../../../../../../shared/components/carousel/carousel';
 

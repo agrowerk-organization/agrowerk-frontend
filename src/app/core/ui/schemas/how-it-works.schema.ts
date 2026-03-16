@@ -1,6 +1,6 @@
 // how-it-works.schema.ts
 import { z } from 'zod';
-import { ICONS_HOW_IT_WORKS } from '../icons/icons-how-it-works/icons.how-it-works';
+import { ICONS_HOW_IT_WORKS } from '../icons/icons-common/icons-how-it-works/icons.how-it-works';
 
 const iconKeys = Object.keys(ICONS_HOW_IT_WORKS) as [string, ...string[]];
 

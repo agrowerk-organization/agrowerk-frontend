@@ -1,1 +1,83 @@
-<p>producer-layout works!</p>
+<div class="min-h-screen flex flex-col bg-[var(--color-background)]"
+     style="background: var(--color-background)">
+
+  <app-pattern />
+  <app-mesh-gradient />
+
+  <header class="flex items-center justify-between
+                 px-6 py-4 border-b border-white/10
+                 backdrop-blur-md sticky top-0 z-50"
+          style="background: var(--color-background)">
+
+    <div class="flex items-center gap-3">
+        <div class="flex items-center z-[1001]">
+              <img 
+                ngSrc="assets/images/agrowerk.png" 
+                alt="Logo Agrowerk" 
+                width="34" 
+                height="34" 
+                priority
+                class="w-27 h-27 lg:w-34 lg:h-34 cursor-pointer hover:scale-110"
+              />
+          </div>
+        <p class="text-neutral-secondary text-xs">Bem-vindo,</p>
+        <p class="text-neutral-primary font-bold">
+          {{ currentUser()?.name }}
+        </p>
+    </div>
+
+    <div class="flex items-center gap-3">
+      <button
+        (click)="showCycle.set(!showCycle())"
+        class="hidden lg:flex items-center gap-2 px-4 py-2
+               rounded-lg border border-white/20
+               text-neutral-secondary text-sm
+               hover:bg-white/10 transition-all">
+        {{ showCycle() ? 'Ocultar ciclo' : 'Ver ciclo' }}
+      </button>
+
+      <button [routerLink]="'/producer/profile'"
+              class="w-9 h-9 rounded-full bg-button-main
+                     flex items-center justify-center
+                     text-white font-bold text-sm">
+        {{ currentUser()?.name?.charAt(0)?.toUpperCase() }}
+      </button>
+    </div>
+  </header>
+
+  <!-- Body -->
+  <div class="flex flex-1 overflow-hidden">
+
+    <!-- Diagrama lateral — desktop -->
+    @if (showCycle()) {
+      <aside class="hidden lg:flex w-[480px] flex-shrink-0
+                     border-r border-white/10
+                     items-center justify-center p-4">
+        <app-cycle-diagram
+          [nodes]="cycleNodes"
+          [navigable]="true"
+          [showDetails]="false"
+          [activeNodeId]="activeNodeId()"
+          (nodeNavigate)="onNodeNavigate($event)" />
+      </aside>
+    }
+
+    <main class="flex-1 overflow-auto p-6">
+      <router-outlet />
+    </main>
+  </div>
+
+  <div class="lg:hidden fixed bottom-0 left-0 right-0
+              border-t border-white/10
+              h-[180px] flex items-center justify-center px-4"
+       style="background: var(--color-background)">
+    <app-cycle-diagram
+      [nodes]="cycleNodes"
+      [navigable]="true"
+      [showDetails]="false"
+      [activeNodeId]="activeNodeId()"
+      (nodeNavigate)="onNodeNavigate($event)" />
+  </div>
+
+  <div class="lg:hidden h-[180px]"></div>
+</div>

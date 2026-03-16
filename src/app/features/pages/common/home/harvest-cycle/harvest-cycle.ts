@@ -1,14 +1,13 @@
 import { Component, computed, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Cycle } from '../../../../../core/ui/types/cycle/cycle';
-import { CycleNode } from './harvest-cycle-components/cycle-node/cycle-node';
-import { CenterHub } from './harvest-cycle-components/center-hub/center-hub';
-import { NodeDetails } from './harvest-cycle-components/node-details/node-details';
 import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
-import { ICONS_HARVEST_CYCLE } from '../../../../../core/ui/icons/icons-home/icons.harvest-cycle';
+import { ICONS_HARVEST_CYCLE } from '../../../../../core/ui/icons/icons-common/icons-home/icons.harvest-cycle';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { Title } from "../../../../../shared/components/title/title";
 import { Subtitle } from '../../../../../shared/components/subtitle/subtitle';
+import CYCLE_DATA from './../.././../../../../assets/files/home/harvest-cycle.json';
+import { CycleDiagram } from '../../../../../shared/components/cycle-diagram/cycle-diagram';
 
 @Component({
   selector: 'app-harvest-cycle-diagram',
@@ -16,9 +15,7 @@ import { Subtitle } from '../../../../../shared/components/subtitle/subtitle';
   imports: [
     CommonModule,
     FontAwesomeModule,
-    CycleNode,
-    CenterHub,
-    NodeDetails,
+    CycleDiagram,
     Title,
     Subtitle
 ],
@@ -32,74 +29,7 @@ export class HarvestCycle {
 
   icons = ICONS_HARVEST_CYCLE;
 
-  cycleNodes: Cycle[] = [
-    {
-      id: 1,
-      label: 'Plantio',
-      description: 'Registre o início da safra e vincule insumos utilizados',
-      color: '#66BB6A',
-      angle: 0,
-      metrics: [
-        { label: 'Em plantio', value: '85' },
-        { label: 'Sementes', value: '12 ton' }
-      ]
-    },
-    {
-      id: 2,
-      label: 'Manejo',
-      description: 'Controle aplicações, irrigação e monitoramento contínuo',
-      color: '#81C784',
-      angle: 60,
-      metrics: [
-        { label: 'Alertas', value: '24' },
-        { label: 'Aplicações', value: '156' }
-      ]
-    },
-    {
-      id: 3,
-      label: 'Colheita',
-      description: 'Rastreie a produção por lote e calcule produtividade',
-      color: '#FFB74D',
-      angle: 120,
-      metrics: [
-        { label: 'Em colheita', value: '42' },
-        { label: 'Produtividade', value: '+40%' }
-      ]
-    },
-    {
-      id: 4,
-      label: 'Estoque',
-      description: 'Armazene e monitore a produção colhida em tempo real',
-      color: '#FF9800',
-      angle: 180,
-      metrics: [
-        { label: 'Armazenado', value: '3.5k ton' },
-        { label: 'Disponível', value: '2.1k ton' }
-      ]
-    },
-    {
-      id: 5,
-      label: 'Negociação',
-      description: 'Troque produção por insumos no marketplace barter',
-      color: '#F57C00',
-      angle: 240,
-      metrics: [
-        { label: 'Ofertas ativas', value: '87' },
-        { label: 'Negociadas', value: 'R$ 2.5M' }
-      ]
-    },
-    {
-      id: 6,
-      label: 'Planejamento',
-      description: 'Organize o calendário de plantio e defina metas de produção',
-      color: '#4CAF50',
-      angle: 300,
-      metrics: [
-        { label: 'Safras ativas', value: '320' },
-        { label: 'Hectares', value: '15k+' }
-      ]
-    }
-  ];
+  cycleNodes: Cycle[] = CYCLE_DATA;
 
   selectedNodeData = computed(() => {
     return this.cycleNodes.find(node => node.id === this.selectedNode());

@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, input, signal } from '@angular/core';
 import { AbstractControl, ReactiveFormsModule } from '@angular/forms';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
-import { ICONS_LOGIN } from '../../../../../../core/ui/icons/icons-login/icons.login';
+import { ICONS_LOGIN } from '../../../../../../core/ui/icons/icons-common/icons-login/icons.login';
 
 @Component({
   selector: 'app-form-input',

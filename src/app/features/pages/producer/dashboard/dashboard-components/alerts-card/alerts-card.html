@@ -1,0 +1,35 @@
+@if (hasAlerts()) {
+    <div class="space-y-2">
+      @for (alert of alerts(); track alert.id) {
+        <div class="flex items-start gap-3 p-4
+                    rounded-xl border transition-all"
+             [class]="alertClass(alert.severity)">
+  
+          <fa-icon [icon]="icons.TRIANGLE_EXCLAMATION"
+                   class="text-xl mt-0.5 flex-shrink-0
+                          animate-pulse" />
+  
+          <div class="flex-1">
+            <div class="flex items-center gap-2 mb-1">
+              <span class="text-xs font-bold px-2 py-0.5
+                           rounded-full border"
+                    [class]="alertClass(alert.severity)">
+                {{ alert.severityDisplayName }}
+              </span>
+              <p class="text-sm font-semibold">
+                {{ alert.alertTypeDisplayName }}
+              </p>
+            </div>
+            <p class="text-xs opacity-80">
+              {{ alert.description }}
+            </p>
+            @if (alert.recommendedActions) {
+              <p class="text-xs mt-1 opacity-70">
+                 {{ alert.recommendedActions }}
+              </p>
+            }
+          </div>
+        </div>
+      }
+    </div>
+  }

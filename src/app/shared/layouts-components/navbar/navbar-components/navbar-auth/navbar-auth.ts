@@ -2,7 +2,7 @@ import { Component, ElementRef, HostListener, inject, input, signal } from '@ang
 import { Router } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { LoginProfileOption } from '../../../../../core/types/auth/login.profile.option';
-import { ICONS_NAVBAR } from '../../../../../core/ui/icons/icons-layouts/icons.navbar';
+import { ICONS_NAVBAR } from '../../../../../core/ui/icons/icons-common/icons-layouts/icons.navbar';
 import { AuthService } from '../../../../../core/services/auth.service';
 import { UserProfile } from '../../../../../core/types/user/user.profile';
 
