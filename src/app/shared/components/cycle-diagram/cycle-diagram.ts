@@ -28,7 +28,8 @@ export class CycleDiagram {
   icons = ICONS_HARVEST_CYCLE;
 
   selectedNodeData = computed(() => {
-    return this.nodes().find(node => node.id === this.activeNodeId());
+    const id = this.selectedNode();
+    return this.nodes().find(node => node.id === id);
   });
 
   constructor() {

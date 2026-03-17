@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit, computed, inject, signal } from '@angular/core';
 import { forkJoin, catchError, of } from 'rxjs';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { Router } from '@angular/router';
 import { AuthService } from '../../../../core/services/auth.service';
 import { PropertyService } from '../../../../core/services/property.service';
 import { WeatherService } from '../../../../core/services/weather.service';
@@ -16,6 +17,10 @@ import { SeasonCard } from './dashboard-components/season-card/season-card';
 import { ForecastCard } from './dashboard-components/forecast-card/forecast-card';
 import { AlertsCard } from './dashboard-components/alerts-card/alerts-card';
 import { OnboardingCard } from './dashboard-components/onboarding-card/onboarding-card';
+import { LayoutStateService } from '../../../../core/services/layout-state.service';
+
+import { Cycle } from '../../../../core/ui/types/cycle/cycle';
+import { CycleDiagram } from '../../../../shared/components/cycle-diagram/cycle-diagram';
 
 @Component({
   selector: 'app-producer-dashboard',
@@ -28,7 +33,8 @@ import { OnboardingCard } from './dashboard-components/onboarding-card/onboardin
     SeasonCard,
     ForecastCard,
     AlertsCard,
-    OnboardingCard
+    OnboardingCard,
+    CycleDiagram
   ],
   templateUrl: './dashboard.html'
 })
@@ -37,6 +43,10 @@ export class ProducerDashboard implements OnInit {
   private propertyService = inject(PropertyService);
   private seasonService = inject(SeasonService);
   private authService = inject(AuthService);
+  private router = inject(Router);
+
+  layoutState = inject(LayoutStateService);
+
 
   loading = signal(true);
   currentUser = toSignal(this.authService.currentUser$);
@@ -49,6 +59,81 @@ export class ProducerDashboard implements OnInit {
 
   ngOnInit() {
     this.loadDashboard();
+  }
+
+  cycleNodes: Cycle[] = [
+    {
+      id: 1,
+      label: 'Plantio',
+      route: '/producer/plantings',
+      description: 'Registre o início da safra e vincule insumos',
+      color: '#66BB6A',
+      angle: 0,
+      metrics: []
+    },
+    {
+      id: 2,
+      label: 'Manejo',
+      route: '/producer/fields',
+      description: 'Controle aplicações e monitoramento',
+      color: '#81C784',
+      angle: 60,
+      metrics: []
+    },
+    {
+      id: 3,
+      label: 'Colheita',
+      route: '/producer/harvests',
+      description: 'Rastreie a produção por lote',
+      color: '#FFB74D',
+      angle: 120,
+      metrics: []
+    },
+    {
+      id: 4,
+      label: 'Estoque',
+      route: '/producer/stock',
+      description: 'Monitore a produção colhida',
+      color: '#FF9800',
+      angle: 180,
+      metrics: []
+    },
+    {
+      id: 5,
+      label: 'Negociação',
+      route: '/producer/barter',
+      description: 'Marketplace barter',
+      color: '#F57C00',
+      angle: 240,
+      metrics: []
+    },
+    {
+      id: 6,
+      label: 'Planejamento',
+      route: '/producer/seasons',
+      description: 'Calendário e metas de produção',
+      color: '#4CAF50',
+      angle: 300,
+      metrics: []
+    }
+  ];
+
+  activeNodeId = computed(() => {
+    const url = this.router.url;
+    const map: Record<string, number> = {
+      '/producer/plantings': 1,
+      '/producer/fields': 2,
+      '/producer/harvests': 3,
+      '/producer/stock': 4,
+      '/producer/barter': 5,
+      '/producer/seasons': 6
+    };
+    return Object.entries(map)
+      .find(([path]) => url.includes(path))?.[1] ?? null;
+  });
+  
+  onNodeNavigate(route: string): void {
+    this.router.navigate([route]);
   }
 
   loadDashboard() {

@@ -13,10 +13,9 @@ import { environment_development } from '../../../environment/environment.dev';
 export class AuthService {
   private readonly apiUrl = environment_development.apiUrl;
 
-  private isLoggedSubject = new BehaviorSubject<boolean>(false);
+  private isLoggedSubject = new BehaviorSubject<boolean | null>(null);
   public isLogged$ = this.isLoggedSubject.asObservable();
 
-  // ← adiciona isso
   private currentUserSubject = new BehaviorSubject<LoginResponse | null>(null);
   public currentUser$ = this.currentUserSubject.asObservable();
 
@@ -103,7 +102,7 @@ export class AuthService {
     return this.currentUserSubject.value;
   }
 
-  isLogged(): boolean {
+  isLogged(): boolean | null {
     return this.isLoggedSubject.value;
   }
 

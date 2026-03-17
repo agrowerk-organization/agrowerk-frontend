@@ -1,99 +1,102 @@
 <div class="w-full h-full">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center h-full">
-  
-      <div class="flex items-center justify-center">
-        <div class="relative w-full max-w-2xl aspect-square">
-  
-          <div class="absolute inset-0 rounded-full"
-            style="
-              background-image: url('/assets/svgs/rotating-circle.svg');
-              background-size: contain;
-              background-repeat: no-repeat;
-              background-position: center;
-              animation: spin 60s linear infinite;
-              will-change: transform;">
-          </div>
-  
-          <div class="absolute top-1/2 left-1/2 
-                      -translate-x-1/2 -translate-y-1/2 z-20">
-            <app-center-hub 
-              (click)="selectNode(null)" 
-              class="cursor-pointer" />
-          </div>
-  
-          @for (node of nodes(); track node.id) {
-            <app-cycle-node
-              [node]="node"
-              [isSelected]="selectedNode() === node.id"
-              [isHovered]="hoveredNode() === node.id"
-              (nodeClick)="selectNode($event)"
-              (nodeHover)="hoveredNode.set($event)" />
-          }
+  <div
+    [class]="showDetails()
+      ? 'grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center h-full'
+      : 'flex items-center justify-center w-full h-full'">
+
+    <div class="flex items-center justify-center w-full">
+      <div class="relative w-full max-w-lg aspect-square overflow-visible">
+
+        <div class="absolute inset-0 rounded-full overflow-visible"
+          style="
+            background-image: url('/assets/svgs/rotating-circle.svg');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            animation: spin 60s linear infinite;
+            will-change: transform;">
         </div>
+
+        <div class="absolute top-1/2 left-1/2 
+                    -translate-x-1/2 -translate-y-1/2 z-20">
+          <app-center-hub 
+            (click)="selectNode(null)" 
+            class="cursor-pointer" />
+        </div>
+
+        @for (node of nodes(); track node.id) {
+          <app-cycle-node
+            [node]="node"
+            [isSelected]="selectedNode() === node.id"
+            [isHovered]="hoveredNode() === node.id"
+            (nodeClick)="selectNode($event)"
+            (nodeHover)="hoveredNode.set($event)" />
+        }
       </div>
-  
-      @if (showDetails()) {
-        <div class="flex items-center justify-center lg:justify-start">
-  
-          @if (selectedNodeData(); as selected) {
-            <div class="w-full max-w-md lg:max-w-2xl">
-              <app-node-details [node]="selected" />
-            </div>
-  
-          } @else {
-            <div class="w-full max-w-md lg:max-w-3xl rounded-3xl p-8 
-                        transition-all duration-500 hover:scale-[1.02] 
-                        relative overflow-hidden"
-                 [style]="getGlassContainerStyle()">
-  
-              <div class="absolute inset-x-0 top-0 h-px 
-                          bg-gradient-to-r from-transparent 
-                          via-white/30 to-transparent">
-              </div>
-  
-              <div class="text-center lg:text-left relative z-10">
-                <div class="inline-flex items-center justify-center 
-                            w-16 h-16 rounded-2xl mb-6 shadow-[0_0_30px_rgba(76,175,80,0.3)]"
-                     style="background: #4CAF50;">
-                  <fa-icon [icon]="icons.GEAR"
-                           class="text-3xl text-white 
-                                  animate-[spin_4s_linear_infinite]" />
-                </div>
-  
-                <h3 class="text-2xl md:text-3xl font-extrabold 
-                           text-white mb-3 tracking-tight">
-                  Gerencie seu
-                  <span class="text-primary">Ciclo Completo</span>
-                </h3>
-  
-                <p class="text-neutral-secondary/80 mb-8 
-                          text-base md:text-xl leading-relaxed font-medium">
-                  Selecione uma etapa no diagrama ao lado para acessar
-                  métricas, ações rápidas e o status da sua produção
-                  em tempo real.
-                </p>
-  
-                <div class="flex flex-wrap gap-3 
-                            justify-center lg:justify-start">
-                  @for (node of nodes().slice(0, 6); track node.id) {
-                    <button
-                      (click)="selectNode(node.id)"
-                      class="inline-flex items-center gap-2 px-5 py-2.5 
-                             rounded-xl text-xl font-bold transition-all 
-                             duration-300 hover:-translate-y-1 
-                             active:scale-95 border cursor-pointer"
-                      [style]="getQuickButtonStyle(node.color)">
-                      <fa-icon [icon]="getEmoji(node.label)"
-                               class="text-xl" />
-                      {{ node.label }}
-                    </button>
-                  }
-                </div>
-              </div>
-            </div>
-          }
-        </div>
-      }
-  
     </div>
+
+    @if (showDetails()) {
+      <div class="flex items-center justify-center lg:justify-start">
+
+        @if (selectedNodeData(); as selected) {
+          <div class="w-full max-w-md lg:max-w-2xl">
+            <app-node-details [node]="selected" />
+          </div>
+
+        } @else {
+          <div class="w-full max-w-md lg:max-w-3xl rounded-3xl p-8 
+                      transition-all duration-500 hover:scale-[1.02] 
+                      relative overflow-hidden"
+               [style]="getGlassContainerStyle()">
+
+            <div class="absolute inset-x-0 top-0 h-px 
+                        bg-gradient-to-r from-transparent 
+                        via-white/30 to-transparent">
+            </div>
+
+            <div class="text-center lg:text-left relative z-10">
+              <div class="inline-flex items-center justify-center 
+                          w-16 h-16 rounded-2xl mb-6 shadow-[0_0_30px_rgba(76,175,80,0.3)]"
+                   style="background: #4CAF50;">
+                <fa-icon [icon]="icons.GEAR"
+                         class="text-3xl text-white 
+                                animate-[spin_4s_linear_infinite]" />
+              </div>
+
+              <h3 class="text-2xl md:text-3xl font-extrabold 
+                         text-white mb-3 tracking-tight">
+                Gerencie seu
+                <span class="text-primary">Ciclo Completo</span>
+              </h3>
+
+              <p class="text-neutral-secondary/80 mb-8 
+                        text-base md:text-xl leading-relaxed font-medium">
+                Selecione uma etapa no diagrama ao lado para acessar
+                métricas, ações rápidas e o status da sua produção
+                em tempo real.
+              </p>
+
+              <div class="flex flex-wrap gap-3 
+                          justify-center lg:justify-start">
+                @for (node of nodes().slice(0, 6); track node.id) {
+                  <button
+                    (click)="selectNode(node.id)"
+                    class="inline-flex items-center gap-2 px-5 py-2.5 
+                           rounded-xl text-xl font-bold transition-all 
+                           duration-300 hover:-translate-y-1 
+                           active:scale-95 border cursor-pointer"
+                    [style]="getQuickButtonStyle(node.color)">
+                    <fa-icon [icon]="getEmoji(node.label)"
+                             class="text-xl" />
+                    {{ node.label }}
+                  </button>
+                }
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    }
+
+  </div>
 </div>

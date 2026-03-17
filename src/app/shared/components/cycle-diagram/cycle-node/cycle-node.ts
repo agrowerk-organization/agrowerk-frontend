@@ -48,14 +48,14 @@ export class CycleNode implements OnInit, OnDestroy {
 
   position = computed(() => {
     const angle = this.node().angle;
-    const radius = this.isMobile() ? 30 : 40;
+    const radius = this.isMobile() ? 32 : 38; 
     const radian = (angle - 90) * (Math.PI / 180);
     return {
       x: `calc(50% + ${radius * Math.cos(radian)}%)`,
       y: `calc(50% + ${radius * Math.sin(radian)}%)`
     };
   });
-
+  
   labelPosition = computed(() => '-45%');
 
   lineLength = computed(() => Math.round(1000 * 0.40));
