@@ -12,6 +12,6 @@ import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 export class ButtonPages {
   icon = input.required<IconDefinition>();
   text = input.required<string>();
-  action = input.required<() => void>();
+  action = input<() => void>();
   width = input<string>();
 }

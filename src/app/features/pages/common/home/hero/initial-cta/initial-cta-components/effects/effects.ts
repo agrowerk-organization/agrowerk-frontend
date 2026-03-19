@@ -6,7 +6,6 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './effects.html',
-  styleUrl: './effects.css',
 })
 export class Effects {
 

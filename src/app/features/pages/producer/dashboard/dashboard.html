@@ -1,77 +1,84 @@
 @if (loading()) {
-  <div class="flex items-center justify-center h-[calc(100vh-100px)]">
-    <div class="animate-spin w-12 h-12 rounded-full
-                border-4 border-button-main border-t-transparent">
+    <div class="flex items-center justify-center h-[calc(100vh-100px)]">
+      <div class="animate-spin w-12 h-12 rounded-full
+                  border-4 border-button-main border-t-transparent">
+      </div>
     </div>
-  </div>
-}
+  }
 
-@else if (!hasProperty()) {
-  <app-onboarding-card />
-}
+  @else if (!hasProperty()) {
+    <app-onboarding-card />
+  }
 
-@else {
+  @else {
 
-  @if (layoutState.showCycle()) {
+    @if (layoutState.showCycle()) {
 
-    <!-- Desktop: largura total, diagrama + card lado a lado -->
-    <div class="hidden lg:flex items-center justify-center
-                w-full h-[calc(100vh-100px)] px-8 overflow-visible">
-      <div class="w-full max-w-7xl h-full">
+      <div class="hidden lg:flex items-center justify-center
+                  w-full h-[calc(100vh-100px)] px-8 overflow-visible">
+        <div class="w-full max-w-7xl h-full">
+          <app-cycle-diagram
+            [nodes]="cycleNodes"
+            [navigable]="true"
+            [showDetails]="true"
+            [activeNodeId]="activeNodeId()"
+            (nodeNavigate)="onNodeNavigate($event)" />
+        </div>
+      </div>
+    
+      <div class="lg:hidden fixed bottom-0 left-0 right-0
+                  border-t border-white/10 h-[180px]
+                  flex items-center justify-center px-4"
+          style="background: var(--color-background)">
         <app-cycle-diagram
           [nodes]="cycleNodes"
           [navigable]="true"
-          [showDetails]="true"
+          [showDetails]="false"
           [activeNodeId]="activeNodeId()"
           (nodeNavigate)="onNodeNavigate($event)" />
       </div>
-    </div>
-  
-    <!-- Mobile: diagrama fixo embaixo -->
-    <div class="lg:hidden fixed bottom-0 left-0 right-0
-                border-t border-white/10 h-[180px]
-                flex items-center justify-center px-4"
-         style="background: var(--color-background)">
-      <app-cycle-diagram
-        [nodes]="cycleNodes"
-        [navigable]="true"
-        [showDetails]="false"
-        [activeNodeId]="activeNodeId()"
-        (nodeNavigate)="onNodeNavigate($event)" />
-    </div>
-    <div class="lg:hidden h-[180px]"></div>
+      <div class="lg:hidden h-[180px]"></div>
 
-  } @else {
+    } @else {
+      <div class="p-6 space-y-6 pb-[200px] lg:pb-6">
+    
+        @if (activeProperty(); as property) {
+    
+          <app-welcome-banner
+            [property]="property" />
+      
+    
+          <app-property-selector
+            [properties]="properties()"
+            [activePropertyId]="property.id"
+            (propertyChange)="onPropertyChange($event)" />
+    
+          <app-alerts-card
+            [alerts]="weatherDashboard()?.activeAlerts ?? []" />
+    
+          <app-update-branding
+            [weatherDashboard]="weatherDashboard()" />
 
-    <div class="p-6 space-y-6 pb-[200px] lg:pb-6">
-
-      <app-welcome-banner
-        [name]="currentUser()?.name ?? ''"
-        [property]="activeProperty()!" />
-
-      <app-property-selector
-        [properties]="properties()"
-        [activePropertyId]="activeProperty()!.id"
-        (propertyChange)="onPropertyChange($event)" />
-
-      <app-alerts-card
-        [alerts]="weatherDashboard()?.activeAlerts ?? []" />
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-
-        <app-weather-card
-          [current]="weatherDashboard()?.current ?? null" />
-
-        <app-season-card
-          [season]="activeSeason()" />
-
-        <app-forecast-card
-          class="md:col-span-2"
-          [forecast]="weatherDashboard()?.dailyForecast ?? []" />
-
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <app-weather-card
+              [current]="weatherDashboard()?.current ?? null" />
+            <app-season-card
+              [season]="activeSeason()" />
+            <app-forecast-card
+              class="md:col-span-2"
+              [forecast]="weatherDashboard()?.dailyForecast ?? []" />
+          
+            <app-statistics-card
+              class="md:col-span-2"
+              [statistics]="weatherDashboard()?.statistics ?? null" />
+            </div>
+    
+        } @else {
+          <div class="flex items-center justify-center h-40">
+            <div class="animate-spin w-8 h-8 rounded-full
+                        border-4 border-button-main border-t-transparent"></div>
+          </div>
+        }
       </div>
-    </div>
-
-  }
-
+    }
 }

@@ -1,0 +1,66 @@
+@if (statistics(); as stats) {
+    <div class="group relative overflow-hidden rounded-3xl
+                bg-neutral-primary border-3 border-primary/70
+                transition-all duration-300 hover:border-primary
+                hover:shadow-xl hover:-translate-y-1 animate-fadeInUp
+                shadow-xl shadow-primary/30">
+  
+      <div class="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
+        <div class="absolute top-0 left-0 w-48 h-48 bg-primary/20 rounded-full blur-3xl"></div>
+      </div>
+  
+      <div class="relative z-10 p-8">
+  
+        <div class="flex items-center gap-4 mb-8">
+          <div class="flex items-center justify-center w-14 h-14 rounded-xl shadow-lg
+                      bg-gradient-to-br to-button-second
+                      group-hover:scale-110 transition-transform duration-300">
+            <fa-icon [icon]="icons.CHART_LINE" class="text-3xl text-neutral-secondary" />
+          </div>
+          <h3 class="text-2xl sm:text-4xl font-bold text-primary">Estatísticas</h3>
+          <span class="text-sm sm:text-xl font-bold text-secondary/90 ml-auto">Últimos 7 dias</span>
+        </div>
+  
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 border-t border-primary/90 pt-6">
+          @for (stat of [
+            { label: 'Temp. média',   value: (stats.avgTemperatureLast7Days || '0.0'     | number:'1.1-1') + '°C',  icon: icons.TEMPERATURE_HALF,     color: 'text-orange-400' },
+            { label: 'Umidade média', value: (stats.avgHumidityLast7Days    ||  '0.0'    | number:'1.0-0') + '%',   icon: icons.DROPLET,              color: 'text-blue-400'   },
+            { label: 'Chuva 7d',      value: (stats.totalRainfallLast7Days  ||  '0.0'    | number:'1.1-1') + ' mm', icon: icons.DROPLET,              color: 'text-blue-300'   },
+            { label: 'Chuva 30d',     value: (stats.totalRainfallLast30Days ||  '0.0'     | number:'1.1-1') + ' mm', icon: icons.DROPLET,              color: 'text-cyan-400'   },
+            { label: 'Evapotrans.',   value: (stats.evapotranspirationTotal7d  || '0.0'  | number:'1.1-1') + ' mm', icon: icons.SUN,                  color: 'text-yellow-400' },
+            { label: 'Alertas',       value: stats.totalAlerts + '',                                         icon: icons.TRIANGLE_EXCLAMATION, color: stats.criticalAlerts > 0 ? 'text-red-400' : 'text-yellow-400' }
+          ]; track stat.label) {
+            <div class="flex flex-col items-center gap-1 p-3 rounded-xl
+                        bg-neutral-primary border-2 border-primary/90
+                        hover:border-primary transition-all duration-300
+                        shadow-lg shadow-primary/40">
+              <fa-icon [icon]="stat.icon" [class]="'text-xl sm:text-2xl ' + stat.color" />
+              <p [class]="'text-lg sm:text-xl uppercase tracking-wider font-semibold ' + stat.color">
+                {{ stat.label }}
+              </p>
+              <p class="font-extrabold text-primary text-lg sm:text-xl">{{ stat.value }}</p>
+              @if (stat.label === 'Alertas' && stats.criticalAlerts > 0) {
+                <span class="text-lg text-red-400">{{ stats.criticalAlerts }} críticos</span>
+              }
+            </div>
+          }
+  
+          <div class="flex flex-col items-center gap-1 p-3 rounded-xl
+                      bg-neutral-primary border-2 border-primary/90
+                      hover:border-primary transition-all duration-300
+                      shadow-lg shadow-primary/40
+                      col-span-2 md:col-span-3 lg:col-span-1">
+            <fa-icon [icon]="icons.SEEDLING" [class]="'text-xl sm:text-2xl ' + stressColor(stats.waterStressLevel)" />
+            <p [class]="'text-lg sm:text-xl uppercase tracking-wider font-semibold ' + stressColor(stats.waterStressLevel)">
+              Estresse hídrico
+            </p>
+            <p [class]="'font-extrabold text-lg sm:text-xl ' + stressColor(stats.waterStressLevel)">
+              {{ stressLabel(stats.waterStressLevel) }}
+            </p>
+            <span class="text-sm sm:text-lg text-secondary/90">{{ stats.waterStressIndex | number:'1.1-1' }}</span>
+          </div>
+  
+        </div>
+      </div>
+    </div>
+}

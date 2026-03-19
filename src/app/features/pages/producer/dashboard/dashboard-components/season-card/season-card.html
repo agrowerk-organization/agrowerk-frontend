@@ -1,92 +1,103 @@
-<div class="group relative overflow-hidden transition-all duration-500 hover:-translate-y-2"
-     style="background: rgba(13, 20, 15, 0.9);
-            backdrop-filter: blur(24px) saturate(160%);
-            border: 2px solid #4CAF5080;
-            box-shadow: 0 12px 40px rgba(0,0,0,0.5), 0 0 20px #4CAF5015;
-            border-radius: 24px;">
+<div class="group relative overflow-hidden rounded-3xl
+            bg-neutral-primary border-3 border-primary/70
+            transition-all duration-300 hover:border-primary
+            shadow-2xl shadow-primary/30
+            hover:shadow-xl hover:-translate-y-1 animate-fadeInUp">
 
-  <div class="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent 
-              opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+  <div class="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
+    <div class="absolute bottom-0 right-0 w-48 h-48 bg-primary/60 rounded-full blur-3xl"></div>
   </div>
 
   <div class="relative z-10 p-8">
-
     <div class="flex items-center justify-between mb-6">
-      <div class="flex items-center gap-3">
-        <div class="w-12 h-12 flex items-center justify-center transition-all duration-300 group-hover:scale-110"
-             style="background: rgba(13, 20, 15, 0.85);
-                    backdrop-filter: blur(12px);
-                    border: 1px solid #4CAF50;
-                    box-shadow: 0 4px 15px rgba(0,0,0,0.4), 0 0 10px #4CAF5033;
-                    border-radius: 12px;">
-          <fa-icon [icon]="icons.SEEDLING" class="text-xl text-primary transition-transform duration-500 group-hover:rotate-[360deg]" />
+      <div class="flex items-center gap-4">
+        <div class="flex items-center justify-center w-14 h-14 rounded-xl shadow-lg
+                    bg-gradient-to-br to-button-second
+                    group-hover:scale-110 transition-transform duration-300">
+          <fa-icon [icon]="icons.SEEDLING" class="text-4xl text-neutral-secondary" />
         </div>
-        <h3 class="font-bold text-lg text-neutral-tertiary group-hover:text-primary transition-colors duration-300">
-          Safra ativa
-        </h3>
+        <h3 class="text-2xl sm:text-4xl font-bold text-primary">Safra ativa</h3>
       </div>
       <a routerLink="/producer/seasons"
-         class="text-xl text-primary hover:text-primary/80 transition-colors px-3 py-3 rounded-full rounded-2xl"
-         style="background: rgba(13,20,15,0.85); border: 1px solid #4CAF5040;">
+         class="text-xl sm:text-2xl font-bold text-primary px-4 py-2 rounded-xl
+                bg-neutral-primary border-3 border-primary/50
+                hover:border-primary transition-all duration-300">
         Ver todas
       </a>
     </div>
 
-    @if (hasSeason(); as s) {
-      <div class="space-y-4">
+    @if (hasSeason()) {
+      @let s = season()!;
 
-        <div class="flex items-center gap-3">
-          <span class="w-2.5 h-2.5 rounded-full bg-green-400 animate-pulse flex-shrink-0"></span>
-          <p class="font-bold text-neutral-tertiary text-xl">{{ season()!.name }}</p>
+      <div class="mb-4">
+        @if (s.seasonStatus === 'IN_PROGRESS') {
+          <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full
+                       bg-primary/60 border border-primary/40 text-primary
+                       text-sm font-semibold">
+            <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+            Em andamento
+          </span>
+        } @else if (s.seasonStatus === 'PLANNED') {
+          <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full
+                       bg-yellow-500/20 border border-yellow-500/40 text-yellow-400
+                       text-lg sm:text-xl font-semibold">
+            <span class="w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-yellow-400"></span>
+            Planejada
+          </span>
+        }
+      </div>
+
+      <p class="text-xl sm:text-2xl font-bold text-secondary mb-4">{{ s.name }}</p>
+
+      <div class="grid grid-cols-2 gap-3 pt-4 border-t border-secondary/40 items-center">
+        <div>
+          <p class="text-lg sm:text-xl text-neutral-secondary/90 mb-1">Início</p>
+          <p class="text-base font-semibold text-secondary">
+            {{ s.startDate | date: 'dd/MM/yyyy' }}
+          </p>
         </div>
-
-        <div class="grid grid-cols-2 gap-3">
-          @for (date of [
-            { label: 'Início', value: season()!.startDate },
-            { label: 'Término', value: season()!.endDate }
-          ]; track date.label) {
-            <div class="p-4 rounded-xl"
-                 style="background: rgba(13,20,15,0.85);
-                        border: 1px solid #4CAF5040;
-                        box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
-              <p class="text-xs text-neutral-secondary mb-1">{{ date.label }}</p>
-              <p class="font-semibold text-neutral-tertiary text-sm">
-                {{ date.value | date:'dd/MM/yyyy' }}
-              </p>
-            </div>
-          }
+            
+        <div>
+          <p class="text-lg sm:text-xl text-neutral-secondary/90 mb-1">Fim</p>
+          <p class="text-base font-semibold text-secondary">
+            {{ s.endDate | date: 'dd/MM/yyyy' }}
+          </p>
         </div>
+      </div>
 
-        <a routerLink="/producer/plantings"
-           class="flex items-center justify-between p-4 rounded-xl
-                  transition-all duration-300 hover:scale-[1.02] hover:-translate-y-0.5"
-           style="background: rgba(13,20,15,0.85);
-                  border: 1px solid #4CAF5066;
-                  box-shadow: 0 4px 15px rgba(0,0,0,0.3), 0 0 10px #4CAF5020;">
-          <span class="text-sm text-primary font-semibold">Ver plantios ativos</span>
-          <fa-icon [icon]="icons.ARROW_RIGHT" class="text-primary" />
-        </a>
-
+      <div class="flex flex-col sm:flex-row gap-3 mt-6">
+        <app-button-pages
+          text="Nova Colheita"
+          [icon]="icons.TRACTOR"
+          width="100%"
+          (click)="addHarvest()">
+        </app-button-pages>
+        <app-button-pages
+          text="Relatórios"
+          [icon]="icons.FILE_TEXT"
+          width="100%"
+          (click)="report()">
+        </app-button-pages>
       </div>
 
     } @else {
-      <div class="flex flex-col items-center justify-center h-32 gap-3 text-center">
-        <fa-icon [icon]="icons.SEEDLING" class="text-3xl text-neutral-secondary opacity-50" />
-        <p class="text-neutral-secondary text-xl sm:text-2xl">Nenhuma safra ativa</p>
-        <a routerLink="/producer/seasons"
-           class="text-2xl text-primary hover:underline">
-          Criar safra
-        </a>
+      <p class="text-neutral-secondary/60 text-base mb-6">
+        Nenhuma safra em andamento.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 animate-fadeInUp">
+        <app-button-pages
+          text="Criar safra"
+          [icon]="icons.PLUS"
+          width="100%"
+          (click)="createSeason()">
+        </app-button-pages>
+        <app-button-pages
+          text="Importar"
+          [icon]="icons.UPLOAD"
+          width="100%"
+          (click)="importData()">
+        </app-button-pages>
       </div>
     }
-
-    <div class="absolute bottom-4 right-4 opacity-0 group-hover:opacity-40 
-                transition-all duration-300 group-hover:translate-x-2">
-      <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-              d="M17 8l4 4m0 0l-4 4m4-4H3" />
-      </svg>
-    </div>
-
   </div>
 </div>

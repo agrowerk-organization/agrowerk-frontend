@@ -1,40 +1,66 @@
-<!-- forecast-card.html -->
 @if (hasForecast()) {
-    <div class="rounded-2xl p-5 bg-white/5
-                border border-white/10 backdrop-blur-md">
-  
-      <h3 class="font-bold text-neutral-primary mb-4">
-        Previsão 7 dias
-      </h3>
-  
-      <div class="grid grid-cols-7 gap-2">
+  <div class="group relative overflow-hidden rounded-3xl
+              bg-neutral-primary border-3 border-primary/70
+              transition-all duration-300 hover:border-primary
+              hover:shadow-xl hover:-translate-y-1 animate-fadeInUp
+              shadow-xl shadow-primary/30">
+
+    <div class="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
+      <div class="absolute bottom-0 left-0 w-48 h-48 bg-primary/20 rounded-full blur-3xl"></div>
+    </div>
+
+    <div class="relative z-10 p-8">
+
+      <div class="flex items-center gap-4 mb-8">
+        <div class="flex items-center justify-center w-26 h-12 sm:w-16 sm:h-16 rounded-xl shadow-lg
+                    bg-gradient-to-br to-button-second
+                    group-hover:scale-110 transition-transform duration-300">
+          <img [src]="getIconPath().path" class="w-8 h-8 sm:w-12 sm:h-12 drop-shadow-lg" alt="forecast" />
+        </div>
+        <h3 class="text-2xl sm:text-4xl font-bold text-primary">Previsão para hoje e os próximos 7 dias</h3>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-7 gap-3">
         @for (day of days(); track day.id) {
-          <div class="flex flex-col items-center gap-1
-                      p-2 rounded-lg bg-white/5 text-center">
-  
-            <p class="text-xs text-neutral-secondary">
+          <div class="flex flex-col items-center gap-2 p-2 rounded-xl
+                      bg-neutral-primary border-2 border-primary/90
+                      hover:border-primary transition-all duration-300
+                      shadow-lg shadow-primary/40">
+
+            <p class="text-lg sm:text-xl text-neutral-secondary/80 uppercase tracking-wider font-semibold">
               {{ day.forecastDate | date:'EEE':'':'pt-BR' }}
             </p>
-  
-            <span class="text-2xl">
-              {{ getIconPath() }}
-            </span>
-  
-            <p class="text-xs font-bold text-neutral-primary">
-              {{ day.temperatureMax | number:'1.0-0' }}°
-            </p>
-  
-            <p class="text-xs text-neutral-secondary">
-              {{ day.temperatureMin | number:'1.0-0' }}°
-            </p>
-  
+
+            <img [src]="getWeatherByCode(day.weatherCode).path"
+                 class="w-10 h-10 sm:w-14 sm:h-14 drop-shadow-lg"
+                 alt="weather icon" />
+
+            <div class="flex items-center gap-1">
+              <span class="text-xl sm:text-2xl text-secondary">↑</span>
+              <p class="font-extrabold text-secondary text-xl sm:text-2xl leading-none">
+                {{ day.temperatureMax | number:'1.0-0' }}°
+              </p>
+            </div>
+
+            <div class="flex items-center gap-1">
+              <span class="text-xl sm:text-2xl font-extrabold text-primary">↓</span>
+              <p class="text-xl sm:text-2xl font-extrabold text-primary leading-none">
+                {{ day.temperatureMin | number:'1.0-0' }}°
+              </p>
+            </div>
+
             @if (day.rainfallProbability > 0) {
-              <p class="text-xs text-blue-400">
-                {{ day.rainfallProbability }}%
+              <p class="text-lg sm:text-xl font-extrabold"
+                 [class.text-blue-400]="day.rainfallProbability >= 50"
+                 [class.text-blue-400/50]="day.rainfallProbability < 50">
+                💧{{ day.rainfallProbability }}%
               </p>
             }
+
           </div>
         }
       </div>
+
     </div>
+  </div>
 }

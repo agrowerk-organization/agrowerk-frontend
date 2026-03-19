@@ -4,8 +4,8 @@ export interface WeatherStatistics {
     totalRainfallLast30Days: number;
     avgHumidityLast7Days: number;
     totalAlerts: number;
-    criticalAlerts: number; 
+    criticalAlerts: number;
     waterStressIndex: number;
     waterStressLevel: string;
-    evapotranspirationTotal7d: number;
+    evapotranspirationTotal7d: number; 
 }

@@ -1,11 +1,11 @@
 import { inject, Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, throwError } from 'rxjs';
-import { catchError, tap } from 'rxjs';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { catchError, switchMap, tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { LoginRequest } from '../types/auth/login.request';
-import { LoginResponse } from '../types/auth/login.response';
 import { environment_development } from '../../../environment/environment.dev';
+import { UserInfo } from '../types/user/user.info';
 
 @Injectable({
   providedIn: 'root'
@@ -16,32 +16,35 @@ export class AuthService {
   private isLoggedSubject = new BehaviorSubject<boolean | null>(null);
   public isLogged$ = this.isLoggedSubject.asObservable();
 
-  private currentUserSubject = new BehaviorSubject<LoginResponse | null>(null);
+  private currentUserSubject = new BehaviorSubject<UserInfo | null>(null);
   public currentUser$ = this.currentUserSubject.asObservable();
 
   private http = inject(HttpClient);
   private router = inject(Router);
 
-  login(credentials: LoginRequest): Observable<LoginResponse> {
-    return this.http.post<LoginResponse>(
+  login(credentials: LoginRequest): Observable<UserInfo> {
+    return this.http.post<UserInfo>(
       `${this.apiUrl}/auth/login`,
       credentials,
       { withCredentials: true }
     ).pipe(
-      tap(response => {
+      tap((response: UserInfo) => {
         this.setLoggedIn(true);
         this.currentUserSubject.next(response);
       })
     );
   }
 
-  refreshToken(): Observable<LoginResponse> {
-    return this.http.post<LoginResponse>(
+  refreshToken(): Observable<UserInfo> {
+    return this.http.post<UserInfo>(
       `${this.apiUrl}/auth/refresh`,
       {},
       { withCredentials: true }
     ).pipe(
-      tap(() => this.setLoggedIn(true))
+      tap((response: UserInfo) => {
+        this.setLoggedIn(true);
+        this.currentUserSubject.next(response);
+      })
     );
   }
 
@@ -52,33 +55,38 @@ export class AuthService {
       { withCredentials: true }
     ).pipe(
       tap(() => {
-        this.setLoggedIn(false);
-        this.currentUserSubject.next(null); 
+        this.handleLogoutState();
         this.router.navigate(['/']);
       })
     );
   }
 
-  getCurrentUser(): Observable<LoginResponse> {
-    return this.http.get<LoginResponse>(
-      `${this.apiUrl}/users/get/me`,
+  getCurrentUser(): Observable<UserInfo> {
+    return this.http.get<UserInfo>(
+      `${this.apiUrl}/auth/me`,
       { withCredentials: true }
     ).pipe(
-      tap(user => {
+      tap((user: UserInfo) => {
         this.setLoggedIn(true);
         this.currentUserSubject.next(user); 
       })
     );
   }
 
-  checkAuthStatus(): Observable<LoginResponse | null> {
+  checkAuthStatus(): Observable<UserInfo | null> {
     return this.getCurrentUser().pipe(
-      catchError(error => {
-        if (error.status === 401) {
-          this.setLoggedIn(false);
-          this.currentUserSubject.next(null);
+      catchError((error: HttpErrorResponse) => {
+        if (error.status === 401 || error.status === 403) {
+          return this.refreshToken().pipe(
+            switchMap(() => this.getCurrentUser()),
+            catchError(() => {
+              this.handleLogoutState();
+              return of(null);
+            })
+          );
         }
-        return throwError(() => error);
+        this.handleLogoutState();
+        return of(null);
       })
     );
   }
@@ -98,7 +106,7 @@ export class AuthService {
     return this.currentUserSubject.value?.role ?? null;
   }
 
-  getUser(): LoginResponse | null {
+  getUser(): UserInfo | null {
     return this.currentUserSubject.value;
   }
 
@@ -108,5 +116,10 @@ export class AuthService {
 
   private setLoggedIn(logged: boolean): void {
     this.isLoggedSubject.next(logged);
+  }
+
+  private handleLogoutState(): void {
+    this.setLoggedIn(false);
+    this.currentUserSubject.next(null);
   }
 }

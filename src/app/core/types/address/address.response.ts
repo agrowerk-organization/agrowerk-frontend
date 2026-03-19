@@ -1,7 +1,7 @@
 export interface AddressResponse {
     rural: boolean;
     code: string;
-    municipality: string;
+    municipality?: string;
     locationName?: string;
     street?: string;
     number?: number;

@@ -21,7 +21,7 @@ export class AlertsCard {
     const map: Record<string, string> = {
       'CRITICAL': 'text-red-400 border-red-500/30 bg-red-500/10',
       'HIGH':     'text-orange-400 border-orange-500/30 bg-orange-500/10',
-      'MEDIUM':   'text-yellow-400 border-yellow-500/30 bg-yellow-500/10',
+      'MEDIUM':   'text-yellow-300 border-yellow-500/30 bg-yellow-500/10',
       'LOW':      'text-blue-400 border-blue-500/30 bg-blue-500/10'
     };
     return map[severity] ?? map['LOW'];

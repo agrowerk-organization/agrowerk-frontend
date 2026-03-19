@@ -1,0 +1,25 @@
+<div class="flex items-center justify-between gap-4
+            rounded-2xl px-5 py-3 mt-2 mb-4
+            bg-neutral-primary/90 border-2 border-primary/80
+            backdrop-blur-sm">
+
+  <div class="flex items-center gap-2 text-neutral-secondary/60 text-sm sm:text-base">
+    <fa-icon [icon]="icons.LOCATION_DOT" class="text-primary/70 text-xl sm:text-2xl" />
+    <span class="text-lg sm:text-xl font-semibold text-secondary/80">
+      {{ weatherDashboard()?.locationName }}
+    </span>
+  </div>
+
+  <div class="h-4 w-px bg-primary/20"></div>
+
+  <div class="flex items-center gap-2 text-neutral-secondary/60 text-sm sm:text-base">
+    <span class="w-6 h-6 rounded-full bg-primary animate-pulse"></span>
+    <span class="text-lg sm:text-xl text-secondary/90">
+      Atualizado em
+      <span class="text-lg sm:text-xl font-semibold text-secondary/80">
+        {{ weatherDashboard()?.lastUpdated | date:'dd/MM/yyyy HH:mm' }}
+      </span>
+    </span>
+  </div>
+
+</div>

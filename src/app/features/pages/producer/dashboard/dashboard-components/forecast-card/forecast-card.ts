@@ -1,7 +1,7 @@
-import { Component, computed, input } from '@angular/core';
+import { Component, computed, input, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy } from '@angular/core';
 import { WeatherForecast } from '../../../../../../core/types/weather/weather-forecast';
+
 @Component({
   selector: 'app-forecast-card',
   standalone: true,
@@ -25,13 +25,12 @@ export class ForecastCard {
   }
 
   private getWeatherConfig(code: number) {
-    if (code === 0) return { path: 'assets/svgs/sunny.svg', color: '#FFB900', label: 'Céu Limpo' };
-    if (code <= 3) return { path: 'assets/svgs/partly-cloudy.svg', color: '#94A3B8', label: 'Parcialmente Nublado' };
-    if (code <= 48) return { path: 'assets/svgs/cloudy.svg', color: '#94A3B8', label: 'Nublado' };
-    if (code <= 67) return { path: 'assets/svgs/rain.svg', color: '#3B82F6', label: 'Chuva' };
-    if (code <= 77) return { path: 'assets/svgs/snow.svg', color: '#0EA5E9', label: 'Neve' };
-    if (code <= 82) return { path: 'assets/svgs/storm.svg', color: '#6366F1', label: 'Pancadas' };
-    
-    return { path: 'assets/svgs/thunderstorm.svg', color: '#4F46E5', label: 'Tempestade' };
+    if (code === 0)  return { path: 'assets/svgs/sunny.svg',        color: '#F59E0B', label: 'Céu Limpo'            };
+    if (code <= 3)   return { path: 'assets/svgs/partly-cloud.svg', color: '#6EE7B7', label: 'Parcialmente Nublado' };
+    if (code <= 48)  return { path: 'assets/svgs/foggy.svg',        color: '#A3B8A3', label: 'Nublado'              };
+    if (code <= 67)  return { path: 'assets/svgs/rainy.svg',        color: '#38BDF8', label: 'Chuva'                };
+    if (code <= 77)  return { path: 'assets/svgs/snowy.svg',        color: '#BAE6FD', label: 'Neve'                 };
+    if (code <= 82)  return { path: 'assets/svgs/showers.svg',      color: '#818CF8', label: 'Pancadas'             };
+    return             { path: 'assets/svgs/thunderstorm.svg',      color: '#C084FC', label: 'Tempestade'           };
   }
 }

@@ -1,7 +1,9 @@
-<div class="min-h-screen flex flex-col" style="background: var(--color-background)">
+<div class="flex flex-col min-h-screen bg-[var(--color-background)]"> 
 
-  <app-pattern />
-  <app-mesh-gradient />
+  <div class="fixed inset-0 z-0 pointer-events-none">
+    <app-pattern />
+    <app-mesh-gradient />
+  </div>
 
   <header 
     class="fixed top-0 left-0 right-0 z-[1050] w-full h-[90px] lg:h-[100px] 
@@ -72,7 +74,7 @@
 
   <div class="h-[90px] lg:h-[100px] flex-shrink-0"></div>
 
-  <main class="flex-1 overflow-auto">
+  <main class="flex-1 overflow-auto z-10">
     <router-outlet />
   </main>
 

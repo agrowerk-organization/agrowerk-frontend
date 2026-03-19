@@ -1,6 +1,6 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router, UrlTree } from '@angular/router';
-import { map, of, catchError, take, switchMap, Observable } from 'rxjs';
+import { map, take, filter, Observable } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 
 export const authGuard: CanActivateFn = (
@@ -10,21 +10,12 @@ export const authGuard: CanActivateFn = (
   const router = inject(Router);
 
   const redirect = router.createUrlTree([''], {
-    queryParams: {
-      redirect: state.url
-    }
+    queryParams: { redirect: state.url }
   });
 
   return authService.isLogged$.pipe(
+    filter(status => status !== null),
     take(1),
-    switchMap(status => {
-      if (status === true) return of(true);
-      if (status === false) return of(redirect);
-
-      return authService.checkAuthStatus().pipe(
-        map(user => user ? true : redirect),
-        catchError(() => of(redirect))
-      );
-    })
+    map(status => status === true ? true : redirect)
   );
 };

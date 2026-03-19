@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, computed, inject, signal } from '@angular/core';
-import { forkJoin, catchError, of } from 'rxjs';
+import { Observable,forkJoin, catchError, of } from 'rxjs';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../../core/services/auth.service';
@@ -18,9 +18,12 @@ import { ForecastCard } from './dashboard-components/forecast-card/forecast-card
 import { AlertsCard } from './dashboard-components/alerts-card/alerts-card';
 import { OnboardingCard } from './dashboard-components/onboarding-card/onboarding-card';
 import { LayoutStateService } from '../../../../core/services/layout-state.service';
-
+import { Page } from '../../../../core/types/page/page';
+import { SeasonStatus } from '../../../../core/enums/season-status';
 import { Cycle } from '../../../../core/ui/types/cycle/cycle';
 import { CycleDiagram } from '../../../../shared/components/cycle-diagram/cycle-diagram';
+import { StatisticsCard } from './dashboard-components/statistics-card/statistics-card';
+import { UpdateBranding } from "./dashboard-components/update-branding/update-branding";
 
 @Component({
   selector: 'app-producer-dashboard',
@@ -34,8 +37,10 @@ import { CycleDiagram } from '../../../../shared/components/cycle-diagram/cycle-
     ForecastCard,
     AlertsCard,
     OnboardingCard,
-    CycleDiagram
-  ],
+    StatisticsCard,
+    CycleDiagram,
+    UpdateBranding
+],
   templateUrl: './dashboard.html'
 })
 export class ProducerDashboard implements OnInit {
@@ -46,7 +51,6 @@ export class ProducerDashboard implements OnInit {
   private router = inject(Router);
 
   layoutState = inject(LayoutStateService);
-
 
   loading = signal(true);
   currentUser = toSignal(this.authService.currentUser$);
@@ -158,16 +162,23 @@ export class ProducerDashboard implements OnInit {
     forkJoin({
       location: this.weatherService
         .getLocationByProperty(propertyId)
-        .pipe(catchError(() => of(null))),
+        .pipe(catchError(() : Observable<null> => {
+         return of(null);
+    })),
       seasons: this.seasonService
         .findMySeasons(propertyId)
-        .pipe(catchError(() => of([])))
+        .pipe(catchError(() : Observable<Page<SeasonResponse>> => {
+          return of({ content: [] } as unknown as Page<SeasonResponse>);
+        }))
     }).subscribe(({ location, seasons }) => {
+  
       this.activeSeason.set(
-        seasons.find((s: SeasonResponse) =>
-          s.seasonStatus === 'ACTIVE') ?? null
-      );
-
+        (seasons as Page<SeasonResponse>).content
+        .find(s => s.seasonStatus === SeasonStatus.PLANNED 
+          || s.seasonStatus === SeasonStatus.IN_PROGRESS
+        ) ?? null
+      )
+  
       if (location) {
         this.weatherService.getDashboard(location.id).subscribe({
           next: (d) => {

@@ -5,10 +5,11 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { ICONS_DASHBOARD } from '../../../../../../core/ui/icons/icons-producer/icons-dashboard/icons-dashboard';
 import { SeasonResponse } from '../../../../../../core/types/season/season-response';
+import { ButtonPages } from "../../../../../../shared/components/buttons/button-pages/button-pages";
 @Component({
   selector: 'app-season-card',
   standalone: true,
-  imports: [CommonModule, RouterLink, FontAwesomeModule],
+  imports: [CommonModule, RouterLink, FontAwesomeModule, ButtonPages],
   templateUrl: './season-card.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -17,4 +18,19 @@ export class SeasonCard {
   icons = ICONS_DASHBOARD;
 
   hasSeason = computed(() => this.season() !== null);
+
+  addHarvest() {
+    return
+  }
+
+  report() {
+    return
+  }
+  createSeason() {
+    return
+  } 
+
+  importData() {
+    return
+  }
 }

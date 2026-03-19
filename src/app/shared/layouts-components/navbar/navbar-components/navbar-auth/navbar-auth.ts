@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, inject, input, signal } from '@angular/core';
+import { Component, input, ElementRef, HostListener, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { LoginProfileOption } from '../../../../../core/types/auth/login.profile.option';
@@ -17,7 +17,8 @@ export class NavbarAuth {
   private elementRef = inject(ElementRef);
   private authService = inject(AuthService);
 
-  isLoggedIn = input<boolean>(false);
+  isLoggedIn = input<boolean>(false); 
+
   showLoginDropdown = signal(false);
   showProfileDropdown = signal(false);
 
@@ -50,10 +51,12 @@ export class NavbarAuth {
     this.showProfileDropdown.update(v => !v);
     this.showLoginDropdown.set(false);
   }
-
   logout(): void {
-    this.authService.logout();
-    this.showProfileDropdown.set(false);
+    this.authService.logout().subscribe({
+      next: () => {
+        this.showProfileDropdown.set(false); 
+      }
+    });
   }
 
   @HostListener('document:click', ['$event'])

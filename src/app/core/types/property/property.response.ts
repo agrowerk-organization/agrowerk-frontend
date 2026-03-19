@@ -6,7 +6,7 @@ export interface PropertyResponse {
     name: string;
     stateRegistration: string;
     ruralRegistration: string;
-    addressResponse: AddressResponse;
+    address: AddressResponse;
     latitude: number;
     longitude: number;
     totalArea: number;
