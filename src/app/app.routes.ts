@@ -17,6 +17,18 @@ export const routes: Routes = [
   },
 
   {
+    path: 'register/producer',
+    loadComponent: () => import('./features/pages/common/producer-register/producer-register')
+      .then(page => page.ProducerRegister)
+  },
+
+  {
+    path: 'register/supplier-admin',
+    loadComponent: () => import('./features/pages/common/supplier-admin-register/supplier-admin-register')
+      .then(page => page.SupplierAdminRegister)
+  },
+
+  {
     path: 'unauthorized',
     loadComponent: () => import('./features/pages/common/unauthorized/unauthorized')
       .then(page => page.Unauthorized)

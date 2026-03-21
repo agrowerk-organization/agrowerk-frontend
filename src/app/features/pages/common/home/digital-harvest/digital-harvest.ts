@@ -1,14 +1,14 @@
 import { Component, OnDestroy, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { TimelinePhase } from '../../../../../core/ui/types/timeline-phase/timeline-phase';
-import { ICONS_DIGITAL_HARVEST } from '../../../../../core/ui/icons/icons-common/icons-home/icons.digital-harvest';
+import { TimelinePhase } from '@core/ui/types/timeline-phase/timeline-phase';
+import { ICONS_DIGITAL_HARVEST } from '@core/ui/icons/icons-common/icons-home/icons.digital-harvest';
 import { PhaseConnector } from './digital-harvest-components/phase-connector/phase-connector';
 import { PhaseDetails } from './digital-harvest-components/phase-details/phase-details';
 import { PhaseCard } from './digital-harvest-components/phase-card/phase-card';
-import { Title } from "../../../../../shared/components/title/title";
-import { Subtitle } from "../../../../../shared/components/subtitle/subtitle";
-import PHASES_DATA from './../../../../../../assets/files/home/digital-harvest.json';
+import { Title } from "@shared/components/title/title";
+import { Subtitle } from "@shared/components/subtitle/subtitle";
+import PHASES_DATA from '@assets/files/home/digital-harvest.json';
 
 @Component({
   selector: 'app-digital-harvest',

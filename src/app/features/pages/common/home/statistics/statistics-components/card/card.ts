@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, input, computed } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { Counter } from '../counter/counter';
-import { StatisticsHome } from '../../../../../../../core/ui/types/statistics-home/statistics-home';
+import { StatisticsHome } from '@core/ui/types/statistics-home/statistics-home';
 import { StatTrend } from '../stat-trend/stat-trend';
 
 @Component({

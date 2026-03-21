@@ -1,15 +1,15 @@
-import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit, signal } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { ICONS_FINAL_CTA } from '../../../../../core/ui/icons/icons-common/icons-home/icons.final-cta';
-import { Title } from '../../../../../shared/components/title/title';
-import { Subtitle } from '../../../../../shared/components/subtitle/subtitle';
-import { Badge } from '../../../../../shared/components/badge/badge';
-import { BadgeIndex } from '../../../../../core/ui/types/badge/badge';
-import { Icons } from '../../../../../shared/components/icons/icons';
-import { Carousel } from "../../../../../shared/components/carousel/carousel";
-import FINAL_CTA_DATA  from "../../../../../../assets/files/home/final-cta.json";
+import { ICONS_FINAL_CTA } from '@core/ui/icons/icons-common/icons-home/icons.final-cta';
+import { BadgeIndex } from '@core/ui/types/badge/badge';
+import { Title } from '@shared/components/title/title';
+import { Subtitle } from '@shared/components/subtitle/subtitle';
+import { Badge } from '@shared/components/badge/badge';
+import { Icons } from '@shared/components/icons/icons';
+import { Carousel } from "@shared/components/carousel/carousel";
+import FINAL_CTA_DATA from "@assets/files/home/final-cta.json";
 
 @Component({
   selector: 'app-final-cta',

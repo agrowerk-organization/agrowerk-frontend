@@ -1,0 +1,26 @@
+[
+    {
+      "number": "01",
+      "iconKey": "BUILDING_USER",
+      "title": "Crie sua conta",
+      "description": "Cadastre-se como administrador da sua fornecedora"
+    },
+    {
+      "number": "02",
+      "iconKey": "BOXES_STACKED",
+      "title": "Registre sua empresa",
+      "description": "Adicione CNPJ, produtos e dados comerciais"
+    },
+    {
+      "number": "03",
+      "iconKey": "HANDSHAKE",
+      "title": "Conecte-se a produtores",
+      "description": "Receba pedidos e feche contratos diretamente na plataforma"
+    },
+    {
+      "number": "04",
+      "iconKey": "CHART_PIE",
+      "title": "Gerencie seu negócio",
+      "description": "Acompanhe vendas, estoque e pagamentos em tempo real"
+    }
+]

@@ -1,0 +1,26 @@
+[
+    {
+      "number": "01",
+      "iconKey": "USER_PLUS",
+      "title": "Crie sua conta",
+      "description": "Preencha seus dados em menos de 2 minutos"
+    },
+    {
+      "number": "02",
+      "iconKey": "MAP_LOCATION_DOT",
+      "title": "Cadastre sua propriedade",
+      "description": "Adicione nome, hectares e localização da sua fazenda"
+    },
+    {
+      "number": "03",
+      "iconKey": "WHEAT_AWN",
+      "title": "Registre suas safras",
+      "description": "Gerencie culturas, insumos e colheitas em um só lugar"
+    },
+    {
+      "number": "04",
+      "iconKey": "CHART_LINE",
+      "title": "Tome decisões com dados",
+      "description": "Cotações, clima e análises em tempo real para o seu campo"
+    }
+]

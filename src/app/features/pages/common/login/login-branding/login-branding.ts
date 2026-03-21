@@ -1,14 +1,14 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Component } from '@angular/core';
-import { MeshGradient } from "../../../../../shared/components/mesh-gradient/mesh-gradient";
-import { Pattern } from "../../../../../shared/components/pattern/pattern";
+import { MeshGradient } from "@shared/components/mesh-gradient/mesh-gradient";
+import { Pattern } from "@shared/components/pattern/pattern";
 import { FeatureStatistic } from "./feature-statistic/feature-statistic";
-import { Statistic } from '../../../../../core/ui/types/login/statistic/statistic';
-import { Title } from "../../../../../shared/components/title/title";
-import { Subtitle } from "../../../../../shared/components/subtitle/subtitle";
-import { Icons } from "../../../../../shared/components/icons/icons";
-import { ICONS_LOGIN } from '../../../../../core/ui/icons/icons-common/icons-login/icons.login';
-import LOGIN_BRANDING_DATA from '../../../../../../assets/files/login/login-branding.json';
+import { Statistic } from '@core/ui/types/login/statistic/statistic';
+import { Title } from "@shared/components/title/title";
+import { Subtitle } from "@shared/components/subtitle/subtitle";
+import { Icons } from "@shared/components/icons/icons";
+import { ICONS_LOGIN } from '@core/ui/icons/icons-common/icons-login/icons.login';
+import LOGIN_BRANDING_DATA from '@assets/files/login/login-branding.json';
 
 @Component({
   selector: 'app-login-branding',

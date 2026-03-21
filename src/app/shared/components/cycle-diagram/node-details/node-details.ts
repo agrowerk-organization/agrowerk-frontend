@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, input, computed } from '@angular/core';
-import { Cycle } from '../../../../core/ui/types/cycle/cycle';
+import { Cycle } from '@core/ui/types/cycle/cycle';
 import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
-import { ICONS_HARVEST_CYCLE } from '../../../../core/ui/icons/icons-common/icons-home/icons.harvest-cycle';
+import { ICONS_HARVEST_CYCLE } from '@core/ui/icons/icons-common/icons-home/icons.harvest-cycle';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @Component({

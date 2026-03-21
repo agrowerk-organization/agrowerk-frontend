@@ -1,15 +1,15 @@
-import { CommonModule } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
-import { Content } from '../../../../../../core/ui/types/generic/content.initial-cta';
-import { ICONS_INITIAL_CTA } from '../../../../../../core/ui/icons/icons-common/icons-home/icons.initial-cta';
+import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { BadgeIndex } from '../../../../../../core/ui/types/badge/badge';
-import { Badge } from "../../../../../../shared/components/badge/badge";
+import { Content } from '@core/ui/types/generic/content.initial-cta';
+import { ICONS_INITIAL_CTA } from '@core/ui/icons/icons-common/icons-home/icons.initial-cta';
+import { BadgeIndex } from '@core/ui/types/badge/badge';
+import { InitialCtaSchema, InitialCtaData } from '@core/ui/schemas/initial-cta.schema';
+import { Badge } from "@shared/components/badge/badge";
+import { Actions } from "@shared/components/actions/actions";
 import { Steps } from "./initial-cta-components/steps/steps";
-import { Actions } from "../../../../../../shared/components/actions/actions";
 import { Trust } from "./initial-cta-components/trust/trust";
-import initialCtaData from '../../../../../../../assets/files/home/initial-cta.json';
-import { InitialCtaSchema, InitialCtaData } from '../../../../../../core/ui/schemas/initial-cta.schema';
+import initialCtaData from '@assets/files/home/initial-cta.json';
 @Component({
   selector: 'app-initial-cta',
   standalone: true,

@@ -1,15 +1,15 @@
-import { CommonModule } from '@angular/common';
 import { Component, signal, computed } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { UserRole } from '../../../../../core/ui/types/benefit/user-role';
-import { RoleBenefit } from '../../../../../core/ui/types/benefit/benefit-role';
-import { ICONS_BENEFITS } from '../../../../../core/ui/icons/icons-common/icons-home/icons.benefits';
+import { UserRole } from '@core/ui/types/benefit/user-role';
+import { RoleBenefit } from '@core/ui/types/benefit/benefit-role';
+import { ICONS_BENEFITS } from '@core/ui/icons/icons-common/icons-home/icons.benefits';
 import { BenefitCard } from './benefits-components/benefit-card/benefit-card';
 import { RoleTabButton } from './benefits-components/role-tab-button/role-tab-button';
-import { Carousel } from '../../../../../shared/components/carousel/carousel';
-import { Title } from "../../../../../shared/components/title/title";
-import { Subtitle } from '../../../../../shared/components/subtitle/subtitle';
-import BENEFITS_DATA from '../../../../../../assets/files/home/benefits.json';
+import { Carousel } from '@shared/components/carousel/carousel';
+import { Title } from "@shared/components/title/title";
+import { Subtitle } from '@shared/components/subtitle/subtitle';
+import BENEFITS_DATA from '@assets/files/home/benefits.json';
 
 @Component({
   selector: 'app-benefits',

@@ -1,0 +1,36 @@
+<div [formGroup]="form()" class="animate-in fade-in slide-in-from-right-4 duration-300">
+    <div class="mt-4">
+      <label for="reg-name" class="field-label text-neutral-secondary text-xl">Nome completo</label>
+      <input id="reg-name" type="text" formControlName="name"
+             placeholder="Seu nome completo" autocomplete="name" class="field-input" />
+      <app-field-error [control]="form().get('name')" [submitted]="submitted()" />
+    </div>
+  
+    <div class="mt-4">
+      <label for="reg-cpf" class="field-label text-neutral-secondary text-xl">CPF</label>
+      <input id="reg-cpf" type="text" formControlName="cpf"
+             placeholder="000.000.000-00" inputmode="numeric" autocomplete="off"
+             appCpfMask class="field-input" />
+      <app-field-error [control]="form().get('cpf')" [submitted]="submitted()" />
+    </div>
+  
+    <div class="mt-4">
+      <label for="reg-telephone" class="field-label text-neutral-secondary text-xl">Telefone</label>
+      <input id="reg-telephone" type="text" formControlName="telephone"
+             placeholder="(99) 99999-9999" inputmode="numeric" autocomplete="tel"
+             appTelephoneMask class="field-input" />
+      <app-field-error [control]="form().get('telephone')" [submitted]="submitted()" />
+    </div>
+  
+    <button type="button" (click)="next.emit()"
+            class="mt-8 w-full py-3 px-6 rounded-xl font-semibold text-2xl text-neutral-primary
+                   bg-[var(--color-primary)] hover:bg-[var(--color-button-second)]
+                   transition-all duration-300 shadow-xs shadow-primary
+                   flex items-center justify-center gap-2 shadow-2xl
+                   hover:shadow-sm hover:-translate-y-0.5
+                   cursor-pointer">
+      Continuar
+      <fa-icon [icon]="icons.ARROW_RIGHT" />
+    </button>
+  
+</div>

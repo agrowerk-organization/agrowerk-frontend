@@ -1,14 +1,14 @@
-import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit, signal } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { ICONS_STATISTICS_HOME } from '../../../../../core/ui/icons/icons-common/icons-home/icons.statistics-home';
-import { StatisticsHome } from '../../../../../core/ui/types/statistics-home/statistics-home';
+import { ICONS_STATISTICS_HOME } from '@core/ui/icons/icons-common/icons-home/icons.statistics-home';
+import { StatisticsHome } from '@core/ui/types/statistics-home/statistics-home';
 import { Card } from './statistics-components/card/card';
-import { Title } from "../../../../../shared/components/title/title";
-import { Subtitle } from "../../../../../shared/components/subtitle/subtitle";
-import { Carousel } from '../../../../../shared/components/carousel/carousel';
-import STATISTICS_DATA from '../../../../../../assets/files/home/statistics.json';
+import { Title } from "@shared/components/title/title";
+import { Subtitle } from "@shared/components/subtitle/subtitle";
+import { Carousel } from '@shared/components/carousel/carousel';
+import STATISTICS_DATA from '@assets/files/home/statistics.json';
 
 @Component({
   selector: 'app-statistics',

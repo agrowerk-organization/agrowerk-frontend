@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, input, output } from '@angular/core';
-import { TimelinePhase } from '../../../../../../../core/ui/types/timeline-phase/timeline-phase';
+import { TimelinePhase } from '@core/ui/types/timeline-phase/timeline-phase';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @Component({

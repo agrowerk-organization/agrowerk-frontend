@@ -4,8 +4,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CycleNode } from './cycle-node/cycle-node';
 import { CenterHub } from './center-hub/center-hub';
 import { NodeDetails } from './node-details/node-details';
-import { Cycle } from '../../../core/ui/types/cycle/cycle';
-import { ICONS_HARVEST_CYCLE } from '../../../core/ui/icons/icons-common/icons-home/icons.harvest-cycle';
+import { Cycle } from '@core/ui/types/cycle/cycle';
+import { ICONS_HARVEST_CYCLE } from '@core/ui/icons/icons-common/icons-home/icons.harvest-cycle';
 import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-cycle-diagram',

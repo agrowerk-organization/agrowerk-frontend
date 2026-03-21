@@ -1,17 +1,15 @@
-<article class="relative w-full h-full min-h-screen bg-[var(--color-background)] from-[var(--color-primary)] via-[var(--color-button-second)] to-[#2E7D32] overflow-hidden flex flex-col items-center justify-center p-12">
-  
-    <div class="absolute inset-0 pointer-events-none opacity-20">
-      <div class="absolute top-10 left-10 w-32 h-32 border-2 border-white/10 rounded-full opacity-30"></div>
-<div class="absolute bottom-20 right-20 w-24 h-24 border-2 border-white/10 rounded-full opacity-20"></div>
-<div class="absolute top-1/2 left-1/4 w-16 h-16 border-2 border-white/10 rounded-full opacity-15"></div>
-    </div>
-    
-    <div class="absolute inset-0 pointer-events-none">
-      <app-mesh-gradient></app-mesh-gradient>
-    </div>
-    <div class="absolute inset-0 pointer-events-none">
-      <app-pattern></app-pattern>
-    </div>
+<article class="relative w-full h-full min-h-screen overflow-hidden flex flex-col items-center justify-center p-12">
+
+  <div class="fixed inset-0 z-0 pointer-events-none">
+    <app-pattern />
+    <app-mesh-gradient />
+  </div>
+
+  <div class="absolute inset-0 pointer-events-none opacity-20">
+    <div class="absolute top-10 left-10 w-32 h-32 border-2 border-white/10 rounded-full opacity-30"></div>
+    <div class="absolute bottom-20 right-20 w-24 h-24 border-2 border-white/10 rounded-full opacity-20"></div>
+    <div class="absolute top-1/2 left-1/4 w-16 h-16 border-2 border-white/10 rounded-full opacity-15"></div>
+  </div>
   
     <div class="relative z-10 w-full max-w-xl text-center flex flex-col items-center space-y-1">
       
@@ -29,8 +27,8 @@
       <div class="space-y-4 animate-[fadeInUp_0.8s_ease-out]">
 
         <app-title
-          [firstSegment]="'Gerencie suas Safras com'"
-          [secondSegment]="'Inteligência'"
+          [firstSegment]="'Gerenciamento inteligente'"
+          [secondSegment]="'para o agronegócio'"
         ></app-title>
 
         <app-subtitle

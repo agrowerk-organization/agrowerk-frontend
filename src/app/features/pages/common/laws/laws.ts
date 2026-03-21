@@ -2,21 +2,22 @@ import { CommonModule, Location } from '@angular/common';
 import { Component, OnInit, inject, computed, signal } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
-import { LawResponse } from '../../../../core/types/law/law';
-import { LawService } from '../../../../core/services/laws.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { ICONS_LAWS } from '../../../../core/ui/icons/icons-common/icons-laws/icons.laws';
-import { ErrorState } from '../../../../shared/components/error-state/error-state';
-import { LoadingState } from '../../../../shared/components/loading-state/loading-state';
-import { MeshGradient } from '../../../../shared/components/mesh-gradient/mesh-gradient';
-import { Pattern } from '../../../../shared/components/pattern/pattern';
+import { LawResponse } from '@core/types/law/law';
+import { LawService } from '@core/services/laws.service';
+import { ICONS_LAWS } from '@core/ui/icons/icons-common/icons-laws/icons.laws';
+import { LAW_LABELS } from '@core/ui/maps/laws/laws-labels';
+import { LAW_NAMES } from '@core/ui/maps/laws/law-names';
+import { BadgeIndex } from '@core/ui/types/badge/badge';
+import { ErrorState } from '@shared/components/error-state/error-state';
+import { LoadingState } from '@shared/components/loading-state/loading-state';
+import { MeshGradient } from '@shared/components/mesh-gradient/mesh-gradient';
+import { Pattern } from '@shared/components/pattern/pattern';
+import { Breadcrumb } from "@shared/components/breadcrumb/breadcrumb";
+import { GlassCard } from '@shared/components/glass-card/glass-card';
+import { Badge } from '@shared/components/badge/badge';
 import { Button } from './laws-components/buttons/button';
-import { Breadcrumb } from "../../../../shared/components/breadcrumb/breadcrumb";
-import { GlassCard } from '../../../../shared/components/glass-card/glass-card';
-import { LAW_LABELS } from '../../../../core/ui/maps/laws/laws-labels';
-import { LAW_NAMES } from '../../../../core/ui/maps/laws/law-names';
-import { Badge } from '../../../../shared/components/badge/badge';
-import { BadgeIndex } from '../../../../core/ui/types/badge/badge';
+
 @Component({
   selector: 'app-laws',
   standalone: true,

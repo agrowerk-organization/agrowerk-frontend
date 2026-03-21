@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { ICONS_NAVBAR } from '../../../../../core/ui/icons/icons-common/icons-layouts/icons.navbar';
+import { ICONS_NAVBAR } from '@core/ui/icons/icons-common/icons-layouts/icons.navbar';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 

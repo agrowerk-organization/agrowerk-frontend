@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { BadgeIndex } from '../../../core/ui/types/badge/badge';
+import { BadgeIndex } from '@core/ui/types/badge/badge';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @Component({

@@ -2,9 +2,9 @@ import { CommonModule } from '@angular/common';
 import { Component, input, inject, signal, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { CardPages } from "../../../../../../shared/components/cards/card-pages/card-pages";
-import { Value } from '../../../../../../core/ui/types/about-us/value';
-import { Carousel } from '../../../../../../shared/components/carousel/carousel';
+import { CardPages } from "@shared/components/cards/card-pages/card-pages";
+import { Value } from '@core/ui/types/about-us/value';
+import { Carousel } from '@shared/components/carousel/carousel';
 
 @Component({
   selector: 'app-values-grid',

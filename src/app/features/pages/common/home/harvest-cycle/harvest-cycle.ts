@@ -1,13 +1,13 @@
 import { Component, computed, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Cycle } from '../../../../../core/ui/types/cycle/cycle';
+import { Cycle } from '@core/ui/types/cycle/cycle';
 import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
-import { ICONS_HARVEST_CYCLE } from '../../../../../core/ui/icons/icons-common/icons-home/icons.harvest-cycle';
+import { ICONS_HARVEST_CYCLE } from '@core/ui/icons/icons-common/icons-home/icons.harvest-cycle';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { Title } from "../../../../../shared/components/title/title";
-import { Subtitle } from '../../../../../shared/components/subtitle/subtitle';
-import CYCLE_DATA from './../.././../../../../assets/files/home/harvest-cycle.json';
-import { CycleDiagram } from '../../../../../shared/components/cycle-diagram/cycle-diagram';
+import { Title } from "@shared/components/title/title";
+import { Subtitle } from '@shared/components/subtitle/subtitle';
+import CYCLE_DATA from '@assets/files/home/harvest-cycle.json';
+import { CycleDiagram } from '@shared/components/cycle-diagram/cycle-diagram';
 
 @Component({
   selector: 'app-harvest-cycle-diagram',

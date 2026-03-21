@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { computed, input, output } from '@angular/core';
 import { ChangeDetectionStrategy } from '@angular/core';
-import { PropertyResponse } from '../../../../../../core/types/property/property.response';
+import { PropertyResponse } from '@core/types/property/property.response';
 @Component({
   selector: 'app-property-selector',
   standalone: true,

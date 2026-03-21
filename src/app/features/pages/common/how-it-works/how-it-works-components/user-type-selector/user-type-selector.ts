@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, input, output } from '@angular/core';
-import { UserType } from '../../../../../../core/ui/types/user/user-type';
+import { UserType } from '@core/ui/types/user/user-type';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @Component({

@@ -33,16 +33,15 @@
       </p>
     </div>
   
-    <div class="md:hidden px-6"> 
+    <div class="md:hidden w-full overflow-hidden"> 
       <app-carousel [items]="currentBenefits().benefits">
         <ng-template #itemTemplate let-benefit>
-          <div class="py-6"> <app-benefit-card [benefit]="benefit"></app-benefit-card>
-          </div>
+          <app-benefit-card [benefit]="benefit" class="w-full"></app-benefit-card>
         </ng-template>
       </app-carousel>
     </div>
   
-    <div class="hidden md:grid grid-cols-2 gap-8">
+    <div class="hidden md:grid grid-cols-2 gap-8 px-4">
       @for (benefit of currentBenefits().benefits; track benefit.id) {
         <app-benefit-card [benefit]="benefit"></app-benefit-card>
       }

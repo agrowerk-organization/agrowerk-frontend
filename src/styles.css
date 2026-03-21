@@ -201,3 +201,25 @@ body {
 .glass-shine:hover::before {
   left: 100%;
 }
+
+/* Utility classes */
+@layer components {
+  .field-label { 
+    @apply block text-[var(--size-text)] font-semibold text-[var(--color-neutral-secondary)] mb-2; 
+  }
+  
+  .field-input { 
+    @apply w-full px-4 py-3 border-2 border-primary/70 rounded-lg outline-none transition-all
+           duration-200 text-lg bg-[var(--color-background)] text-[var(--color-neutral-secondary)]
+           placeholder-gray-500 focus:ring-2 focus:ring-[var(--color-primary)]/50 focus:border-[var(--color-primary)]; 
+  }
+
+  .input-error {
+    @apply border-[var(--color-error)] focus:ring-[var(--color-error)]/20 focus:border-[var(--color-error)];
+  }
+
+  .password-toggle { 
+    @apply absolute right-3 top-1/2 -translate-y-1/2 text-[var(--color-neutral-secondary)]/50
+           hover:text-[var(--color-primary)] transition-colors duration-200; 
+  }
+}

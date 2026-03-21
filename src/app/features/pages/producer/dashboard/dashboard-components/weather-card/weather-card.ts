@@ -1,8 +1,8 @@
 import { Component, computed, input, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { ICONS_DASHBOARD } from '../../../../../../core/ui/icons/icons-producer/icons-dashboard/icons-dashboard';
-import { WeatherCurrent } from '../../../../../../core/types/weather/weather-current';
+import { ICONS_DASHBOARD } from '@core/ui/icons/icons-producer/icons-dashboard/icons-dashboard';
+import { WeatherCurrent } from '@core/types/weather/weather-current';
 
 @Component({
   selector: 'app-weather-card',

@@ -2,8 +2,8 @@ import { Component, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ChangeDetectionStrategy } from '@angular/core';
-import { WeatherStatistics } from '../../../../../../core/types/weather/weather-statistics';
-import { ICONS_DASHBOARD } from '../../../../../../core/ui/icons/icons-producer/icons-dashboard/icons-dashboard';
+import { WeatherStatistics } from '@core/types/weather/weather-statistics';
+import { ICONS_DASHBOARD } from '@core/ui/icons/icons-producer/icons-dashboard/icons-dashboard';
 
 @Component({
   selector: 'app-statistics-card',

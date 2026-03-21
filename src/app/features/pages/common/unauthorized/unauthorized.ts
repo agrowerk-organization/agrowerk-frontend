@@ -1,8 +1,8 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { MeshGradient } from "../../../../shared/components/mesh-gradient/mesh-gradient";
-import { Pattern } from "../../../../shared/components/pattern/pattern";
+import { MeshGradient } from "@shared/components/mesh-gradient/mesh-gradient";
+import { Pattern } from "@shared/components/pattern/pattern";
 
 @Component({
   selector: 'app-unauthorized',

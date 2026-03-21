@@ -1,6 +1,6 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Component, input } from '@angular/core';
-import { AuthSocial } from '../../../../../../core/ui/types/auth-social/auth-social';
+import { AuthSocial } from '@core/ui/types/auth-social/auth-social';
 
 @Component({
   selector: 'app-auth-social-form',

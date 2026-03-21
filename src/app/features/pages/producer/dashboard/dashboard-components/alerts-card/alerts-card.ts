@@ -2,8 +2,8 @@ import { Component, computed, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ChangeDetectionStrategy } from '@angular/core';
-import { ICONS_DASHBOARD } from '../../../../../../core/ui/icons/icons-producer/icons-dashboard/icons-dashboard';
-import { WeatherAlert } from '../../../../../../core/types/weather/weather-alert';
+import { ICONS_DASHBOARD } from '@core/ui/icons/icons-producer/icons-dashboard/icons-dashboard';
+import { WeatherAlert } from '@core/types/weather/weather-alert';
 @Component({
   selector: 'app-alerts-card',
   standalone: true,

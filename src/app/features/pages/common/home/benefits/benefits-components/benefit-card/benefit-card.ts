@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, input } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { Benefit } from '../../../../../../../core/ui/types/benefit/benefit';
+import { Benefit } from '@core/ui/types/benefit/benefit';
 
 @Component({
   selector: 'app-benefit-card',

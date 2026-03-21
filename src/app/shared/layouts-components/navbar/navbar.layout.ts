@@ -1,9 +1,8 @@
 import { Component, HostListener, inject, OnDestroy, OnInit, signal } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { Subscription, filter } from 'rxjs';
 import { Router, NavigationEnd, RouterLink } from '@angular/router';
 import { NgOptimizedImage } from '@angular/common';
-import { AuthService } from '../../../core/services/auth.service';
+import { AuthService } from '@core/services/auth.service';
 import { NavbarLinks } from './navbar-components/navbar-links/navbar-links';
 import { NavbarAuth } from './navbar-components/navbar-auth/navbar-auth';
 import { NavbarMobileToggle } from './navbar-components/navbar-mobile-toggle/navbar-mobile-toggle';
@@ -23,7 +22,6 @@ import { NavbarMobileToggle } from './navbar-components/navbar-mobile-toggle/nav
 export class NavbarLayout implements OnInit, OnDestroy {
   private router = inject(Router);
   private authService = inject(AuthService);
-  isLoggedIn = toSignal(this.authService?.isLogged$, { initialValue: false });
   openMenu = signal(false);
   private routerSubscription!: Subscription;
 

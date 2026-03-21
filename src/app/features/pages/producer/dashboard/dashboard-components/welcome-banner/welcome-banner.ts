@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
-import { PropertyResponse } from '../../../../../../core/types/property/property.response';
-import { Title } from '../../../../../../shared/components/title/title';
+import { PropertyResponse } from '@core/types/property/property.response';
+import { Title } from '@shared/components/title/title';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { ICONS_DASHBOARD } from '../../../../../../core/ui/icons/icons-producer/icons-dashboard/icons-dashboard';
-import { Badge } from '../../../../../../shared/components/badge/badge';
-import { Subtitle } from '../../../../../../shared/components/subtitle/subtitle';
+import { ICONS_DASHBOARD } from '@core/ui/icons/icons-producer/icons-dashboard/icons-dashboard';
+import { Badge } from '@shared/components/badge/badge';
+import { Subtitle } from '@shared/components/subtitle/subtitle';
 @Component({
   selector: 'app-welcome-banner',
   standalone: true,

@@ -3,9 +3,9 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ChangeDetectionStrategy } from '@angular/core';
-import { ICONS_DASHBOARD } from '../../../../../../core/ui/icons/icons-producer/icons-dashboard/icons-dashboard';
-import { SeasonResponse } from '../../../../../../core/types/season/season-response';
-import { ButtonPages } from "../../../../../../shared/components/buttons/button-pages/button-pages";
+import { ICONS_DASHBOARD } from '@core/ui/icons/icons-producer/icons-dashboard/icons-dashboard';
+import { SeasonResponse } from '@core/types/season/season-response';
+import { ButtonPages } from "@shared/components/buttons/button-pages/button-pages";
 @Component({
   selector: 'app-season-card',
   standalone: true,

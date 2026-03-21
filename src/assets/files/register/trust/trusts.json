@@ -1,0 +1,20 @@
+[
+    {
+      "id": "1",
+      "iconKey": "SHIELD_HALVED",
+      "title": "LGPD",
+      "subtitle": "compliant"
+    },
+    {
+      "id": "2",
+      "iconKey": "CERTIFICATE",
+      "title": "100%",
+      "subtitle": "seguro"
+    },
+    {
+      "id": "3",
+      "iconKey": "HEADSET",
+      "title": "Suporte",
+      "subtitle": "24/7"
+    }
+]

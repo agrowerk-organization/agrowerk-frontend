@@ -1,6 +1,6 @@
 import { Component, computed, input, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { WeatherForecast } from '../../../../../../core/types/weather/weather-forecast';
+import { WeatherForecast } from '@core/types/weather/weather-forecast';
 
 @Component({
   selector: 'app-forecast-card',
