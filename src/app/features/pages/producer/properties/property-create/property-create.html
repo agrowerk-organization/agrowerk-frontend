@@ -1,0 +1,95 @@
+<div class="min-h-screen p-4 sm:p-8 pb-32">
+    <div class="max-w-2xl mx-auto">
+  
+      <div class="flex items-center gap-4 mb-8">
+        <a routerLink="/producer/dashboard"
+           class="flex items-center justify-center w-10 h-10 rounded-xl
+                  border-2 border-primary/50 hover:border-primary
+                  text-primary transition-all duration-300">
+          <fa-icon [icon]="icons.ARROW_LEFT" />
+        </a>
+        <div>
+          <h1 class="text-2xl sm:text-3xl font-bold text-primary">Nova Propriedade</h1>
+          <p class="text-neutral-secondary text-sm">Passo {{ currentStep() }} de {{ steps.length }}</p>
+        </div>
+      </div>
+  
+      <div class="flex items-center gap-2 mb-8">
+        @for (step of steps; track $index; let i = $index) {
+          <div class="flex items-center gap-2 flex-1">
+            <div class="flex items-center justify-center w-9 h-9 rounded-full border-2 font-bold text-sm transition-all duration-300"
+                 [class.border-primary]="currentStep() >= i + 1"
+                 [class.bg-primary]="currentStep() > i + 1"
+                 [class.text-white]="currentStep() > i + 1"
+                 [class.text-primary]="currentStep() === i + 1"
+                 [class.border-primary/30]="currentStep() < i + 1"
+                 [class.text-neutral-secondary]="currentStep() < i + 1">
+              @if (currentStep() > i + 1) {
+                <fa-icon [icon]="icons.CHECK" />
+              } @else {
+                {{ i + 1 }}
+              }
+            </div>
+            @if (i < steps.length - 1) {
+              <div class="h-0.5 flex-1 transition-all duration-300"
+                   [class.bg-primary]="currentStep() > i + 1"
+                   [class.bg-primary/20]="currentStep() <= i + 1"></div>
+            }
+          </div>
+        }
+      </div>
+  
+      <div class="relative overflow-hidden rounded-3xl bg-neutral-primary
+                  border-3 border-primary/70 shadow-xl shadow-primary/30 p-8">
+        <div class="absolute top-0 right-0 w-48 h-48 bg-primary/10 rounded-full blur-3xl -z-10 pointer-events-none"></div>
+  
+        @switch (currentStep()) {
+          @case (1) {
+            <app-step-general [form]="generalForm" [states]="states()" />
+          }
+          @case (2) {
+            <app-step-address [form]="addressForm" />
+          }
+          @case (3) {
+            <app-step-units [units]="units" />
+          }
+          @case (4) {
+            <app-step-photo
+              [previewUrl]="previewUrl()"
+              [hasFile]="!!selectedFile()"
+              [uploading]="photoUploading()"
+              (fileSelected)="onFileSelected($event)"
+              (upload)="uploadPhoto()"
+              (skip)="skipPhoto()" />
+          }
+        }
+      </div>
+  
+      @if (currentStep() < 4) {
+        <div class="flex gap-3 mt-6">
+          @if (currentStep() > 1) {
+            <button type="button" (click)="back()"
+                    class="flex-1 py-4 rounded-2xl border-2 border-primary/50 text-primary
+                           font-bold hover:border-primary transition-all duration-300
+                           flex items-center justify-center gap-2">
+              <fa-icon [icon]="icons.ARROW_LEFT" /> Voltar
+            </button>
+          }
+          <button type="button" (click)="next()"
+                  [disabled]="!currentFormValid() || loading()"
+                  class="flex-1 py-4 rounded-2xl bg-button-main text-white font-bold
+                         hover:bg-button-main-hover transition-all duration-300
+                         disabled:opacity-40 flex items-center justify-center gap-2">
+            @if (loading()) {
+              <fa-icon [icon]="icons.SPINNER" class="animate-spin" /> Salvando...
+            } @else if (currentStep() === 3) {
+              <fa-icon [icon]="icons.CHECK" /> Criar propriedade
+            } @else {
+              Continuar <fa-icon [icon]="icons.ARROW_RIGHT" />
+            }
+          </button>
+        </div>
+      }
+  
+    </div>
+  </div>

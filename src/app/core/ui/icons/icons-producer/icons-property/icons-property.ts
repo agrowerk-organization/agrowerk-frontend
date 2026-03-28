@@ -1,0 +1,43 @@
+import {
+    faArrowLeft,
+    faArrowRight,
+    faToggleOn,
+    faToggleOff,
+    faBuilding,
+    faPlus,
+    faTrash,
+    faPencil,
+    faLocationDot,
+    faRulerCombined,
+    faSeedling,
+    faLayerGroup,
+    faCircleCheck,
+    faCircleXmark,
+    faMapPin,
+    faCalendar,
+    faCheck,
+    faCamera,
+    faSpinner
+} from '@fortawesome/free-solid-svg-icons';
+
+export const ICONS_PROPERTY = {
+    ARROW_LEFT: faArrowLeft,
+    ARROW_RIGHT: faArrowRight,
+    TOGGLE_ON: faToggleOn,
+    TOGGLE_OFF: faToggleOff,
+    BUILDING: faBuilding,
+    PLUS: faPlus,
+    TRASH: faTrash,
+    PENCIL: faPencil,
+    LOCATION_DOT: faLocationDot,
+    RULER_COMBINED: faRulerCombined,
+    SEEDLING: faSeedling,
+    LAYER_GROUP: faLayerGroup,
+    CIRCLE_CHECK: faCircleCheck,
+    CIRCLE_XMARK: faCircleXmark,
+    MAP_PIN: faMapPin,
+    CALENDAR: faCalendar,
+    CHECK: faCheck,
+    CAMERA: faCamera,
+    SPINNER: faSpinner
+}

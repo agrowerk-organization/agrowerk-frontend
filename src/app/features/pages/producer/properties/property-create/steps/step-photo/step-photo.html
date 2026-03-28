@@ -1,0 +1,55 @@
+<h2 class="text-xl font-bold text-primary mb-2">Foto da Propriedade</h2>
+<p class="text-neutral-secondary text-sm mb-6">Opcional — adicione uma foto da sua fazenda.</p>
+
+<div class="flex flex-col items-center gap-6">
+
+  @if (previewUrl()) {
+    <img [src]="previewUrl()" alt="Preview"
+         class="w-full max-h-64 object-cover rounded-2xl border-2 border-primary/50" />
+  } @else {
+    <label for="photo-upload"
+           class="w-full h-48 flex flex-col items-center justify-center gap-3
+                  rounded-2xl border-2 border-dashed border-primary/40
+                  hover:border-primary cursor-pointer transition-all duration-300">
+      <fa-icon [icon]="icons.CAMERA" class="text-4xl text-neutral-secondary/50" />
+      <span class="text-neutral-secondary text-sm">Clique para selecionar uma foto</span>
+    </label>
+  }
+
+  <input #fileInput 
+  id="photo-upload" 
+  type="file" 
+  accept="image/*" 
+  class="hidden"
+  (change)="fileSelected.emit(fileInput.files![0])" />
+
+  @if (!previewUrl()) {
+    <label for="photo-upload"
+           class="px-6 py-3 rounded-xl border-2 border-primary/50 text-primary
+                  font-semibold hover:border-primary cursor-pointer transition-all">
+      Selecionar foto
+    </label>
+  }
+
+  <div class="flex gap-3 w-full mt-2">
+    <button type="button" (click)="skip.emit()"
+            class="flex-1 py-3 rounded-xl border-2 border-primary/40 text-neutral-secondary
+                   font-semibold hover:border-primary transition-all">
+      Pular
+    </button>
+
+    @if (hasFile()) {
+      <button type="button" (click)="upload.emit()" [disabled]="uploading()"
+              class="flex-1 py-3 rounded-xl bg-button-main text-white font-semibold
+                     hover:bg-button-main-hover transition-all disabled:opacity-50
+                     flex items-center justify-center gap-2">
+        @if (uploading()) {
+          <fa-icon [icon]="icons.SPINNER" class="animate-spin" />
+        } @else {
+          <fa-icon [icon]="icons.CHECK" />
+        }
+        Salvar e concluir
+      </button>
+    }
+  </div>
+</div>

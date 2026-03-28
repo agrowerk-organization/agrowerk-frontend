@@ -15,7 +15,15 @@ import {
     faTemperatureHalf,
     faSun,
     faLocationDot,
-    faMap
+    faMap,
+    faArrowTrendUp,
+    faArrowTrendDown,
+    faMinus,
+    faWheatAwn,
+    faDrumstickBite,
+    faMugHot,
+    faLeaf,
+    faNeuter
 } from '@fortawesome/free-solid-svg-icons'
 
 export const ICONS_DASHBOARD = {
@@ -35,5 +43,13 @@ export const ICONS_DASHBOARD = {
     TEMPERATURE_HALF : faTemperatureHalf,
     SUN : faSun,
     LOCATION_DOT : faLocationDot,
-    MAP : faMap
+    MAP : faMap,
+    NEUTER: faNeuter,
+    ARROW_TREND_UP : faArrowTrendUp,
+    ARROW_TREND_DOWN : faArrowTrendDown,
+    MINUS : faMinus,
+    WHEAT_AWN : faWheatAwn,
+    DRUMSTICK_BITE : faDrumstickBite,
+    MUG_HOT : faMugHot,
+    LEAF : faLeaf
 }

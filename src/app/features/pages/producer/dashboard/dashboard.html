@@ -68,6 +68,8 @@
               class="md:col-span-2"
               [forecast]="weatherDashboard()?.dailyForecast ?? []" />
           
+            <app-market-data class="md:col-span-2" [dashboard]="commodityDashboard()" />
+
             <app-statistics-card
               class="md:col-span-2"
               [statistics]="weatherDashboard()?.statistics ?? null" />

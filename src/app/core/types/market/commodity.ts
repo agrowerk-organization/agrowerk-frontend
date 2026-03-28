@@ -1,0 +1,1 @@
+export type Commodity = | 'SOJA' | 'MILHO' | 'BOI_GORDO' | 'CAFE' | 'TRIGO' | 'ALGODAO';

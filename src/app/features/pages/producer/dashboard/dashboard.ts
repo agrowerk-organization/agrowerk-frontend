@@ -25,6 +25,9 @@ import { CycleDiagram } from '@shared/components/cycle-diagram/cycle-diagram';
 import { StatisticsCard } from './dashboard-components/statistics-card/statistics-card';
 import { UpdateBranding } from "./dashboard-components/update-branding/update-branding";
 import  CYCLE_NODES_DATA  from '@assets/files/producer/dashboard-producer.json';
+import { MarketData } from "./dashboard-components/market-data/market-data";
+import { CommodityPriceService } from '@core/services/commodity-price.service';
+import { CommodityDashboardResponse } from '@core/types/market/commodity-dashboard.response';
 
 @Component({
   selector: 'app-producer-dashboard',
@@ -40,7 +43,8 @@ import  CYCLE_NODES_DATA  from '@assets/files/producer/dashboard-producer.json';
     OnboardingCard,
     StatisticsCard,
     CycleDiagram,
-    UpdateBranding
+    UpdateBranding,
+    MarketData
 ],
   templateUrl: './dashboard.html'
 })
@@ -48,6 +52,7 @@ export class ProducerDashboard implements OnInit {
   private weatherService = inject(WeatherService);
   private propertyService = inject(PropertyService);
   private seasonService = inject(SeasonService);
+  private commodityService = inject(CommodityPriceService);
   private authService = inject(AuthService);
   private router = inject(Router);
 
@@ -59,11 +64,13 @@ export class ProducerDashboard implements OnInit {
   activeProperty = signal<PropertyResponse | null>(null);
   weatherDashboard = signal<WeatherDashboard | null>(null);
   activeSeason = signal<SeasonResponse | null>(null);
+  commodityDashboard = signal<CommodityDashboardResponse | null>(null);
 
   hasProperty = computed(() => this.properties().length > 0);
 
   ngOnInit() {
     this.loadDashboard();
+    this.commodityService.getDashboard().subscribe(d => this.commodityDashboard.set(d));
   }
 
   readonly cycleNodes: Cycle[] = CYCLE_NODES_DATA.map(node => ({
