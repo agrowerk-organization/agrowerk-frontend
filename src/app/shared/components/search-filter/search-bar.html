@@ -1,0 +1,85 @@
+<div class="space-y-3">
+
+    <div class="relative">
+      <fa-icon
+        [icon]="icons.SEARCH"
+        class="absolute left-4 top-1/2 -translate-y-1/2
+               text-neutral-secondary/50 pointer-events-none" />
+  
+      <input
+        type="text"
+        [formControl]="searchControl"
+        [placeholder]="placeholder()"
+        class="w-full pl-11 pr-10 py-4 rounded-2xl border-2 border-primary/40
+               bg-neutral-primary text-primary placeholder:text-neutral-secondary/50
+               focus:border-primary outline-none transition-all duration-300
+               shadow-lg shadow-primary/10" />
+  
+      @if (searchControl.value) {
+        <button
+          type="button"
+          (click)="clearSearch()"
+          class="absolute right-4 top-1/2 -translate-y-1/2
+                 text-neutral-secondary/50 hover:text-primary transition-colors">
+          <fa-icon [icon]="icons.X_MARK" />
+        </button>
+      }
+    </div>
+  
+    @if (hasFilters && filterMode() === 'buttons') {
+      <div class="flex flex-wrap gap-2">
+  
+        <button
+          type="button"
+          (click)="setFilter(null)"
+          class="flex items-center gap-2 px-4 py-2 rounded-xl border-2
+                 text-sm font-semibold transition-all duration-300"
+          [class.border-primary]="activeFilter() === null"
+          [class.bg-primary/10]="activeFilter() === null"
+          [class.text-primary]="activeFilter() === null"
+          [class.border-primary/30]="activeFilter() !== null"
+          [class.text-neutral-secondary]="activeFilter() !== null">
+          {{ allLabel() }}
+        </button>
+  
+        @for (filter of filters(); track filter.key) {
+          <button
+            type="button"
+            (click)="setFilter(filter.key)"
+            class="flex items-center gap-2 px-4 py-2 rounded-xl border-2
+                   text-sm font-semibold transition-all duration-300"
+            [class.border-primary]="activeFilter() === filter.key"
+            [class.bg-primary/10]="activeFilter() === filter.key"
+            [class.text-primary]="activeFilter() === filter.key"
+            [class.border-primary/30]="activeFilter() !== filter.key"
+            [class.text-neutral-secondary]="activeFilter() !== filter.key">
+            @if (filter.icon) {
+              <fa-icon [icon]="filter.icon" class="text-xs" />
+            }
+            {{ filter.label }}
+          </button>
+        }
+      </div>
+    }
+  
+    @if (hasFilters && filterMode() === 'dropdown') {
+      <div class="relative">
+        <fa-icon
+          [icon]="icons.FILTER"
+          class="absolute left-4 top-1/2 -translate-y-1/2
+                 text-neutral-secondary/50 pointer-events-none" />
+        <select
+          (change)="onDropdownChange($event)"
+          class="w-full pl-11 pr-4 py-4 rounded-2xl border-2 border-primary/40
+                 bg-neutral-primary text-primary
+                 focus:border-primary outline-none transition-all duration-300
+                 shadow-lg shadow-primary/10 appearance-none cursor-pointer">
+          <option value="">{{ allLabel() }}</option>
+          @for (filter of filters(); track filter.key) {
+            <option [value]="filter.key">{{ filter.label }}</option>
+          }
+        </select>
+      </div>
+    }
+  
+  </div>

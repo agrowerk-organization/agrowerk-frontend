@@ -4,8 +4,9 @@ import { Injectable, signal } from '@angular/core';
     providedIn: 'root'
 })
 export class LayoutStateService {
-    showCycle = signal(true);
+    showCycle = signal(false);
     toggle() {
         this.showCycle.update(show => !show);
     }
 }
+

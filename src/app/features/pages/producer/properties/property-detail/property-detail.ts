@@ -5,10 +5,12 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PropertyService } from '@core/services/property.service';
 import { ICONS_PROPERTY } from '@core/ui/icons/icons-producer/icons-property/icons-property';
 import { PropertyResponse } from '@core/types/property/property.response';
+import { PropertyUpdateModal } from '../property-update-modal/property-update-modal';
+
 @Component({
   selector: 'app-property-detail',
   standalone: true,
-  imports: [CommonModule, FontAwesomeModule],
+  imports: [CommonModule, FontAwesomeModule, PropertyUpdateModal],
   templateUrl: './property-detail.html',
 })
 export class PropertyDetail implements OnInit {

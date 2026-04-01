@@ -1,18 +1,56 @@
-<div class="relative min-h-screen bg-gradient-to-br from-neutral-primary/95 
+<div class="relative min-h-screen bg-gradient-to-br from-neutral-primary/95
             to-neutral-primary/90 backdrop-blur-sm rounded-3xl p-8 shadow-2xl">
- 
-  <app-mesh-gradient class="absolute inset-0 -z-10"></app-mesh-gradient>
-  <app-pattern class="absolute inset-0 -z-10"></app-pattern>
+  <app-mesh-gradient class="absolute inset-0 -z-10" />
+  <app-pattern class="absolute inset-0 -z-10" />
 
-  
-    <section class="relative  py-20">
-      <div class="container mx-auto px-4 lg:px-8">
-        <div class="max-w-4xl mx-auto text-center">
-            <app-breadcrumb main="Agrowerk" pageName="Ajuda e Suporte" subPageName=""></app-breadcrumb>
-            <app-title [firstSegment]="'Resolva suas Dúvidas'" [secondSegment]="'Conosco de Forma Prática'"></app-title>
-            <app-subtitle [text]="'Nossos especialistas estaremos prontos para ajudar'"></app-subtitle>
-         
-        </div>
+  <!-- Hero -->
+  <section class="relative py-20">
+    <div class="container mx-auto px-4 lg:px-8">
+      <div class="max-w-4xl mx-auto text-center">
+        <app-breadcrumb main="Agrowerk" pageName="Ajuda e Suporte" subPageName="" />
+        <app-title
+          [firstSegment]="'Resolva suas Dúvidas'"
+          [secondSegment]="'Conosco de Forma Prática'" />
+        <app-subtitle [text]="'Nossos especialistas estarão prontos para ajudar'" />
       </div>
-</section>
+    </div>
+  </section>
 
+  <section class="relative pb-20">
+    <div class="container mx-auto px-4 lg:px-8">
+      <div class="max-w-3xl mx-auto space-y-6">
+
+        <app-search-bar
+          placeholder="Buscar pergunta..."
+          filterMode="buttons"
+          allLabel="Todas"
+          [filters]="searchFilters"
+          (searchChange)="searchTerm.set($event)"
+          (filterChange)="activeTab.set($event)" />
+
+        @if (loading()) {
+          <div class="flex items-center justify-center h-40">
+            <div class="animate-spin w-10 h-10 rounded-full
+                        border-4 border-button-main border-t-transparent"></div>
+          </div>
+        } @else if (filtered().length === 0) {
+          <div class="text-center py-16">
+            <p class="text-neutral-secondary/60 text-lg">Nenhuma pergunta encontrada.</p>
+          </div>
+        } @else {
+          <div class="group relative overflow-hidden rounded-3xl
+                      bg-neutral-primary border-3 border-primary/70
+                      shadow-xl shadow-primary/30 p-6 sm:p-8">
+            <div class="absolute top-0 right-0 w-48 h-48 bg-primary/10
+                        rounded-full blur-3xl -z-10 pointer-events-none"></div>
+            <p class="text-sm text-neutral-secondary/60 mb-5">
+              {{ filtered().length }} pergunta{{ filtered().length !== 1 ? 's' : '' }}
+            </p>
+            <app-faq-accordion [faqs]="filtered()" />
+          </div>
+        }
+
+      </div>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,36 @@
+<div class="space-y-3">
+
+    @for (faq of faqs(); track faq.id) {
+        <div 
+            class="group rounded-2xl border-2 transition-all duration-300 overflow-hidden"
+            [class.border-primary]="isOpen(faq.id)"
+            [class.border-primary/40]="!isOpen(faq.id)"
+            [class.bg-primary/5]="isOpen(faq.id)"
+            [class.bg-neutral-primary]="!isOpen(faq.id)">
+
+            <button
+            type="button"
+            (click)="toggle(faq)"
+            class="w-full flex items-center justify-between gap-4 p-5 text-left
+                hover:bg-primary/5 transition-colors duration-200">
+            <span class="text-base sm:text-lg font-semibold text-primary leading-snug">
+            {{ faq.question }}
+            </span>
+            <fa-icon
+            [icon]="icons.CHEVRON"
+            class="text-primary shrink-0 transition-transform duration-300"
+            [class.rotate-180]="isOpen(faq.id)" />
+        </button>
+
+        @if (isOpen(faq.id)) {
+            <div class="px-5 pb-5 animate-fadeInUp">
+            <div class="pt-3 border-t border-primary/20">
+                <p class="text-neutral-secondary leading-relaxed text-sm sm:text-base whitespace-pre-line">
+                {{ faq.answer }}
+                </p>
+            </div>
+            </div>
+        }
+        </div>
+    }
+</div>

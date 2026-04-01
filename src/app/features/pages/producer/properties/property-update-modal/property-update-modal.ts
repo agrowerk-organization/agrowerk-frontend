@@ -1,31 +1,34 @@
-import { Component, input, output, signal, computed, OnInit, inject } from '@angular/core';
+import { Component, input, output, signal, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faXmark, faCheck, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { PropertyResponse } from '@core/types/property/property.response';
-import { PropertyService } from '@core/services/property/property.service';
-import { UpdateGeneral } from './steps/update-general/update-general';
-import { UpdateAddress } from './steps/update-address/update-address';
-import { UpdateUnits } from './steps/update-units/update-units';
-
+import { PropertyService } from '@core/services/property.service';
+import { StepGeneral } from '../property-create/steps/step-general/step-general';
+import { StepAddress } from '../property-create/steps/step-address/step-address';
+import { StepUnits } from '../property-create/steps/step-units/step-units';
+import { ICONS_PROPERTY } from '@core/ui/icons/icons-producer/icons-property/icons-property';
+import { StateService } from '@core/services/state.service';
+import { StateResponse } from '@core/types/state/state.response';
 @Component({
   selector: 'app-property-update-modal',
   standalone: true,
   imports: [
     CommonModule, ReactiveFormsModule, FontAwesomeModule,
-    UpdateGeneral, UpdateAddressComponent, UpdateUnits,
+    StepGeneral, StepAddress, StepUnits,
   ],
   templateUrl: './property-update-modal.html',
 })
-export class PropertyUpdateModalComponent implements OnInit {
+export class PropertyUpdateModal implements OnInit {
   private propertyService = inject(PropertyService);
+  private stateService = inject(StateService);
 
   property = input.required<PropertyResponse>();
+  states = signal<StateResponse[]>([]);
   updated  = output<PropertyResponse>();
-  close    = output<void>();
+  doClose    = output<void>();
 
-  readonly icons = { XMARK: faXmark, CHECK: faCheck, SPINNER: faSpinner };
+  icons = ICONS_PROPERTY;
 
   readonly tabs = ['Geral', 'Endereço', 'Talhões'];
   activeTab = signal(0);
@@ -38,6 +41,8 @@ export class PropertyUpdateModalComponent implements OnInit {
   get units(): FormArray { return this.unitsForm.get('units') as FormArray; }
 
   ngOnInit() {
+    this.stateService.listAll().subscribe(s => this.states.set(s));
+
     const p = this.property();
     const a = p.address;
 
@@ -130,5 +135,9 @@ export class PropertyUpdateModalComponent implements OnInit {
       next: res  => { this.loading.set(false); this.updated.emit(res); },
       error: ()  => this.loading.set(false),
     });
+  }
+
+  onDialogClick(event: MouseEvent): void {
+    event.stopPropagation();
   }
 }

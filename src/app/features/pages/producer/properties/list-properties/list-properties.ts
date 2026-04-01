@@ -6,6 +6,7 @@ import { PropertyResponse } from '@core/types/property/property.response';
 import { ICONS_PROPERTY } from '@core/ui/icons/icons-producer/icons-property/icons-property';
 import { PropertyService } from '@core/services/property.service';
 import { PropertyCard } from '../property-card/property-card';
+import { PropertyUpdateModal } from '../property-update-modal/property-update-modal';
 
 @Component({
   selector: 'app-list-properties',
@@ -15,6 +16,7 @@ import { PropertyCard } from '../property-card/property-card';
     RouterModule,
     FontAwesomeModule,
     PropertyCard,
+    PropertyUpdateModal
   ],
   templateUrl: './list-properties.html',
 })

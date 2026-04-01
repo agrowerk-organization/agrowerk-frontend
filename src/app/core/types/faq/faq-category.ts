@@ -1,0 +1,1 @@
+export type FaqCategory = 'REGISTRATION' | 'INVENTORY' | 'HARVESTS' | 'REPORTS';

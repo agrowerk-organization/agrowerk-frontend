@@ -3,8 +3,8 @@
   style="background: rgba(0,0,0,0.6);"
   role="button"
   tabindex="0"
-  (click)="close.emit()"
-  (keydown.escape)="close.emit()">
+  (click)="doClose.emit()"
+  (keydown.escape)="doClose.emit()">
 
   <div
     class="w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-3xl
@@ -24,11 +24,11 @@
       </div>
       <button
         type="button"
-        (click)="close.emit()"
+        (click)="doClose.emit()"
         class="flex items-center justify-center w-10 h-10 rounded-xl
                border-2 border-primary/40 text-primary
                hover:border-primary transition-all">
-        <fa-icon [icon]="icons.XMARK" />
+        <fa-icon [icon]="icons.CIRCLE_XMARK" />
       </button>
     </div>
 
@@ -49,9 +49,9 @@
 
     <div class="p-6">
       @switch (activeTab()) {
-        @case (0) { <app-update-general [form]="generalForm" /> }
-        @case (1) { <app-update-address [form]="addressForm" /> }
-        @case (2) { <app-update-units [units]="units" /> }
+        @case (0) { <app-step-general [form]="generalForm" [states]="states()" /> }
+        @case (1) { <app-step-address [form]="addressForm" /> }
+        @case (2) { <app-step-units   [units]="units" /> }
       }
     </div>
 
@@ -60,7 +60,7 @@
       style="background: var(--color-neutral-primary)">
       <button
         type="button"
-        (click)="close.emit()"
+        (click)="doClose.emit()"
         class="flex-1 py-3 rounded-xl border-2 border-primary/50 text-primary
                font-semibold hover:border-primary transition-all">
         Cancelar
