@@ -3,8 +3,7 @@
   <app-mesh-gradient class="absolute inset-0 -z-10" />
   <app-pattern class="absolute inset-0 -z-10" />
 
-  <!-- Hero -->
-  <section class="relative py-20">
+  <section class="relative py-10">
     <div class="container mx-auto px-4 lg:px-8">
       <div class="max-w-4xl mx-auto text-center">
         <app-breadcrumb main="Agrowerk" pageName="Ajuda e Suporte" subPageName="" />
@@ -16,7 +15,7 @@
     </div>
   </section>
 
-  <section class="relative pb-20">
+  <section class="relative pb-10">
     <div class="container mx-auto px-4 lg:px-8">
       <div class="max-w-3xl mx-auto space-y-6">
 
@@ -35,15 +34,15 @@
           </div>
         } @else if (filtered().length === 0) {
           <div class="text-center py-16">
-            <p class="text-neutral-secondary/60 text-lg">Nenhuma pergunta encontrada.</p>
+            <p class="text-neutral-secondary/60 text-lg sm:text-xl">Nenhuma pergunta encontrada.</p>
           </div>
         } @else {
-          <div class="group relative overflow-hidden rounded-3xl
+          <div class="group relative overflow-hidden rounded-3xl mt-8
                       bg-neutral-primary border-3 border-primary/70
                       shadow-xl shadow-primary/30 p-6 sm:p-8">
             <div class="absolute top-0 right-0 w-48 h-48 bg-primary/10
                         rounded-full blur-3xl -z-10 pointer-events-none"></div>
-            <p class="text-sm text-neutral-secondary/60 mb-5">
+            <p class="text-sm sm:text-xl text-neutral-secondary/80 mb-5">
               {{ filtered().length }} pergunta{{ filtered().length !== 1 ? 's' : '' }}
             </p>
             <app-faq-accordion [faqs]="filtered()" />

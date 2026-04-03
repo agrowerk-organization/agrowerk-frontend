@@ -1,4 +1,4 @@
-<div [formGroup]="form()" [class.hidden] class="animate-in fade-in slide-in-from-right-4 duration-300">
+<div [formGroup]="form()" class="animate-in fade-in slide-in-from-right-4 duration-300">
 
     <div class="mt-4">
       <label for="reg-email" class="field-label text-neutral-secondary text-xl">E-mail</label>
@@ -15,7 +15,7 @@
                placeholder="Mínimo 8 caracteres" autocomplete="new-password"
                class="field-input pr-12" />
         <button type="button" (click)="togglePassword()" class="password-toggle">
-          <fa-icon [icon]="showPassword() ? icons.EYE : icons.EYE_SLASH" class="text-xl" />
+          <fa-icon [icon]="showPassword() ? icons.EYE : icons.EYE_SLASH" class="text-xl cursor-pointer" />
         </button>
       </div>
       
@@ -39,21 +39,6 @@
         [formGroup]="form()" 
         groupError="passwordMismatch"
         groupErrorMessage="As senhas não coincidem" />
-    </div>
-  
-    <div class="mt-4">
-      <label for="reg-roleId" class="field-label text-neutral-secondary text-xl">Perfil de acesso</label>
-      @if (isLoadingRoles()) {
-        <div class="field-input text-[var(--color-neutral-secondary)]/40">Carregando perfis...</div>
-      } @else {
-        <select id="reg-roleId" formControlName="roleId" class="field-input">
-          <option value="" disabled>Selecione um perfil</option>
-          @for (role of roles(); track role.roleId) {
-            <option [value]="role.roleId">{{ role.name }}</option>
-          }
-        </select>
-      }
-      <app-field-error [control]="form().get('roleId')" [submitted]="submitted()" />
     </div>
 
     <div class="mt-6">
@@ -91,7 +76,7 @@
         Voltar
       </button>
   
-      <button type="submit" [disabled]="loading()"
+      <button type="button" (click)="register.emit()" [disabled]="loading()"
               class="flex-1 py-3 px-6 rounded-xl font-semibold text-2xl text-neutral-primary
                      bg-[var(--color-primary)] hover:bg-[var(--color-button-second)]
                      transition-all duration-300 shadow-lg shadow-[var(--color-primary)]/20

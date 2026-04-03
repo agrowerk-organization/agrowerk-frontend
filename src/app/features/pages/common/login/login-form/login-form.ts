@@ -45,6 +45,12 @@ export class LoginForm {
     () => REGISTER_ROUTES[this.role() ?? ''] ?? '/register/producer'
   );
 
+  readonly showRegister = computed(() =>  {
+    const currentRole = this.role();
+    return currentRole !== 'system_admin';
+  });
+
+
   readonly loginForm = this.formBuilder.nonNullable.group({
     email:      ['', [Validators.required, Validators.email]],
     password:   ['', [Validators.required, Validators.minLength(8)]],

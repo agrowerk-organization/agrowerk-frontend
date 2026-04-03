@@ -1,0 +1,5 @@
+export enum AccessProfile {
+    PRODUCER = 'PRODUCER',
+    SYSTEM_ADMIN = 'SYSTEM_ADMIN',
+    SUPPLIER_ADMIN = 'SUPPLIER_ADMIN'
+}

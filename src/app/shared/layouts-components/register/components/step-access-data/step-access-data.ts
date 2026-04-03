@@ -21,6 +21,7 @@ export class StepAccessData {
   readonly submitted      = input<boolean>(false);
   readonly isLoadingRoles = input<boolean>(false);
   readonly back         = output<void>();
+  readonly register = output<void>(); 
 
   showPassword = signal(false);
   showConfirm  = signal(false);

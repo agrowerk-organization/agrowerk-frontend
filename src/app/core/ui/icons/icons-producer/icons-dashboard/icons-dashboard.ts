@@ -23,7 +23,9 @@ import {
     faDrumstickBite,
     faMugHot,
     faLeaf,
-    faNeuter
+    faNeuter,
+    faHome,
+    faChartBar
 } from '@fortawesome/free-solid-svg-icons'
 
 export const ICONS_DASHBOARD = {
@@ -51,5 +53,7 @@ export const ICONS_DASHBOARD = {
     WHEAT_AWN : faWheatAwn,
     DRUMSTICK_BITE : faDrumstickBite,
     MUG_HOT : faMugHot,
-    LEAF : faLeaf
+    LEAF : faLeaf,
+    HOME : faHome,
+    CHART_BAR : faChartBar
 }

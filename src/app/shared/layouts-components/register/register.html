@@ -10,45 +10,6 @@
       <app-subtitle [text]="subtitle()" />
     </div>
 
-    <div class="flex items-center gap-3 mb-8 animate-[fadeInUp_0.45s_ease-out]">
-
-      <div class="flex items-center gap-2">
-        <div class="w-8 h-8 rounded-full flex items-center justify-center text-xl font-bold transition-all duration-300"
-            [class.text-neutral-secondary]="currentStep() === 1"
-            [class.text-primary]="currentStep() > 1">
-        @if (currentStep() > 1) {
-            <fa-icon [icon]="icons.CHECK" class="text-lg" />
-        } @else { 1 }
-        </div>
-        <span class="text-xl font-medium transition-colors duration-300"
-                [class.neutral-secondary]="currentStep() === 1"
-                [class.text-primary]="currentStep() > 1">
-            Dados pessoais
-        </span>
-        </div>
-
-      <div class="flex-1 h-px transition-colors duration-500"
-           [class.bg-\[var\(--color-primary\)\]]="currentStep() === 2"
-           [class.bg-white\/15]="currentStep() === 1">
-      </div>
-
-        <div class="flex items-center gap-2">
-                <div class="w-8 h-8 rounded-full flex items-center justify-center text-xl font-bold transition-all duration-300"
-                [class.bg-\[var\(--color-primary\)\]]="currentStep() === 2"
-                [class.text-white]="currentStep() === 2"
-                [class.bg-white\/15]="currentStep() < 2"
-                [class.text-white\/40]="currentStep() < 2">
-                2
-        </div>
-            <span class="text-xl font-medium transition-colors duration-300"
-                    [class.text-primary]="currentStep() === 2"
-                    [class.text-white\/40]="currentStep() < 2">
-                Dados de Acesso
-            </span>
-        </div>
-
-    </div>
-
     @if (successMessage()) {
       <div class="flex items-center gap-3 p-4 mb-6 bg-green-50 border border-green-200 rounded-xl
                   animate-in fade-in slide-in-from-top-2">
@@ -80,6 +41,14 @@
             [submitted]="submitted()"
             [isLoadingRoles]="isLoadingRoles()"
             (back)="prevStep()"
+            (register)="onSubmit()"
+          />
+        }
+        @case (3) {
+          <app-step-success
+            [email]="confirmedEmail()"
+            (goLogin)="router.navigate(['loginRoute()'])"
+            (resend)="onResendEmail()"
           />
         }
       }

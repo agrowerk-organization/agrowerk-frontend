@@ -100,7 +100,11 @@ export class ProducerDashboard implements OnInit {
     this.loading.set(true);
     this.propertyService.findMyProperties().subscribe({
       next: (page) => {
-        const props = page.content;
+
+        const props = page.content ?? [];
+
+        console.log(props);
+
         this.properties.set(props);
         if (props.length === 0) {
           this.loading.set(false);
@@ -129,7 +133,7 @@ export class ProducerDashboard implements OnInit {
     }).subscribe(({ location, seasons }) => {
   
       this.activeSeason.set(
-        (seasons as Page<SeasonResponse>).content
+        ((seasons as Page<SeasonResponse>).content ?? [])
         .find(s => s.seasonStatus === SeasonStatus.PLANNED 
           || s.seasonStatus === SeasonStatus.IN_PROGRESS
         ) ?? null

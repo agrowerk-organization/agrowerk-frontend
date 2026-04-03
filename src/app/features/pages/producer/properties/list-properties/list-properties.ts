@@ -37,7 +37,7 @@ export class ListProperties implements OnInit {
     this.loading.set(true);
     this.propertyService.findMyProperties().subscribe({
       next: page => {
-        this.properties.set(page.content);
+        this.properties.set(page.content ?? []);
         this.loading.set(false);
       },
       error: () => {
