@@ -11,12 +11,12 @@
   <div class="relative z-10 p-8">
 
     <div class="flex items-center gap-3 mb-6">
-      <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-900 to-green-950
+      <div class="w-16 h-8 sm:w-16 h-16 rounded-xl bg-gradient-to-br from-emerald-900 to-green-950
                   flex items-center justify-center
                   shadow-lg group-hover:scale-110 transition-transform duration-300">
-        <fa-icon [icon]="icons.CONTRACT" class="text-primary text-xl" />
+        <fa-icon [icon]="icons.CONTRACT" class="text-primary text-4xl" />
       </div>
-      <h3 class="text-2xl font-bold text-primary">Privacidade</h3>
+      <h3 class="text-2xl sm:text-4xl font-bold text-primary">Privacidade</h3>
     </div>
 
     <ul class="space-y-3">
@@ -26,13 +26,13 @@
         { icon: icons.CHART,    label: 'Consentimento de marketing', value: profile().marketingConsent }
       ]; track item.label) {
         <li class="flex items-center justify-between p-3 rounded-xl
-                   border border-primary/20 hover:border-primary/50 transition-colors">
+                   border-2 border-primary/50 hover:border-primary/95 transition-colors">
           <div class="flex items-center gap-3">
-            <fa-icon [icon]="item.icon" class="text-primary/60 w-5 text-base" />
-            <p class="text-white font-medium text-sm">{{ item.label }}</p>
+            <fa-icon [icon]="item.icon" class="text-primary/60 w-5 text-2xl" />
+            <p class="text-xl sm:text-2xl text-neutral-secondary font-medium text-sm">{{ item.label }}</p>
           </div>
-          <div class="flex items-center gap-1.5 text-xs font-bold"
-               [class]="item.value ? 'text-emerald-400' : 'text-neutral-secondary'">
+          <div class="flex items-center gap-1.5 text-lg font-bold"
+            [class]="item.value ? 'text-primary' : 'text-error'">
             <fa-icon [icon]="item.value ? icons.CHECK_CIRCLE : icons.TIMES_CIRCLE" />
             {{ item.value ? 'Aceito' : 'Não aceito' }}
           </div>
