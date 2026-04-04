@@ -27,7 +27,7 @@ import { ICONS_PROPERTY } from '@core/ui/icons/icons-producer/icons-property/ico
   ],
   templateUrl: './property-create.html',
 })
-export class PropertyCreateComponent implements OnInit {
+export class PropertyCreate implements OnInit {
   private propertyService = inject(PropertyService);
   private stateService    = inject(StateService);
   private router          = inject(Router);
@@ -51,7 +51,6 @@ export class PropertyCreateComponent implements OnInit {
 
   states = signal<StateResponse[]>([]);
 
-  // ── Forms ────────────────────────────────────────────────────
   generalForm = new FormGroup({
     name:              new FormControl('',   Validators.required),
     stateRegistration: new FormControl('',   Validators.required),

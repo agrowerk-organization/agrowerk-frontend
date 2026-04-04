@@ -16,5 +16,7 @@ export class UserSteps {
   icons = ICONS_HOW_IT_WORKS;
   currentSteps = input.required<UserStep[]>();  
 
-  handleAction: () => void = () => this.router.navigate(['/register']);
+  handleAction() {
+    this.router.navigate(['/register']); 
+  }
 }

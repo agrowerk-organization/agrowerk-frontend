@@ -95,6 +95,11 @@ export const routes: Routes = [
           .then(page => page.Weather)
       },
       {
+        path: 'property-create',
+        loadComponent: () => import('./features/pages/producer/properties/property-create/property-create')
+          .then(page => page.PropertyCreate)
+      },
+      {
         path: 'properties',
         loadComponent: () => import('./features/pages/producer/properties/list-properties/list-properties')
           .then(page => page.ListProperties)
@@ -151,9 +156,14 @@ export const routes: Routes = [
       },
       {
         path: 'profile',
-        loadComponent: () => import('./features/pages/producer/profile/profile')
-          .then(page => page.Profile)
+        loadComponent: () => import('./features/pages/producer/user-profile/user-profile')
+          .then(page => page.UserProfile)
       },
+      {
+        path: 'help-and-support',
+        loadComponent: () => import('./features/pages/common/help-and-support/help-and-support')
+          .then(page => page.HelpAndSupport)
+      }
     ]
   },
 

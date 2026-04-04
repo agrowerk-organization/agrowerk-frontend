@@ -1,0 +1,55 @@
+<div class="group relative overflow-hidden rounded-3xl
+            bg-neutral-primary border-3 border-primary/70
+            shadow-xl shadow-primary/30
+            transition-all duration-300 hover:border-primary hover:shadow-xl hover:-translate-y-1
+            animate-fadeInUp">
+
+  <div class="absolute inset-0 -z-10 pointer-events-none overflow-hidden">
+    <div class="absolute top-0 right-0 w-40 h-40 bg-primary/20 rounded-full blur-3xl"></div>
+  </div>
+
+  <div class="relative z-10 p-8">
+
+    <div class="flex items-center justify-between mb-6">
+      <div class="flex items-center gap-3">
+        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-900 to-green-950
+                    flex items-center justify-center
+                    shadow-lg group-hover:scale-110 transition-transform duration-300">
+          <fa-icon [icon]="icons.USER" class="text-primary text-xl" />
+        </div>
+        <h3 class="text-2xl font-bold text-primary">Dados pessoais</h3>
+      </div>
+      <button routerLink="/producer/profile/edit"
+              class="flex items-center gap-2 px-4 py-2 rounded-xl
+                     border border-primary/40 text-primary text-sm font-semibold
+                     hover:border-primary hover:bg-primary/10
+                     transition-all duration-200 cursor-pointer">
+        <fa-icon [icon]="icons.PENCIL" class="text-xs" />
+        Editar
+      </button>
+    </div>
+
+    <ul class="space-y-4">
+      @for (item of [
+        { icon: icons.USER,     label: 'Nome',      value: profile().name },
+        { icon: icons.ENVELOPE, label: 'E-mail',    value: profile().email },
+        { icon: icons.PHONE,    label: 'Telefone',  value: profile().telephone },
+        { icon: icons.ID_CARD,  label: 'CPF',       value: profile().cpf },
+        { icon: icons.MAP_PIN,  label: 'Município', value: profile().addressResponse ? (profile().addressResponse!.municipality ?? '—') : '—' }
+      ]; track item.label) {
+        <li class="flex items-center gap-3 p-3 rounded-xl
+                   border border-primary/20 hover:border-primary/50
+                   transition-colors duration-200">
+          <fa-icon [icon]="item.icon" class="text-primary/60 w-5 text-base flex-shrink-0" />
+          <div class="min-w-0">
+            <p class="text-xs text-neutral-secondary uppercase tracking-wider font-semibold">
+              {{ item.label }}
+            </p>
+            <p class="text-white font-medium truncate">{{ item.value }}</p>
+          </div>
+        </li>
+      }
+    </ul>
+
+  </div>
+</div>

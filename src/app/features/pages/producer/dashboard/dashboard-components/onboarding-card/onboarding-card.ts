@@ -24,13 +24,13 @@ export class OnboardingCard {
   icons = ICONS_DASHBOARD;
 
   features = [
-    { label: 'Propriedades',       icon: this.icons.HOME,       description: 'Gerencie fazendas, talhões e áreas' },
+    { label: 'Propriedades',        icon: this.icons.HOME,       description: 'Gerencie fazendas, talhões e áreas' },
     { label: 'Clima em tempo real', icon: this.icons.CLOUD_SUN,  description: 'Alertas e previsão para sua região' },
     { label: 'Safras e plantios',   icon: this.icons.CHART_BAR,  description: 'Acompanhe do plantio à colheita'    },
     { label: 'Mercado',             icon: this.icons.CHART_LINE, description: 'Cotações e tendências de commodities' },
   ];
 
   handleAction() {
-    this.router.navigate(['/producer/properties/create']);
+    this.router.navigate(['/producer/property-create']);
   }
 }

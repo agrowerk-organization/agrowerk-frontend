@@ -1,0 +1,44 @@
+<div class="group relative overflow-hidden rounded-3xl
+            bg-neutral-primary border-3 border-primary/70
+            shadow-xl shadow-primary/30
+            transition-all duration-300 hover:border-primary hover:shadow-xl hover:-translate-y-1
+            animate-fadeInUp">
+
+  <div class="absolute inset-0 -z-10 pointer-events-none overflow-hidden">
+    <div class="absolute top-0 right-0 w-40 h-40 bg-primary/20 rounded-full blur-3xl"></div>
+  </div>
+
+  <div class="relative z-10 p-8">
+
+    <div class="flex items-center gap-3 mb-6">
+      <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-900 to-green-950
+                  flex items-center justify-center
+                  shadow-lg group-hover:scale-110 transition-transform duration-300">
+        <fa-icon [icon]="icons.CONTRACT" class="text-primary text-xl" />
+      </div>
+      <h3 class="text-2xl font-bold text-primary">Privacidade</h3>
+    </div>
+
+    <ul class="space-y-3">
+      @for (item of [
+        { icon: icons.CONTRACT, label: 'Termos de uso',              value: profile().termsAccepted },
+        { icon: icons.SHIELD,   label: 'Política de privacidade',    value: profile().privacyPolicyAccepted },
+        { icon: icons.CHART,    label: 'Consentimento de marketing', value: profile().marketingConsent }
+      ]; track item.label) {
+        <li class="flex items-center justify-between p-3 rounded-xl
+                   border border-primary/20 hover:border-primary/50 transition-colors">
+          <div class="flex items-center gap-3">
+            <fa-icon [icon]="item.icon" class="text-primary/60 w-5 text-base" />
+            <p class="text-white font-medium text-sm">{{ item.label }}</p>
+          </div>
+          <div class="flex items-center gap-1.5 text-xs font-bold"
+               [class]="item.value ? 'text-emerald-400' : 'text-neutral-secondary'">
+            <fa-icon [icon]="item.value ? icons.CHECK_CIRCLE : icons.TIMES_CIRCLE" />
+            {{ item.value ? 'Aceito' : 'Não aceito' }}
+          </div>
+        </li>
+      }
+    </ul>
+
+  </div>
+</div>

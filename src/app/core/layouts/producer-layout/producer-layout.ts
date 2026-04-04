@@ -1,9 +1,10 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { Component, ElementRef, HostListener, inject, signal } from '@angular/core';
+import { Component, computed, ElementRef, HostListener, inject, signal } from '@angular/core';
 import { RouterOutlet, RouterLink } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { AuthService } from '../../services/auth.service';
+import { PropertyService } from '@core/services/property.service';
 import { LayoutStateService } from '../../services/layout-state.service';
 import { MeshGradient } from '../../../shared/components/mesh-gradient/mesh-gradient';
 import { Pattern } from '../../../shared/components/pattern/pattern';
@@ -25,12 +26,16 @@ import { ICONS_PRODUCER_LAYOUT } from '../../ui/icons/icons-producer/icons-produ
 })
 export class ProducerLayout {
   private readonly authService   = inject(AuthService);
+  private readonly propertyService = inject(PropertyService);
   private readonly elementRef    = inject(ElementRef);
 
   layoutState      = inject(LayoutStateService);
   currentUser      = toSignal(this.authService.currentUser$);
   icons            = ICONS_PRODUCER_LAYOUT;
   showUserDropdown = signal(false);
+
+  private propertiesPage = toSignal(this.propertyService.findMyProperties(0, 1));
+  hasProperties = computed(() => (this.propertiesPage()?.totalElements ?? 0) > 0);
 
   toggleUserDropdown(): void {
     this.showUserDropdown.update(v => !v);

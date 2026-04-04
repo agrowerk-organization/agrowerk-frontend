@@ -73,6 +73,10 @@ export class AuthService {
     );
   }
 
+  isAuthenticated(): boolean {
+    return this.isLoggedSubject.value === true; // null e false viram false
+  }
+
   checkAuthStatus(): Observable<UserInfo | null> {
     return this.getCurrentUser().pipe(
       catchError((error: HttpErrorResponse) => {

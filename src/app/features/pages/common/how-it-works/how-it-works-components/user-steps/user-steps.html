@@ -45,7 +45,7 @@
               <app-button-pages
                 [icon]="icons.ARROW_RIGHT"
                 [text]="'Criar Conta'"
-                [action]="handleAction"
+                (action)="handleAction()"
                 [width]="'400'"
               ></app-button-pages>
             }

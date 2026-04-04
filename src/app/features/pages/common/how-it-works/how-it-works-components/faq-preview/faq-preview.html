@@ -8,7 +8,7 @@
       <app-button-pages 
             [icon]="icon.QUESTION" 
             [text]="'Ver FAQ Completo'" 
-            [action]="handleAction"
+            (action)="handleAction()"
             [width]="'360'"
         ></app-button-pages>
     </div>

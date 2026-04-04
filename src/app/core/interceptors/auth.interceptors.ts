@@ -15,21 +15,27 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
 
   const authReq = req.clone({ withCredentials: true });
 
+  const isExcluded = 
+    req.url.includes('/auth/refresh') ||
+    req.url.includes('/auth/login') ||
+    req.url.includes('/auth/me'); 
+
   return next(authReq).pipe(
     catchError(error => {
-      if (error.status === 401 && 
-          !req.url.includes('/auth/refresh') &&
-          !req.url.includes('/auth/login')) {
-        
+      if (error.status === 401 && !isExcluded) {
         return authService.refreshToken().pipe(
-          switchMap(() => next(authReq)), 
-          catchError(() => {
-            authService.logout().subscribe();
-            router.navigate(['/']);
-            return throwError(() => error);
+          switchMap(() => next(authReq)),
+          catchError((refreshError) => {
+
+            if (authService.isAuthenticated()) {
+              authService.logout().subscribe();
+              router.navigate(['/']);
+            }
+            return throwError(() => refreshError);
           })
         );
       }
+
       return throwError(() => error);
     })
   );

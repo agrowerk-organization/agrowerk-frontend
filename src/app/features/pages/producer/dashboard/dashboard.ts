@@ -103,8 +103,6 @@ export class ProducerDashboard implements OnInit {
 
         const props = page.content ?? [];
 
-        console.log(props);
-
         this.properties.set(props);
         if (props.length === 0) {
           this.loading.set(false);

@@ -10,7 +10,8 @@ import { UpdateUserRequest } from "../types/user/update-user.request";
 import { AddressResponse } from "../types/address/address.response";
 import { UserInfo } from "../types/user/user.info";
 import { Page } from "../types/page/page";
-
+import { FileUploadResponse } from "@core/types/file/file-upload.response";
+import { UserProfileResponse } from "@core/types/user/user-profile.response";
 @Injectable({
     providedIn: 'root'
   })
@@ -79,4 +80,21 @@ import { Page } from "../types/page/page";
         { withCredentials: true }
       );
     }
-  }
+
+    uploadAvatar(file: File): Observable<FileUploadResponse> {
+      const form = new FormData();
+      form.append('file', file);
+      return this.http.post<FileUploadResponse>(
+        `${this.apiUrl}/users/upload-avatar`,
+        form,
+        { withCredentials: true }
+      );
+    }
+
+    getProfile(): Observable<UserProfileResponse> {
+      return this.http.get<UserProfileResponse>(
+        `${this.apiUrl}/users/profile/me`,
+        { withCredentials: true }
+      );
+    }
+}

@@ -1,0 +1,89 @@
+<div class="group relative overflow-hidden rounded-3xl
+            bg-neutral-primary border-3 border-red-900/40
+            shadow-xl shadow-red-900/20
+            transition-all duration-300 hover:border-red-700/60 hover:shadow-xl hover:-translate-y-1
+            animate-fadeInUp">
+
+  <div class="absolute inset-0 -z-10 pointer-events-none overflow-hidden">
+    <div class="absolute top-0 right-0 w-40 h-40 bg-red-900/10 rounded-full blur-3xl"></div>
+  </div>
+
+  <div class="relative z-10 p-8">
+
+    <div class="flex items-center gap-3 mb-6">
+      <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-red-950 to-red-900
+                  flex items-center justify-center
+                  shadow-lg group-hover:scale-110 transition-transform duration-300">
+        <fa-icon [icon]="icons.WARNING" class="text-red-400 text-xl" />
+      </div>
+      <h3 class="text-2xl font-bold text-red-400">Conta</h3>
+    </div>
+
+    <p class="text-neutral-secondary text-sm mb-5">
+      Ações irreversíveis relacionadas à sua conta. Prossiga com cuidado.
+    </p>
+
+    <div class="space-y-3">
+
+      <!-- Desativar -->
+      <div class="p-4 rounded-xl border border-yellow-700/30 bg-yellow-900/10">
+        <div class="flex items-start justify-between gap-4">
+          <div>
+            <p class="text-yellow-400 font-semibold flex items-center gap-2">
+              <fa-icon [icon]="icons.POWER" />
+              Desativar conta
+            </p>
+            <p class="text-xs text-neutral-secondary mt-1">
+              Sua conta ficará invisível. Você pode reativar a qualquer momento.
+            </p>
+          </div>
+          <button (click)="confirmDeactivate.set(!confirmDeactivate())"
+                  class="flex-shrink-0 text-xs font-bold text-yellow-400
+                         border border-yellow-700/50 px-3 py-1.5 rounded-lg
+                         hover:bg-yellow-900/30 transition-all cursor-pointer">
+            {{ confirmDeactivate() ? 'Cancelar' : 'Desativar' }}
+          </button>
+        </div>
+        @if (confirmDeactivate()) {
+          <div class="mt-3 pt-3 border-t border-yellow-700/20">
+            <button (click)="onDeactivate()"
+                    class="w-full py-2 rounded-lg bg-yellow-600 hover:bg-yellow-500
+                           text-white text-xs font-bold transition-all cursor-pointer">
+              Confirmar desativação
+            </button>
+          </div>
+        }
+      </div>
+
+      <div class="p-4 rounded-xl border border-red-700/30 bg-red-900/10">
+        <div class="flex items-start justify-between gap-4">
+          <div>
+            <p class="text-red-400 font-semibold flex items-center gap-2">
+              <fa-icon [icon]="icons.TRASH" />
+              Excluir conta
+            </p>
+            <p class="text-xs text-neutral-secondary mt-1">
+              Todos os seus dados serão anonimizados. Ação irreversível.
+            </p>
+          </div>
+          <button (click)="confirmDelete.set(!confirmDelete())"
+                  class="flex-shrink-0 text-xs font-bold text-red-400
+                         border border-red-700/50 px-3 py-1.5 rounded-lg
+                         hover:bg-red-900/30 transition-all cursor-pointer">
+            {{ confirmDelete() ? 'Cancelar' : 'Excluir' }}
+          </button>
+        </div>
+        @if (confirmDelete()) {
+          <div class="mt-3 pt-3 border-t border-red-700/20">
+            <button (click)="onDelete()"
+                    class="w-full py-2 rounded-lg bg-red-700 hover:bg-red-600
+                           text-white text-xs font-bold transition-all cursor-pointer">
+              Sim, excluir minha conta
+            </button>
+          </div>
+        }
+      </div>
+
+    </div>
+  </div>
+</div>
