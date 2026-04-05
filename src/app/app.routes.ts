@@ -29,6 +29,12 @@ export const routes: Routes = [
   },
 
   {
+    path: 'forgot-password',
+    loadComponent: () => import('./features/pages/common/forgot-password/forgot-password')
+      .then(page => page.ForgotPassword)
+  },
+
+  {
     path: 'unauthorized',
     loadComponent: () => import('./features/pages/common/unauthorized/unauthorized')
       .then(page => page.Unauthorized)

@@ -1,0 +1,34 @@
+<div [formGroup]="form()" class="flex flex-col gap-6">
+
+    <div class="flex flex-col gap-3">
+        <label for="email-input" class="text-xl sm:text-2xl font-medium text-neutral-secondary">E-mail</label>
+        <input id="email-input"
+            type="email"
+            formControlName="email"
+            placeholder="seu@email.com"
+            class="w-full px-4 py-3 rounded-xl bg-neutral-secondary/5 border-2 border-primary/50 
+                text-lg sm:text-xl text-neutral-secondary placeholder-neutral-secondary/30
+                focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary
+                transition-all duration-200"
+        />
+      @if (submitted() && form().get('email')?.errors?.['required']) {
+        <p class="text-xl sm:text-2xl text-error">E-mail é obrigatório</p>
+      }
+      @if (submitted() && form().get('email')?.errors?.['email']) {
+        <p class="text-xl sm:text-2xl text-error]">Informe um e-mail válido</p>
+      }
+    </div>
+  
+    <app-form-button class="text-2xl font-bold"
+        label="Enviar código"
+        loadingLabel="Enviando..."
+        [isLoading]="loading()"
+        [disabled]="form().invalid"
+        (click)="next.emit()">
+    </app-form-button>
+
+    <p class="flex justify-center text-sm sm:text-xl text-neutral-secondary/60 mb-4">
+        Se este e-mail estiver cadastrado, você receberá um código em breve.
+    </p>
+  
+  </div>

@@ -1,0 +1,47 @@
+<div [formGroup]="form()" class="flex flex-col gap-3">
+
+    <p class="text-sm sm:text-lg text-neutral-secondary/70 leading-relaxed">
+      Enviamos um código para
+      <span class="text-sm sm:text-lg text-primary font-medium">{{ email() }}</span>.
+      Pode levar alguns minutos.
+    </p>
+  
+    <div class="flex flex-col gap-3 mt-3 mb-5">
+      <label for="token-input" class="text-xl sm:text-2xl font-medium text-neutral-secondary">Código de recuperação</label>
+      <input
+        type="text"
+        formControlName="token"
+        placeholder="ex: a3f9bc2e"
+        maxlength="8"
+        autocomplete="off"
+        class="w-full px-4 py-3 rounded-xl bg-neutral-secondary/5 border-2 border-primary/50 
+            text-lg sm:text-xl text-neutral-secondary placeholder-neutral-secondary/30
+            focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary
+            transition-all duration-200"
+      />
+      @if (submitted() && form().get('token')?.errors?.['required']) {
+        <p class="text-xs text-[var(--color-error)]">Código é obrigatório</p>
+      }
+      @if (submitted() && form().get('token')?.errors?.['minlength']) {
+        <p class="text-xs text-[var(--color-error)]">O código deve ter 8 caracteres</p>
+      }
+    </div>
+  
+    <app-form-button class="text-2xl font-bold"
+        label="Verificar código"
+        loadingLabel="Validando..."
+        [isLoading]="loading()"
+        [disabled]="form().invalid"
+        (click)="next.emit()">
+    </app-form-button>
+
+    <div class="flex items-center gap-2"></div>
+
+    <app-form-button class="text-2xl font-bold"
+        label="Usar outro email"
+        loadingLabel="Validando..."
+        [isLoading]="loading()"
+        (click)="back.emit()">
+    </app-form-button>
+  
+</div>
