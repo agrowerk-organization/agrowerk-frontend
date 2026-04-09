@@ -14,4 +14,5 @@ export class ButtonPages {
   text = input.required<string>();
   action = output<void>();
   width = input<string>();
+  disabled = input<boolean>(false);
 }

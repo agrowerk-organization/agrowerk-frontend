@@ -1,67 +1,63 @@
-<h2 class="text-xl font-bold text-primary mb-6">Endereço da Propriedade</h2>
+<h2 class="w-full flex justify-center text-2xl sm:text-3xl font-bold text-primary mb-6">Endereço da Propriedade</h2>
 
 <div [formGroup]="form()" class="space-y-4">
 
-  <div class="flex items-center justify-between p-4 rounded-xl border-2 border-primary/40">
-    <span class="text-primary font-medium">Zona rural</span>
-    <button type="button" (click)="toggleRural()">
-      <fa-icon [icon]="form().value.rural ? icons.TOGGLE_ON : icons.TOGGLE_OFF"
-               class="text-3xl transition-colors duration-300"
-               [class.text-primary]="form().value.rural"
-               [class.text-neutral-secondary]="!form().value.rural" />
-    </button>
-  </div>
+  <app-toggle-field
+    label="Zona rural"
+    [value]="form().value.rural ?? false"
+    (toggled)="form().get('rural')?.setValue($event)" />
 
   <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
     <div>
-      <label for="address-code" class="text-sm text-neutral-secondary mb-1 block">CEP *</label>
-      <input id="address-code" formControlName="code" type="text" placeholder="00000-000"
-             class="w-full px-4 py-3 rounded-xl border-2 border-primary/90
-                    bg-transparent text-primary placeholder:text-neutral-secondary/50
-                    focus:border-primary outline-none transition-all" />
+      <label for="address-code" class="text-xl sm:text-2xl text-neutral-secondary font-bold mb-1 block">CEP *</label>
+      <input id="address-code" formControlName="code" type="text" placeholder="00000-000" appCepMask
+      class="w-full px-4 py-3 rounded-xl border-2 border-primary/90
+            bg-transparent text-lg sm:text-xl text-neutral-secondary placeholder:text-neutral-secondary/50
+            focus:border-primary outline-none transition-all" />
     </div>
 
     <div>
-      <label for="municipality" class="text-sm text-neutral-secondary mb-1 block">Município *</label>
+      <label for="municipality" class="text-xl sm:text-2xl text-neutral-secondary font-bold mb-1 block">Município *</label>
       <input id="municipality" formControlName="municipality" type="text"
              class="w-full px-4 py-3 rounded-xl border-2 border-primary/90
-                    bg-transparent text-primary focus:border-primary outline-none transition-all" />
+                    bg-transparent text-lg sm:text-xl text-neutral-secondary focus:border-primary outline-none transition-all" />
     </div>
 
     <div class="sm:col-span-2">
-      <label for="location-name" class="text-sm text-neutral-secondary mb-1 block">Nome do local / localidade</label>
+      <label for="location-name" class="text-xl sm:text-2xl text-neutral-secondary font-bold mb-1 block">Nome do local / localidade</label>
       <input id="location-name" formControlName="locationName" type="text" placeholder="Ex: Linha São Miguel"
              class="w-full px-4 py-3 rounded-xl border-2 border-primary/90
-                    bg-transparent text-primary placeholder:text-neutral-secondary/50
+                    bg-transparent text-lg sm:text-xl text-neutral-secondary placeholder:text-neutral-secondary/50
                     focus:border-primary outline-none transition-all" />
     </div>
 
     <div>
-      <label for="street" class="text-sm text-neutral-secondary mb-1 block">Rua / Estrada</label>
+      <label for="street" class="text-xl sm:text-2xl text-neutral-secondary font-bold mb-1 block">Rua / Estrada</label>
       <input id="street" formControlName="street" type="text"
-             class="w-full px-4 py-3 rounded-xl border-2 border-primary/40
-                    bg-transparent text-primary focus:border-primary outline-none transition-all" />
+             class="w-full px-4 py-3 rounded-xl border-2 border-primary/90
+                    bg-transparent text-lg sm:text-xl text-neutral-secondary focus:border-primary outline-none transition-all" />
     </div>
+    
+    <app-number-field
+      label="Número"
+      fieldId="number"
+      [step]="0.01"
+      [min]="0"
+      placeholder="0.00"
+      formControlName="plantedArea" />
 
     <div>
-      <label for="address-number" class="text-sm text-neutral-secondary mb-1 block">Número</label>
-      <input id="address-number" formControlName="number" type="number"
-             class="w-full px-4 py-3 rounded-xl border-2 border-primary/40
-                    bg-transparent text-primary focus:border-primary outline-none transition-all" />
-    </div>
-
-    <div>
-      <label for="neighborhood" class="text-sm text-neutral-secondary mb-1 block">Bairro</label>
+      <label for="neighborhood" class="text-lg sm:text-2xl text-neutral-secondary font-bold mb-1 block">Bairro</label>
       <input id="neighborhood" formControlName="neighborhood" type="text"
-             class="w-full px-4 py-3 rounded-xl border-2 border-primary/40
-                    bg-transparent text-primary focus:border-primary outline-none transition-all" />
+             class="w-full px-4 py-3 rounded-xl border-2 border-primary/90
+                    bg-transparent text-lg sm:text-xl text-neutral-secondary focus:border-primary outline-none transition-all" />
     </div>
 
     <div>
-      <label for="landmark" class="text-sm text-neutral-secondary mb-1 block">Ponto de referência</label>
+      <label for="landmark" class="text-xl sm:text-2xl text-neutral-secondary font-bold mb-1 block">Ponto de referência</label>
       <input id="landmark" formControlName="landmark" type="text"
-             class="w-full px-4 py-3 rounded-xl border-2 border-primary/40
-                    bg-transparent text-primary placeholder:text-neutral-secondary/50
+             class="w-full px-4 py-3 rounded-xl border-2 border-primary/90
+                    bg-transparent text-lg sm:text-xl text-neutral-secondary placeholder:text-neutral-secondary/50
                     focus:border-primary outline-none transition-all" />
     </div>
   </div>

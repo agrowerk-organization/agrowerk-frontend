@@ -2,11 +2,12 @@ import { Component, input } from '@angular/core';
 import { ReactiveFormsModule, FormArray, FormGroup, FormControl, Validators } from '@angular/forms';
 import { ICONS_PROPERTY } from '@core/ui/icons/icons-producer/icons-property/icons-property';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ToggleField } from '@shared/components/toggle-field/toggle-field';
 
 @Component({
   selector: 'app-step-units',
   standalone: true,
-  imports: [ReactiveFormsModule, FontAwesomeModule],
+  imports: [ReactiveFormsModule, FontAwesomeModule, ToggleField],
   templateUrl: './step-units.html',
 })
 export class StepUnits {

@@ -1,7 +1,7 @@
 import { inject, Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { environment_development } from "../../../environment/environment.dev";
-import { Observable } from "rxjs";
+import { Observable, shareReplay } from "rxjs";
 import { RegisterUserRequest } from "../types/user/register-user.request";
 import { UserResponse } from "../types/user/user.response";
 import { AddAddressRequest } from "../types/address/add-address.request";
@@ -95,6 +95,6 @@ import { UserProfileResponse } from "@core/types/user/user-profile.response";
       return this.http.get<UserProfileResponse>(
         `${this.apiUrl}/users/profile/me`,
         { withCredentials: true }
-      );
+      ).pipe(shareReplay(1));
     }
 }

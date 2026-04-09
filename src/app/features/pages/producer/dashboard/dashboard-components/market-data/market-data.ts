@@ -31,6 +31,20 @@ export class MarketData {
     ALGODAO: { icon: this.icons.LEAF, color: 'text-blue-300' }
   };
 
+  // Adicione este mapeamento simples
+private readonly nameMap: Record<string, string> = {
+  'SOJA': 'Soja',
+  'MILHO': 'Milho',
+  'BOI_GORDO': 'Boi Gordo',
+  'CAFE': 'Café',
+  'TRIGO': 'Trigo',
+  'ALGODAO': 'Algodão'
+};
+
+formatName(commodity: string): string {
+  return this.nameMap[commodity] ?? commodity;
+}
+
   prices = computed(() => this.dashboard()?.latestPrices ?? []);
 
   variationClass(v: number | null): string {
@@ -50,6 +64,13 @@ export class MarketData {
 
   metaFor(commodity: string) {
     return this.commodityMeta[commodity] ?? { icon: this.icons.CHART_LINE, color: 'text-primary' };
+  }
+
+  isStale(referenceDate: string | null): boolean {
+    if (!referenceDate) return true;
+    const ref = new Date(referenceDate);
+    const diffDays = (Date.now() - ref.getTime()) / (1000 * 60 * 60 * 24);
+    return diffDays > 7;
   }
 
 }

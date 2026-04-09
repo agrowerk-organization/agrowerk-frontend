@@ -28,32 +28,46 @@
     </div>
 
     @if (prices().length > 0) {
-      <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-4 border-t border-primary/40">
+      <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-4 border-t border-primary/90">
         @for (item of prices(); track item.commodity) {
           @let meta = metaFor(item.commodity.toString());
-          <div class="flex flex-col gap-2 p-3 rounded-xl border-2 border-primary/70
-                      hover:border-primary transition-all duration-300
-                      shadow-lg shadow-primary/20"
-               [ngClass]="bgVariation(item.variationPercent)">
-
-            <div class="flex items-center gap-2">
-              <fa-icon [icon]="meta.icon" [class]="'text-lg ' + meta.color" />
-              <p class="text-sm font-semibold text-neutral-secondary uppercase tracking-wide truncate">
-                {{ item.commodity }}
-              </p>
+          @let stale = isStale(item.referenceDate);
+    
+          <div class="flex flex-col gap-2 p-3 rounded-xl border-2 transition-all duration-300
+                      shadow-lg shadow-primary/20 hover:border-primary"
+               [ngClass]="[bgVariation(item.variationPercent), stale ? 'border-yellow-500/60' : 'border-primary/70']">
+    
+            <div class="flex items-center justify-between gap-1">
+              <div class="flex items-center gap-2 min-w-0">
+                <fa-icon [icon]="meta.icon" [class]="'text-lg shrink-0 ' + meta.color" />
+                <p class="text-xl sm:text-2xl font-semibold text-neutral-secondary uppercase tracking-wide truncate">
+                  {{ formatName(item.commodity) }}
+                </p>
+              </div>
+              @if (stale) {
+                <span class="text-lg sm:text-xl font-bold text-yellow-400 border-2 border-yellow-400/50
+                             rounded px-1 shrink-0">
+                  OLD
+                </span>
+              }
             </div>
-
-            <!-- Preço -->
-            <p class="text-xl font-extrabold text-primary leading-none">
+    
+            <p class="text-xl sm:text-2xl font-extrabold text-primary leading-none">
               R$ {{ item.price | number:'1.2-2' }}
             </p>
-            <p class="text-xs text-neutral-secondary/70">{{ item.unit }}</p>
-
+    
+            <div class="flex items-center justify-between">
+              <p class="text-lg sm:text-xl text-neutral-secondary/70">{{ item.unit }}</p>
+              <p class="text-lg sm:text-xl text-neutral-secondary/50">
+                {{ item.referenceDate | date:'dd/MM' }}
+              </p>
+            </div>
+    
             @if (item.variationPercent !== null) {
               <div class="flex items-center gap-1 mt-1"
                    [ngClass]="variationClass(item.variationPercent)">
                 <fa-icon [icon]="variationIcon(item.variationPercent)" class="text-sm" />
-                <span class="text-sm font-bold">
+                <span class="text-lg sm:text-xl font-bold">
                   {{ item.variationPercent | number:'1.2-2' }}%
                 </span>
               </div>
@@ -61,13 +75,6 @@
           </div>
         }
       </div>
-
-      @if (prices()[0]?.referenceDate; as ref) {
-        <p class="text-xs text-neutral-secondary/50 mt-4 text-right">
-          Ref.: {{ ref | date:'dd/MM/yyyy' }}
-        </p>
-      }
-
     } @else {
       <div class="flex flex-col items-center justify-center h-40 gap-3">
         <fa-icon [icon]="icons.CHART_LINE" class="text-5xl text-neutral-secondary opacity-30" />

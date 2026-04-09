@@ -17,7 +17,9 @@ import {
     faCalendar,
     faCheck,
     faCamera,
-    faSpinner
+    faSpinner,
+    faEye,
+    faCloud
 } from '@fortawesome/free-solid-svg-icons';
 
 export const ICONS_PROPERTY = {
@@ -39,5 +41,7 @@ export const ICONS_PROPERTY = {
     CALENDAR: faCalendar,
     CHECK: faCheck,
     CAMERA: faCamera,
-    SPINNER: faSpinner
+    SPINNER: faSpinner,
+    EYE: faEye,
+    CLOUD: faCloud
 }

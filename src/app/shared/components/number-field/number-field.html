@@ -1,12 +1,12 @@
 <div class="w-full">
     <label [for]="fieldId()"
-           class="text-xl sm:text-2xl text-neutral-secondary mb-1 block">
+           class="text-xl sm:text-2xl text-neutral-secondary font-bold mb-1 block">
       {{ label() }}
     </label>
   
     <div class="flex items-center gap-2
-                border-2 border-primary/70 hover:border-primary
-                rounded-xl px-2 py-1 bg-neutral-primary
+                border-2 border-primary/90 hover:border-primary
+                rounded-xl px-1 py-2 bg-neutral-primary
                 transition-all duration-200
                 focus-within:border-primary
                 focus-within:shadow-[0_0_0_3px_rgba(var(--color-primary),0.15)]">
@@ -14,7 +14,7 @@
       <button type="button"
               (click)="decrement()"
               [disabled]="isDisabled() || !canDecrement()"
-              class="w-9 h-9 flex items-center justify-center rounded-lg
+              class="w-9 h-9 flex-shrink-0 items-center justify-center rounded-lg
                      border-2 border-primary/60 text-primary
                      hover:bg-primary/10 hover:border-primary
                      disabled:opacity-30 disabled:cursor-not-allowed
@@ -31,7 +31,7 @@
              [disabled]="isDisabled()"
              [value]="value() ?? ''"
              (input)="onInput($event)"
-             class="flex-1 bg-transparent text-primary text-center text-xl
+             class="flex-1 min-w-0 bg-transparent text-primary text-center text-xl
                     outline-none placeholder:text-neutral-secondary/40
                     disabled:opacity-50
                     [appearance:textfield]
@@ -41,7 +41,7 @@
       <button type="button"
               (click)="increment()"
               [disabled]="isDisabled() || !canIncrement()"
-              class="w-9 h-9 flex items-center justify-center rounded-lg
+              class="w-9 h-9 flex-shrink-0 items-center justify-center rounded-lg
                      border-2 border-primary/60 text-primary
                      hover:bg-primary/10 hover:border-primary
                      disabled:opacity-30 disabled:cursor-not-allowed

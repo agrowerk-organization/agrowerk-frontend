@@ -1,232 +1,291 @@
 @if (loading()) {
-    <div class="flex items-center justify-center h-[calc(100vh-100px)]">
-        <div class="animate-spin w-10 h-10 rounded-full border-4 
-            border-button-main border-t-transparent">
-        </div>
+  <div class="flex items-center justify-center h-[calc(100vh-100px)]">
+    <div class="animate-spin w-10 h-10 rounded-full border-4
+                border-button-main border-t-transparent">
     </div>
+  </div>
 }
 
 @else if (property(); as p) {
-    <div class="p-6 space-y-6 pb-32 lg:pb-6 max-w-4xl mx-auto">
+  <div class="p-6 space-y-6 pb-32 lg:pb-6 max-w-4xl mx-auto">
 
-        <div class="flex items-center justify-between gap-4">
-          <div class="flex items-center gap-4">
-            <a routerLink="/producer/properties"
-               class="flex items-center justify-center w-10 h-10 rounded-xl
-                      border-2 border-primary/50 hover:border-primary
-                      text-primary transition-all duration-300">
-              <fa-icon [icon]="icons.ARROW_LEFT" />
-            </a>
-            <div>
-              <h1 class="text-2xl sm:text-3xl font-bold text-primary">{{ p.name }}</h1>
-              <p class="text-neutral-secondary text-sm mt-0.5">{{ p.stateName }}</p>
-            </div>
-          </div>
-    
-          <button
-            type="button"
-            (click)="showModal.set(true)"
-            class="flex items-center gap-2 px-4 py-3 rounded-xl
-                   border-2 border-primary/50 text-primary font-semibold
-                   hover:border-primary transition-all duration-300">
-            <fa-icon [icon]="icons.PENCIL" />
-            <span class="hidden sm:inline">Editar</span>
-          </button>
+    <div class="flex items-center justify-between gap-4">
+      <div class="flex items-center gap-4">
+        <a routerLink="/producer/dashboard"
+           class="flex items-center justify-center w-10 h-10 sm:w-14 sm:h-14 rounded-xl
+                  border-2 border-primary/50 hover:border-primary
+                  text-primary transition-all duration-300 cursor-pointer">
+          <fa-icon [icon]="icons.ARROW_LEFT" class="text-lg sm:text-2xl" />
+        </a>
+        <div>
+          <h1 class="text-3xl sm:text-4xl font-bold text-primary">{{ p.name }}</h1>
+          <p class="text-secondary text-xl sm:text-2xl mt-0.5">{{ p.stateName }}</p>
         </div>
-    
-        <div class="flex flex-wrap gap-3">
-          <div class="flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-sm font-semibold"
-               [class.border-green-500/40]="p.isActive"
-               [class.text-green-400]="p.isActive"
-               [class.bg-green-500/10]="p.isActive"
-               [class.border-red-500/40]="!p.isActive"
-               [class.text-red-400]="!p.isActive"
-               [class.bg-red-500/10]="!p.isActive">
-            <fa-icon [icon]="p.isActive ? icons.CIRCLE_CHECK : icons.CIRCLE_XMARK" />
-            {{ p.isActive ? 'Ativa' : 'Inativa' }}
-          </div>
-    
-          @if (p.mainCrop) {
-            <div class="flex items-center gap-1.5 px-3 py-1.5 rounded-full
-                        bg-primary/10 border border-primary/30 text-sm font-semibold text-primary">
-              <fa-icon [icon]="icons.SEEDLING" />
-              {{ p.mainCrop }}
-            </div>
-          }
+      </div>
+
+      <button type="button" (click)="showModal.set(true)"
+              class="flex items-center gap-2 px-4 py-3 rounded-xl
+                     border-2 border-primary/50 text-primary font-semibold
+                     hover:border-primary transition-all duration-300 cursor-pointer">
+        <fa-icon [icon]="icons.PENCIL" class="text-xl sm:text-2xl" />
+        <span class="hidden text-2xl sm:block">Editar</span>
+      </button>
+    </div>
+
+    <div class="flex flex-wrap gap-3">
+      <div class="flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-xl font-semibold"
+           [class.border-green-500/40]="p.isActive"
+           [class.text-green-400]="p.isActive"
+           [class.bg-green-500/10]="p.isActive"
+           [class.border-red-500/40]="!p.isActive"
+           [class.text-red-400]="!p.isActive"
+           [class.bg-red-500/10]="!p.isActive">
+        <fa-icon [icon]="p.isActive ? icons.CIRCLE_CHECK : icons.CIRCLE_XMARK" />
+        {{ p.isActive ? 'Ativa' : 'Inativa' }}
+      </div>
+
+      @if (p.mainCrop) {
+        <div class="flex items-center gap-1.5 px-3 py-1.5 rounded-full
+                    bg-primary/10 border border-primary/30 text-xl font-semibold text-primary">
+          <fa-icon [icon]="icons.SEEDLING" />
+          {{ p.mainCrop }}
         </div>
-    
-        <div class="group relative overflow-hidden rounded-3xl
-                    bg-neutral-primary border-3 border-primary/70
-                    shadow-xl shadow-primary/30 p-6">
-          <div class="absolute inset-0 -z-10 pointer-events-none overflow-hidden">
-            <div class="absolute top-0 right-0 w-40 h-40 bg-primary/15 rounded-full blur-3xl"></div>
+      }
+    </div>
+
+    <div class="group relative overflow-hidden rounded-3xl
+                bg-neutral-primary border-3 border-primary/70
+                shadow-xl shadow-primary/30 p-6">
+      <div class="absolute inset-0 -z-10 pointer-events-none overflow-hidden">
+        <div class="absolute bottom-0 right-0 w-40 h-40 bg-primary/20 rounded-full blur-3xl"></div>
+      </div>
+
+      <h2 class="text-lg font-bold text-primary mb-4 flex items-center gap-2">
+        <fa-icon [icon]="icons.RULER_COMBINED" />
+        Áreas
+      </h2>
+
+      <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+        <div class="flex flex-col gap-0.5 p-3 rounded-xl border-2 border-primary/90
+                    hover:border-primary transition-all duration-300 shadow-xl shadow-primary/40">
+          <div class="flex items-center gap-1.5 text-neutral-secondary">
+            <fa-icon [icon]="icons.RULER_COMBINED" class="text-xl sm:text-2xl" />
+            <span class="text-xl sm:text-2xl tracking-wide">Total</span>
           </div>
-    
-          <h2 class="text-lg font-bold text-primary mb-4 flex items-center gap-2">
-            <fa-icon [icon]="icons.RULER_COMBINED" />
-            Áreas
-          </h2>
-    
-          <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
-            <div class="flex flex-col gap-1 p-4 rounded-xl border-2 border-primary/40
-                        hover:border-primary transition-all duration-300">
-              <span class="text-xs text-neutral-secondary/70 uppercase tracking-wide">Total</span>
-              <span class="text-xl font-extrabold text-primary">
-                {{ p.totalArea | number:'1.0-2' }} ha
-              </span>
-            </div>
-    
-            <div class="flex flex-col gap-1 p-4 rounded-xl border-2 border-primary/40
-                        hover:border-primary transition-all duration-300">
-              <span class="text-xs text-neutral-secondary/70 uppercase tracking-wide">Plantada</span>
-              <span class="text-xl font-extrabold text-primary">
-                {{ p.plantedArea ? (p.plantedArea | number:'1.0-2') + ' ha' : '—' }}
-              </span>
-            </div>
-    
-            <div class="flex flex-col gap-1 p-4 rounded-xl border-2 border-primary/40
-                        hover:border-primary transition-all duration-300">
-              <span class="text-xs text-neutral-secondary/70 uppercase tracking-wide">Talhões</span>
-              <span class="text-xl font-extrabold text-primary">
-                {{ p.units.length }}
-              </span>
-            </div>
-          </div>
+          <p class="font-bold text-primary text-lg sm:text-xl">
+            {{ p.totalArea | number:'1.0-2' }} ha
+          </p>
         </div>
-    
-        <div class="group relative overflow-hidden rounded-3xl
-                    bg-neutral-primary border-3 border-primary/70
-                    shadow-xl shadow-primary/30 p-6">
-          <div class="absolute inset-0 -z-10 pointer-events-none overflow-hidden">
-            <div class="absolute bottom-0 left-0 w-40 h-40 bg-primary/15 rounded-full blur-3xl"></div>
+
+        <div class="flex flex-col gap-0.5 p-3 rounded-xl border-2 border-primary/90
+                    hover:border-primary transition-all duration-300 shadow-xl shadow-primary/40">
+          <div class="flex items-center gap-1.5 text-neutral-secondary">
+            <fa-icon [icon]="icons.SEEDLING" class="text-xl sm:text-2xl" />
+            <span class="text-xl sm:text-2xl tracking-wide">Plantada</span>
           </div>
-    
-          <h2 class="text-lg font-bold text-primary mb-4 flex items-center gap-2">
-            <fa-icon [icon]="icons.LOCATION_DOT" />
-            Endereço
-          </h2>
-    
-          <div class="grid grid-cols-2 gap-3">
-            <div class="flex flex-col gap-1 p-4 rounded-xl border-2 border-primary/40">
-              <span class="text-xs text-neutral-secondary/70 uppercase tracking-wide">Município</span>
-              <span class="font-semibold text-primary">{{ p.address.municipality }}</span>
-            </div>
-    
-            <div class="flex flex-col gap-1 p-4 rounded-xl border-2 border-primary/40">
-              <span class="text-xs text-neutral-secondary/70 uppercase tracking-wide">CEP</span>
-              <span class="font-semibold text-primary">{{ p.address.code }}</span>
-            </div>
-    
-            @if (p.address.locationName) {
-              <div class="col-span-2 flex flex-col gap-1 p-4 rounded-xl border-2 border-primary/40">
-                <span class="text-xs text-neutral-secondary/70 uppercase tracking-wide">Localidade</span>
-                <span class="font-semibold text-primary">{{ p.address.locationName }}</span>
-              </div>
-            }
-    
-            @if (p.address.street) {
-              <div class="flex flex-col gap-1 p-4 rounded-xl border-2 border-primary/40">
-                <span class="text-xs text-neutral-secondary/70 uppercase tracking-wide">Logradouro</span>
-                <span class="font-semibold text-primary">
-                  {{ p.address.street }}{{ p.address.number ? ', ' + p.address.number : '' }}
-                </span>
-              </div>
-            }
-    
-            @if (p.address.landmark) {
-              <div class="flex flex-col gap-1 p-4 rounded-xl border-2 border-primary/40">
-                <span class="text-xs text-neutral-secondary/70 uppercase tracking-wide">Referência</span>
-                <span class="font-semibold text-primary">{{ p.address.landmark }}</span>
-              </div>
-            }
-    
-            <div class="flex flex-col gap-1 p-4 rounded-xl border-2 border-primary/40">
-              <span class="text-xs text-neutral-secondary/70 uppercase tracking-wide">Zona</span>
-              <span class="font-semibold text-primary">
-                {{ p.address.rural ? 'Rural' : 'Urbana' }}
-              </span>
-            </div>
-    
-            @if (p.latitude && p.longitude) {
-              <div class="flex flex-col gap-1 p-4 rounded-xl border-2 border-primary/40">
-                <span class="text-xs text-neutral-secondary/70 uppercase tracking-wide flex items-center gap-1">
-                  <fa-icon [icon]="icons.MAP_PIN" /> Coordenadas
-                </span>
-                <span class="font-semibold text-primary text-sm">
-                  {{ p.latitude }}, {{ p.longitude }}
-                </span>
-              </div>
-            }
-          </div>
+          <p class="font-bold text-primary text-lg sm:text-xl">
+            {{ p.plantedArea ? (p.plantedArea | number:'1.0-2') + ' ha' : '—' }}
+          </p>
         </div>
-    
-=        @if (p.units.length) {
-          <div class="group relative overflow-hidden rounded-3xl
-                      bg-neutral-primary border-3 border-primary/70
-                      shadow-xl shadow-primary/30 p-6">
-            <h2 class="text-lg font-bold text-primary mb-4 flex items-center gap-2">
-              <fa-icon [icon]="icons.LAYER_GROUP" />
-              Talhões
-            </h2>
-    
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              @for (unit of p.units; track unit.id) {
-                <div class="flex flex-col gap-2 p-4 rounded-xl border-2 border-primary/40
-                            hover:border-primary transition-all duration-300">
-                  <div class="flex items-center justify-between">
-                    <span class="font-bold text-primary">{{ unit.name }}</span>
-                    <span class="text-sm font-semibold text-neutral-secondary">
-                      {{ unit.area | number:'1.0-2' }} ha
-                    </span>
-                  </div>
-                  @if (unit.response.municipality) {
-                    <span class="text-xs text-neutral-secondary/70">
-                      {{ unit.response.municipality }}
-                      @if (unit.response.locationName) { — {{ unit.response.locationName }} }
-                    </span>
-                  }
-                </div>
-              }
+
+        <div class="flex flex-col gap-0.5 p-3 rounded-xl border-2 border-primary/90
+                    hover:border-primary transition-all duration-300 shadow-xl shadow-primary/40">
+          <div class="flex items-center gap-1.5 text-neutral-secondary">
+            <fa-icon [icon]="icons.LAYER_GROUP" class="text-xl sm:text-2xl" />
+            <span class="text-xl sm:text-2xl tracking-wide">Talhões</span>
+          </div>
+          <p class="font-bold text-primary text-lg sm:text-xl">
+            {{ p.units?.length ?? 0 }}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="group relative overflow-hidden rounded-3xl
+                bg-neutral-primary border-3 border-primary/70
+                shadow-xl shadow-primary/30 p-6">
+      <div class="absolute inset-0 -z-10 pointer-events-none overflow-hidden">
+        <div class="absolute bottom-0 left-0 w-40 h-40 bg-primary/20 rounded-full blur-3xl"></div>
+      </div>
+
+      <h2 class="text-lg font-bold text-primary mb-4 flex items-center gap-2">
+        <fa-icon [icon]="icons.LOCATION_DOT" />
+        Endereço
+      </h2>
+
+      <div class="grid grid-cols-2 gap-3">
+        <div class="flex flex-col gap-0.5 p-3 rounded-xl border-2 border-primary/90
+                    hover:border-primary transition-all duration-300 shadow-xl shadow-primary/40">
+          <div class="flex items-center gap-1.5 text-neutral-secondary">
+            <fa-icon [icon]="icons.LOCATION_DOT" class="text-xl sm:text-2xl" />
+            <span class="text-xl sm:text-2xl tracking-wide">Município</span>
+          </div>
+          <p class="font-bold text-primary text-lg sm:text-xl">{{ p.address.municipality }}</p>
+        </div>
+
+        <div class="flex flex-col gap-0.5 p-3 rounded-xl border-2 border-primary/90
+                    hover:border-primary transition-all duration-300 shadow-xl shadow-primary/40">
+          <div class="flex items-center gap-1.5 text-neutral-secondary">
+            <fa-icon [icon]="icons.MAP_PIN" class="text-xl sm:text-2xl" />
+            <span class="text-xl sm:text-2xl tracking-wide">CEP</span>
+          </div>
+          <p class="font-bold text-primary text-lg sm:text-xl">{{ p.address.code }}</p>
+        </div>
+
+        <div class="flex flex-col gap-0.5 p-3 rounded-xl border-2 border-primary/90
+                    hover:border-primary transition-all duration-300 shadow-xl shadow-primary/40">
+          <div class="flex items-center gap-1.5 text-neutral-secondary">
+            <fa-icon [icon]="icons.TOGGLE_ON" class="text-xl sm:text-2xl" />
+            <span class="text-xl sm:text-2xl tracking-wide">Zona</span>
+          </div>
+          <p class="font-bold text-primary text-lg sm:text-xl">
+            {{ p.address.rural ? 'Rural' : 'Urbana' }}
+          </p>
+        </div>
+
+        @if (p.address.locationName) {
+          <div class="flex flex-col gap-0.5 p-3 rounded-xl border-2 border-primary/90
+                      hover:border-primary transition-all duration-300 shadow-xl shadow-primary/40">
+            <div class="flex items-center gap-1.5 text-neutral-secondary">
+              <fa-icon [icon]="icons.MAP_PIN" class="text-xl sm:text-2xl" />
+              <span class="text-xl sm:text-2xl tracking-wide">Localidade</span>
             </div>
+            <p class="font-bold text-primary text-lg sm:text-xl">{{ p.address.locationName }}</p>
           </div>
         }
 
-        <div class="group relative overflow-hidden rounded-3xl
-                    bg-neutral-primary border-3 border-primary/70
-                    shadow-xl shadow-primary/30 p-6">
-          <h2 class="text-lg font-bold text-primary mb-4 flex items-center gap-2">
-            <fa-icon [icon]="icons.CALENDAR" />
-            Registros
-          </h2>
-    
-          <div class="grid grid-cols-2 gap-3">
-            <div class="flex flex-col gap-1 p-4 rounded-xl border-2 border-primary/40">
-              <span class="text-xs text-neutral-secondary/70 uppercase tracking-wide">Matrícula Estadual</span>
-              <span class="font-semibold text-primary">{{ p.stateRegistration }}</span>
+        @if (p.address.street) {
+          <div class="flex flex-col gap-0.5 p-3 rounded-xl border-2 border-primary/90
+                      hover:border-primary transition-all duration-300 shadow-xl shadow-primary/40">
+            <div class="flex items-center gap-1.5 text-neutral-secondary">
+              <fa-icon [icon]="icons.MAP_PIN" class="text-xl sm:text-2xl" />
+              <span class="text-xl sm:text-2xl tracking-wide">Logradouro</span>
             </div>
-    
-            @if (p.ruralRegistration) {
-              <div class="flex flex-col gap-1 p-4 rounded-xl border-2 border-primary/40">
-                <span class="text-xs text-neutral-secondary/70 uppercase tracking-wide">Matrícula Rural</span>
-                <span class="font-semibold text-primary">{{ p.ruralRegistration }}</span>
-              </div>
-            }
-    
-            <div class="flex flex-col gap-1 p-4 rounded-xl border-2 border-primary/40">
-              <span class="text-xs text-neutral-secondary/70 uppercase tracking-wide">Cadastrado em</span>
-              <span class="font-semibold text-primary">
-                {{ p.createdAt | date:'dd/MM/yyyy' }}
-              </span>
-            </div>
+            <p class="font-bold text-primary text-lg sm:text-xl">
+              {{ p.address.street }}{{ p.address.number ? ', ' + p.address.number : '' }}
+            </p>
           </div>
-        </div>
-    
+        }
+
+        @if (p.address.landmark) {
+          <div class="flex flex-col gap-0.5 p-3 rounded-xl border-2 border-primary/90
+                      hover:border-primary transition-all duration-300 shadow-xl shadow-primary/40">
+            <div class="flex items-center gap-1.5 text-neutral-secondary">
+              <fa-icon [icon]="icons.MAP_PIN" class="text-xl sm:text-2xl" />
+              <span class="text-xl sm:text-2xl tracking-wide">Referência</span>
+            </div>
+            <p class="font-bold text-primary text-lg sm:text-xl">{{ p.address.landmark }}</p>
+          </div>
+        }
+
+        @if (p.latitude && p.longitude) {
+          <div class="col-span-2 flex flex-col gap-0.5 p-3 rounded-xl border-2 border-primary/90
+                      hover:border-primary transition-all duration-300 shadow-xl shadow-primary/40">
+            <div class="flex items-center gap-1.5 text-neutral-secondary">
+              <fa-icon [icon]="icons.MAP_PIN" class="text-xl sm:text-2xl" />
+              <span class="text-xl sm:text-2xl tracking-wide">Coordenadas</span>
+            </div>
+            <p class="font-bold text-secondary text-lg sm:text-xl">Latitude</p>
+            <p class="font-bold text-primary text-lg sm:text-xl font-mono">
+              {{ p.latitude }},
+            </p>
+
+            <p class="font-bold text-secondary text-lg sm:text-xl">Longitude</p>
+            <p class="font-bold text-primary text-lg sm:text-xl font-mono">
+              {{ p.longitude }}
+            </p>
+          </div>
+        }
       </div>
-    
-      @if (showModal()) {
-        <app-property-update-modal
-          [property]="p"
-          (updated)="onUpdated($event)"
-          (close)="showModal.set(false)" />
+    </div>
+
+    @if (p.units?.length) {
+      <div class="group relative overflow-hidden rounded-3xl
+                  bg-neutral-primary border-3 border-primary/70
+                  shadow-xl shadow-primary/30 p-6">
+        <div class="absolute inset-0 -z-10 pointer-events-none overflow-hidden">
+          <div class="absolute top-0 right-0 w-40 h-40 bg-primary/20 rounded-full blur-3xl"></div>
+        </div>
+
+        <h2 class="text-lg font-bold text-primary mb-4 flex items-center gap-2">
+          <fa-icon [icon]="icons.LAYER_GROUP" />
+          Talhões
+        </h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          @for (unit of p.units; track unit.id) {
+            <div class="flex flex-col gap-2 p-4 rounded-xl border-2 border-primary/90
+                        hover:border-primary transition-all duration-300 shadow-xl shadow-primary/40">
+              <div class="flex items-center justify-between">
+                <span class="font-bold text-primary text-xl">{{ unit.name }}</span>
+                <span class="text-lg font-semibold text-neutral-secondary">
+                  {{ unit.area | number:'1.0-2' }} ha
+                </span>
+              </div>
+              @if (unit.response.municipality) {
+                <span class="text-sm text-neutral-secondary/70">
+                  {{ unit.response.municipality }}
+                  @if (unit.response.locationName) { — {{ unit.response.locationName }} }
+                </span>
+              }
+            </div>
+          }
+        </div>
+      </div>
     }
+
+    <div class="group relative overflow-hidden rounded-3xl
+                bg-neutral-primary border-3 border-primary/70
+                shadow-xl shadow-primary/30 p-6">
+      <div class="absolute inset-0 -z-10 pointer-events-none overflow-hidden">
+        <div class="absolute bottom-0 right-0 w-40 h-40 bg-primary/20 rounded-full blur-3xl"></div>
+      </div>
+
+      <h2 class="text-lg font-bold text-primary mb-4 flex items-center gap-2">
+        <fa-icon [icon]="icons.CALENDAR" />
+        Registros
+      </h2>
+
+      <div class="grid grid-cols-2 gap-3">
+        <div class="flex flex-col gap-0.5 p-3 rounded-xl border-2 border-primary/90
+                    hover:border-primary transition-all duration-300 shadow-xl shadow-primary/40">
+          <div class="flex items-center gap-1.5 text-neutral-secondary">
+            <fa-icon [icon]="icons.CALENDAR" class="text-xl sm:text-2xl" />
+            <span class="text-xl sm:text-2xl tracking-wide">Matrícula Estadual</span>
+          </div>
+          <p class="font-bold text-primary text-lg sm:text-xl">{{ p.stateRegistration }}</p>
+        </div>
+
+        @if (p.ruralRegistration) {
+          <div class="flex flex-col gap-0.5 p-3 rounded-xl border-2 border-primary/90
+                      hover:border-primary transition-all duration-300 shadow-xl shadow-primary/40">
+            <div class="flex items-center gap-1.5 text-neutral-secondary">
+              <fa-icon [icon]="icons.CALENDAR" class="text-xl sm:text-2xl" />
+              <span class="text-xl sm:text-2xl tracking-wide">Matrícula Rural</span>
+            </div>
+            <p class="font-bold text-primary text-lg sm:text-xl">{{ p.ruralRegistration }}</p>
+          </div>
+        }
+
+        <div class="flex flex-col gap-0.5 p-3 rounded-xl border-2 border-primary/90
+                    hover:border-primary transition-all duration-300 shadow-xl shadow-primary/40">
+          <div class="flex items-center gap-1.5 text-neutral-secondary">
+            <fa-icon [icon]="icons.CALENDAR" class="text-xl sm:text-2xl" />
+            <span class="text-xl sm:text-2xl tracking-wide">Cadastrado em</span>
+          </div>
+          <p class="font-bold text-primary text-lg sm:text-xl">
+            {{ p.createdAt | date:'dd/MM/yyyy' }}
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  @if (showModal()) {
+    <app-property-update-modal
+      [property]="p"
+      (updated)="onUpdated($event)"
+      (close)="showModal.set(false)" />
+  }
 }

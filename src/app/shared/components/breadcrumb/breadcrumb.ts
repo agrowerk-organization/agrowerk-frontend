@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, input } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faHome } from '@fortawesome/free-solid-svg-icons';
 
@@ -10,8 +10,7 @@ import { faHome } from '@fortawesome/free-solid-svg-icons';
   imports: [
     CommonModule,
     FontAwesomeModule,
-    RouterLink,
-    RouterLinkActive
+    RouterLink
   ],
   templateUrl: './breadcrumb.html',
 })

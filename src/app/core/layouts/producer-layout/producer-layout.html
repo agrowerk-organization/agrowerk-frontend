@@ -18,6 +18,7 @@
     </div>
 
     <div class="flex items-center z-[1001]">
+      <a routerLink="/producer/dashboard" class="block">
       <img
         ngSrc="assets/images/agrowerk.png"
         alt="Logo Agrowerk"
@@ -26,6 +27,7 @@
         priority
         class="w-27 h-27 lg:w-34 lg:h-34 cursor-pointer hover:scale-110 transition-transform duration-200"
       />
+      </a>
     </div>
 
     <div class="absolute left-1/2 -translate-x-1/2 z-[1001] hidden lg:flex flex-col items-center">
@@ -38,7 +40,7 @@
     </div>
 
     <div class="flex items-center gap-4 sm:gap-10 z-[1001]">
-      @if (hasProperties()) {
+      @if (hasProperties() && isOnDashboard()) {
         <button
           (click)="layoutState.toggle()"
           class="hidden lg:flex items-center gap-2 px-8 py-3
@@ -70,15 +72,26 @@
 
       <div class="relative">
         <button
-          (click)="toggleUserDropdown()"
-          [attr.aria-expanded]="showUserDropdown()"
-          class="w-15 h-15 rounded-full bg-button-main
-                 flex items-center justify-center
-                 text-white font-bold text-xl sm:text-2xl
-                 ring-2 ring-primary/40 hover:ring-primary
-                 transition-all duration-200 hover:scale-105 cursor-pointer">
-          {{ currentUser()?.name?.charAt(0)?.toUpperCase() }}
-        </button>
+        (click)="toggleUserDropdown()"
+        [attr.aria-expanded]="showUserDropdown()"
+        class="w-15 h-15 rounded-full overflow-hidden
+              ring-2 ring-primary/40 hover:ring-primary
+              transition-all duration-200 hover:scale-105 cursor-pointer">
+
+        @if (userProfile()?.avatarUrl) {
+          <img
+            [src]="userProfile()?.avatarUrl"
+            [alt]="currentUser()?.name"
+            class="w-full h-full object-cover" />
+        } @else {
+          <div class="w-full h-full bg-button-main
+                      flex items-center justify-center
+                      text-white font-bold text-xl sm:text-2xl">
+            {{ currentUser()?.name?.charAt(0)?.toUpperCase() }}
+          </div>
+        }
+
+      </button>
 
         @if (showUserDropdown()) {
           <ul class="absolute top-[calc(100%+0.75rem)] right-0 min-w-[180px]
@@ -86,7 +99,7 @@
                      border-2 border-primary/90
                      animate-in fade-in slide-in-from-top-2 duration-150">
 
-            <li class="px-4 py-2 border-b border-white/10 mb-1">
+            <li class="px-4 py-2 border-b border-neutral-secondary/20 mb-1">
               <p class="text-lg sm:text-xl font-semibold text-white truncate">{{ currentUser()?.name }}</p>
               <p class="text-sm sm:text-base text-white/45 truncate">{{ currentUser()?.email }}</p>
             </li>

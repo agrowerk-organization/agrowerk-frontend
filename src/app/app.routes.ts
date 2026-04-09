@@ -169,6 +169,11 @@ export const routes: Routes = [
         path: 'help-and-support',
         loadComponent: () => import('./features/pages/common/help-and-support/help-and-support')
           .then(page => page.HelpAndSupport)
+      },
+      {
+        path: 'market',
+        loadComponent: () => import('./features/pages/producer/market/market')
+          .then(page => page.Market)
       }
     ]
   },

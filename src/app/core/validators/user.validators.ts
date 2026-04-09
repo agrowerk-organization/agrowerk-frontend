@@ -30,4 +30,9 @@ export class UserValidators {
       return val1 === val2 ? null : { passwordMismatch: true };
     };
   }
+
+  static cepFormat(ctrl: AbstractControl): ValidationErrors | null {
+    const digits = (ctrl.value ?? '').replace(/\D/g, '');
+    return digits.length === 8 ? null : { cepFormat: true };
+  }
 }

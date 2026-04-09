@@ -13,7 +13,9 @@ export interface PropertyResponse {
     plantedArea: number;
     mainCrop: string;
     isActive: boolean;
+    stateAbbreviation: string;
     stateName: string;
-    units: FarmUnitResponse[];
+    hasWeatherLocation: boolean;
+    units?: FarmUnitResponse[];
     createdAt: string;
 }

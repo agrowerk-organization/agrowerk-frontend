@@ -28,6 +28,7 @@ import  CYCLE_NODES_DATA  from '@assets/files/producer/dashboard-producer.json';
 import { MarketData } from "./dashboard-components/market-data/market-data";
 import { CommodityPriceService } from '@core/services/commodity-price.service';
 import { CommodityDashboardResponse } from '@core/types/market/commodity-dashboard.response';
+import { PropertyCard } from "../properties/property-card/property-card";
 
 @Component({
   selector: 'app-producer-dashboard',
@@ -44,7 +45,8 @@ import { CommodityDashboardResponse } from '@core/types/market/commodity-dashboa
     StatisticsCard,
     CycleDiagram,
     UpdateBranding,
-    MarketData
+    MarketData,
+    PropertyCard
 ],
   templateUrl: './dashboard.html'
 })
@@ -54,7 +56,7 @@ export class ProducerDashboard implements OnInit {
   private seasonService = inject(SeasonService);
   private commodityService = inject(CommodityPriceService);
   private authService = inject(AuthService);
-  private router = inject(Router);
+  readonly router = inject(Router);
 
   layoutState = inject(LayoutStateService);
 
@@ -157,5 +159,10 @@ export class ProducerDashboard implements OnInit {
       this.activeProperty.set(prop);
       this.loadPropertyData(propertyId);
     }
+  }
+
+  onWeatherAssociated(): void {
+    const prop = this.activeProperty();
+    if (prop) this.loadDashboard();
   }
 }

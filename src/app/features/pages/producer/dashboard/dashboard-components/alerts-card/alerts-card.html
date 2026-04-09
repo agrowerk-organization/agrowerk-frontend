@@ -1,35 +1,35 @@
 @if (hasAlerts()) {
-    <div class="space-y-2 mb-6">
-      @for (alert of alerts(); track alert.id) {
-        <div class="flex items-start gap-3 p-4
-                    rounded-xl border transition-all"
-             [class]="alertClass(alert.severity)">
-  
-          <fa-icon [icon]="icons.TRIANGLE_EXCLAMATION"
-                   class="text-3xl mt-0.5 flex-shrink-0
-                          animate-pulse" />
-  
-          <div class="flex-1">
-            <div class="flex items-center gap-2 mb-1">
-              <span class="text-xs sm:text-xl font-bold px-2 py-0.5
-                           rounded-full border"
-                    [class]="alertClass(alert.severity)">
-                {{ alert.severityDisplayName }}
-              </span>
-              <p class="text-sm sm:text-2xl font-semibold">
-                {{ alert.alertTypeDisplayName }}
-              </p>
-            </div>
-            <p class="text-sm sm:text-xl opacity-90">
-              {{ alert.description }}
+  <div class="grid grid-cols-1 gap-4 mb-6 w-full max-w-6xl mx-auto">
+    
+    @for (alert of alerts(); track alert.id) {
+      <div class="flex items-start gap-3 p-4 rounded-xl border-2
+                  backdrop-blur-sm transition-all"
+           [class]="alertClass(alert.severity)">
+
+        <fa-icon [icon]="icons.TRIANGLE_EXCLAMATION"
+                 class="text-3xl mt-0.5 flex-shrink-0 animate-pulse" />
+
+        <div class="flex-1 flex flex-col">
+          <div class="flex items-center gap-2 mb-1">
+            <span class="text-xs sm:text-xl font-bold px-2 py-0.5
+                         rounded-full border-2"
+                  [class]="badgeClass(alert.severity)">
+              {{ alert.severityDisplayName }}
+            </span>
+            <p class="text-xl sm:text-2xl font-semibold">
+              {{ alert.alertTypeDisplayName }}
             </p>
-            @if (alert.recommendedActions) {
-              <p class="text-xs sm:text-lg mt-1 opacity-70">
-                 {{ alert.recommendedActions }}
-              </p>
-            }
           </div>
+          
+          <p class="text-xl sm:text-2xl opacity-90">{{ alert.description }}</p>
+          
+          @if (alert.recommendedActions) {
+            <p class="text-lg sm:text-xl mt-1 opacity-70">
+              {{ alert.recommendedActions }}
+            </p>
+          }
         </div>
-      }
-    </div>
-  }
+      </div>
+    }
+  </div>
+}

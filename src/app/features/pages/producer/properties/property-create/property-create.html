@@ -74,9 +74,9 @@
         <div class="flex gap-3 mt-6">
           @if (currentStep() > 1) {
             <button type="button" (click)="back()"
-                    class="flex-1 py-4 rounded-2xl border-2 border-primary/50 text-primary
+                    class="flex-1 py-4 rounded-2xl border-2 border-primary/50 text-xl sm:text-2xl text-primary
                            font-bold hover:border-primary transition-all duration-300
-                           flex items-center justify-center gap-2">
+                           flex items-center justify-center gap-2 cursor-pointer">
               <fa-icon [icon]="icons.ARROW_LEFT" /> Voltar
             </button>
           }
@@ -84,7 +84,7 @@
                   [disabled]="!currentFormValid() || loading()"
                   class="flex-1 py-4 rounded-2xl bg-button-main text-xl sm:text-2xl text-neutral-primary font-bold
                          hover:bg-button-main-hover transition-all duration-300
-                         disabled:opacity-40 flex items-center justify-center gap-2">
+                         disabled:opacity-40 flex items-center justify-center gap- cursor-pointer">
             @if (loading()) {
               <fa-icon [icon]="icons.SPINNER" class="animate-spin" /> Salvando...
             } @else if (currentStep() === 3) {

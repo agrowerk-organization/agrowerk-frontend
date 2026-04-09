@@ -1,6 +1,7 @@
 import { Component, inject, signal, computed, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { ReactiveFormsModule, FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PropertyService } from '@core/services/property.service';
 import { StateService } from '@core/services/state.service';
@@ -12,7 +13,7 @@ import { StepAddress } from './steps/step-address/step-address';
 import { StepUnits } from './steps/step-units/step-units';
 import { StepPhoto } from './steps/step-photo/step-photo';
 import { ICONS_PROPERTY } from '@core/ui/icons/icons-producer/icons-property/icons-property';
-
+import { UserValidators } from '@core/validators/user.validators';
 @Component({
   selector: 'app-property-create',
   standalone: true,
@@ -65,7 +66,7 @@ export class PropertyCreate implements OnInit {
 
   addressForm = new FormGroup({
     rural:        new FormControl(false),
-    code:         new FormControl('', Validators.required),
+    code: new FormControl('', [Validators.required, UserValidators.cepFormat]),
     municipality: new FormControl('', Validators.required),
     locationName: new FormControl(''),
     street:       new FormControl(''),
@@ -77,11 +78,13 @@ export class PropertyCreate implements OnInit {
   unitsForm = new FormGroup({ units: new FormArray([]) });
 
   get units(): FormArray { return this.unitsForm.get('units') as FormArray; }
-
+  private generalFormStatus  = toSignal(this.generalForm.statusChanges, { initialValue: this.generalForm.status });
+  private addressFormStatus  = toSignal(this.addressForm.statusChanges, { initialValue: this.addressForm.status });
+  
   currentFormValid = computed(() => {
     switch (this.currentStep()) {
-      case 1:  return this.generalForm.valid;
-      case 2:  return this.addressForm.valid;
+      case 1:  return this.generalFormStatus()  === 'VALID';
+      case 2:  return this.addressFormStatus()  === 'VALID';
       case 3:  return true;
       case 4:  return true;
       default: return false;

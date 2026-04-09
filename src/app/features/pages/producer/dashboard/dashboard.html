@@ -46,20 +46,29 @@
     
           <app-welcome-banner
             [property]="property" />
-      
     
           <app-property-selector
             [properties]="properties()"
             [activePropertyId]="property.id"
             (propertyChange)="onPropertyChange($event)" />
     
-          <app-alerts-card
-            [alerts]="weatherDashboard()?.activeAlerts ?? []" />
+            <div class="w-full flex items-center justify-center p-4">
+              <app-alerts-card 
+              [alerts]="weatherDashboard()?.activeAlerts ?? []" />
+            </div>
     
           <app-update-branding
             [weatherDashboard]="weatherDashboard()" />
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            
+            <app-property-card
+              class="md:col-span-2"
+              [property]="activeProperty()!"
+              mode="view"
+              (view)="router.navigate(['/producer/properties', $event.id])"
+              (weatherAssociated)="onWeatherAssociated()" />
+
             <app-weather-card
               [current]="weatherDashboard()?.current ?? null" />
             <app-season-card
@@ -68,12 +77,12 @@
               class="md:col-span-2"
               [forecast]="weatherDashboard()?.dailyForecast ?? []" />
           
-            <app-market-data class="md:col-span-2" [dashboard]="commodityDashboard()" />
-
             <app-statistics-card
               class="md:col-span-2"
               [statistics]="weatherDashboard()?.statistics ?? null" />
             </div>
+
+            <app-market-data class="md:col-span-2" [dashboard]="commodityDashboard()" />
     
         } @else {
           <div class="flex items-center justify-center h-40">

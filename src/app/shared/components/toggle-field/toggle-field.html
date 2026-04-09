@@ -1,0 +1,10 @@
+<div class="flex items-center justify-between p-4 rounded-xl border-2 border-primary/80">
+    <span class="text-lg sm:text-xl text-primary font-semibold">{{ label() }}</span>
+    <button type="button" (click)="toggle()" [disabled]="disabled()">
+      <fa-icon
+        [icon]="value() ? icons.TOGGLE_ON : icons.TOGGLE_OFF"
+        class="text-4xl transition-colors duration-300 cursor-pointer"
+        [class.text-primary]="value()"
+        [class.text-neutral-secondary]="!value()" />
+    </button>
+</div>
