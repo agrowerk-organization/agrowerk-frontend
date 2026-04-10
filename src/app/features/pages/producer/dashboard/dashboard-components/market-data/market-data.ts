@@ -28,22 +28,23 @@ export class MarketData {
     BOI_GORDO: { icon: this.icons.DRUMSTICK_BITE, color: 'text-gray-400' },
     CAFE: { icon: this.icons.MUG_HOT, color: 'text-brown-400' },
     TRIGO: { icon: this.icons.WHEAT_AWN, color: 'text-yellow-200' },
-    ALGODAO: { icon: this.icons.LEAF, color: 'text-blue-300' }
+    ALGODAO: { icon: this.icons.LEAF, color: 'text-blue-300' },
+    ACUCAR: { icon: this.icons.CUBE, color: 'text-primary' }
   };
 
-  // Adicione este mapeamento simples
-private readonly nameMap: Record<string, string> = {
-  'SOJA': 'Soja',
-  'MILHO': 'Milho',
-  'BOI_GORDO': 'Boi Gordo',
-  'CAFE': 'Café',
-  'TRIGO': 'Trigo',
-  'ALGODAO': 'Algodão'
-};
+  private readonly nameMap: Record<string, string> = {
+    'SOJA': 'Soja',
+    'MILHO': 'Milho',
+    'BOI_GORDO': 'Boi Gordo',
+    'CAFE': 'Café',
+    'TRIGO': 'Trigo',
+    'ALGODAO': 'Algodão',
+    'ACUCAR': 'Açúcar'
+  };
 
-formatName(commodity: string): string {
-  return this.nameMap[commodity] ?? commodity;
-}
+  formatName(commodity: string): string {
+    return this.nameMap[commodity] ?? commodity;
+  }
 
   prices = computed(() => this.dashboard()?.latestPrices ?? []);
 

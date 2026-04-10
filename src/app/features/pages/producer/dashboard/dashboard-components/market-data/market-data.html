@@ -39,9 +39,9 @@
     
             <div class="flex items-center justify-between gap-1">
               <div class="flex items-center gap-2 min-w-0">
-                <fa-icon [icon]="meta.icon" [class]="'text-lg shrink-0 ' + meta.color" />
-                <p class="text-xl sm:text-2xl font-semibold text-neutral-secondary uppercase tracking-wide truncate">
-                  {{ formatName(item.commodity) }}
+                <fa-icon [icon]="meta.icon" [class]="'text-2xl sm:text-3xl shrink-0 ' + meta.color" />
+                <p [class]="`text-xl sm:text-2xl font-semibold uppercase tracking-wide truncate ${meta.color}`">
+                    {{ formatName(item.commodity) }}
                 </p>
               </div>
               @if (stale) {

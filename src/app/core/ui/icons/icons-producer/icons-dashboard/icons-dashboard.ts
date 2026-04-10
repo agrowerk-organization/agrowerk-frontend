@@ -25,7 +25,8 @@ import {
     faLeaf,
     faNeuter,
     faHome,
-    faChartBar
+    faChartBar,
+    faCube
 } from '@fortawesome/free-solid-svg-icons'
 
 export const ICONS_DASHBOARD = {
@@ -55,5 +56,6 @@ export const ICONS_DASHBOARD = {
     MUG_HOT : faMugHot,
     LEAF : faLeaf,
     HOME : faHome,
-    CHART_BAR : faChartBar
+    CHART_BAR : faChartBar,
+    CUBE : faCube
 }

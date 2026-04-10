@@ -8,7 +8,8 @@ import {
     faArrowTrendUp,
     faArrowTrendDown,
     faMinus,
-    faBoxes
+    faBoxes,
+    faCube
 } from '@fortawesome/free-solid-svg-icons';
 
 export const ICONS_MARKET = {
@@ -22,4 +23,5 @@ export const ICONS_MARKET = {
     ARROW_TREND_DOWN: faArrowTrendDown,
     MINUS: faMinus,
     BOXES: faBoxes,
+    CUBE: faCube
 }

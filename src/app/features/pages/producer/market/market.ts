@@ -29,22 +29,21 @@ export class Market implements OnInit {
   readonly COMMODITY_META: Record<Commodity, { label: string; icon: IconDefinition; color: string }> = {
     SOJA:     { label: 'Soja',     icon: this.icons.SEEDLING,  color: 'text-yellow-400' },
     MILHO:    { label: 'Milho',    icon: this.icons.SEEDLING,  color: 'text-yellow-300' },
-    BOI_GORDO:{ label: 'Boi Gordo',icon: this.icons.TRACTOR,   color: 'text-orange-400' },
     CAFE:     { label: 'Café',     icon: this.icons.MUG_HOT,    color: 'text-amber-600'  },
     TRIGO:    { label: 'Trigo',    icon: this.icons.WHEAT_AWN,  color: 'text-yellow-500' },
     ALGODAO:  { label: 'Algodão',  icon: this.icons.BOXES,     color: 'text-neutral-300'},
+    ACUCAR:   { label: 'Açúcar',   icon: this.icons.CUBE, color: 'text-primary' }
   };
   
   readonly PERIOD_OPTIONS = [
-    { label: '30 dias',  value: 30  },
-    { label: '90 dias',  value: 90  },
-    { label: '180 dias', value: 180 },
     { label: '1 ano',    value: 365 },
+    { label: '3 anos',   value: 1095 },
+    { label: '5 anos',   value: 1825 },
   ];
 
   loading       = signal(true);
   dashboard     = signal<CommodityDashboardResponse | null>(null);
-  selectedDays  = signal<number>(180);
+  selectedDays  = signal<number>(365);
   selectedCommodity = signal<Commodity>('SOJA');
 
   periodOptions = this.PERIOD_OPTIONS;
@@ -75,12 +74,12 @@ export class Market implements OnInit {
       tooltip: {
         trigger: 'axis',
         confine: true,
-        backgroundColor: '#171717', // Fundo preto/neutro escuro
-        borderColor: '#404040',     // Uma borda sutil para separar do fundo
+        backgroundColor: '#171717', 
+        borderColor: '#404040',     
         borderWidth: 1,
-        padding: [8, 12],           // Respiro interno do quadrinho
+        padding: [8, 12],           
         textStyle: {
-          color: '#22c55e',         // Cor "secondary" (usei o verde do seu gráfico)
+          color: '#22c55e',         
           fontSize: 14,
           fontFamily: 'sans-serif'
         },
@@ -89,47 +88,77 @@ export class Market implements OnInit {
           const p = (Array.isArray(params) ? params[0] : params) as AxisFormatterParams;
           return `
             <div style="font-weight: 600; margin-bottom: 4px;">${p.axisValue}</div>
-            <div style="color: #a3a3a3; font-size: 12px;">
+            <div style="color: #ffffff; font-size: 12px;">
               Preço: <span style="color: #22c55e; font-weight: bold;">R$ ${(p.value as number).toFixed(2)}</span>
             </div>
           `;
         }
       },
-      grid: { left: '3%', right: '3%', bottom: '3%', top: '8%', containLabel: true },
+      grid: { 
+        left: '2%', 
+        right: '4%', 
+        bottom: '5%', 
+        top: '12%', 
+        containLabel: true 
+      },
       xAxis: {
         type: 'category',
         data: dates,
+        boundaryGap: false, 
         axisLabel: {
-          color: '#a3a3a3',
+          color: '#FF9800',
+          fontSize: 16,
+          fontWeight: 800,
+          fontFamily: 'Inter, sans-serif',
+          margin: 15,
           formatter: (val: string) => {
             const d = new Date(val);
-            return `${d.getMonth()+1}/${d.getFullYear().toString().slice(2)}`;
+            const monthNames = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"];
+            return `${monthNames[d.getMonth()]}/${d.getFullYear().toString().slice(2)}`;
           }
         },
-        axisLine: { lineStyle: { color: '#404040' } },
+        axisLine: { show: false }, 
+        axisTick: { show: false }, 
       },
       yAxis: {
         type: 'value',
+        min: 'dataMin', 
         axisLabel: {
-          color: '#a3a3a3',
-          formatter: (val: number) => `R$${val.toFixed(0)}`
+          color: '#4CAF50', 
+          fontSize: 16,
+          fontWeight: 800,
+          fontFamily: 'Inter, sans-serif',
+          margin: 15,
+          formatter: (val: number) => `R$ ${val.toLocaleString('pt-BR')}`
         },
-        splitLine: { lineStyle: { color: '#2a2a2a' } },
+        splitLine: { 
+          lineStyle: { 
+            color: 'rgba(0, 148, 37, 0.4)', 
+            type: 'dashed',
+            width: 1
+          } 
+        },
       },
       series: [{
         type: 'line',
         data: prices,
-        smooth: true,
+        smooth: 0.4, 
         symbol: 'circle',
-        symbolSize: 5,
-        lineStyle: { width: 2, color: '#22c55e' },
+        symbolSize: 8,
+        showSymbol: false, 
+        lineStyle: { 
+          width: 3, 
+          color: '#22c55e',
+          shadowBlur: 10,
+          shadowColor: 'rgba(34, 197, 94, 0.5)' 
+        },
         itemStyle: { color: '#22c55e' },
         areaStyle: {
           color: {
             type: 'linear', x: 0, y: 0, x2: 0, y2: 1,
             colorStops: [
-              { offset: 0, color: 'rgba(34,197,94,0.3)' },
-              { offset: 1, color: 'rgba(34,197,94,0.01)' },
+              { offset: 0, color: 'rgba(34,197,94,0.25)' },
+              { offset: 1, color: 'rgba(34,197,94,0)' },
             ]
           }
         }

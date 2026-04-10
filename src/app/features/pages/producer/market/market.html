@@ -7,7 +7,7 @@
   }
   
   @else if (dashboard(); as dash) {
-    <div class="p-6 space-y-6 pb-32 lg:pb-6 max-w-5xl mx-auto">
+    <div class="p-8 space-y-6 pb-32 lg:pb-6 max-w-7xl mx-auto">
   
       <div class="flex items-center gap-4">
         <a routerLink="/producer/dashboard"
@@ -34,7 +34,7 @@
           Últimas Cotações
         </h2>
   
-        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
           @for (item of dash.latestPrices; track item.commodity) {
             @let meta = metaFor(item.commodity);
             @let stale = isStale(item.referenceDate);
@@ -47,7 +47,7 @@
               <div class="flex items-center justify-between gap-1">
                 <div class="flex items-center gap-2 min-w-0">
                   <fa-icon [icon]="meta.icon" [class]="'text-xl sm:text-2xl shrink-0 ' + meta.color" />
-                  <p class="text-xl sm:text-2xl font-semibold text-neutral-secondary uppercase tracking-wide truncate">
+                    <p [class]="`text-xl sm:text-2xl font-semibold uppercase tracking-wide truncate ${meta.color}`">
                     {{ meta.label }}
                   </p>
                 </div>
@@ -98,7 +98,7 @@
           <div class="flex flex-wrap gap-2">
             @for (c of commodities; track c) {
               <button type="button" (click)="selectedCommodity.set(c)"
-                      class="px-3 py-1.5 rounded-xl text-xs sm:text-sm font-semibold border-2 transition-all duration-200 cursor-pointer"
+                      class="px-3 py-1.5 rounded-xl text-lg sm:text-xl font-semibold border-2 transition-all duration-200 cursor-pointer"
                       [class.border-primary]="selectedCommodity() === c"
                       [class.text-primary]="selectedCommodity() === c"
                       [class.border-primary/30]="selectedCommodity() !== c"
@@ -111,7 +111,7 @@
           <div class="flex gap-2 ml-auto">
             @for (p of periodOptions; track p.value) {
               <button type="button" (click)="selectedDays.set(p.value)"
-                      class="px-3 py-1.5 rounded-xl text-xs sm:text-sm font-semibold border-2 transition-all duration-200 cursor-pointer"
+                      class="px-3 py-1.5 rounded-xl text-lg sm:text-xl font-semibold border-2 transition-all duration-200 cursor-pointer"
                       [class.border-primary]="selectedDays() === p.value"
                       [class.text-primary]="selectedDays() === p.value"
                       [class.border-primary/30]="selectedDays() !== p.value"
@@ -122,7 +122,7 @@
           </div>
         </div>
   
-        <div echarts [options]="chartOption()" class="h-72 w-full"></div>
+        <div echarts [options]="chartOption()" class="h-[450px] w-full"></div>
       </div>
   
     </div>
