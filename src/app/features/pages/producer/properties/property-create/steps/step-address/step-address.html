@@ -3,11 +3,10 @@
 <div [formGroup]="form()" class="space-y-4">
 
   <app-toggle-field
-    label="Zona rural"
-    [value]="form().value.rural ?? false"
-    (toggled)="form().get('rural')?.setValue($event)" />
-
-  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+  label="Zona rural"
+  [value]="form().get('rural')?.value ?? false"
+  (toggled)="form().get('rural')?.setValue($event)" />
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
     <div>
       <label for="address-code" class="text-xl sm:text-2xl text-neutral-secondary font-bold mb-1 block">CEP *</label>
       <input id="address-code" formControlName="code" type="text" placeholder="00000-000" appCepMask
@@ -38,13 +37,15 @@
                     bg-transparent text-lg sm:text-xl text-neutral-secondary focus:border-primary outline-none transition-all" />
     </div>
     
-    <app-number-field
-      label="Número"
-      fieldId="number"
-      [step]="0.01"
-      [min]="0"
-      placeholder="0.00"
-      formControlName="plantedArea" />
+    <div>
+      <app-number-field
+        label="Número"
+        fieldId="number"
+        [step]="1"
+        [min]="0"
+        placeholder="0"
+        formControlName="number" />
+    </div>
 
     <div>
       <label for="neighborhood" class="text-lg sm:text-2xl text-neutral-secondary font-bold mb-1 block">Bairro</label>

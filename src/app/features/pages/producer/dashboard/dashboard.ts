@@ -29,6 +29,8 @@ import { MarketData } from "./dashboard-components/market-data/market-data";
 import { CommodityPriceService } from '@core/services/commodity-price.service';
 import { CommodityDashboardResponse } from '@core/types/market/commodity-dashboard.response';
 import { PropertyCard } from "../properties/property-card/property-card";
+import { ButtonPages } from '@shared/components/buttons/button-pages/button-pages';
+import { ICONS_DASHBOARD } from '@core/ui/icons/icons-producer/icons-dashboard/icons-dashboard';
 
 @Component({
   selector: 'app-producer-dashboard',
@@ -46,7 +48,8 @@ import { PropertyCard } from "../properties/property-card/property-card";
     CycleDiagram,
     UpdateBranding,
     MarketData,
-    PropertyCard
+    PropertyCard,
+    ButtonPages
 ],
   templateUrl: './dashboard.html'
 })
@@ -70,6 +73,8 @@ export class ProducerDashboard implements OnInit {
 
   hasProperty = computed(() => this.properties().length > 0);
 
+  icons = ICONS_DASHBOARD;
+  
   ngOnInit() {
     this.loadDashboard();
     this.commodityService.getDashboard().subscribe(d => this.commodityDashboard.set(d));

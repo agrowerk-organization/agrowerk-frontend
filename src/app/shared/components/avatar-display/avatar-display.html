@@ -1,0 +1,9 @@
+<div [class]="size()" class="rounded-2xl overflow-hidden ring-4 ring-primary/50
+              bg-gradient-to-br from-emerald-800 to-green-950
+              flex items-center justify-center shrink-0">
+  @if (avatarUrl()) {
+    <img [src]="avatarUrl()" alt="Foto" class="w-full h-full object-cover" />
+  } @else {
+    <span class="text-3xl font-extrabold text-primary">{{ initials() }}</span>
+  }
+</div>

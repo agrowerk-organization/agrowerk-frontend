@@ -12,5 +12,5 @@ export interface WeatherDashboard {
     dailyForecast: WeatherForecast[];
     activeAlerts: WeatherAlert[];
     statistics: WeatherStatistics;
-    lastUpdated: string;
+    lastUpdate: string;
 }

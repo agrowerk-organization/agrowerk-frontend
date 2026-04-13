@@ -23,35 +23,73 @@
         </div>
       </div>
 
-      <button type="button" (click)="showModal.set(true)"
-              class="flex items-center gap-2 px-4 py-3 rounded-xl
-                     border-2 border-primary/50 text-primary font-semibold
-                     hover:border-primary transition-all duration-300 cursor-pointer">
-        <fa-icon [icon]="icons.PENCIL" class="text-xl sm:text-2xl" />
-        <span class="hidden text-2xl sm:block">Editar</span>
-      </button>
+      <app-button-pages
+        text="Editar"
+        [icon]="icons.PENCIL"
+        width="fit-content"
+        (action)="showModal.set(true)" />
     </div>
 
-    <div class="flex flex-wrap gap-3">
-      <div class="flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-xl font-semibold"
-           [class.border-green-500/40]="p.isActive"
-           [class.text-green-400]="p.isActive"
-           [class.bg-green-500/10]="p.isActive"
-           [class.border-red-500/40]="!p.isActive"
-           [class.text-red-400]="!p.isActive"
-           [class.bg-red-500/10]="!p.isActive">
-        <fa-icon [icon]="p.isActive ? icons.CIRCLE_CHECK : icons.CIRCLE_XMARK" />
-        {{ p.isActive ? 'Ativa' : 'Inativa' }}
+    <div class="group relative overflow-hidden rounded-3xl
+            bg-neutral-primary border-3 border-primary/70
+            shadow-xl shadow-primary/30 p-6 sm:p-8
+            transition-all duration-300 hover:shadow-primary/20">
+
+  <div class="absolute inset-0 -z-10 pointer-events-none overflow-hidden">
+    <div class="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-3xl"></div>
+  </div>
+
+  <div class="relative z-10 flex flex-col sm:flex-row items-center sm:items-center gap-8">
+      
+    <div class="shrink-0 p-2 bg-neutral-secondary/5 rounded-2xl border border-primary/20 shadow-inner">
+        <app-avatar-upload
+          [avatarUrl]="p.avatarThumbnailUrl!"
+          [avatarPreview]="avatarPreview()"
+          [name]="p.name"
+          [uploading]="uploading()"
+          (fileSelected)="onFileSelected($event)" />
       </div>
 
-      @if (p.mainCrop) {
-        <div class="flex items-center gap-1.5 px-3 py-1.5 rounded-full
-                    bg-primary/10 border border-primary/30 text-xl font-semibold text-primary">
-          <fa-icon [icon]="icons.SEEDLING" />
-          {{ p.mainCrop }}
+      <div class="flex-1 text-center sm:text-left space-y-3">
+        <div>
+          <h1 class="text-3xl sm:text-5xl font-extrabold text-primary leading-tight">
+            {{ p.name }}
+          </h1>
+          <p class="text-secondary/80 text-xl sm:text-2xl flex items-center justify-center sm:justify-start gap-2">
+            <fa-icon [icon]="icons.LOCATION_DOT" class="text-primary/60" />
+            {{ p.address.municipality }} — {{ p.stateAbbreviation }}
+          </p>
         </div>
-      }
+
+        <div class="flex flex-wrap justify-center sm:justify-start gap-3">
+          <span class="flex items-center gap-1.5 px-3 py-1 rounded-full border text-lg font-bold"
+                [class.border-green-500/40]="p.isActive"
+                [class.text-green-400]="p.isActive"
+                [class.bg-green-500/10]="p.isActive"
+                [class.border-red-500/40]="!p.isActive"
+                [class.text-red-400]="!p.isActive"
+                [class.bg-red-500/10]="!p.isActive">
+            <fa-icon [icon]="p.isActive ? icons.CIRCLE_CHECK : icons.CIRCLE_XMARK" />
+            {{ p.isActive ? 'Propriedade Ativa' : 'Propriedade Inativa' }}
+          </span>
+
+          @if (p.mainCrop) {
+            <span class="flex items-center gap-1.5 px-3 py-1 rounded-full
+                        bg-primary/10 border border-primary/30 text-lg font-bold text-primary">
+              <fa-icon [icon]="icons.SEEDLING" />
+              {{ p.mainCrop }}
+            </span>
+          }
+
+          <span class="flex items-center gap-1.5 px-3 py-1 rounded-full
+                      bg-secondary/10 border border-secondary/30 text-lg font-medium text-neutral-secondary">
+            <fa-icon [icon]="icons.CALENDAR" />
+            Desde {{ p.createdAt | date:'dd/MM/yyyy' }}
+          </span>
+        </div>
+      </div>
     </div>
+  </div>
 
     <div class="group relative overflow-hidden rounded-3xl
                 bg-neutral-primary border-3 border-primary/70
@@ -60,7 +98,7 @@
         <div class="absolute bottom-0 right-0 w-40 h-40 bg-primary/20 rounded-full blur-3xl"></div>
       </div>
 
-      <h2 class="text-lg font-bold text-primary mb-4 flex items-center gap-2">
+      <h2 class="text-2xl sm:text-3xl font-bold text-primary mb-4 flex items-center gap-2">
         <fa-icon [icon]="icons.RULER_COMBINED" />
         Áreas
       </h2>
@@ -108,7 +146,7 @@
         <div class="absolute bottom-0 left-0 w-40 h-40 bg-primary/20 rounded-full blur-3xl"></div>
       </div>
 
-      <h2 class="text-lg font-bold text-primary mb-4 flex items-center gap-2">
+      <h2 class="text-2xl sm:text-3xl font-bold text-primary mb-4 flex items-center gap-2">
         <fa-icon [icon]="icons.LOCATION_DOT" />
         Endereço
       </h2>
@@ -241,7 +279,7 @@
         <div class="absolute bottom-0 right-0 w-40 h-40 bg-primary/20 rounded-full blur-3xl"></div>
       </div>
 
-      <h2 class="text-lg font-bold text-primary mb-4 flex items-center gap-2">
+      <h2 class="text-2xl sm:text-3xl font-bold text-primary mb-4 flex items-center gap-2">
         <fa-icon [icon]="icons.CALENDAR" />
         Registros
       </h2>
@@ -286,6 +324,6 @@
     <app-property-update-modal
       [property]="p"
       (updated)="onUpdated($event)"
-      (close)="showModal.set(false)" />
+      (doClose)="showModal.set(false)" />
   }
 }

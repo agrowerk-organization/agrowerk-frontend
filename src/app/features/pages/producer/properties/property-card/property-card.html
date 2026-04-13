@@ -8,113 +8,124 @@
     <div class="absolute bottom-0 right-0 w-40 h-40 bg-primary/20 rounded-full blur-3xl"></div>
   </div>
 
-  <div class="relative z-10 p-6 flex flex-col gap-4">
+  <div class="relative z-10 flex flex-col sm:flex-row">
 
-    <div class="flex items-start justify-between gap-3">
-      <div class="flex items-center gap-3">
-        <div class="flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 rounded-xl
-                    bg-gradient-to-br to-button-second shadow-lg shrink-0
-                    group-hover:scale-110 transition-transform duration-300">
-          <fa-icon [icon]="icons.SEEDLING" class="text-3xl text-neutral-secondary" />
-        </div>
+    <div class="w-full sm:w-160 sm:shrink-0 flex items-center justify-center p-4"> 
+      <div class="w-full h-48 sm:w-160 sm:h-120 overflow-hidden rounded-2xl border border-primary/20 shadow-md bg-neutral-secondary/10">
+        @if (property().avatarUrl) {
+          <img [src]="property().avatarUrl" [alt]="property().name"
+               class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+        } @else {
+          <div class="w-full h-full bg-gradient-to-br from-emerald-800 to-green-950
+                      flex items-center justify-center">
+            <span class="text-5xl font-extrabold text-primary">
+              {{ property().name.slice(0,2).toUpperCase() }}
+            </span>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="flex-1 flex flex-col gap-4 p-6">
+
+      <div class="flex items-start justify-between gap-3">
         <div>
           <h3 class="text-2xl sm:text-4xl font-bold text-primary leading-tight">{{ property().name }}</h3>
           <p class="text-xl sm:text-2xl text-secondary/90">{{ property().stateName }}</p>
         </div>
-      </div>
 
-      <div class="flex items-center gap-1.5 px-2 py-1 rounded-full border text-xl sm:text-2xl font-semibold shrink-0"
-           [class.border-green-500/40]="property().isActive"
-           [class.text-green-400]="property().isActive"
-           [class.bg-green-500/10]="property().isActive"
-           [class.border-red-500/40]="!property().isActive"
-           [class.text-red-400]="!property().isActive"
-           [class.bg-red-500/10]="!property().isActive">
-        <fa-icon [icon]="property().isActive ? icons.CIRCLE_CHECK : icons.CIRCLE_XMARK" class="text-xl sm:text-2xl" />
-        {{ property().isActive ? 'Ativa' : 'Inativa' }}
-      </div>
-    </div>
-
-    @if (property().mainCrop) {
-
-      <div class="animate-fadeInUp" style="animation-delay: 0.1s;">
-        <app-badge [badges]="badges()" />
-      </div>
-    }
-
-    <div class="grid grid-cols-2 gap-2 pt-3 border-t border-primary/80">
-
-      <div class="flex flex-col gap-0.5 p-3 rounded-xl border-2 border-primary/90
-                  hover:border-primary transition-all duration-300 shadow-xl shadow-primary/40">
-        <div class="flex items-center gap-1.5 text-neutral-secondary">
-          <fa-icon [icon]="icons.RULER_COMBINED" class="text-xl sm:text-2xl" />
-          <span class="text-xl sm:text-2xl tracking-wide">Área total</span>
+        <div class="flex items-center gap-1.5 px-2 py-1 rounded-full border text-xl sm:text-2xl font-semibold shrink-0"
+             [class.border-green-500/40]="property().isActive"
+             [class.text-green-400]="property().isActive"
+             [class.bg-green-500/10]="property().isActive"
+             [class.border-red-500/40]="!property().isActive"
+             [class.text-red-400]="!property().isActive"
+             [class.bg-red-500/10]="!property().isActive">
+          <fa-icon [icon]="property().isActive ? icons.CIRCLE_CHECK : icons.CIRCLE_XMARK" class="text-xl sm:text-2xl" />
+          {{ property().isActive ? 'Ativa' : 'Inativa' }}
         </div>
-        <p class="font-bold text-primary text-lg sm:text-xl">
-          {{ property().totalArea | number:'1.0-2' }} ha
-        </p>
       </div>
 
-      <div class="flex flex-col gap-0.5 p-3 rounded-xl border-2 border-primary/90
-                  hover:border-primary transition-all duration-300 shadow-xl shadow-/40">
-        <div class="flex items-center gap-1.5 text-neutral-secondary">
-          <fa-icon [icon]="icons.SEEDLING" class="text-xl sm:text-2xl" />
-          <span class="text-xl sm:text-2xl  tracking-wide">Área plantada</span>
+      @if (property().mainCrop) {
+        <div class="animate-fadeInUp" style="animation-delay: 0.1s;">
+          <app-badge [badges]="badges()" />
         </div>
-        <p class="font-bold text-primary text-lg sm:text-xl">
-          {{ property().plantedArea ? (property().plantedArea | number:'1.0-2') + ' ha' : '—' }}
-        </p>
-      </div>
-
-      <div class="flex flex-col gap-0.5 p-3 rounded-xl border-2 border-primary/90
-                  hover:border-primary transition-all duration-300 shadow-xl shadow-primary/40">
-        <div class="flex items-center gap-1.5 text-neutral-secondary">
-          <fa-icon [icon]="icons.LAYER_GROUP" class="text-xl sm:text-2xl" />
-          <span class="text-xl sm:text-2xl tracking-wide">Talhões</span>
-        </div>
-        <p class="font-bold text-primary text-lg sm:text-xl">
-          {{ property().units?.length ?? 0 }}
-        </p>
-      </div>
-
-      <div class="flex flex-col gap-0.5 p-3 rounded-xl border-2 border-primary/90
-                  hover:border-primary transition-all duration-300 shadow-xl shadow-primary/40">
-        <div class="flex items-center gap-1.5 text-neutral-secondary">
-          <fa-icon [icon]="icons.LOCATION_DOT" class="text-xl sm:text-2xl" />
-          <span class="text-xl sm:text-2xl tracking-wide">Município</span>
-        </div>
-        <p class="font-bold text-primary text-lg sm:text-xl truncate">
-          {{ property().address.municipality }}
-        </p>
-      </div>
-    </div>
-
-    @if (associateSuccess()) {
-      <div class="flex items-center gap-2 px-3 py-2 rounded-xl
-                  bg-green-500/10 border border-green-500/30 text-green-400
-                  text-xl sm:text-2xl font-medium animate-in fade-in duration-300">
-        <fa-icon [icon]="icons.CIRCLE_CHECK" />
-        Clima associado com sucesso!
-      </div>
-    }
-
-    <div class="flex flex-col sm:flex-row items-center justify-center gap-2 mt-4">
-
-      @if (mode() === 'view' && property().latitude && property().longitude) {
-        <app-button-pages
-          [text]="property().hasWeatherLocation ? 'Clima associado' : 'Associar clima'"
-          [icon]="property().hasWeatherLocation ? icons.CIRCLE_CHECK : icons.CLOUD"
-          width="100%"
-          [disabled]="associatingWeather() || property().hasWeatherLocation"
-          (action)="onAssociateWeather()" />
       }
-      
-      <app-button-pages
-        [text]="mode() === 'edit' ? 'Editar propriedade' : 'Ver detalhes'"
-        [icon]="mode() === 'edit' ? icons.PENCIL : icons.EYE"
-        width="100%"
-        (action)="mode() === 'edit' ? edit.emit(property()) : view.emit(property())" />
 
+      <div class="grid grid-cols-2 gap-2 pt-3 border-t border-primary/80">
+
+        <div class="flex flex-col gap-0.5 p-3 rounded-xl border-2 border-primary/90
+                    hover:border-primary transition-all duration-300 shadow-xl shadow-primary/40">
+          <div class="flex items-center gap-1.5 text-neutral-secondary">
+            <fa-icon [icon]="icons.RULER_COMBINED" class="text-xl sm:text-2xl" />
+            <span class="text-xl sm:text-2xl tracking-wide">Área total</span>
+          </div>
+          <p class="font-bold text-primary text-lg sm:text-xl">
+            {{ property().totalArea | number:'1.0-2' }} ha
+          </p>
+        </div>
+
+        <div class="flex flex-col gap-0.5 p-3 rounded-xl border-2 border-primary/90
+                    hover:border-primary transition-all duration-300 shadow-xl shadow-primary/40">
+          <div class="flex items-center gap-1.5 text-neutral-secondary">
+            <fa-icon [icon]="icons.SEEDLING" class="text-xl sm:text-2xl" />
+            <span class="text-xl sm:text-2xl tracking-wide">Área plantada</span>
+          </div>
+          <p class="font-bold text-primary text-lg sm:text-xl">
+            {{ property().plantedArea ? (property().plantedArea | number:'1.0-2') + ' ha' : '—' }}
+          </p>
+        </div>
+
+        <div class="flex flex-col gap-0.5 p-3 rounded-xl border-2 border-primary/90
+                    hover:border-primary transition-all duration-300 shadow-xl shadow-primary/40">
+          <div class="flex items-center gap-1.5 text-neutral-secondary">
+            <fa-icon [icon]="icons.LAYER_GROUP" class="text-xl sm:text-2xl" />
+            <span class="text-xl sm:text-2xl tracking-wide">Talhões</span>
+          </div>
+          <p class="font-bold text-primary text-lg sm:text-xl">
+            {{ property().units?.length ?? 0 }}
+          </p>
+        </div>
+
+        <div class="flex flex-col gap-0.5 p-3 rounded-xl border-2 border-primary/90
+                    hover:border-primary transition-all duration-300 shadow-xl shadow-primary/40">
+          <div class="flex items-center gap-1.5 text-neutral-secondary">
+            <fa-icon [icon]="icons.LOCATION_DOT" class="text-xl sm:text-2xl" />
+            <span class="text-xl sm:text-2xl tracking-wide">Município</span>
+          </div>
+          <p class="font-bold text-primary text-lg sm:text-xl truncate">
+            {{ property().address.municipality }}
+          </p>
+        </div>
+      </div>
+
+      @if (associateSuccess()) {
+        <div class="flex items-center gap-2 px-3 py-2 rounded-xl
+                    bg-green-500/10 border border-green-500/30 text-green-400
+                    text-xl sm:text-2xl font-medium animate-in fade-in duration-300">
+          <fa-icon [icon]="icons.CIRCLE_CHECK" />
+          Clima associado com sucesso!
+        </div>
+      }
+
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-2 mt-4">
+
+        @if (mode() === 'view' && property().latitude && property().longitude) {
+          <app-button-pages
+            [text]="property().hasWeatherLocation ? 'Clima associado' : 'Associar clima'"
+            [icon]="property().hasWeatherLocation ? icons.CIRCLE_CHECK : icons.CLOUD"
+            width="100%"
+            [disabled]="associatingWeather() || property().hasWeatherLocation"
+            (action)="onAssociateWeather()" />
+        }
+
+        <app-button-pages
+          [text]="mode() === 'edit' ? 'Editar propriedade' : 'Ver detalhes'"
+          [icon]="mode() === 'edit' ? icons.PENCIL : icons.EYE"
+          width="100%"
+          (action)="mode() === 'edit' ? edit.emit(property()) : view.emit(property())" />
+
+      </div>
     </div>
   </div>
 </div>

@@ -62,15 +62,15 @@
               </p>
   
               <div class="flex items-center justify-between">
-                <p class="text-sm sm:text-lg text-neutral-secondary/70">{{ item.unit }}</p>
-                <p class="text-sm sm:text-lg text-neutral-secondary/50">
+                <p class="text-lg sm:text-xl text-neutral-secondary">{{ item.unit }}</p>
+                <p class="text-lg sm:text-xl text-neutral-secondary">
                   {{ item.referenceDate | date:'dd/MM/yy' }}
                 </p>
               </div>
   
               @if (item.variationPercent !== null) {
                 <div class="flex items-center gap-1" [ngClass]="variationClass(item.variationPercent)">
-                  <fa-icon [icon]="variationIcon(item.variationPercent)" class="text-sm" />
+                  <fa-icon [icon]="variationIcon(item.variationPercent)" class="text-lg sm:text-xl" />
                   <span class="text-lg sm:text-xl font-bold">
                     {{ item.variationPercent | number:'1.2-2' }}%
                   </span>

@@ -20,6 +20,7 @@ export class StepGeneral {
 
   form = input.required<FormGroup>();
   states = input<StateResponse[]>([]);
+  readonly = input<boolean>(false);
   
   stateOptions = computed(() =>
     this.states().map(s => ({ value: s.id, label: s.name }))

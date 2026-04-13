@@ -18,4 +18,6 @@ export interface PropertyResponse {
     hasWeatherLocation: boolean;
     units?: FarmUnitResponse[];
     createdAt: string;
+    avatarUrl?: string;
+    avatarThumbnailUrl?: string;
 }

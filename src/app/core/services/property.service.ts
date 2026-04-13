@@ -5,6 +5,7 @@ import { environment_development } from '../../../environment/environment.dev';
 import { Page } from '../types/page/page';
 import { PropertyResponse } from '../types/property/property.response';
 import { CreatePropertyRequest } from '../types/property/create-property.request';
+import { FileUploadResponse } from '@core/types/file/file-upload.response';
 
 @Injectable({ providedIn: 'root' })
 export class PropertyService {
@@ -41,10 +42,10 @@ export class PropertyService {
     );
   }
 
-  uploadPhoto(propertyId: string, file: File): Observable<void> {
+  uploadPhoto(propertyId: string, file: File): Observable<FileUploadResponse> {
     const form = new FormData();
     form.append('file', file);
-    return this.http.post<void>(
+    return this.http.post<FileUploadResponse>(
       `${this.apiUrl}/properties/upload-photo/${propertyId}`,
       form,
       { withCredentials: true }

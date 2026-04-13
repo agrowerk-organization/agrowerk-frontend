@@ -29,7 +29,7 @@ export class MarketData {
     CAFE: { icon: this.icons.MUG_HOT, color: 'text-brown-400' },
     TRIGO: { icon: this.icons.WHEAT_AWN, color: 'text-yellow-200' },
     ALGODAO: { icon: this.icons.LEAF, color: 'text-blue-300' },
-    ACUCAR: { icon: this.icons.CUBE, color: 'text-primary' }
+    ACUCAR: { icon: this.icons.CUBE, color: 'text-white' }
   };
 
   private readonly nameMap: Record<string, string> = {

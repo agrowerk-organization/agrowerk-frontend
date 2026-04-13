@@ -29,10 +29,10 @@ export class Market implements OnInit {
   readonly COMMODITY_META: Record<Commodity, { label: string; icon: IconDefinition; color: string }> = {
     SOJA:     { label: 'Soja',     icon: this.icons.SEEDLING,  color: 'text-yellow-400' },
     MILHO:    { label: 'Milho',    icon: this.icons.SEEDLING,  color: 'text-yellow-300' },
-    CAFE:     { label: 'Café',     icon: this.icons.MUG_HOT,    color: 'text-amber-600'  },
+    CAFE:     { label: 'Café',     icon: this.icons.MUG_HOT,    color: 'text-black-300'  },
     TRIGO:    { label: 'Trigo',    icon: this.icons.WHEAT_AWN,  color: 'text-yellow-500' },
-    ALGODAO:  { label: 'Algodão',  icon: this.icons.BOXES,     color: 'text-neutral-300'},
-    ACUCAR:   { label: 'Açúcar',   icon: this.icons.CUBE, color: 'text-primary' }
+    ALGODAO:  { label: 'Algodão',  icon: this.icons.BOXES,     color: 'text-blue-300'},
+    ACUCAR:   { label: 'Açúcar',   icon: this.icons.CUBE, color: 'text-white' }
   };
   
   readonly PERIOD_OPTIONS = [
@@ -75,12 +75,12 @@ export class Market implements OnInit {
         trigger: 'axis',
         confine: true,
         backgroundColor: '#171717', 
-        borderColor: '#404040',     
-        borderWidth: 1,
-        padding: [8, 12],           
+        borderColor: '#22c55e',     
+        borderWidth: 2,
+        padding: [10, 16],           
         textStyle: {
           color: '#22c55e',         
-          fontSize: 14,
+          fontSize: 18,
           fontFamily: 'sans-serif'
         },
         extraCssText: 'box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5); border-radius: 8px;',
@@ -88,7 +88,7 @@ export class Market implements OnInit {
           const p = (Array.isArray(params) ? params[0] : params) as AxisFormatterParams;
           return `
             <div style="font-weight: 600; margin-bottom: 4px;">${p.axisValue}</div>
-            <div style="color: #ffffff; font-size: 12px;">
+            <div style="color: #ffffff; font-size: 16px;">
               Preço: <span style="color: #22c55e; font-weight: bold;">R$ ${(p.value as number).toFixed(2)}</span>
             </div>
           `;
@@ -197,7 +197,7 @@ export class Market implements OnInit {
 
   bgVariation(v: number | null): string {
     if (v === null || v === 0) return '';
-    return v > 0 ? 'bg-green-500/5' : 'bg-red-500/5';
+    return v > 0 ? 'bg-green-500/10' : v < 0 ? 'bg-red-500/10' : 'bg-neutral-primary';
   }
 
 }

@@ -11,32 +11,12 @@
 
   <div class="relative z-10 p-8 flex flex-col sm:flex-row items-center sm:items-end gap-6">
 
-    <div class="relative flex-shrink-0">
-      <div class="w-28 h-28 sm:w-36 sm:h-36 rounded-2xl ring-4 ring-primary/50 overflow-hidden
-                  bg-gradient-to-br from-emerald-800 to-green-950
-                  flex items-center justify-center">
-        @if (avatarSrc()) {
-          <img [src]="avatarSrc()" alt="Avatar" class="w-full h-full object-cover" />
-        } @else {
-          <span class="text-4xl font-extrabold text-primary">{{ initials() }}</span>
-        }
-      </div>
-
-      <button (click)="triggerInput()"
-              class="absolute -bottom-2 -right-2 w-9 h-9 sm:w-12 sm:h-12 rounded-xl
-                     bg-button-main hover:bg-button-main-hover
-                     flex items-center justify-center
-                     shadow-lg transition-all duration-200 hover:scale-110 cursor-pointer">
-        @if (uploading()) {
-          <fa-icon [icon]="icons.SPINNER" class="text-neutral-secondary text-lg animate-spin" />
-        } @else {
-          <fa-icon [icon]="icons.CAMERA" class="text-neutral-secondary text-lg" />
-        }
-      </button>
-
-      <input #avatarInput type="file" accept="image/*" class="hidden"
-             (change)="onFileChange($event)" />
-    </div>
+    <app-avatar-upload
+      [avatarUrl]="profile().avatarUrl"
+      [avatarPreview]="avatarPreview()"
+      [name]="profile().name"
+      [uploading]="uploading()"
+      (fileSelected)="fileSelected.emit($event)" />
 
     <div class="flex-1 text-center sm:text-left">
       <h1 class="text-3xl sm:text-4xl font-extrabold text-secondary leading-tight">

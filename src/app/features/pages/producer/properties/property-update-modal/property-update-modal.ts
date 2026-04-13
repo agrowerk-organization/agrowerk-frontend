@@ -10,12 +10,18 @@ import { StepUnits } from '../property-create/steps/step-units/step-units';
 import { ICONS_PROPERTY } from '@core/ui/icons/icons-producer/icons-property/icons-property';
 import { StateService } from '@core/services/state.service';
 import { StateResponse } from '@core/types/state/state.response';
+import { ButtonPages } from '@shared/components/buttons/button-pages/button-pages';
 @Component({
   selector: 'app-property-update-modal',
   standalone: true,
   imports: [
-    CommonModule, ReactiveFormsModule, FontAwesomeModule,
-    StepGeneral, StepAddress, StepUnits,
+    CommonModule, 
+    ReactiveFormsModule, 
+    FontAwesomeModule,
+    StepGeneral, 
+    StepAddress,
+    StepUnits,
+    ButtonPages
   ],
   templateUrl: './property-update-modal.html',
 })
@@ -48,6 +54,7 @@ export class PropertyUpdateModal implements OnInit {
 
     this.generalForm = new FormGroup({
       name:              new FormControl(p.name),
+      stateRegistration: new FormControl(p.stateRegistration),
       ruralRegistration: new FormControl(p.ruralRegistration ?? ''),
       totalArea:         new FormControl(p.totalArea),
       plantedArea:       new FormControl(p.plantedArea ?? null),
@@ -58,14 +65,14 @@ export class PropertyUpdateModal implements OnInit {
     });
 
     this.addressForm = new FormGroup({
-      rural:        new FormControl(a.rural),
-      code:         new FormControl(a.code),
-      municipality: new FormControl(a.municipality),
-      locationName: new FormControl(a.locationName ?? ''),
-      street:       new FormControl(a.street ?? ''),
-      number:       new FormControl(a.number ?? null),
-      neighborhood: new FormControl(a.neighborhood ?? ''),
-      landmark:     new FormControl(a.landmark ?? ''),
+      rural:        new FormControl(a?.rural ?? false),
+      code:         new FormControl(a?.code ?? ''),
+      municipality: new FormControl(a?.municipality ?? ''),
+      locationName: new FormControl(a?.locationName ?? ''),
+      street:       new FormControl(a?.street ?? ''),
+      number:       new FormControl(a?.number ?? null),
+      neighborhood: new FormControl(a?.neighborhood ?? ''),
+      landmark:     new FormControl(a?.landmark ?? ''),
     });
 
     const unitControls = (p.units ?? []).map(u => new FormGroup({
@@ -111,6 +118,7 @@ export class PropertyUpdateModal implements OnInit {
 
     const payload = {
       name:              g.name || undefined,
+      stateRegistration: g.stateRegistration || undefined,
       ruralRegistration: g.ruralRegistration || undefined,
       totalArea:         g.totalArea || undefined,
       plantedArea:       g.plantedArea || undefined,

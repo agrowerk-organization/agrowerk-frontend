@@ -7,7 +7,7 @@
   (keydown.escape)="doClose.emit()">
 
   <div
-    class="w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-3xl
+    class="w-full max-w-2xl max-h-[70vh] overflow-y-auto rounded-3xl
            bg-neutral-primary border-3 border-primary/70
            shadow-2xl shadow-primary/30"
     role="dialog"
@@ -19,16 +19,17 @@
       class="sticky top-0 z-10 flex items-center justify-between p-6 border-b border-primary/30"
       style="background: var(--color-neutral-primary)">
       <div>
-        <h2 class="text-xl font-bold text-primary">Editar Propriedade</h2>
-        <p class="text-neutral-secondary text-sm">{{ property().name }}</p>
+        <h2 class="text-xl sm:text-2xl font-bold text-primary">Editar Propriedade</h2>
+        <p class="text-secondary text-lg sm:text-xl">{{ property().name }}</p>
       </div>
       <button
         type="button"
         (click)="doClose.emit()"
-        class="flex items-center justify-center w-10 h-10 rounded-xl
-               border-2 border-primary/40 text-primary
-               hover:border-primary transition-all">
-        <fa-icon [icon]="icons.CIRCLE_XMARK" />
+        class="flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-xl
+               border-2 border-primary/90 text-primary
+               hover:border-primary transition-all
+               cursor-pointer">
+        <fa-icon [icon]="icons.CIRCLE_XMARK" class="text-xl sm:text-2xl" />
       </button>
     </div>
 
@@ -37,7 +38,7 @@
         <button
           type="button"
           (click)="activeTab.set(i)"
-          class="px-4 py-3 text-sm font-semibold transition-all duration-300 border-b-2 -mb-px"
+          class="px-4 py-3 text-xl sm:text-2xl font-semibold transition-all duration-300 border-b-4 -mb-px cursor-pointer"
           [class.border-primary]="activeTab() === i"
           [class.text-primary]="activeTab() === i"
           [class.border-transparent]="activeTab() !== i"
@@ -49,38 +50,30 @@
 
     <div class="p-6">
       @switch (activeTab()) {
-        @case (0) { <app-step-general [form]="generalForm" [states]="states()" /> }
+        @case (0) { <app-step-general [form]="generalForm" [states]="states()" [readonly]="true" /> }
         @case (1) { <app-step-address [form]="addressForm" /> }
         @case (2) { <app-step-units   [units]="units" /> }
       }
     </div>
 
     <div
-      class="sticky bottom-0 flex gap-3 p-6 border-t border-primary/30"
-      style="background: var(--color-neutral-primary)">
-      <button
-        type="button"
-        (click)="doClose.emit()"
-        class="flex-1 py-3 rounded-xl border-2 border-primary/50 text-primary
-               font-semibold hover:border-primary transition-all">
-        Cancelar
-      </button>
-      <button
-        type="button"
-        (click)="submit()"
-        [disabled]="loading()"
-        class="flex-1 py-3 rounded-xl bg-button-main text-white font-semibold
-               hover:bg-button-main-hover transition-all disabled:opacity-40
-               flex items-center justify-center gap-2">
-        @if (loading()) {
-          <fa-icon [icon]="icons.SPINNER" class="animate-spin" />
-          Salvando...
-        } @else {
-          <fa-icon [icon]="icons.CHECK" />
-          Salvar alterações
-        }
-      </button>
-    </div>
+    class="flex flex-col sm:flex-row justify-center sticky bottom-0 flex gap-3 p-6 border-t border-primary/30"
+    style="background: var(--color-neutral-primary)">
+  
+    <app-button-pages
+      text="Cancelar"
+      [icon]="icons.CIRCLE_XMARK"
+      width="100%"
+      (action)="doClose.emit()" />
+  
+    <app-button-pages
+      [text]="loading() ? 'Salvando...' : 'Salvar alterações'"
+      [icon]="loading() ? icons.SPINNER : icons.CHECK"
+      width="100%"
+      [disabled]="loading()"
+      (action)="submit()" />
+  
+  </div>
 
   </div>
 </div>

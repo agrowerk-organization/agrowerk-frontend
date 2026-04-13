@@ -1,12 +1,13 @@
-import { Component, input, output, computed, ViewChild, ElementRef } from '@angular/core';
+import { Component, input, output, ViewChild, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { UserProfileResponse } from '@core/types/user/user-profile.response';
 import { ICONS_USER_PROFILE } from '@core/ui/icons/icons-producer/icons-profile/icons-profile';
+import { AvatarUpload } from '@shared/components/avatar-upload/avatar-upload';
 @Component({
   selector: 'app-profile-header',
   standalone: true,
-  imports: [CommonModule, FontAwesomeModule],
+  imports: [CommonModule, FontAwesomeModule, AvatarUpload],
   templateUrl: './profile-header.html'
 })
 export class ProfileHeader {
@@ -20,19 +21,4 @@ export class ProfileHeader {
 
   icons = ICONS_USER_PROFILE;
 
-  initials = computed(() => {
-    const name = this.profile()?.name ?? '';
-    return name.split(' ').slice(0, 2).map(n => n[0]).join('').toUpperCase();
-  });
-
-  avatarSrc = computed(() => this.avatarPreview() ?? this.profile()?.avatarUrl ?? null);
-
-  triggerInput(): void {
-    this.avatarInput.nativeElement.click();
-  }
-
-  onFileChange(event: Event): void {
-    const file = (event.target as HTMLInputElement).files?.[0];
-    if (file) this.fileSelected.emit(file);
-  }
 }

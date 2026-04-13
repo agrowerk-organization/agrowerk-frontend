@@ -24,14 +24,16 @@
                   bg-transparent text-lg sm:text-xl text-neutral-secondary focus:border-primary outline-none transition-all" />
   </div>
 
-  <div>
-       <app-select-field
-       label="Estado *"
-       fieldId="state-id"
-       placeholder="Selecione um estado..."
-       [options]="stateOptions()"
-       formControlName="stateId" />
-  </div>
+       @if (!readonly()) {
+              <div>
+                     <app-select-field
+                     label="Estado *"
+                     fieldId="state-id"
+                     placeholder="Selecione um estado..."
+                     [options]="stateOptions()"
+                     formControlName="stateId" />
+              </div>
+       }
 
   <div>
     <label for="main-crop" class="text-xl sm:text-2xl text-neutral-secondary font-bold mb-1 block">Cultura principal</label>
@@ -40,37 +42,43 @@
                   bg-transparent text-lg sm:text-xl text-neutral-secondary placeholder:text-neutral-secondary/50
                   focus:border-primary outline-none transition-all" />
   </div>
-
+     
+     <div>
        <app-number-field
-              label="Área total (ha) *"
-              fieldId="total-area"
-              [step]="0.01"
-              [min]="0"
-              placeholder="0.00"
-              formControlName="totalArea" />
-
-
+         label="Área total (ha) *"
+         fieldId="total-area"
+         [step]="0.01"
+         [min]="0"
+         placeholder="0.00"
+         formControlName="totalArea" />
+     </div>
+     
+     <div>
        <app-number-field
-              label="Área plantada (ha) *"
-              fieldId="planted-area"
-              [step]="0.01"
-              [min]="0"
-              placeholder="0.00"
-              formControlName="plantedArea" />
-
-
+         label="Área plantada (ha) *"
+         fieldId="planted-area"
+         [step]="0.01"
+         [min]="0"
+         placeholder="0.00"
+         formControlName="plantedArea" />
+     </div>
+     
+     <div>
        <app-number-field
-              label="Latitude"
-              fieldId="latitude"
-              [step]="0.000001"
-              placeholder="-7.123456"
-              formControlName="latitude" />  
-              
+         label="Latitude"
+         fieldId="latitude"
+         [step]="0.000001"
+         placeholder="-7.123456"
+         formControlName="latitude" />
+     </div>
+     
+     <div>
        <app-number-field
-              label="Longitude *"
-              fieldId="longitude"
-              [step]="0.000001"
-              placeholder="-15.987456"
-              formControlName="longitude" />
+         label="Longitude *"
+         fieldId="longitude"
+         [step]="0.000001"
+         placeholder="-15.987456"
+         formControlName="longitude" />
+     </div>
 
 </div>

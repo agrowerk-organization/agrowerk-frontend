@@ -47,10 +47,18 @@
           <app-welcome-banner
             [property]="property" />
     
-          <app-property-selector
+            <app-property-selector
             [properties]="properties()"
             [activePropertyId]="property.id"
             (propertyChange)="onPropertyChange($event)" />
+          
+          <div class="flex justify-end">
+            <app-button-pages
+              text="Nova propriedade"
+              [icon]="icons.PLUS"
+              width="fit-content"
+              (action)="router.navigate(['//producer/property-create'])" />
+          </div>
     
             <div class="w-full flex items-center justify-center p-4">
               <app-alerts-card 
