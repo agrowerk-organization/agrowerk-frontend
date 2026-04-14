@@ -1,4 +1,6 @@
-<h2 class="text-3xl sm:text-4xl font-bold text-primary mb-2">Unidades</h2>
+<h2 class="text-3xl sm:text-4xl font-bold text-primary mb-2">Unidades ou glebas</h2>
+<p class="text-neutral-secondary text-xl sm:text-2xl mb-6">Unidades ou glebas são parcelas da sua fazenda que podem se estender da 
+  mesma propriedade de forma contínua até outras localidades.</p>
 <p class="text-neutral-secondary text-xl sm:text-2xl mb-6">Opcional — você pode adicionar depois.</p>
 
 <div class="space-y-4">
@@ -7,7 +9,7 @@
          class="rounded-2xl border-3 border-primary/90 p-5 space-y-3">
 
       <div class="flex items-center justify-between">
-        <span class="text-primary font-semibold">Talhão {{ i + 1 }}</span>
+        <span class="text-primary font-semibold">Gleba {{ i + 1 }}</span>
         <button type="button" (click)="removeUnit(i)"
                 class="text-3xl text-red-400 hover:text-red-700 transition-colors cursor-pointer">
           <fa-icon [icon]="icons.TRASH" />
@@ -67,6 +69,6 @@
                  flex items-center justify-center gap-2 transition-all duration-300
                  cursor-pointer">
     <fa-icon [icon]="icons.PLUS" />
-    Adicionar talhão
+    Adicionar unidade
   </button>
 </div>

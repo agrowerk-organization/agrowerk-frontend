@@ -64,10 +64,10 @@
               <app-alerts-card 
               [alerts]="weatherDashboard()?.activeAlerts ?? []" />
             </div>
-    
-          <app-update-branding
-            [weatherDashboard]="weatherDashboard()" />
 
+          <app-update-branding
+              [weatherDashboard]="weatherDashboard()" />
+         
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             
             <app-property-card
