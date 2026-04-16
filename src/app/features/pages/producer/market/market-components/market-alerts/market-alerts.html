@@ -1,0 +1,71 @@
+<div class="group relative overflow-hidden rounded-3xl
+            bg-neutral-primary border-3 border-yellow-500/50
+            shadow-xl shadow-yellow-500/20 p-6">
+
+  <div class="flex items-center justify-between mb-4">
+    <h2 class="text-2xl sm:text-3xl font-bold text-primary flex items-center gap-2">
+      <fa-icon [icon]="icons.BELL" class="text-yellow-400" />
+      Alertas de Mercado
+      @if (unreadCount() > 0) {
+        <span class="ml-1 px-2 py-0.5 rounded-full text-base font-bold
+                     bg-yellow-500/20 text-yellow-400 border border-yellow-500/40">
+          {{ unreadCount() }}
+        </span>
+      }
+    </h2>
+
+    <div class="flex gap-2">
+      @if (unreadCount() > 0) {
+        <button type="button" (click)="markAllRead.emit()"
+                class="text-lg text-neutral-secondary hover:text-primary
+                       transition-colors cursor-pointer underline underline-offset-2">
+          Marcar todos como lidos
+        </button>
+      }
+      <button type="button" (click)="toggleExpanded.emit()"
+              class="text-lg text-neutral-secondary hover:text-primary
+                     transition-colors cursor-pointer">
+        {{ expanded() ? 'Ver menos' : 'Ver todos' }}
+      </button>
+    </div>
+  </div>
+
+  <div class="flex flex-col gap-3">
+    @for (alert of (expanded() ? alerts() : alerts().slice(0, 3)); track alert.id) {
+      @let cfg = severityConfig(alert.severity);
+      <div class="flex items-start justify-between gap-3 p-4 rounded-xl border-2 transition-all duration-200"
+           [ngClass]="[cfg.border, alert.read ? 'opacity-50' : '']">
+
+        <div class="flex flex-col gap-1 min-w-0">
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-base font-bold px-2 py-0.5 rounded-full" [ngClass]="cfg.badge">
+              {{ cfg.label }}
+            </span>
+            @if (alert.commodity !== 'GENERAL') {
+              <span class="text-base text-neutral-secondary font-medium uppercase">
+                {{ alert.commodity }}
+              </span>
+            }
+            <span class="text-base text-neutral-secondary">
+              {{ alert.referenceDate | date:'dd/MM/yy' }}
+            </span>
+          </div>
+          <p class="text-lg sm:text-xl text-primary font-medium">{{ alert.message }}</p>
+        </div>
+
+        @if (!alert.read) {
+          <button type="button" (click)="markAlertRead.emit(alert.id)"
+                  class="shrink-0 text-base text-neutral-secondary hover:text-primary
+                         transition-colors cursor-pointer mt-1">
+            <fa-icon [icon]="icons.CHECK" />
+          </button>
+        }
+      </div>
+    }
+  </div>
+
+  <p class="mt-4 text-base text-neutral-secondary italic">
+    Informações geradas automaticamente com base em dados de mercado.
+    Consulte um especialista antes de tomar decisões comerciais.
+  </p>
+</div>

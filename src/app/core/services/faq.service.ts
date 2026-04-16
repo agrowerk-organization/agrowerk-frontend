@@ -1,14 +1,14 @@
 import { Injectable, inject } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { environment_development } from "@environments/environment.dev";
+import { environment } from "@environments/environment";
 import { CachedPage } from "@core/types/page/cached-page";
 import { FaqResponse } from "@core/types/faq/faq-response";
 import { FaqCategory } from "@core/types/faq/faq-category";
 import { FaqRequest } from "@core/types/faq/faq-request";
 @Injectable({ providedIn: 'root' })
 export class FaqService {
-    private readonly apiUrl = environment_development.apiUrl;
+    private readonly base = `${environment.apiUrl}/faqs`;
     private http = inject(HttpClient);
 
 
@@ -20,20 +20,20 @@ export class FaqService {
         }
 
         return this.http.get<CachedPage<FaqResponse[]>>(
-            `${this.apiUrl}/faqs/list-active`, { params } 
+            `${this.base}/list-active`, { params } 
         );
     }
 
     getOne(id: string): Observable<FaqResponse> {
         return this.http.get<FaqResponse>(
-            `${this.apiUrl}/faqs/get-one/${id}`
+            `${this.base}/get-one/${id}`
         );
     }
 
 
     create(request: FaqRequest): Observable<FaqResponse> {
         return this.http.post<FaqResponse>(
-            `${this.apiUrl}/faqs/create-faq`,
+            `${this.base}/create-faq`,
             request,
             { withCredentials: true }
         );
@@ -41,7 +41,7 @@ export class FaqService {
 
     update(id: string, request: FaqRequest): Observable<FaqResponse> {
         return this.http.put<FaqResponse>(
-            `${this.apiUrl}/faqs/update-faq/${id}`,
+            `${this.base}/update-faq/${id}`,
             request,
             { withCredentials: true }
         );
@@ -49,7 +49,7 @@ export class FaqService {
 
     deactivate(id: string): Observable<void> {
         return this.http.delete<void>(
-            `${this.apiUrl}/faqs/deactivate-faq/${id}`,
+            `${this.base}/deactivate-faq/${id}`,
             { withCredentials: true }
         );
     }

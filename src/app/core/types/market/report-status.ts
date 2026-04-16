@@ -1,0 +1,1 @@
+export type ReportStatus = 'GENERATED' | 'STALE';

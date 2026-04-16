@@ -1,7 +1,7 @@
 import { inject, Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { environment_development } from "../../../environment/environment.dev";
 import { Observable, shareReplay } from "rxjs";
+import { environment } from "@environments/environment";
 import { RegisterUserRequest } from "../types/user/register-user.request";
 import { UserResponse } from "../types/user/user.response";
 import { AddAddressRequest } from "../types/address/add-address.request";
@@ -16,33 +16,33 @@ import { UserProfileResponse } from "@core/types/user/user-profile.response";
     providedIn: 'root'
   })
   export class UserService {
-    private readonly apiUrl = environment_development.apiUrl;
+    private readonly base = `${environment.apiUrl}/users`;
     private http = inject(HttpClient);
   
     register(request: RegisterUserRequest): Observable<UserResponse> {
       return this.http.post<UserResponse>(
-        `${this.apiUrl}/users/register`,
+        `${this.base}/register`,
         request
       );
     }
   
     getMe(): Observable<UserResponse> {
       return this.http.get<UserResponse>(
-        `${this.apiUrl}/users/get/me`,
+        `${this.base}/get/me`,
         { withCredentials: true }
       );
     }
   
     getUserById(id: string): Observable<UserResponse> {
       return this.http.get<UserResponse>(
-        `${this.apiUrl}/users/get-user-by-id/${id}`,
+        `${this.base}/get-user-by-id/${id}`,
         { withCredentials: true }
       );
     }
   
     updateUser(request: UpdateUserRequest): Observable<UserResponse> {
       return this.http.put<UserResponse>(
-        `${this.apiUrl}/users/update/me`,
+        `${this.base}/update/me`,
         request,
         { withCredentials: true }
       );
@@ -50,14 +50,14 @@ import { UserProfileResponse } from "@core/types/user/user-profile.response";
   
     deleteUser(): Observable<void> {
       return this.http.delete<void>(
-        `${this.apiUrl}/users/delete/me`,
+        `${this.base}/delete/me`,
         { withCredentials: true }
       );
     }
   
     searchProducers(query: string, page = 0, size = 10): Observable<Page<UserInfo>> {
       return this.http.get<Page<UserInfo>>(
-        `${this.apiUrl}/users/search/producers`,
+        `${this.base}/search/producers`,
         {
           params: { query, page, size },
           withCredentials: true
@@ -67,7 +67,7 @@ import { UserProfileResponse } from "@core/types/user/user-profile.response";
   
     addAddress(userId: string, request: AddAddressRequest): Observable<AddressResponse> {
       return this.http.post<AddressResponse>(
-        `${this.apiUrl}/users/add-address/me/address/${userId}`,
+        `${this.base}/add-address/me/address/${userId}`,
         request,
         { withCredentials: true }
       );
@@ -75,7 +75,7 @@ import { UserProfileResponse } from "@core/types/user/user-profile.response";
   
     updateAddress(userId: string, request: UpdateAddressRequest): Observable<AddressResponse> {
       return this.http.patch<AddressResponse>(
-        `${this.apiUrl}/users/update-address/me/address/${userId}`,
+        `${this.base}/update-address/me/address/${userId}`,
         request,
         { withCredentials: true }
       );
@@ -85,7 +85,7 @@ import { UserProfileResponse } from "@core/types/user/user-profile.response";
       const form = new FormData();
       form.append('file', file);
       return this.http.post<FileUploadResponse>(
-        `${this.apiUrl}/users/upload-avatar`,
+        `${this.base}/upload-avatar`,
         form,
         { withCredentials: true }
       );
@@ -93,7 +93,7 @@ import { UserProfileResponse } from "@core/types/user/user-profile.response";
 
     getProfile(): Observable<UserProfileResponse> {
       return this.http.get<UserProfileResponse>(
-        `${this.apiUrl}/users/profile/me`,
+        `${this.base}/profile/me`,
         { withCredentials: true }
       ).pipe(shareReplay(1));
     }

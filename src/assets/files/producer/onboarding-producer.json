@@ -1,0 +1,22 @@
+[
+    {
+      "label": "Propriedades",
+      "iconKey": "HOME",
+      "description": "Gerencie fazendas, talhões e áreas"
+    },
+    {
+      "label": "Clima em tempo real",
+      "iconKey": "CLOUD_SUN",
+      "description": "Alertas e previsão para sua região"
+    },
+    {
+      "label": "Safras e plantios",
+      "iconKey": "CHART_BAR",
+      "description": "Acompanhe do plantio à colheita"
+    },
+    {
+      "label": "Mercado",
+      "iconKey": "CHART_LINE",
+      "description": "Cotações e tendências de commodities"
+    }
+]

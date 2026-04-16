@@ -1,0 +1,94 @@
+@if (report(); as r) {
+  <div class="group mb-4 relative overflow-hidden rounded-3xl
+              bg-neutral-primary border-3 border-primary/70
+              shadow-xl shadow-primary/30 p-6">
+    
+    <div class="absolute inset-0 -z-10 pointer-events-none overflow-hidden">
+      <div class="absolute top-0 left-0 w-48 h-48 bg-primary/20 rounded-full blur-3xl"></div>
+    </div>
+
+    <div class="flex items-center justify-between mb-6 flex-wrap gap-2">
+      <h2 class="text-2xl sm:text-3xl font-bold text-primary flex items-center gap-3">
+        <fa-icon [icon]="icons.FILE_LINES" />
+        {{ REPORT_LABELS[r.reportType] }}
+      </h2>
+      <span class="text-lg bg-primary/10 text-primary px-4 py-1 rounded-full border border-primary/30 font-bold">
+        {{ r.periodStart | date:'dd/MM/yyyy' }} – {{ r.periodEnd | date:'dd/MM/yyyy' }}
+      </span>
+    </div>
+
+    <p class="text-xl text-primary/90 font-medium leading-relaxed mb-8 border-l-4 border-primary/40 pl-4">
+      {{ r.summary }}
+    </p>
+
+    @if (r.reportPayload; as p) {
+      
+      @if (p.priceChangePercent && (p.priceChangePercent | keyvalue).length > 0) {
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+          @for (entry of p.priceChangePercent | keyvalue; track entry.key) {
+            @let meta = metaFor(entry.key); 
+            @let label = normalizeName(entry.key);
+        
+            <div class="flex flex-col gap-2 p-4 rounded-2xl border-2 border-primary/50 
+                        bg-neutral-primary shadow-md shadow-primary/10 transition-all duration-300 hover:border-primary">
+              
+              <div class="flex items-center justify-between mb-1">
+                <div class="flex items-center gap-2">
+                  <fa-icon [icon]="meta.icon" [class]="'text-lg ' + meta.color" />
+                  
+                  <span class="text-sm font-black uppercase tracking-widest text-neutral-secondary">
+                    {{ label }}
+                  </span>
+                </div>
+                </div>
+        
+              <div class="flex items-baseline gap-2">
+                <span class="text-3xl font-black tracking-tighter"
+                      [ngClass]="(entry?.value ?? 0) > 0 ? 'text-green-400' : (entry?.value ?? 0) < 0 ? 'text-red-400' : 'text-neutral-400'">
+                  {{ (entry?.value ?? 0) > 0 ? '+' : '' }}{{ entry.value | number:'1.2-2' }}%
+                </span>
+              </div>
+              
+              </div>
+          }
+        </div>
+      }
+
+      @if (p.highlights && p.highlights.length > 0) {
+        <div class="flex flex-col justify-center items-center gap-4 mb-8">
+          <h3 class="text-lg sm:text-2xl uppercase font-bold tracking-widest text-secondary">
+            Tendências do mercado agrícola
+          </h3>
+          
+          <app-badge [badges]="marketBadges" />
+        </div>
+      }
+    
+      <div class="mt-6 pt-6 border-t-2 border-primary/20 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-3 bg-primary/5 px-4 py-2 rounded-xl border border-primary/20">
+          <span class="text-neutral-secondary font-medium">Câmbio médio:</span>
+          <span class="text-2xl font-black text-primary">R$ {{ p.avgExchangeRate | number:'1.2-2' }}</span>
+        </div>
+        <span class="text-xs text-neutral-secondary/50 font-mono">
+          ID: {{ r.id.substring(0,8) }} | {{ r.generatedAt | date:'dd/MM/yy HH:mm' }}
+        </span>
+      </div>
+    } 
+  </div> 
+} @else {
+  <div class="flex flex-col items-center justify-center gap-6 py-16 bg-neutral-primary rounded-3xl border-3 border-dashed border-primary/30">
+    <div class="p-8 rounded-full bg-primary/10 text-primary shadow-inner">
+       <fa-icon [icon]="icons.FILE_LINES" size="4x" />
+    </div>
+    <div class="text-center">
+      <p class="text-2xl font-bold text-primary mb-1">Relatório não gerado</p>
+      <p class="text-neutral-secondary">Tendência de {{ REPORT_LABELS[selectedReportType()] }}</p>
+    </div>
+    <button type="button" (click)="generateReport.emit()"
+          class="px-10 py-4 rounded-2xl font-black text-xl border-3
+                 border-primary text-primary hover:bg-primary hover:text-white
+                 active:scale-95 transition-all duration-300 cursor-pointer shadow-xl shadow-primary/20">
+      GERAR RELATÓRIO AGORA
+    </button>
+  </div>
+}

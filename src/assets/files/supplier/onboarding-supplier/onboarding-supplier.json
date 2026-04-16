@@ -1,0 +1,22 @@
+[
+    {
+      "iconKey": "BOXES",
+      "label": "Inventário",
+      "description": "Gerencie seus insumos, estoques e precificações em um só lugar."
+    },
+    {
+      "iconKey": "HANDSHAKE",
+      "label": "Negociação",
+      "description": "Envie e receba propostas de produtores de forma ágil e transparente."
+    },
+    {
+      "iconKey": "CONTRACT",
+      "label": "Contrato",
+      "description": "Formalize acordos com segurança jurídica e rastreabilidade total."
+    },
+    {
+      "iconKey": "BARTER",
+      "label": "Barter",
+      "description": "Realize trocas de insumos por produção agrícola de forma estruturada."
+    }
+]

@@ -7,7 +7,7 @@
       "@shared/*": ["src/app/shared/*"],
       "@features/*": ["src/app/features/pages/*"],
       "@assets/*": ["src/assets/*"],
-      "@environments/*": ["src/environment/*"]
+      "@environments/*": ["src/env/*"]
     },
     "strict": true,
     "noImplicitOverride": true,

@@ -1,1 +1,1 @@
-export type Commodity = | 'SOJA' | 'MILHO' | 'CAFE' | 'TRIGO' | 'ALGODAO' | 'ACUCAR';
+export type Commodity = | 'SOJA' | 'MILHO' | 'CAFE' | 'TRIGO' | 'ALGODAO' | 'ACUCAR' | 'BOI_GORDO';

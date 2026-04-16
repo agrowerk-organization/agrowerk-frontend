@@ -4,14 +4,14 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 import { catchError, switchMap, tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { LoginRequest } from '../types/auth/login.request';
-import { environment_development } from '../../../environment/environment.dev';
+import { environment } from '@environments/environment';
 import { UserInfo } from '../types/user/user.info';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private readonly apiUrl = environment_development.apiUrl;
+private readonly base = `${environment.apiUrl}/auth`;
 
   private isLoggedSubject = new BehaviorSubject<boolean | null>(null);
   public isLogged$ = this.isLoggedSubject.asObservable();
@@ -24,7 +24,7 @@ export class AuthService {
 
   login(credentials: LoginRequest): Observable<UserInfo> {
     return this.http.post<UserInfo>(
-      `${this.apiUrl}/auth/login`,
+      `${this.base}/login`,
       credentials,
       { withCredentials: true }
     ).pipe(
@@ -37,7 +37,7 @@ export class AuthService {
 
   refreshToken(): Observable<UserInfo> {
     return this.http.post<UserInfo>(
-      `${this.apiUrl}/auth/refresh`,
+      `${this.base}/refresh`,
       {},
       { withCredentials: true }
     ).pipe(
@@ -50,7 +50,7 @@ export class AuthService {
 
   logout(): Observable<void> {
     return this.http.post<void>(
-      `${this.apiUrl}/auth/logout`,
+      `${this.base}/logout`,
       {},
       { withCredentials: true }
     ).pipe(
@@ -63,7 +63,7 @@ export class AuthService {
 
   getCurrentUser(): Observable<UserInfo> {
     return this.http.get<UserInfo>(
-      `${this.apiUrl}/auth/me`,
+      `${this.base}/me`,
       { withCredentials: true }
     ).pipe(
       tap((user: UserInfo) => {
@@ -74,7 +74,7 @@ export class AuthService {
   }
 
   isAuthenticated(): boolean {
-    return this.isLoggedSubject.value === true; // null e false viram false
+    return this.isLoggedSubject.value === true; 
   }
 
   checkAuthStatus(): Observable<UserInfo | null> {

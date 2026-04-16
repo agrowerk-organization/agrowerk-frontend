@@ -9,8 +9,17 @@ import {
     faArrowTrendDown,
     faMinus,
     faBoxes,
-    faCube
+    faCube,
+    faBell,
+    faFileLines,
+    faCheck,
+    faCircleDot,
+    faDrumstickBite,
+    faCow,
+    faCubes,
+    faSearch
 } from '@fortawesome/free-solid-svg-icons';
+import { faCottonBureau } from '@fortawesome/free-brands-svg-icons';
 
 export const ICONS_MARKET = {
     ARROW_LEFT: faArrowLeft,
@@ -23,5 +32,15 @@ export const ICONS_MARKET = {
     ARROW_TREND_DOWN: faArrowTrendDown,
     MINUS: faMinus,
     BOXES: faBoxes,
-    CUBE: faCube
+    CUBE: faCube,
+    BELL: faBell,
+    FILE_LINES: faFileLines,
+    CHECK: faCheck,
+    CIRCLE_DOT: faCircleDot,
+    DRUMSTICK_BITE: faDrumstickBite,
+    COW: faCow,
+    COTTON_BUREAU: faCottonBureau,
+    CUBES: faCubes,
+    WHEAT_WHEAT: faWheatAwn,
+    SEARCH: faSearch
 }

@@ -1,0 +1,58 @@
+<div class="group relative overflow-hidden rounded-3xl
+            bg-neutral-primary border-3 border-primary/70
+            shadow-xl shadow-primary/30 p-8 w-full shadow-xl shadow-primary">
+  <div class="absolute inset-0 -z-10 pointer-events-none overflow-hidden">
+    <div class="absolute top-0 left-0 w-48 h-48 bg-primary/20 rounded-full blur-3xl"></div>
+  </div>
+
+  <h2 class="text-2xl sm:text-3xl font-bold text-primary mb-4 flex items-center gap-2">
+    <fa-icon [icon]="icons.CHART_LINE" />
+    Últimas Cotações
+  </h2>
+
+  <div class="grid grid-cols-2 gap-3">
+    @for (item of latestPrices(); track item.commodity) {
+      @let meta = metaFor(item.commodity);
+      @let stale = isStale(item.referenceDate);
+
+      <div class="flex flex-col gap-2 p-4 rounded-xl border-2 transition-all duration-300
+                  shadow-lg shadow-primary/20 hover:border-primary"
+           [ngClass]="[bgVariation(item.variationPercent),
+                        stale ? 'border-yellow-500/60' : 'border-primary/70']">
+
+        <div class="flex items-center justify-between gap-1">
+          <div class="flex items-center gap-2 min-w-0">
+            <fa-icon [icon]="meta.icon" [class]="'text-xl sm:text-2xl shrink-0 ' + meta.color" />
+            <p [class]="`text-xl sm:text-2xl font-semibold uppercase tracking-wide truncate ${meta.color}`">
+              {{ meta.label }}
+            </p>
+          </div>
+          @if (stale) {
+            <span class="text-xl sm:text-2xl font-bold text-yellow-400 border-2 border-yellow-400/50
+                         rounded px-1 shrink-0">OLD</span>
+          }
+        </div>
+
+        <p class="text-2xl font-extrabold text-primary leading-none">
+          R$ {{ item.price | number:'1.2-2' }}
+        </p>
+
+        <div class="flex items-center justify-between">
+          <p class="text-lg sm:text-xl text-neutral-secondary">{{ item.unit }}</p>
+          <p class="text-lg sm:text-xl text-neutral-secondary">
+            {{ item.referenceDate | date:'dd/MM/yy' }}
+          </p>
+        </div>
+
+        @if (item.variationPercent !== null) {
+          <div class="flex items-center gap-1" [ngClass]="variationClass(item.variationPercent)">
+            <fa-icon [icon]="variationIcon(item.variationPercent)" class="text-lg sm:text-xl" />
+            <span class="text-lg sm:text-xl font-bold">
+              {{ item.variationPercent | number:'1.2-2' }}%
+            </span>
+          </div>
+        }
+      </div>
+    }
+  </div>
+</div>

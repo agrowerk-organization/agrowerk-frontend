@@ -6,7 +6,7 @@ import { ICONS_DASHBOARD } from '@core/ui/icons/icons-producer/icons-dashboard/i
 import { Title } from "@shared/components/title/title";
 import { Subtitle } from "@shared/components/subtitle/subtitle";
 import { ButtonPages } from "@shared/components/buttons/button-pages/button-pages";
-
+import featuresData from '@assets/files/producer/onboarding-producer.json';
 @Component({
   selector: 'app-onboarding-card',
   standalone: true,
@@ -23,12 +23,10 @@ export class OnboardingCard {
   private router = inject(Router);
   icons = ICONS_DASHBOARD;
 
-  features = [
-    { label: 'Propriedades',        icon: this.icons.HOME,       description: 'Gerencie fazendas, talhões e áreas' },
-    { label: 'Clima em tempo real', icon: this.icons.CLOUD_SUN,  description: 'Alertas e previsão para sua região' },
-    { label: 'Safras e plantios',   icon: this.icons.CHART_BAR,  description: 'Acompanhe do plantio à colheita'    },
-    { label: 'Mercado',             icon: this.icons.CHART_LINE, description: 'Cotações e tendências de commodities' },
-  ];
+  readonly features = featuresData.map(feature => ({
+    ...feature,
+    icon: this.icons[feature.iconKey as keyof typeof ICONS_DASHBOARD]
+  }))
 
   handleAction() {
     this.router.navigate(['/producer/property-create']);

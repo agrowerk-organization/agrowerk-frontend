@@ -2,14 +2,14 @@ import { inject } from '@angular/core';
 import { catchError, switchMap, throwError } from 'rxjs';
 import { HttpInterceptorFn } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { environment_development } from '../../../environment/environment.dev';
+import { environment } from '@environments/environment';
 import { AuthService } from '../services/auth.service';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const authService = inject(AuthService);
   const router = inject(Router);
 
-  if (!req.url.startsWith(environment_development.apiUrl)) {
+  if (!req.url.startsWith(environment.apiUrl)) {
     return next(req);
   }
 

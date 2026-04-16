@@ -1,0 +1,43 @@
+<div class="group relative overflow-hidden rounded-3xl
+            bg-neutral-primary border-3 border-primary/70
+            shadow-xl shadow-primary/30 p-6">
+  <div class="absolute inset-0 -z-10 pointer-events-none overflow-hidden">
+    <div class="absolute bottom-0 right-0 w-48 h-48 bg-primary/20 rounded-full blur-3xl"></div>
+  </div>
+
+  <h2 class="text-2xl sm:text-3xl font-bold text-primary mb-4 flex items-center gap-2">
+    <fa-icon [icon]="icons.CHART_LINE" />
+    Histórico de Preços
+  </h2>
+
+  <div class="flex flex-wrap gap-3 mb-6">
+
+    <div class="flex flex-wrap gap-2">
+      @for (c of commodities(); track c) {
+        <button type="button" (click)="commodityChange.emit(c)"
+                class="px-3 py-1.5 rounded-xl text-lg sm:text-xl font-semibold border-2 transition-all duration-200 cursor-pointer"
+                [class.border-primary]="selectedCommodity() === c"
+                [class.text-primary]="selectedCommodity() === c"
+                [class.border-primary/30]="selectedCommodity() !== c"
+                [class.text-neutral-secondary]="selectedCommodity() !== c">
+          {{ metaFor(c).label }}
+        </button>
+      }
+    </div>
+
+    <div class="flex gap-2 ml-auto">
+      @for (p of periodOptions(); track p.value) {
+        <button type="button" (click)="daysChange.emit(p.value)"
+                class="px-3 py-1.5 rounded-xl text-lg sm:text-xl font-semibold border-2 transition-all duration-200 cursor-pointer"
+                [class.border-primary]="selectedDays() === p.value"
+                [class.text-primary]="selectedDays() === p.value"
+                [class.border-primary/30]="selectedDays() !== p.value"
+                [class.text-neutral-secondary]="selectedDays() !== p.value">
+          {{ p.label }}
+        </button>
+      }
+    </div>
+  </div>
+
+  <div echarts [options]="chartOption()" class="h-[450px] w-full"></div>
+</div>

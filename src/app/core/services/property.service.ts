@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment_development } from '../../../environment/environment.dev';
+import { environment } from '@environments/environment';
 import { Page } from '../types/page/page';
 import { PropertyResponse } from '../types/property/property.response';
 import { CreatePropertyRequest } from '../types/property/create-property.request';
@@ -9,12 +9,12 @@ import { FileUploadResponse } from '@core/types/file/file-upload.response';
 
 @Injectable({ providedIn: 'root' })
 export class PropertyService {
-  private readonly apiUrl = environment_development.apiUrl;
+  private readonly base = `${environment.apiUrl}/properties`;
   private http = inject(HttpClient);
 
   create(request: CreatePropertyRequest): Observable<PropertyResponse> {
     return this.http.post<PropertyResponse>(
-      `${this.apiUrl}/properties/create`,
+      `${this.base}/create-property`,
       request,
       { withCredentials: true }
     );
@@ -22,21 +22,21 @@ export class PropertyService {
 
   findPropertyById(id: string): Observable<PropertyResponse> {
     return this.http.get<PropertyResponse>(
-      `${this.apiUrl}/properties/find-by-id/${id}`,
+      `${this.base}/find-by-id/${id}`,
       { withCredentials: true }
     );
   }
   
   findMyProperties(page = 0, size = 10): Observable<Page<PropertyResponse>> {
     return this.http.get<Page<PropertyResponse>>(
-      `${this.apiUrl}/properties/my-properties`,
+      `${this.base}/my-properties`,
       { params: { page, size }, withCredentials: true }
     );
   }
 
   update(propertyId: string, request: Partial<CreatePropertyRequest>): Observable<PropertyResponse> {
     return this.http.put<PropertyResponse>(
-      `${this.apiUrl}/properties/update-property/${propertyId}`,
+      `${this.base}/update-property/${propertyId}`,
       request,
       { withCredentials: true }
     );
@@ -46,7 +46,7 @@ export class PropertyService {
     const form = new FormData();
     form.append('file', file);
     return this.http.post<FileUploadResponse>(
-      `${this.apiUrl}/properties/upload-photo/${propertyId}`,
+      `${this.base}/upload-photo/${propertyId}`,
       form,
       { withCredentials: true }
     );
@@ -54,7 +54,7 @@ export class PropertyService {
 
   addOwner(propertyId: string, request: { userId: string; canEdit: boolean }): Observable<void> {
     return this.http.post<void>(
-      `${this.apiUrl}/properties/add-owner/${propertyId}`,
+      `${this.base}/add-owner/${propertyId}`,
       request,
       { withCredentials: true }
     );
@@ -62,14 +62,14 @@ export class PropertyService {
 
   removeOwner(propertyId: string, targetUserId: string, reason: string): Observable<void> {
     return this.http.delete<void>(
-      `${this.apiUrl}/properties/remove-owner/${propertyId}/${targetUserId}`,
+      `${this.base}/remove-owner/${propertyId}/${targetUserId}`,
       { params: { reason }, withCredentials: true }
     );
   }
 
   updatePermissions(propertyId: string, targetUserId: string, canEdit: boolean): Observable<void> {
     return this.http.patch<void>(
-      `${this.apiUrl}/properties/update-permissions/${propertyId}/${targetUserId}`,
+      `${this.base}/update-permissions/${propertyId}/${targetUserId}`,
       null,
       { params: { canEdit }, withCredentials: true }
     );
