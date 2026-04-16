@@ -54,7 +54,7 @@ export class Market implements OnInit {
     TRIGO:   { label: 'Trigo',   icon: this.icons.WHEAT_AWN, color: 'text-yellow-500' },
     ALGODAO: { label: 'Algodão', icon: this.icons.BOXES,     color: 'text-blue-300'   },
     ACUCAR:  { label: 'Açúcar',  icon: this.icons.CUBE,      color: 'text-white'      },
-    BOI_GORDO: { label: 'Boi Gordo', icon: this.icons.DRUMSTICK_BITE, color: 'text-yellow-400' }
+    BOI_GORDO: { label: 'Boi Gordo', icon: this.icons.DRUMSTICK_BITE, color: 'text-orange-700' }
   };
 
   readonly PERIOD_OPTIONS = [
@@ -191,13 +191,16 @@ export class Market implements OnInit {
   
     const min = history[0];
     const max = history[history.length - 1];
-      
+  
+    const avgPrice = history.reduce((sum, p) => sum + p.price, 0) / history.length;
+  
     return {
       minPrice: min.price,
       minDate: min.referenceDate,
       maxPrice: max.price,
       maxDate: max.referenceDate,
-      avgExchange: dash.avgExchangeRate, 
+      avgPrice: avgPrice,
+      avgExchange: dash.avgExchangeRate,
       recordCount: history.length
     };
   });

@@ -25,11 +25,11 @@ export class MarketData {
   readonly commodityMeta : Record<string, { icon: IconDefinition; color: string}> = {
     SOJA: { icon: this.icons.SEEDLING, color: 'text-green-400' },
     MILHO: { icon: this.icons.WHEAT_AWN, color: 'text-yellow-400' },
-    CAFE: { icon: this.icons.MUG_HOT, color: 'text-brown-400' },
+    CAFE: { icon: this.icons.MUG_HOT, color: 'text-orange-500' },
     TRIGO: { icon: this.icons.WHEAT_AWN, color: 'text-yellow-200' },
     ALGODAO: { icon: this.icons.LEAF, color: 'text-blue-300' },
     ACUCAR: { icon: this.icons.CUBE, color: 'text-white' },
-    BOI_GORDO: { icon: this.icons.DRUMSTICK_BITE, color: 'text-yellow-400' }
+    BOI_GORDO: { icon: this.icons.DRUMSTICK_BITE, color: 'text-orange-700' }
   };
 
   private readonly nameMap: Record<string, string> = {
