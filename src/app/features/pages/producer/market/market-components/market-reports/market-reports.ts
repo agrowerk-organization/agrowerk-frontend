@@ -6,11 +6,15 @@ import { MarketReport } from '@core/types/market/market-report';
 import { ReportType } from '@core/types/market/report-type';
 import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { Badge } from '@shared/components/badge/badge';
-
+import { ButtonPages } from '@shared/components/buttons/button-pages/button-pages';
 @Component({
   selector: 'app-market-report',
   standalone: true,
-  imports: [CommonModule, FontAwesomeModule, Badge],
+  imports: [
+    CommonModule, 
+    FontAwesomeModule,
+    Badge,
+    ButtonPages],
   templateUrl: './market-reports.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -21,11 +25,10 @@ export class MarketReports {
   selectedReportType = input.required<ReportType>();
 
   generateReport = output<void>();
+  selectReportType = output<ReportType>();
 
   readonly REPORT_LABELS: Record<ReportType, string> = {
-    WEEKLY_SUMMARY:    'Resumo Semanal',
     MONTHLY_TREND:     'Tendência Mensal',
-    SEMI_ANNUAL_TREND: 'Tendência Semestral',
     ANNUAL_TREND:      'Tendência Anual',
     VOLATILITY_ALERT:  'Alerta de Volatilidade'
   };
@@ -109,6 +112,7 @@ export class MarketReports {
   }
 
   getVal(map: Record<string, number> | undefined, key: string | unknown): number {
-    return map ? map[key as string] : 0;
+    const k = String(key);
+    return (map && k in map) ? map[key as string] : 0;
   }
 }

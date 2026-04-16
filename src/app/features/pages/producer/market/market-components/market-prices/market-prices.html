@@ -10,14 +10,14 @@
     Últimas Cotações
   </h2>
 
-  <div class="grid grid-cols-2 gap-3">
+  <div class="grid grid-cols-1 gap-3"> 
     @for (item of latestPrices(); track item.commodity) {
       @let meta = metaFor(item.commodity);
       @let stale = isStale(item.referenceDate);
 
-      <div class="flex flex-col gap-2 p-4 rounded-xl border-2 transition-all duration-300
+      <div class="grid grid-cols-1 gap-2 p-4 rounded-xl border-2 transition-all duration-300
                   shadow-lg shadow-primary/20 hover:border-primary"
-           [ngClass]="[bgVariation(item.variationPercent),
+          [ngClass]="[bgVariation(item.variationPercent),
                         stale ? 'border-yellow-500/60' : 'border-primary/70']">
 
         <div class="flex items-center justify-between gap-1">
@@ -28,30 +28,35 @@
             </p>
           </div>
           @if (stale) {
-            <span class="text-xl sm:text-2xl font-bold text-yellow-400 border-2 border-yellow-400/50
-                         rounded px-1 shrink-0">OLD</span>
+            <span class="text-xs sm:text-sm font-bold text-yellow-400 border-2 border-yellow-400/50
+                        rounded px-1.5 py-0.5 shrink-0">OLD</span>
           }
         </div>
 
-        <p class="text-2xl font-extrabold text-primary leading-none">
-          R$ {{ item.price | number:'1.2-2' }}
-        </p>
-
-        <div class="flex items-center justify-between">
-          <p class="text-lg sm:text-xl text-neutral-secondary">{{ item.unit }}</p>
-          <p class="text-lg sm:text-xl text-neutral-secondary">
-            {{ item.referenceDate | date:'dd/MM/yy' }}
-          </p>
-        </div>
-
-        @if (item.variationPercent !== null) {
-          <div class="flex items-center gap-1" [ngClass]="variationClass(item.variationPercent)">
-            <fa-icon [icon]="variationIcon(item.variationPercent)" class="text-lg sm:text-xl" />
-            <span class="text-lg sm:text-xl font-bold">
-              {{ item.variationPercent | number:'1.2-2' }}%
-            </span>
+        <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2">
+          
+          <div>
+            <p class="text-3xl font-extrabold text-primary leading-none">
+              R$ {{ item.price | number:'1.2-2' }}
+            </p>
+            <p class="text-lg text-neutral-secondary mt-1">{{ item.unit }}</p>
           </div>
-        }
+
+          <div class="flex items-center justify-between sm:flex-col sm:items-end gap-1">
+            <p class="text-lg text-neutral-secondary">
+              {{ item.referenceDate | date:'dd/MM/yy' }}
+            </p>
+            
+            @if (item.variationPercent !== null) {
+              <div class="flex items-center gap-1" [ngClass]="variationClass(item.variationPercent)">
+                <fa-icon [icon]="variationIcon(item.variationPercent)" class="text-lg" />
+                <span class="text-lg font-bold">
+                  {{ item.variationPercent | number:'1.2-2' }}%
+                </span>
+              </div>
+            }
+          </div>
+        </div>
       </div>
     }
   </div>

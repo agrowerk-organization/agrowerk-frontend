@@ -1,0 +1,45 @@
+<div class="group relative overflow-hidden rounded-3xl mt-4 mb-4
+            bg-neutral-primary border-3 border-primary/70
+            shadow-xl shadow-primary/30 p-6">
+  <div class="absolute inset-0 -z-10 pointer-events-none overflow-hidden">
+    <div class="absolute bottom-0 right-0 w-40 h-40 bg-primary/20 rounded-full blur-3xl"></div>
+  </div>
+
+  <h2 class="text-2xl sm:text-3xl font-bold text-primary mb-4 flex items-center gap-2">
+    <fa-icon [icon]="icons.CALENDAR" />
+    Registros
+  </h2>
+
+  <div class="grid grid-cols-2 gap-3">
+    <div class="flex flex-col gap-0.5 p-3 rounded-xl border-2 border-primary/90
+                hover:border-primary transition-all duration-300 shadow-xl shadow-primary/40">
+      <div class="flex items-center gap-1.5 text-neutral-secondary">
+        <fa-icon [icon]="icons.CALENDAR" class="text-xl sm:text-2xl" />
+        <span class="text-xl sm:text-2xl tracking-wide">Matrícula Estadual</span>
+      </div>
+      <p class="font-bold text-primary text-lg sm:text-xl">{{ property().stateRegistration }}</p>
+    </div>
+
+    @if (property().ruralRegistration) {
+      <div class="flex flex-col gap-0.5 p-3 rounded-xl border-2 border-primary/90
+                  hover:border-primary transition-all duration-300 shadow-xl shadow-primary/40">
+        <div class="flex items-center gap-1.5 text-neutral-secondary">
+          <fa-icon [icon]="icons.CALENDAR" class="text-xl sm:text-2xl" />
+          <span class="text-xl sm:text-2xl tracking-wide">Matrícula Rural</span>
+        </div>
+        <p class="font-bold text-primary text-lg sm:text-xl">{{ property().ruralRegistration }}</p>
+      </div>
+    }
+
+    <div class="flex flex-col gap-0.5 p-3 rounded-xl border-2 border-primary/90
+                hover:border-primary transition-all duration-300 shadow-xl shadow-primary/40">
+      <div class="flex items-center gap-1.5 text-neutral-secondary">
+        <fa-icon [icon]="icons.CALENDAR" class="text-xl sm:text-2xl" />
+        <span class="text-xl sm:text-2xl tracking-wide">Cadastrado em</span>
+      </div>
+      <p class="font-bold text-primary text-lg sm:text-xl">
+        {{ property().createdAt | date:'dd/MM/yyyy' }}
+      </p>
+    </div>
+  </div>
+</div>

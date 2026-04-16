@@ -17,7 +17,12 @@ import {
     faDrumstickBite,
     faCow,
     faCubes,
-    faSearch
+    faSearch,
+    faCalendar,
+    faChartPie,
+    faGaugeHigh,
+    faFile,
+    faArrowsRotate
 } from '@fortawesome/free-solid-svg-icons';
 import { faCottonBureau } from '@fortawesome/free-brands-svg-icons';
 
@@ -42,5 +47,10 @@ export const ICONS_MARKET = {
     COTTON_BUREAU: faCottonBureau,
     CUBES: faCubes,
     WHEAT_WHEAT: faWheatAwn,
-    SEARCH: faSearch
+    SEARCH: faSearch,
+    CALENDAR: faCalendar,
+    CHART_PIE: faChartPie,
+    GAUGE_HIGH: faGaugeHigh,
+    FILE: faFile,
+    ARROWS_ROTATE: faArrowsRotate
 }

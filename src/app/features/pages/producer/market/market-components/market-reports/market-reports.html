@@ -1,3 +1,26 @@
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+  <app-button-pages
+    [text]="REPORT_LABELS.MONTHLY_TREND"
+    [icon]="icons.CALENDAR"
+    [width]="'100%'"
+    [disabled]="selectedReportType() === 'MONTHLY_TREND'"
+    (action)="selectReportType.emit('MONTHLY_TREND')" /> 
+  
+  <app-button-pages
+    [text]="REPORT_LABELS.ANNUAL_TREND"
+    [icon]="icons.CHART_PIE"
+    [width]="'100%'"
+    [disabled]="selectedReportType() === 'ANNUAL_TREND'"
+    (action)="selectReportType.emit('ANNUAL_TREND')" />
+
+  <app-button-pages
+    [text]="REPORT_LABELS.VOLATILITY_ALERT"
+    [icon]="icons.GAUGE_HIGH"
+    [width]="'100%'"
+    [disabled]="selectedReportType() === 'VOLATILITY_ALERT'"
+    (action)="selectReportType.emit('VOLATILITY_ALERT')" />
+</div>
+
 @if (report(); as r) {
   <div class="group mb-4 relative overflow-hidden rounded-3xl
               bg-neutral-primary border-3 border-primary/70
@@ -9,7 +32,7 @@
 
     <div class="flex items-center justify-between mb-6 flex-wrap gap-2">
       <h2 class="text-2xl sm:text-3xl font-bold text-primary flex items-center gap-3">
-        <fa-icon [icon]="icons.FILE_LINES" />
+        <fa-icon [icon]="icons.FILE_LINES" class="text-2xl sm:text-5xl" />
         {{ REPORT_LABELS[r.reportType] }}
       </h2>
       <span class="text-lg bg-primary/10 text-primary px-4 py-1 rounded-full border border-primary/30 font-bold">
@@ -22,73 +45,80 @@
     </p>
 
     @if (r.reportPayload; as p) {
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+        @for (entry of p.priceChangePercent | keyvalue; track entry.key) {
+          @let meta = metaFor(entry.key); 
+          @let label = normalizeName(entry.key);
       
-      @if (p.priceChangePercent && (p.priceChangePercent | keyvalue).length > 0) {
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
-          @for (entry of p.priceChangePercent | keyvalue; track entry.key) {
-            @let meta = metaFor(entry.key); 
-            @let label = normalizeName(entry.key);
-        
-            <div class="flex flex-col gap-2 p-4 rounded-2xl border-2 border-primary/50 
-                        bg-neutral-primary shadow-md shadow-primary/10 transition-all duration-300 hover:border-primary">
-              
-              <div class="flex items-center justify-between mb-1">
-                <div class="flex items-center gap-2">
-                  <fa-icon [icon]="meta.icon" [class]="'text-lg ' + meta.color" />
-                  
-                  <span class="text-sm font-black uppercase tracking-widest text-neutral-secondary">
-                    {{ label }}
-                  </span>
-                </div>
-                </div>
-        
-              <div class="flex items-baseline gap-2">
-                <span class="text-3xl font-black tracking-tighter"
-                      [ngClass]="(entry?.value ?? 0) > 0 ? 'text-green-400' : (entry?.value ?? 0) < 0 ? 'text-red-400' : 'text-neutral-400'">
-                  {{ (entry?.value ?? 0) > 0 ? '+' : '' }}{{ entry.value | number:'1.2-2' }}%
+          <div class="flex flex-col gap-3 p-5 rounded-2xl border-2 border-primary/50 
+                      bg-neutral-primary shadow-lg shadow-primary/80 transition-all duration-300 hover:border-primary">
+            
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <fa-icon [icon]="meta.icon" [class]="'text-xl ' + meta.color" />
+                <span class="text-lg font-black uppercase tracking-widest text-neutral-secondary">
+                  {{ label }}
                 </span>
               </div>
-              
-              </div>
-          }
-        </div>
-      }
+              <span class="text-lg font-bold px-2 py-0.5 rounded-lg bg-black/20"
+                    [ngClass]="getVal(p.priceChangePercent, entry.key) > 0 ? 'text-green-400' : getVal(p.priceChangePercent, entry.key) < 0 ? 'text-red-400' : 'text-neutral-400'">
+                {{ getVal(p.priceChangePercent, entry.key) | number:'1.2-2' }}%
+              </span>
+            </div>
+      
+            <div class="space-y-0.5">
+              <p class="text-sm text-neutral-secondary/70 uppercase font-black tracking-tighter">Mediana</p>
+              <p class="text-3xl font-black text-primary leading-none">
+                R$ {{ getVal(p.medianPrice, entry.key) | number:'1.2-2' }}
+              </p>
+            </div>
+            
+            <div class="pt-2 border-t border-primary/20">
+               <p class="text-sm text-neutral-secondary font-medium">
+                 Média: <span class="text-lg text-primary font-bold">R$ {{ getVal(p.averagePrice, entry.key) | number:'1.2-2' }}</span>
+               </p>
+            </div>
+          </div>
+        }
+      </div>
 
       @if (p.highlights && p.highlights.length > 0) {
         <div class="flex flex-col justify-center items-center gap-4 mb-8">
-          <h3 class="text-lg sm:text-2xl uppercase font-bold tracking-widest text-secondary">
-            Tendências do mercado agrícola
-          </h3>
-          
+          <h3 class="text-lg sm:text-2xl uppercase font-bold tracking-widest text-secondary">Insights de Mercado</h3>
           <app-badge [badges]="marketBadges" />
         </div>
       }
-    
-      <div class="mt-6 pt-6 border-t-2 border-primary/20 flex flex-col sm:flex-row items-center justify-between gap-4">
-        <div class="flex items-center gap-3 bg-primary/5 px-4 py-2 rounded-xl border border-primary/20">
-          <span class="text-neutral-secondary font-medium">Câmbio médio:</span>
-          <span class="text-2xl font-black text-primary">R$ {{ p.avgExchangeRate | number:'1.2-2' }}</span>
+
+      <div class="mt-6 pt-6 border-t-2 border-primary/80 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="flex flex-col sm:flex-row items-center gap-4">
+          <div class="flex items-center gap-3 bg-primary/20 px-4 py-2 rounded-xl border border-primary/80">
+            <span class="text-neutral-secondary font-medium">Câmbio médio:</span>
+            <span class="text-2xl font-bold text-primary">R$ {{ p.avgExchangeRate | number:'1.4-4' }}</span>
+          </div>
+          @if (p.exchangeRateVariation) {
+            <span [ngClass]="p.exchangeRateVariation > 0 ? 'text-red-400' : 'text-green-400'" class="font-bold text-sm sm:text-xl">
+              Var: {{ p.exchangeRateVariation | number:'1.2-2' }}%
+            </span>
+          }
         </div>
-        <span class="text-xs text-neutral-secondary/50 font-mono">
-          ID: {{ r.id.substring(0,8) }} | {{ r.generatedAt | date:'dd/MM/yy HH:mm' }}
-        </span>
+        <button (click)="generateReport.emit()" class="text-xl sm:text-2xl text-primary hover:text-secondary transition-colors font-bold flex items-center gap-2 cursor-pointer">
+           <fa-icon [icon]="icons.ARROWS_ROTATE" /> Atualizar
+        </button>
       </div>
     } 
   </div> 
 } @else {
-  <div class="flex flex-col items-center justify-center gap-6 py-16 bg-neutral-primary rounded-3xl border-3 border-dashed border-primary/30">
-    <div class="p-8 rounded-full bg-primary/10 text-primary shadow-inner">
-       <fa-icon [icon]="icons.FILE_LINES" size="4x" />
-    </div>
+  <div class="flex flex-col items-center justify-center gap-8 py-20 bg-neutral-primary rounded-3xl border-3 border-dashed border-primary/30">
+    <fa-icon [icon]="icons.FILE" class="text-primary/20 text-8xl" />
     <div class="text-center">
-      <p class="text-2xl font-bold text-primary mb-1">Relatório não gerado</p>
-      <p class="text-neutral-secondary">Tendência de {{ REPORT_LABELS[selectedReportType()] }}</p>
+      <h3 class="text-3xl font-black text-primary uppercase">Relatório Indisponível</h3>
+      <p class="text-neutral-secondary">Clique no botão abaixo para processar os dados de {{ REPORT_LABELS[selectedReportType()] }}</p>
     </div>
-    <button type="button" (click)="generateReport.emit()"
-          class="px-10 py-4 rounded-2xl font-black text-xl border-3
-                 border-primary text-primary hover:bg-primary hover:text-white
-                 active:scale-95 transition-all duration-300 cursor-pointer shadow-xl shadow-primary/20">
-      GERAR RELATÓRIO AGORA
-    </button>
+    <app-button-pages
+      [text]="'GERAR AGORA'"
+      [icon]="icons.CHART_LINE"
+      [width]="'320px'"
+      (action)="generateReport.emit()" />
   </div>
 }
+

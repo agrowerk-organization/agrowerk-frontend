@@ -1,33 +1,33 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PropertyService } from '@core/services/property.service';
-import { ICONS_PROPERTY } from '@core/ui/icons/icons-producer/icons-property/icons-property';
 import { PropertyResponse } from '@core/types/property/property.response';
 import { PropertyUpdateModal } from '../property-update-modal/property-update-modal';
-import { ButtonPages } from '@shared/components/buttons/button-pages/button-pages';
-import { AvatarUpload } from '@shared/components/avatar-upload/avatar-upload';
+import { PropertyHeader } from './components/property-header/property-header';
+import { PropertyHero } from './components/property-hero/property-hero';
+import { PropertyAreas } from './components/property-areas/property-areas';
+import { PropertyAddress } from './components/property-address/property-address';
+import { PropertyRecords } from './components/property-records/property-records';
 
 @Component({
   selector: 'app-property-detail',
   standalone: true,
   imports: [
     CommonModule,
-    FontAwesomeModule,
     PropertyUpdateModal,
-    ButtonPages,
-    AvatarUpload
+    PropertyHeader,
+    PropertyHero,
+    PropertyAreas,
+    PropertyAddress,
+    PropertyRecords,
   ],
   templateUrl: './property-detail.html',
 })
 export class PropertyDetail implements OnInit {
-
   private route = inject(ActivatedRoute);
   private router = inject(Router);
   private propertyService = inject(PropertyService);
-
-  icons = ICONS_PROPERTY;
 
   property = signal<PropertyResponse | null>(null);
   loading = signal(true);
@@ -37,20 +37,11 @@ export class PropertyDetail implements OnInit {
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
-    if (!id) {
-      this.router.navigate(['/producer/properties']);
-      return;
-    }
+    if (!id) { this.router.navigate(['/producer/properties']); return; }
 
     this.propertyService.findPropertyById(id).subscribe({
-      next: p => {
-        this.property.set(p);
-        this.loading.set(false);
-      },
-      error: () => {
-        this.loading.set(false);
-        this.router.navigate(['/producer/properties']);
-      }
+      next: p => { this.property.set(p); this.loading.set(false); },
+      error: () => { this.loading.set(false); this.router.navigate(['/producer/properties']); }
     });
   }
 
@@ -60,8 +51,7 @@ export class PropertyDetail implements OnInit {
   }
 
   onFileSelected(file: File): void {
-    const preview = URL.createObjectURL(file);
-    this.avatarPreview.set(preview);
+    this.avatarPreview.set(URL.createObjectURL(file));
     this.uploading.set(true);
 
     this.propertyService.uploadPhoto(this.property()!.id, file).subscribe({
@@ -70,10 +60,7 @@ export class PropertyDetail implements OnInit {
         this.avatarPreview.set(null);
         this.uploading.set(false);
       },
-      error: () => {
-        this.avatarPreview.set(null);
-        this.uploading.set(false);
-      }
+      error: () => { this.avatarPreview.set(null); this.uploading.set(false); }
     });
   }
 }

@@ -1,0 +1,82 @@
+<div class="group relative overflow-hidden rounded-3xl mt-4 mb-4
+            bg-neutral-primary border-3 border-primary/70
+            shadow-xl shadow-primary/30 p-6">
+  <div class="absolute inset-0 -z-10 pointer-events-none overflow-hidden">
+    <div class="absolute bottom-0 right-0 w-40 h-40 bg-primary/20 rounded-full blur-3xl"></div>
+  </div>
+
+  <h2 class="text-2xl sm:text-3xl font-bold text-primary mb-4 flex items-center gap-2">
+    <fa-icon [icon]="icons.RULER_COMBINED" />
+    Áreas
+  </h2>
+
+  <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+    <div class="flex flex-col gap-0.5 p-3 rounded-xl border-2 border-primary/90
+                hover:border-primary transition-all duration-300 shadow-xl shadow-primary/40">
+      <div class="flex items-center gap-1.5 text-neutral-secondary">
+        <fa-icon [icon]="icons.RULER_COMBINED" class="text-xl sm:text-2xl" />
+        <span class="text-xl sm:text-2xl tracking-wide">Total</span>
+      </div>
+      <p class="font-bold text-primary text-lg sm:text-xl">
+        {{ property().totalArea | number:'1.0-2' }} ha
+      </p>
+    </div>
+
+    <div class="flex flex-col gap-0.5 p-3 rounded-xl border-2 border-primary/90
+                hover:border-primary transition-all duration-300 shadow-xl shadow-primary/40">
+      <div class="flex items-center gap-1.5 text-neutral-secondary">
+        <fa-icon [icon]="icons.SEEDLING" class="text-xl sm:text-2xl" />
+        <span class="text-xl sm:text-2xl tracking-wide">Plantada</span>
+      </div>
+      <p class="font-bold text-primary text-lg sm:text-xl">
+        {{ property().plantedArea ? (property().plantedArea | number:'1.0-2') + ' ha' : '—' }}
+      </p>
+    </div>
+
+    <div class="flex flex-col gap-0.5 p-3 rounded-xl border-2 border-primary/90
+                hover:border-primary transition-all duration-300 shadow-xl shadow-primary/40">
+      <div class="flex items-center gap-1.5 text-neutral-secondary">
+        <fa-icon [icon]="icons.LAYER_GROUP" class="text-xl sm:text-2xl" />
+        <span class="text-xl sm:text-2xl tracking-wide">Talhões</span>
+      </div>
+      <p class="font-bold text-primary text-lg sm:text-xl">
+        {{ property().units?.length ?? 0 }}
+      </p>
+    </div>
+  </div>
+</div>
+
+@if (property().units?.length) {
+  <div class="group relative overflow-hidden rounded-3xl
+              bg-neutral-primary border-3 border-primary/70
+              shadow-xl shadow-primary/30 p-6">
+    <div class="absolute inset-0 -z-10 pointer-events-none overflow-hidden">
+      <div class="absolute top-0 right-0 w-40 h-40 bg-primary/20 rounded-full blur-3xl"></div>
+    </div>
+
+    <h2 class="text-lg font-bold text-primary mb-4 flex items-center gap-2">
+      <fa-icon [icon]="icons.LAYER_GROUP" />
+      Talhões
+    </h2>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+      @for (unit of property().units; track unit.id) {
+        <div class="flex flex-col gap-2 p-4 rounded-xl border-2 border-primary/90
+                    hover:border-primary transition-all duration-300 shadow-xl shadow-primary/40">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-primary text-xl">{{ unit.name }}</span>
+            <span class="text-lg font-semibold text-neutral-secondary">
+              {{ unit.area | number:'1.0-2' }} ha
+            </span>
+          </div>
+          @if (unit.response.municipality) {
+            <span class="text-sm text-neutral-secondary/70">
+              {{ unit.response.municipality }}
+              @if (unit.response.locationName) { — {{ unit.response.locationName }} }
+            </span>
+          }
+        </div>
+      }
+    </div>
+  </div>
+}

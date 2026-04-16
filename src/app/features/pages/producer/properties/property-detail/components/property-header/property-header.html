@@ -1,0 +1,20 @@
+<div class="flex items-center justify-between gap-4 mt-4 mb-4">
+    <div class="flex items-center gap-4">
+      <a routerLink="/producer/dashboard"
+         class="flex items-center justify-center w-10 h-10 sm:w-14 sm:h-14 rounded-xl
+                border-2 border-primary/50 hover:border-primary
+                text-primary transition-all duration-300 cursor-pointer">
+        <fa-icon [icon]="icons.ARROW_LEFT" class="text-lg sm:text-2xl" />
+      </a>
+      <div>
+        <h1 class="text-3xl sm:text-4xl font-bold text-primary">{{ name() }}</h1>
+        <p class="text-secondary text-xl sm:text-2xl mt-0.5">{{ stateName() }}</p>
+      </div>
+    </div>
+  
+    <app-button-pages
+      text="Editar"
+      [icon]="icons.PENCIL"
+      width="fit-content"
+      (action)="edit.emit()" />
+</div>

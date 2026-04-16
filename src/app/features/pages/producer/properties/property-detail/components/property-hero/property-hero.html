@@ -1,0 +1,60 @@
+<div class="group relative overflow-hidden rounded-3xl mt-4 mb-4
+            bg-neutral-primary border-3 border-primary/70
+            shadow-xl shadow-primary/30 p-6 sm:p-8
+            transition-all duration-300 hover:shadow-primary/20">
+
+  <div class="absolute inset-0 -z-10 pointer-events-none overflow-hidden">
+    <div class="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-3xl"></div>
+  </div>
+
+  <div class="relative z-10 flex flex-col sm:flex-row items-center gap-8">
+
+    <div class="shrink-0 p-2 bg-neutral-secondary/5 rounded-2xl border border-primary/20 shadow-inner">
+      <app-avatar-upload
+        [avatarUrl]="property().avatarThumbnailUrl!"
+        [avatarPreview]="avatarPreview()"
+        [name]="property().name"
+        [uploading]="uploading()"
+        (fileSelected)="fileSelected.emit($event)" />
+    </div>
+
+    <div class="flex-1 text-center sm:text-left space-y-3">
+      <div>
+        <h1 class="text-3xl sm:text-5xl font-extrabold text-primary leading-tight">
+          {{ property().name }}
+        </h1>
+        <p class="text-secondary/80 text-xl sm:text-2xl flex items-center justify-center sm:justify-start gap-2">
+          <fa-icon [icon]="icons.LOCATION_DOT" class="text-primary/60" />
+          {{ property().address.municipality }} — {{ property().stateAbbreviation }}
+        </p>
+      </div>
+
+      <div class="flex flex-wrap justify-center sm:justify-start gap-3">
+        <span class="flex items-center gap-1.5 px-3 py-1 rounded-full border text-lg font-bold"
+              [class.border-green-500/40]="property().isActive"
+              [class.text-green-400]="property().isActive"
+              [class.bg-green-500/10]="property().isActive"
+              [class.border-red-500/40]="!property().isActive"
+              [class.text-red-400]="!property().isActive"
+              [class.bg-red-500/10]="!property().isActive">
+          <fa-icon [icon]="property().isActive ? icons.CIRCLE_CHECK : icons.CIRCLE_XMARK" />
+          {{ property().isActive ? 'Propriedade Ativa' : 'Propriedade Inativa' }}
+        </span>
+
+        @if (property().mainCrop) {
+          <span class="flex items-center gap-1.5 px-3 py-1 rounded-full
+                      bg-primary/10 border border-primary/30 text-lg font-bold text-primary">
+            <fa-icon [icon]="icons.SEEDLING" />
+            {{ property().mainCrop }}
+          </span>
+        }
+
+        <span class="flex items-center gap-1.5 px-3 py-1 rounded-full
+                    bg-secondary/10 border border-secondary/30 text-lg font-medium text-neutral-secondary">
+          <fa-icon [icon]="icons.CALENDAR" />
+          Desde {{ property().createdAt | date:'dd/MM/yyyy' }}
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
