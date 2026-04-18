@@ -1,50 +1,57 @@
 <div class="p-6 lg:p-10 space-y-10 max-w-7xl mx-auto">
 
+  <div class="text-center mb-12">
+    <app-title [firstSegment]="'Painel de Controle'" [secondSegment]="'do Administrador'"></app-title>
+    <app-subtitle [text]="'Gerencie as operações centrais da plataforma AgroWerk'"></app-subtitle>
+  </div>
 
-    <div class="space-y-1"></div>
-        <app-title [firstSegment]="'Painel de Controle'" [secondSegment]="'Administrador'"></app-title>
-        <app-subtitle [text]="'O que deseja fazer hoje?'"></app-subtitle>
-    </div>
-  
-    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5">
-  
-      @for (card of cards; track card.route) {
+  <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 mb-12">
+    @for (card of cards; track card.route) {
+      <a [routerLink]="card.route"
+         class="group relative overflow-hidden rounded-3xl bg-neutral-primary
+                border-3 border-primary/50 hover:border-primary
+                transition-all duration-300 hover:-translate-y-2
+                shadow-2xl shadow-primary/40 p-8">
         
-          [routerLink]="card.route"
-          class="group flex flex-col gap-4 p-6 rounded-2xl
-                 bg-neutral-primary/60 backdrop-blur-sm
-                 border border-white/5
-                 hover:border-primary/50
-                 hover:shadow-[0_0_24px_rgba(76,175,80,0.15)]
-                 hover:bg-neutral-primary/80
-                 transition-all duration-300 cursor-pointer">
-  
-          <div class="w-12 h-12 rounded-xl flex items-center justify-center
-                      bg-gradient-to-br from-emerald-900/80 to-green-950/80
-                      border border-primary/20
-                      group-hover:border-primary/60 group-hover:scale-110
-                      transition-all duration-300">
-            <fa-icon [icon]="card.icon" class="text-primary text-xl" />
-          </div>
-  
-          <div class="space-y-1">
-            <h2 class="text-white font-bold text-xl group-hover:text-primary transition-colors duration-200">
-              {{ card.label }}
-            </h2>
-            <p class="text-neutral-secondary/60 text-base leading-snug">
-              {{ card.description }}
-            </p>
+        <div class="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="relative z-10">
+          <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-button-main to-button-second
+                      flex items-center justify-center mb-5
+                      group-hover:scale-110 transition-transform duration-300
+                      border-2 border-primary/80">
+            <fa-icon [icon]="card.icon" class="text-2xl text-neutral-primary" />
           </div>
 
-          <app-button-pages
-                [icon]="icons.ARROW_RIGHT"
-                [text]="'Criar Conta'"
-                (action)="handleAction()"
-                [width]="'400'"
-              >
-          </app-button-pages>
-
+          <h2 class="font-bold text-primary text-2xl mb-2">
+            {{ card.label }}
+          </h2>
+          <p class="text-neutral-secondary/90 text-lg leading-relaxed">
+            {{ card.description }}
+          </p>
+        </div>
+      </a>
     }
-  
+  </div>
+
+  <div class="group relative overflow-hidden rounded-3xl bg-neutral-primary
+              border-3 border-primary/50 hover:border-primary 
+              transition-all duration-300 shadow-2xl shadow-primary/60 p-8">
+    
+    <div class="absolute top-0 right-0 w-48 h-48 bg-primary/10 rounded-full blur-3xl pointer-events-none"></div>
+    
+    <div class="relative z-10 flex items-center justify-between gap-6 flex-wrap">
+      <div>
+        <p class="text-2xl sm:text-3xl font-bold text-neutral-secondary mb-1">Gestão de Usuários</p>
+        <p class="text-lg sm:text-xl text-neutral-secondary/60">Adicione novos administradores ou produtores à base.</p>
+      </div>
+      
+      <app-button-pages
+        [text]="'Criar Nova Conta'"
+        [icon]="icons.ARROW_RIGHT"
+        [width]="'full'"
+        (action)="handleAction()" />
+    </div>
+  </div>
+
 </div>
-  

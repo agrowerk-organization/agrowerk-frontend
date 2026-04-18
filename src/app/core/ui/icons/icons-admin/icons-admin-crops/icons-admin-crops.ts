@@ -15,7 +15,8 @@ import {
     faCarrot,
     faLeaf,
     faCandyCane,
-    faGrip
+    faGrip,
+    faCircleXmark
 } from '@fortawesome/free-solid-svg-icons';
 
 export const ICONS_ADMIN_CROPS = {
@@ -35,5 +36,6 @@ export const ICONS_ADMIN_CROPS = {
     CARROT: faCarrot,
     LEAF: faLeaf,
     CANDY_CANE: faCandyCane,
-    GRIP: faGrip
+    GRIP: faGrip,
+    CIRCLE_XMARK: faCircleXmark
 }

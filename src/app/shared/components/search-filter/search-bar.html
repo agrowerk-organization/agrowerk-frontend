@@ -10,8 +10,8 @@
         type="text"
         [formControl]="searchControl"
         [placeholder]="placeholder()"
-        class="w-full pl-11 pr-10 py-4 rounded-2xl border-3 border-primary/60
-               bg-neutral-primary text-primary placeholder:text-neutral-secondary/50
+        class="w-full pl-14 pr-10 py-4 rounded-2xl gap-4 border-3 border-primary/60
+               bg-neutral-primary text-xl sm:text-2xl text-primary placeholder:text-neutral-secondary/50
                focus:border-primary outline-none transition-all duration-300
                shadow-lg shadow-primary/10 cursor-pointer" />
   
@@ -19,7 +19,7 @@
         <button
           type="button"
           (click)="clearSearch()"
-          class="absolute right-4 top-1/2 -translate-y-1/2 text-xl
+          class="absolute right-4 top-1/2 -translate-y-1/2 text-xl sm:text-2xl px-12
                  text-neutral-secondary/50 hover:text-primary transition-colors">
           <fa-icon [icon]="icons.X_MARK" />
         </button>
@@ -33,7 +33,7 @@
           type="button"
           (click)="setFilter(null)"
           class="flex items-center gap-2 px-6 py-2 rounded-xl border-2
-                 text-sm sm:text-xl font-semibold transition-all duration-300
+                 text-xl sm:text-2xl font-semibold transition-all duration-300
                  shadow-2xl shadow-primary/40 cursor-pointer"
           [class.border-primary]="activeFilter() === null"
           [class.bg-primary/10]="activeFilter() === null"
@@ -47,8 +47,8 @@
           <button
             type="button"
             (click)="setFilter(filter.key)"
-            class="flex items-center gap-2 px-4 py-2 rounded-xl border-2
-                   text-sm sm:text-xl font-semibold transition-all duration-300
+            class="flex items-center gap-4 px-4 py-2 rounded-xl border-2
+                   text-xl sm:text-2xl font-semibold transition-all duration-300
                    cursor-pointer"
             [class.border-primary]="activeFilter() === filter.key"
             [class.bg-primary/10]="activeFilter() === filter.key"
@@ -73,7 +73,7 @@
         <select
           (change)="onDropdownChange($event)"
           class="w-full pl-11 pr-4 py-4 rounded-2xl border-2 border-primary/40
-                 bg-neutral-primary text-primary
+                 bg-neutral-primary text-xl sm:text-2xl text-primary
                  focus:border-primary outline-none transition-all duration-300
                  shadow-lg shadow-primary/10 appearance-none cursor-pointer">
           <option value="">{{ allLabel() }}</option>

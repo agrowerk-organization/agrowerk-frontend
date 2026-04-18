@@ -17,6 +17,9 @@ import { UpdateCropRequest } from '@core/types/crop/update-crop.request';
 import { CropResponse } from '@core/types/crop/crop.response';
 import { CropFormPayload } from '@core/ui/types/crop/crop-category';
 import { SearchBar } from '@shared/components/search-filter/search-bar';
+import { Title } from "@shared/components/title/title";
+import { Subtitle } from '@shared/components/subtitle/subtitle';
+import { Paginator } from '@shared/components/paginator/paginator';
 @Component({
   selector: 'app-admin-crops',
   standalone: true,
@@ -27,11 +30,14 @@ import { SearchBar } from '@shared/components/search-filter/search-bar';
     ButtonPages,
     CropCard,
     CropForm,
-    SearchBar
-  ],
+    SearchBar,
+    Title,
+    Subtitle,
+    Paginator
+],
   templateUrl: './crops.html',
 })
-export class AdminCrops implements OnInit {
+export class Crops implements OnInit {
   private readonly cropService = inject(CropService);
   private readonly destroyRef  = inject(DestroyRef);
   private readonly search$     = new Subject<string>();
@@ -46,7 +52,6 @@ export class AdminCrops implements OnInit {
   totalElements    = signal(0);
   currentPage      = signal(0);
   selectedCategory = signal<string>('ALL');
-  searchTerm       = signal<string>('');
 
   modalOpen   = signal(false);
   editingCrop = signal<CropResponse | null>(null);
@@ -57,15 +62,7 @@ export class AdminCrops implements OnInit {
   readonly totalPages = computed(() =>
     Math.ceil(this.totalElements() / this.PAGE_SIZE)
   );
-  readonly pages = computed(() =>
-    Array.from({ length: this.totalPages() }, (_, i) => i)
-  );
-  readonly filteredCrops = computed(() => {
-    const cat = this.selectedCategory();
-    return cat === 'ALL'
-      ? this.crops()
-      : this.crops().filter(c => c.cropCategory === cat);
-  });
+
 
   constructor() {
     this.search$.pipe(
@@ -90,7 +87,12 @@ export class AdminCrops implements OnInit {
 
   loadPage(page: number): void {
     this.loading.set(true);
-    this.cropService.list(page, this.PAGE_SIZE).subscribe({
+    const cat = this.selectedCategory();
+    const obs = cat === 'ALL'
+      ? this.cropService.list(page, this.PAGE_SIZE)
+      : this.cropService.listByCategory(page, this.PAGE_SIZE, cat);
+  
+    obs.subscribe({
       next: res => {
         this.crops.set(res.content!);
         this.totalElements.set(res.totalElements);
@@ -108,10 +110,7 @@ export class AdminCrops implements OnInit {
 
   onFilterChange(key: string | null): void {
     this.selectedCategory.set(key || 'ALL');
-  }
-
-  selectCategory(value: string): void {
-    this.selectedCategory.set(value);
+    this.loadPage(0);
   }
 
   openCreate(): void {
@@ -140,11 +139,12 @@ export class AdminCrops implements OnInit {
       this.cropService.update(this.editingCrop()!.id, updateData).subscribe({
         next: updated => {
           this.uploadAndFinish(updated.id, file, () => {
-            this.crops.update(list =>
-              list.map(c => c.id === updated.id ? updated : c)
+            this.loadPage(
+              Math.floor(this.currentPage() / this.PAGE_SIZE)
             );
           });
         },
+        
         error: (err: { error: { message: string } }) => {
           this.saveError.set(err.error?.message ?? 'Erro ao atualizar cultura.');
           this.saving.set(false);

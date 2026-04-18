@@ -1,0 +1,49 @@
+@if (totalPages() > 1) {
+    <nav aria-label="Paginação" class="flex items-center justify-center gap-2 pt-6">
+  
+      <button
+        (click)="go(currentPage() - 1)"
+        [disabled]="currentPage() === 0"
+        class="flex items-center gap-1.5 px-3 h-10 rounded-xl border border-neutral-secondary
+               text-xl sm:text-2xl font-medium text-neutral-secondary
+               hover:border-primary/40 hover:text-primary
+               disabled:opacity-90 disabled:cursor-not-allowed
+               transition-all duration-200 cursor-pointer">
+        <fa-icon [icon]="icons.PREV" class="text-xl sm:text-2xl" />
+        <span class="hidden sm:inline">Anterior</span>
+      </button>
+  
+      @for (item of pageItems(); track $index) {
+        @if (item === '...') {
+          <span class="w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center
+                       text-neutral-secondary/30 select-none">
+            &hellip;
+          </span>
+        } @else {
+                <button
+                    (click)="go(item)"
+                    [attr.aria-current]="item === currentPage() ? 'page' : null"
+                    class="w-10 h-10 rounded-xl border text-xl sm:text-2xl font-bold
+                        transition-all duration-200 cursor-pointer shadow-sm shadow-primary/10" 
+                    [class]="item === currentPage()
+                    ? 'bg-primary border-primary text-text-neutral-secondary shadow-lg shadow-primary/20'
+                    : 'border-text-neutral-secondary/10 text-neutral-secondary hover:border-primary/80 hover:text-primary'">
+                    {{ item + 1 }}
+                </button>
+        }
+      }
+  
+      <button
+        (click)="go(currentPage() + 1)"
+        [disabled]="currentPage() === totalPages() - 1"
+        class="flex items-center gap-1.5 px-3 h-10 rounded-xl border border-neutral-secondary
+               text-xl sm:text-2xl font-medium text-neutral-secondary
+               hover:border-primary/40 hover:text-primary
+               disabled:opacity-30 disabled:cursor-not-allowed
+               transition-all duration-200 cursor-pointer">
+        <span class="hidden sm:inline">Próxima</span>
+        <fa-icon [icon]="icons.NEXT" class="text-xl sm:text-2xl" />
+      </button>
+  
+    </nav>
+}

@@ -8,6 +8,7 @@ import { MeshGradient } from '@shared/components/mesh-gradient/mesh-gradient';
 import { Pattern } from '@shared/components/pattern/pattern';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ICONS_ADMIN_LAYOUT } from '@core/ui/icons/icons-admin/icons-admin-layout/icons-admin-layout';
+import { Title } from "@shared/components/title/title";
 @Component({
   selector: 'app-admin-layout',
   standalone: true,
@@ -18,8 +19,9 @@ import { ICONS_ADMIN_LAYOUT } from '@core/ui/icons/icons-admin/icons-admin-layou
     NgOptimizedImage,
     FontAwesomeModule,
     MeshGradient,
-    Pattern
-  ],
+    Pattern,
+    Title
+],
   templateUrl: './admin-layout.html'
 })
 export class AdminLayout {

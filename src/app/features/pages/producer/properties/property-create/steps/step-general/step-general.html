@@ -25,14 +25,14 @@
   </div>
 
        @if (!readonly()) {
-              <div>
-                     <app-select-field
-                     label="Estado *"
-                     fieldId="state-id"
-                     placeholder="Selecione um estado..."
-                     [options]="stateOptions()"
-                     formControlName="stateId" />
-              </div>
+          <div>
+                  <app-select-field
+                  label="Estado *"
+                  fieldId="state-id"
+                  placeholder="Selecione um estado..."
+                  [options]="stateOptions()"
+                  formControlName="stateId" />
+          </div>
        }
 
   <div>

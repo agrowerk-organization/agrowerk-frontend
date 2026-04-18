@@ -213,7 +213,7 @@ export const routes: Routes = [
       {
         path: 'crops',
         loadComponent: () => import('./features/pages/admin/crops/crops')
-          .then(page => page.AdminCrops)
+          .then(page => page.Crops)
       },
       {
         path: 'suppliers',

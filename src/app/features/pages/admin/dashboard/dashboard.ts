@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -13,7 +14,13 @@ import { Subtitle } from "@shared/components/subtitle/subtitle";
 @Component({
   selector: 'app-admin-dashboard',
   standalone: true,
-  imports: [RouterLink, FontAwesomeModule, ButtonPages, Title, Subtitle],
+  imports: [
+    CommonModule, 
+    RouterLink,
+    FontAwesomeModule, 
+    ButtonPages, 
+    Title, 
+    Subtitle],
   templateUrl: './dashboard.html',
 })
 export class Dashboard {

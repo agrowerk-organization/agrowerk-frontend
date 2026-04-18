@@ -6,7 +6,6 @@ import { ICONS_PROPERTY } from '@core/ui/icons/icons-producer/icons-property/ico
 import { WeatherLocationService } from '@core/services/weather-location.service';
 import { ButtonPages } from '@shared/components/buttons/button-pages/button-pages';
 import { Badge } from '@shared/components/badge/badge';
-import { AvatarDisplay } from '@shared/components/avatar-display/avatar-display';
 @Component({
   selector: 'app-property-card',
   standalone: true,
@@ -14,8 +13,7 @@ import { AvatarDisplay } from '@shared/components/avatar-display/avatar-display'
     CommonModule, 
     FontAwesomeModule,
     Badge,
-    ButtonPages,
-    AvatarDisplay
+    ButtonPages
   ],
   templateUrl: './property-card.html',
 })

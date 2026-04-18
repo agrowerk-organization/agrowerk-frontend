@@ -4,7 +4,9 @@ export interface CropResponse {
     scientificName: string;
     growthCycleDays: number;
     cropCategory: string;
-    photoUrl?: string;
     createdAt: string;
     updatedAt: string;
+    originalUrl?: string;
+    mediumUrl?: string;
+    thumbnailUrl?: string;
 }

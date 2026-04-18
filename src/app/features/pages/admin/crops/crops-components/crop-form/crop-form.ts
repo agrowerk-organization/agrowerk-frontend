@@ -7,6 +7,8 @@ import { ICONS_ADMIN_CROPS } from '@core/ui/icons/icons-admin/icons-admin-crops/
 import { CROP_CATEGORIES } from '@core/types/crop/crop-categories';
 import { CreateCropRequest } from '@core/types/crop/create-crop.request';
 import { ButtonPages } from '@shared/components/buttons/button-pages/button-pages';
+import { NumberField } from '@shared/components/number-field/number-field';
+import { SelectField } from '@shared/components/select-field/select-field';
 
 @Component({
   selector: 'app-crop-form',
@@ -15,7 +17,9 @@ import { ButtonPages } from '@shared/components/buttons/button-pages/button-page
     CommonModule,
     ReactiveFormsModule, 
     FontAwesomeModule,
-    ButtonPages
+    ButtonPages,
+    NumberField,
+    SelectField
   ],
   templateUrl: './crop-form.html'
 })
@@ -53,7 +57,7 @@ export class CropForm {
           growthCycleDays: data.growthCycleDays,
           cropCategory: data.cropCategory
         });
-        this.photoPreview.set(data.photoUrl ?? null);
+        this.photoPreview.set(data.originalUrl ?? null);
       } else {
         this.form.reset();
         this.photoPreview.set(null);

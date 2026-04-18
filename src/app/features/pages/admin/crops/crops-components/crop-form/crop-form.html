@@ -1,155 +1,96 @@
-<div 
-  class="fixed inset-0 z-[2000] flex items-center justify-center p-4"
-  role="presentation"
->
-  <div 
-    class="absolute inset-0 bg-black/60 backdrop-blur-sm"
-    (click)="toCancel.emit()"
-    (keydown.escape)="toCancel.emit()"
-    tabindex="-1"
-    aria-hidden="true">
-  </div>
+<div class="fixed inset-0 z-[2000] flex items-center justify-center p-4">
+  <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" 
+       (click)="toCancel.emit()" 
+       (keydown.escape)="toCancel.emit()" 
+       tabindex="-1"
+       role="presentation"></div>
 
-  <div 
-    class="relative z-10 w-full max-w-xl max-h-[90vh] overflow-y-auto
-           bg-neutral-primary rounded-2xl border border-white/10
-           shadow-[0_0_60px_rgba(0,0,0,0.6)]
-           animate-in fade-in zoom-in-95 duration-200"
-    role="dialog"
-    aria-modal="true"
-    aria-labelledby="modal-title"
-    (click)="$event.stopPropagation()"
-    (keydown)="$event.stopPropagation()"
-    tabindex="-1">
+  <div class="relative z-10 w-full mt-8 max-w-xl max-h-[80vh] flex flex-col rounded-3xl
+           bg-neutral-primary border-3 border-primary/70 shadow-2xl shadow-primary/30 overflow-hidden">
 
-    <div class="flex items-center justify-between px-6 py-5 border-b border-white/10">
-      <h2 id="modal-title" class="text-2xl font-extrabold text-white">
-        {{ cropData() ? 'Editar Cultura' : 'Nova Cultura' }}
-      </h2>
+    <div class="flex items-center justify-between p-6 border-b border-primary/30 bg-neutral-primary">
+      <div>
+        <h2 id="modal-title" class="text-xl sm:text-2xl font-black text-primary uppercase tracking-tight">
+          {{ cropData() ? 'Editar Cultura' : 'Nova Cultura' }}
+        </h2>
+        @if (cropData()) {
+          <p class="text-secondary/90 text-lg sm:text-xl italic">{{ cropData()!.name }}</p>
+        }
+      </div>
 
-      <app-button-pages
-          [text]="'Fechar modal'"
-          [icon]="icons.XMARK"
-          [disabled]="saving()"
-          (action)="toCancel.emit()"
-          class="flex-1"
-          style="--btn-width: 100%; --gradient-from: #333; --gradient-to: #444;" 
-          [class.opacity-70]="saving()">
-     </app-button-pages>
-      
+      <button type="button" (click)="toCancel.emit()" 
+              class="w-12 h-12 flex items-center justify-center rounded-xl border-2 border-primary/30 text-primary hover:border-primary transition-all">
+        <fa-icon [icon]="icons.CIRCLE_XMARK" class="text-2xl" />
+      </button>
+    </div>
 
-    <form class="px-6 py-6 space-y-6" [formGroup]="form" (ngSubmit)="submit()">
+    <div class="overflow-y-auto flex-1">
+      <form id="cropForm" class="p-6 space-y-6" [formGroup]="form" (ngSubmit)="submit()">
+        
+        <div class="flex flex-col items-center gap-3">
+          <div class="relative">
+            <div class="w-28 h-28 rounded-3xl ring-4 ring-primary/20 overflow-hidden bg-black/20 border-2 border-primary/50 flex items-center justify-center">
+              @if (photoPreview()) {
+                <img [src]="photoPreview()" alt="Preview" class="w-full h-full object-cover" />
+              } @else {
+                <fa-icon [icon]="icons.SEEDLING" class="text-5xl text-primary/20" />
+              }
+            </div>
+            <button type="button" (click)="photoInput.click()"
+                    class="absolute -bottom-2 -right-2 w-10 h-10 rounded-2xl bg-primary text-neutral-primary flex items-center justify-center shadow-lg hover:scale-110 transition-all cursor-pointer">
+              <fa-icon [icon]="icons.CAMERA" />
+            </button>
+            <input #photoInput type="file" accept="image/*" class="hidden" (change)="onPhotoChange($event)" />
+          </div>
+          <p class="text-primary/90 text-xL font-black uppercase tracking-widest">Identidade Visual</p>
+        </div>
 
-      <div class="flex flex-col items-center gap-3">
-        <div class="relative">
-          <div class="w-28 h-28 rounded-2xl ring-4 ring-primary/50 overflow-hidden
-                      bg-gradient-to-br from-emerald-800 to-green-950
-                      flex items-center justify-center">
-            @if (photoPreview()) {
-              <img [src]="photoPreview()" alt="Prévia da foto da cultura"
-                   class="w-full h-full object-cover" />
-            } @else {
-              <fa-icon [icon]="icons.SEEDLING" class="text-4xl text-primary/50" aria-hidden="true" />
-            }
+        <div class="space-y-4">
+          <div>
+            <label for="crop-name" class="text-xl sm:text-2xl text-neutral-secondary font-bold mb-1 block">Nome da Cultura *</label>
+            <input id="crop-name" formControlName="name" type="text" placeholder="Ex: Soja"
+                   class="w-full px-4 py-4 rounded-2xl border-2 border-primary/90 
+                          bg-transparent text-lg sm:text-xl text-neutral-secondary focus:border-primary outline-none transition-all" />
           </div>
 
-          <button 
-            type="button" 
-            (click)="photoInput.click()"
-            class="absolute -bottom-2 -right-2 w-10 h-10 rounded-xl
-                   bg-button-main hover:bg-button-main-hover
-                   flex items-center justify-center
-                   shadow-lg transition-all duration-200 hover:scale-110 cursor-pointer"
-            aria-label="Alterar foto">
-            <fa-icon [icon]="icons.CAMERA" class="text-white text-lg" aria-hidden="true" />
-          </button>
+          <div>
+            <label for="scientific-name" class="text-xl sm:text-2xl text-neutral-secondary font-bold mb-1 block">Nome da Cultura *</label>
+            <input id="scientific-name" formControlName="scientificName" type="type" placeholder="Ex: Glycine max"
+                   class="w-full px-4 py-3 rounded-xl border-2 border-primary/90
+                          bg-transparent text-lg sm:text-xl text-neutral-secondary focus:border-primary outline-none transition-all" />
+          </div>
 
-          <input #photoInput type="file" accept="image/*" class="hidden"
-                 (change)="onPhotoChange($event)" />
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <app-number-field
+              label="Ciclo (Dias) *"
+              fieldId="growth-days"
+              [min]="1"
+              formControlName="growthCycleDays" />
+
+            <app-select-field
+              label="Categoria *"
+              fieldId="crop-cat"
+              [options]="categories"
+              formControlName="cropCategory" />
+          </div>
         </div>
-        <p class="text-neutral-secondary/40 text-sm">Foto da cultura (opcional)</p>
-      </div>
+      </form>
+    </div>
 
-      <div>
-        <label for="crop-name" class="text-xl text-neutral-secondary font-bold mb-1 block">Nome *</label>
-        <input 
-          id="crop-name"
-          formControlName="name" 
-          type="text" 
-          placeholder="Ex: Soja"
-          class="w-full px-4 py-3 rounded-xl border-2 border-primary/90
-                 bg-transparent text-lg text-neutral-secondary
-                 focus:border-primary outline-none transition-all"
-          [class.border-red-500]="form.get('name')?.invalid && form.get('name')?.touched" />
-      </div>
+    <div class="p-6 border-t border-primary/30 bg-neutral-primary flex flex-col sm:flex-row gap-3">
+      <app-button-pages
+        text="Cancelar"
+        [icon]="icons.CIRCLE_XMARK"
+        width="100%"
+        (action)="toCancel.emit()" />
 
-      <div>
-        <label for="scientific-name" class="text-xl text-neutral-secondary font-bold mb-1 block">Nome científico *</label>
-        <input 
-          id="scientific-name"
-          formControlName="scientificName" 
-          type="text" 
-          placeholder="Ex: Glycine max"
-          class="w-full px-4 py-3 rounded-xl border-2 border-primary/90
-                 bg-transparent text-lg text-neutral-secondary italic
-                 focus:border-primary outline-none transition-all"
-          [class.border-red-500]="form.get('scientificName')?.invalid && form.get('scientificName')?.touched" />
-      </div>
+      <app-button-pages
+        [text]="saving() ? 'Salvando...' : (cropData() ? 'Salvar Alterações' : 'Confirmar Criação')"
+        [icon]="saving() ? icons.SPINNER : (cropData() ? icons.PEN : icons.PLUS)"
+        [disabled]="saving() || form.invalid"
+        width="100%"
+        (action)="submit()" />
+    </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <div>
-          <label for="growth-cycle" class="text-xl text-neutral-secondary font-bold mb-1 block">Ciclo (dias) *</label>
-          <input 
-            id="growth-cycle"
-            formControlName="growthCycleDays" 
-            type="number"
-            class="w-full px-4 py-3 rounded-xl border-2 border-primary/90
-                   bg-transparent text-lg text-neutral-secondary outline-none"
-            [class.border-red-500]="form.get('growthCycleDays')?.invalid && form.get('growthCycleDays')?.touched" />
-        </div>
-
-        <div>
-          <label for="category" class="text-xl text-neutral-secondary font-bold mb-1 block">Categoria *</label>
-          <select 
-            id="category"
-            formControlName="cropCategory"
-            class="w-full px-4 py-3 rounded-xl border-2 border-primary/90
-                   bg-neutral-primary text-lg text-neutral-secondary cursor-pointer">
-            <option value="" disabled>Selecione...</option>
-            @for (cat of categories; track cat.value) {
-              <option [value]="cat.value">{{ cat.label }}</option>
-            }
-          </select>
-        </div>
-      </div>
-
-      @if (saveError()) {
-        <p class="text-center text-red-400 text-base font-medium" role="alert">{{ saveError() }}</p>
-      }
-
-      <div class="flex flex-col sm:flex-row gap-4 pt-2">
-        
-        <app-button-pages
-          [text]="'Cancelar'"
-          [icon]="icons.XMARK"
-          [disabled]="saving()"
-          (action)="toCancel.emit()"
-          class="flex-1"
-          style="--btn-width: 100%; --gradient-from: #333; --gradient-to: #444;" 
-          [class.opacity-70]="saving()">
-          </app-button-pages>
-
-        <app-button-pages
-          [text]="cropData() ? 'Salvar' : 'Criar'"
-          [icon]="saving() ? icons.SPINNER : (cropData() ? icons.PEN : icons.PLUS)"
-          [disabled]="saving() || form.invalid"
-          (action)="submit()"
-          class="flex-1"
-          style="--btn-width: 100%">
-        </app-button-pages>
-
-      </div>
-
-    </form>
   </div>
 </div>

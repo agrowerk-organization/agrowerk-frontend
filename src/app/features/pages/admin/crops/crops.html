@@ -2,12 +2,8 @@
 
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
       <div>
-        <h1 class="text-3xl lg:text-4xl font-extrabold text-white tracking-tight">
-          Culturas
-        </h1>
-        <p class="text-neutral-secondary/60 text-lg mt-1">
-          {{ totalElements() }} cultura(s) cadastrada(s)
-        </p>
+        <app-title firstSegment="Culturas" secondSegment="Cadastradas"></app-title>
+        <app-subtitle text=" {{ totalElements() }} cultura(s) cadastrada(s)"></app-subtitle>
       </div>
   
       <app-button-pages
@@ -32,7 +28,7 @@
       </div>
     }
   
-    @else if (filteredCrops().length === 0) {
+    @else if (crops().length === 0) {
       <div class="flex flex-col items-center justify-center h-64 gap-4">
         <fa-icon [icon]="icons.SEEDLING" class="text-6xl text-primary/20" />
         <p class="text-xl font-medium text-neutral-secondary/50">
@@ -43,55 +39,20 @@
   
     @else {
       <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5">
-        @for (crop of filteredCrops(); track crop.id) {
+        @for (crop of crops(); track crop.id) {
           <app-crop-card
             [crop]="crop"
             [categoryLabel]="categoryLabel(crop.cropCategory)"
             (edit)="openEdit($event)" />
         }
       </div>
-  
-      @if (totalPages() > 1) {
-        <div class="flex items-center justify-center gap-2 pt-4">
-  
-          <button
-            (click)="loadPage(currentPage() - 1)"
-            [disabled]="currentPage() === 0"
-            class="px-4 py-2 rounded-xl border border-white/10
-                   text-neutral-secondary/60 hover:border-primary/40 hover:text-primary
-                   disabled:opacity-30 disabled:cursor-not-allowed
-                   transition-all duration-200 cursor-pointer">
-            <fa-icon [icon]="icons.CHEVRON_LEFT" />
-          </button>
-  
-          @for (page of pages(); track page) {
-            <button
-              (click)="loadPage(page)"
-              class="w-10 h-10 rounded-xl border font-bold text-base
-                     hover:border-primary/50 hover:text-primary
-                     transition-all duration-200 cursor-pointer"
-              [class.border-primary]="page === currentPage()"
-              [class.text-primary]="page === currentPage()"
-              [class.border-white\/10]="page !== currentPage()"
-              [class.text-neutral-secondary\/50]="page !== currentPage()">
-              {{ page + 1 }}
-            </button>
-          }
-  
-          <button
-            (click)="loadPage(currentPage() + 1)"
-            [disabled]="currentPage() === totalPages() - 1"
-            class="px-4 py-2 rounded-xl border border-white/10
-                   text-neutral-secondary/60 hover:border-primary/40 hover:text-primary
-                   disabled:opacity-30 disabled:cursor-not-allowed
-                   transition-all duration-200 cursor-pointer">
-            <fa-icon [icon]="icons.CHEVRON_RIGHT" />
-          </button>
-  
-        </div>
-      }
     }
   
+    <app-paginator 
+      [currentPage]="currentPage()"
+      [totalPages]="totalPages()"
+      (pageChange)="loadPage($event)" />
+    
   </div>
   
   @if (modalOpen()) {
