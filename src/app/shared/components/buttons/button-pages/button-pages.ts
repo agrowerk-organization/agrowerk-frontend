@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, input, output } from '@angular/core';
+import { Component, computed, input, output } from '@angular/core';
+import { ButtonSize } from '@core/ui/types/button/button';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 
@@ -10,9 +11,25 @@ import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
   templateUrl: './button-pages.html',
 })
 export class ButtonPages {
-  icon = input.required<IconDefinition>();
-  text = input.required<string>();
-  action = output<void>();
-  width = input<string>();
-  disabled = input<boolean>(false);
+  readonly icon = input.required<IconDefinition>();
+  readonly text = input.required<string>();
+  readonly action = output<void>();
+  readonly width = input<string>();
+  readonly disabled = input<boolean>(false);
+  readonly active = input<boolean>(false);
+  readonly size = input<ButtonSize>('md');
+
+  readonly sizeClasses = computed(() =>
+    this.size() === 'sm'
+      ? 'py-2 px-4 text-base rounded-xl gap-2'
+      : 'py-4 px-6 text-2xl rounded-2xl gap-3');
+
+  readonly iconSizeClass = computed(() =>
+    this.size() === 'sm' ? 'text-base' : 'text-2xl'
+  );
+
+  onClick(): void {
+    if (!this.disabled()) this.action.emit();
+  }
+  
 }

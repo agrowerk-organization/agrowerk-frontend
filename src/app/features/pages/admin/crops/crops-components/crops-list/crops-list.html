@@ -1,0 +1,70 @@
+<div class="space-y-8">
+  
+    @if (loading()) {
+      <div class="flex items-center justify-center h-64">
+        <div class="animate-spin w-12 h-12 rounded-full border-4 border-button-main border-t-transparent"></div>
+      </div>
+    }
+  
+    @else if (crops().length === 0) {
+      <div class="flex flex-col items-center justify-center h-64 gap-4 text-neutral-secondary/50">
+        <fa-icon [icon]="icons.SEEDLING" class="text-6xl text-primary/30" aria-hidden="true" />
+        <p class="text-xl font-medium">Nenhuma cultura encontrada</p>
+      </div>
+    }
+  
+    @else {
+      <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5">
+        @for (crop of crops(); track crop.id) {
+          <app-crop-card 
+            [crop]="crop" 
+            [categoryLabel]="crop.cropCategory"
+            (edit)="editCrop.emit($event)"
+          />
+        }
+      </div>
+  
+      @if (totalPages() > 1) {
+        <nav class="flex items-center justify-center gap-2 pt-4" aria-label="Navegação de páginas">
+          
+          <button 
+            type="button"
+            (click)="pageChange.emit(currentPage() - 1)"
+            [disabled]="currentPage() === 0"
+            class="px-4 py-2 rounded-xl border border-white/10 text-neutral-secondary/60
+                   hover:border-primary/40 hover:text-primary disabled:opacity-30
+                   disabled:cursor-not-allowed transition-all cursor-pointer"
+            aria-label="Página anterior">
+            <fa-icon [icon]="icons.CHEVRON_LEFT" aria-hidden="true" />
+          </button>
+  
+          @for (page of pages; track page) {
+            <button 
+              type="button"
+              (click)="pageChange.emit(page)"
+              [class.border-primary]="page === currentPage()"
+              [class.text-primary]="page === currentPage()"
+              [class.border-white\/10]="page !== currentPage()"
+              [class.text-neutral-secondary\/50]="page !== currentPage()"
+              class="w-10 h-10 rounded-xl border font-bold text-base
+                     hover:border-primary/50 hover:text-primary
+                     transition-all cursor-pointer">
+              {{ page + 1 }}
+            </button>
+          }
+  
+          <button 
+            type="button"
+            (click)="pageChange.emit(currentPage() + 1)"
+            [disabled]="currentPage() === totalPages() - 1"
+            class="px-4 py-2 rounded-xl border border-white/10 text-neutral-secondary/60
+                   hover:border-primary/40 hover:text-primary disabled:opacity-30
+                   disabled:cursor-not-allowed transition-all cursor-pointer"
+            aria-label="Próxima página">
+            <fa-icon [icon]="icons.CHEVRON_RIGHT" aria-hidden="true" />
+          </button>
+  
+        </nav>
+      }
+    }
+</div>

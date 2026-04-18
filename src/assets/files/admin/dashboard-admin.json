@@ -1,0 +1,32 @@
+[
+    {
+      "label": "Culturas",
+      "description": "Gerencie culturas e variedades cadastradas na plataforma",
+      "route": "/admin/crops",
+      "icon": "SEEDLING"
+    },
+    {
+      "label": "Usuários",
+      "description": "Visualize e gerencie todos os produtores cadastrados",
+      "route": "/admin/users",
+      "icon": "USERS"
+    },
+    {
+      "label": "Fornecedores",
+      "description": "Administre os fornecedores disponíveis na plataforma",
+      "route": "/admin/suppliers",
+      "icon": "TRUCK"
+    },
+    {
+      "label": "Insumos",
+      "description": "Controle o catálogo de insumos agrícolas",
+      "route": "/admin/inputs",
+      "icon": "FLASK"
+    },
+    {
+      "label": "Aprovação de ativos",
+      "description": "Revise e aprove solicitações pendentes de ativos",
+      "route": "/admin/assets-approval",
+      "icon": "CLOCK"
+    }
+]

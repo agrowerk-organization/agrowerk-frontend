@@ -193,7 +193,7 @@ export const routes: Routes = [
       {
         path: 'dashboard',
         loadComponent: () => import('./features/pages/admin/dashboard/dashboard')
-          .then(page => page.AdminDashboard)
+          .then(page => page.Dashboard)
       },
       {
         path: 'users',
@@ -213,7 +213,7 @@ export const routes: Routes = [
       {
         path: 'crops',
         loadComponent: () => import('./features/pages/admin/crops/crops')
-          .then(page => page.Crops)
+          .then(page => page.AdminCrops)
       },
       {
         path: 'suppliers',

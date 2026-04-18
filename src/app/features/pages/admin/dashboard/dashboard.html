@@ -1,1 +1,50 @@
-<p>dashboard works!</p>
+<div class="p-6 lg:p-10 space-y-10 max-w-7xl mx-auto">
+
+
+    <div class="space-y-1"></div>
+        <app-title [firstSegment]="'Painel de Controle'" [secondSegment]="'Administrador'"></app-title>
+        <app-subtitle [text]="'O que deseja fazer hoje?'"></app-subtitle>
+    </div>
+  
+    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5">
+  
+      @for (card of cards; track card.route) {
+        
+          [routerLink]="card.route"
+          class="group flex flex-col gap-4 p-6 rounded-2xl
+                 bg-neutral-primary/60 backdrop-blur-sm
+                 border border-white/5
+                 hover:border-primary/50
+                 hover:shadow-[0_0_24px_rgba(76,175,80,0.15)]
+                 hover:bg-neutral-primary/80
+                 transition-all duration-300 cursor-pointer">
+  
+          <div class="w-12 h-12 rounded-xl flex items-center justify-center
+                      bg-gradient-to-br from-emerald-900/80 to-green-950/80
+                      border border-primary/20
+                      group-hover:border-primary/60 group-hover:scale-110
+                      transition-all duration-300">
+            <fa-icon [icon]="card.icon" class="text-primary text-xl" />
+          </div>
+  
+          <div class="space-y-1">
+            <h2 class="text-white font-bold text-xl group-hover:text-primary transition-colors duration-200">
+              {{ card.label }}
+            </h2>
+            <p class="text-neutral-secondary/60 text-base leading-snug">
+              {{ card.description }}
+            </p>
+          </div>
+
+          <app-button-pages
+                [icon]="icons.ARROW_RIGHT"
+                [text]="'Criar Conta'"
+                (action)="handleAction()"
+                [width]="'400'"
+              >
+          </app-button-pages>
+
+    }
+  
+</div>
+  

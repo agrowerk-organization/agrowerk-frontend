@@ -1,0 +1,27 @@
+<div class="group flex flex-col rounded-2xl overflow-hidden bg-neutral-primary/60 border border-white/5 hover:border-primary/40 transition-all">
+    <div class="w-full h-44 bg-gradient-to-br from-emerald-900/60 to-green-950/80 flex items-center justify-center overflow-hidden">
+      @if (crop().photoUrl) {
+        <img [src]="crop().photoUrl" [alt]="crop().name" class="w-full h-full object-cover group-hover:scale-105 transition-all" />
+      } @else {
+        <fa-icon [icon]="icons.SEEDLING" class="text-6xl text-primary/30" />
+      }
+    </div>
+    <div class="flex flex-col gap-3 p-5 flex-1">
+      <div>
+        <h2 class="text-white font-bold text-xl">{{ crop().name }}</h2>
+        <p class="text-neutral-secondary/50 text-base italic">{{ crop().scientificName }}</p>
+      </div>
+      <div class="flex flex-wrap gap-2">
+        <span class="px-3 py-1 rounded-full text-sm font-semibold bg-emerald-900/60 text-primary">
+          {{ categoryLabel() }}
+        </span>
+        <span class="px-3 py-1 rounded-full text-sm font-semibold bg-white/5 text-neutral-secondary/70">
+          <fa-icon [icon]="icons.CLOCK" class="mr-1" /> {{ crop().growthCycleDays }} dias
+        </span>
+      </div>
+      <button (click)="edit.emit(crop())" class="mt-auto flex items-center justify-center gap-2 px-4 py-2 rounded-xl
+                                                 border border-primary/30 text-primary hover:bg-primary/10">
+        <fa-icon [icon]="icons.PEN" /> Editar
+      </button>
+    </div>
+</div>

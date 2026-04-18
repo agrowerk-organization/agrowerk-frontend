@@ -1,1 +1,122 @@
-<p>admin-layout works!</p>
+<div class="flex flex-col min-h-screen bg-[var(--color-background)]">
+
+    <div class="fixed inset-0 z-0 pointer-events-none">
+      <app-pattern />
+      <app-mesh-gradient />
+    </div>
+  
+    <header
+      class="fixed top-0 left-0 right-0 z-[1050] w-full h-[90px] lg:h-[100px]
+             flex items-center justify-between px-6 lg:px-12
+             bg-neutral-primary/80 backdrop-blur-md
+             shadow-[0_2px_15px_rgba(0,0,0,0.4)]
+             border-b border-white/5">
+  
+      <div class="absolute inset-0 z-[998] pointer-events-none">
+        <div class="absolute inset-0 bg-gradient-to-br from-emerald-900/40 via-green-900/30 to-transparent"></div>
+        <div class="absolute -top-20 -right-0 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl"></div>
+      </div>
+  
+      <div class="flex items-center z-[1001]">
+        <a routerLink="/admin/dashboard" class="block">
+          <img
+            ngSrc="assets/images/agrowerk.png"
+            alt="Logo Agrowerk"
+            width="34"
+            height="34"
+            priority
+            class="w-27 h-27 lg:w-34 lg:h-34 cursor-pointer hover:scale-110 transition-transform duration-200"
+          />
+        </a>
+      </div>
+  
+      <div class="absolute left-1/2 -translate-x-1/2 z-[1001] hidden lg:flex flex-col items-center">
+        <span class="text-2xl text-neutral-secondary/80 font-medium tracking-widest uppercase">
+          Painel Admin
+        </span>
+        <span class="text-white font-extrabold text-2xl tracking-tight leading-tight">
+          {{ currentUser()?.name }}
+        </span>
+      </div>
+  
+      <div class="flex items-center gap-4 sm:gap-10 z-[1001]">
+  
+        <a routerLink="/admin/help-and-support"
+          title="Ajuda e suporte"
+          class="w-10 h-10 rounded-full flex items-center justify-center
+                 text-white/60 hover:text-white hover:bg-white/10
+                 transition-all duration-200 cursor-pointer">
+          <fa-icon [icon]="icons.CIRCLE_QUESTION" class="text-5xl text-primary" />
+        </a>
+  
+        <div class="relative">
+          <button
+            (click)="toggleUserDropdown()"
+            [attr.aria-expanded]="showUserDropdown()"
+            class="w-15 h-15 rounded-full overflow-hidden
+                   ring-2 ring-primary/40 hover:ring-primary
+                   transition-all duration-200 hover:scale-105 cursor-pointer">
+  
+            @if (userProfile()?.avatarUrl) {
+              <img
+                [src]="userProfile()?.avatarUrl"
+                [alt]="currentUser()?.name"
+                class="w-full h-full object-cover" />
+            } @else {
+              <div class="w-full h-full bg-button-main
+                          flex items-center justify-center
+                          text-white font-bold text-xl sm:text-2xl">
+                {{ currentUser()?.name?.charAt(0)?.toUpperCase() }}
+              </div>
+            }
+          </button>
+  
+          @if (showUserDropdown()) {
+            <ul class="absolute top-[calc(100%+0.75rem)] right-0 min-w-[180px]
+                       bg-neutral-primary/80 rounded-xl shadow-xl py-2 z-[1010]
+                       border-2 border-primary/90
+                       animate-in fade-in slide-in-from-top-2 duration-150">
+  
+              <li class="px-4 py-2 border-b border-neutral-secondary/20 mb-1">
+                <p class="text-lg sm:text-xl font-semibold text-white truncate">{{ currentUser()?.name }}</p>
+                <p class="text-sm sm:text-base text-white/45 truncate">{{ currentUser()?.email }}</p>
+              </li>
+  
+              <li
+                class="flex items-center gap-3 px-4 py-2 text-lg sm:text-xl text-primary font-medium
+                       hover:bg-white/10 transition-colors cursor-pointer"
+                [routerLink]="'/admin/profile'"
+                (click)="toggleUserDropdown()"
+                (keyup.enter)="toggleUserDropdown()"
+                role="button"
+                tabindex="0">
+                <fa-icon [icon]="icons.USER" class="text-lg sm:text-xl text-primary w-4" />
+                Meu perfil
+              </li>
+  
+              <li
+                class="flex items-center gap-3 px-4 py-2 text-lg sm:text-xl font-medium
+                       text-[var(--color-error)]/80 hover:text-[var(--color-error)]
+                       hover:bg-white/10 transition-colors cursor-pointer"
+                (click)="logout()"
+                (keyup.enter)="logout()"
+                role="button"
+                tabindex="0">
+                <fa-icon [icon]="icons.RIGHT_TO_BRACKET" class="text-lg sm:text-xl w-4" />
+                Sair
+              </li>
+  
+            </ul>
+          }
+        </div>
+  
+      </div>
+    </header>
+  
+    <div class="h-[90px] lg:h-[100px] flex-shrink-0"></div>
+  
+    <main class="flex-1 overflow-auto z-10">
+      <router-outlet />
+    </main>
+  
+</div>

@@ -1,24 +1,28 @@
 <button
-    [style.--btn-width]="width()"
-    [disabled]="disabled()"
-    [class.opacity-50]="disabled()"
-    [class.cursor-not-allowed]="disabled()"
-    [class.hover:-translate-y-1]="!disabled()"
-    class="group relative flex items-center justify-between gap-3 
-            py-4 px-6 rounded-2xl font-bold text-2xl 
-            transition-all duration-300 overflow-hidden
-            cursor-pointer w-[var(--btn-width)]
-            bg-gradient-to-br from-button-main to-button-second text-neutral-primary shadow-lg 
-            border border:primary hover:shadow-2xl active:translate-y-0"
-    (click)="!disabled() && action.emit()">
+  [style.width]="width()"
+  [disabled]="disabled()"
+  (click)="onClick()"
+  class="group relative flex items-center justify-between
+         font-bold transition-all duration-300 overflow-hidden cursor-pointer
+         border shadow-lg hover:shadow-2xl active:translate-y-0"
+  [class]="sizeClasses()"
+  [class.opacity-50]="disabled()"
+  [class.cursor-not-allowed]="disabled()"
+  [class.hover:-translate-y-1]="!disabled()"
+  [class.bg-gradient-to-br]="!active()"
+  [class.from-button-main]="!active()"
+  [class.to-button-second]="!active()"
+  [class.text-neutral-primary]="!active()"
+  [class.border-transparent]="!active()"
+  [class.bg-transparent]="active()"
+  [class.border-primary]="active()"
+  [class.text-primary]="active()"
+  [class.shadow-none]="active()">
 
-    <span class="relative z-10 text-2xl text-neutral-primary">
-        {{ text() }}
-    </span>
+  <span class="relative z-10">{{ text() }}</span>
 
-    <fa-icon
-        class="relative z-10 text-2xl transition-transform duration-300 
-                group-hover:translate-x-2"
-        [icon]="icon()">
-    </fa-icon>
+  <fa-icon
+    [icon]="icon()"
+    class="relative z-10 transition-transform duration-300 group-hover:translate-x-1"
+    [class]="iconSizeClass()" />
 </button>
