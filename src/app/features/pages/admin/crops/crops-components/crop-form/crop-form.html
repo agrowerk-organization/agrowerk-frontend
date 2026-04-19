@@ -19,7 +19,7 @@
       </div>
 
       <button type="button" (click)="toCancel.emit()" 
-              class="w-12 h-12 flex items-center justify-center rounded-xl border-2 border-primary/30 text-primary hover:border-primary transition-all">
+              class="w-12 h-12 flex items-center justify-center rounded-xl border-2 border-primary/30 text-primary hover:border-primary transition-all cursor-pointer">
         <fa-icon [icon]="icons.CIRCLE_XMARK" class="text-2xl" />
       </button>
     </div>
@@ -77,7 +77,7 @@
       </form>
     </div>
 
-    <div class="p-6 border-t border-primary/30 bg-neutral-primary flex flex-col sm:flex-row gap-3">
+    <div class="p-6 border-t border-primary/30 bg-neutral-primary flex flex-col justify-center sm:flex-row gap-3">
       <app-button-pages
         text="Cancelar"
         [icon]="icons.CIRCLE_XMARK"
