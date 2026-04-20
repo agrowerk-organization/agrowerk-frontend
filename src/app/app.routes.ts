@@ -162,7 +162,7 @@ export const routes: Routes = [
       },
       {
         path: 'profile',
-        loadComponent: () => import('./features/pages/producer/user-profile/user-profile')
+        loadComponent: () => import('./shared/layouts-components/user-profile/user-profile')
           .then(page => page.UserProfile)
       },
       {

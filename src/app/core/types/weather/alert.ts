@@ -1,4 +1,4 @@
-export interface WeatherAlert {
+export interface Alert {
     id: string;
     locationId: string;
     locationName: string;

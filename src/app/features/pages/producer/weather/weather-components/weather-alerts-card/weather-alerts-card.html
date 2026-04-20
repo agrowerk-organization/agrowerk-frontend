@@ -1,0 +1,103 @@
+@if (hasAlerts()) {
+    <div class="group relative overflow-hidden rounded-3xl
+                bg-neutral-primary border-3 border-primary/70
+                shadow-xl shadow-primary/30 animate-fadeInUp">
+  
+      <div class="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
+        <div class="absolute top-0 left-0 w-56 h-56 bg-yellow-400/10 rounded-full blur-3xl"></div>
+      </div>
+  
+      <div class="relative z-10 p-8">
+        <div class="flex items-center gap-4 mb-8">
+          <div class="flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 rounded-xl
+                      bg-yellow-500/20 group-hover:scale-110 transition-transform duration-300">
+            <fa-icon [icon]="icons.TRIANGLE_EXCLAMATION" class="text-2xl sm:text-3xl text-yellow-400" />
+          </div>
+          <div>
+            <h3 class="text-2xl sm:text-4xl font-bold text-primary">Alertas Ativos</h3>
+            <p class="text-neutral-secondary text-lg sm:text-xl mt-0.5">
+              {{ alertCount() }} alerta{{ alertCount() > 1 ? 's' : '' }}
+              requer{{ alertCount() === 1 ? '' : 'em' }} atenção
+            </p>
+          </div>
+        </div>
+  
+        <div class="flex flex-col gap-4">
+          @for (alert of alerts(); track alert.id) {
+            <div class="flex flex-col sm:flex-row sm:items-center gap-4 p-5 rounded-2xl
+                        border-2 bg-neutral-primary/50 transition-all duration-300
+                        hover:-translate-y-0.5 hover:shadow-lg"
+                 [style.borderColor]="alert.severityColor">
+  
+              <div class="flex items-center gap-4 flex-1 min-w-0">
+                <div class="flex-shrink-0 flex items-center justify-center w-10 h-10 rounded-xl"
+                     [style.backgroundColor]="alert.severityColor + '22'">
+                  <fa-icon [icon]="icons.TRIANGLE_EXCLAMATION"
+                           [style.color]="alert.severityColor"
+                           class="text-xl" />
+                </div>
+  
+                <div class="min-w-0 flex-1">
+                  <div class="flex items-center gap-2 flex-wrap mb-1">
+                    <span class="text-lg sm:text-xl font-bold"
+                          [style.color]="alert.severityColor">
+                      {{ alert.title }}
+                    </span>
+                    <span class="text-xs font-bold uppercase tracking-widest px-2 py-0.5 rounded-full"
+                          [style.backgroundColor]="alert.severityColor + '33'"
+                          [style.color]="alert.severityColor">
+                      {{ alert.severityDisplayName }}
+                    </span>
+                    <span class="text-sm sm:text-base text-neutral-secondary/60 font-medium">
+                      {{ alert.alertTypeDisplayName }}
+                    </span>
+                  </div>
+  
+                  <p class="text-neutral-secondary text-base sm:text-lg sm:text-xl line-clamp-2">
+                    {{ alert.description }}
+                  </p>
+  
+                  @if (alert.recommendedActions) {
+                    <div class="mt-3">
+                      <div class="flex items-center gap-2 text-neutral-secondary/80 mb-2">
+                        <fa-icon [icon]="icons.CIRCLE_INFO" class="text-xl sm:text-2xl text-neutral-secondary/" />
+                        <span class="text-sm sm:text-base font-bold uppercase tracking-wider">Ações Recomendadas:</span>
+                      </div>
+                  
+                      <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2">
+                        @for (action of formatActions(alert.recommendedActions); track $index) {
+                          <div class="flex items-start gap-2 group/item">
+                            <span class="text-primary font-bold text-xl leading-none mt-1">•</span>
+                            <p class="text-neutral-secondary text-sm sm:text-lg leading-tight 
+                                      group-hover/item:text-neutral-secondary/100 transition-colors">
+                              {{ action }}
+                            </p>
+                          </div>
+                        }
+                      </div>
+                    </div>
+                  }
+
+                  @for (alert of alertsWithBadges(); track alert.id) {
+                    <app-badge
+                      [badges]="alert.dateBadge"
+                      class="flex flex-wrap gap-2 mt-4" />
+                      
+                  }
+  
+                </div>
+              </div>
+  
+              @if (canResolve()) {
+                <app-button-pages
+                  text="Resolver"
+                  [icon]="icons.CHECK"
+                  width="100%"
+                  (click)="onResolve(alert)"/>
+              }
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  }

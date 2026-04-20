@@ -81,14 +81,8 @@
               [current]="weatherDashboard()?.current ?? null" />
             <app-season-card
               [season]="activeSeason()" />
-            <app-forecast-card
-              class="md:col-span-2"
-              [forecast]="weatherDashboard()?.dailyForecast ?? []" />
-          
-            <app-statistics-card
-              class="md:col-span-2"
-              [statistics]="weatherDashboard()?.statistics ?? null" />
-            </div>
+           
+          </div>
 
             <app-market-data class="md:col-span-2" [dashboard]="commodityDashboard()" />
     

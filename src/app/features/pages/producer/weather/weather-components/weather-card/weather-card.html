@@ -12,46 +12,57 @@
 
     <div class="flex items-center justify-between mb-8">
       <div class="flex items-center gap-4">
-        <div class="flex items-center justify-center w-14 h-14 rounded-xl shadow-lg
+        <div class="flex items-center justify-center w-16 h-16 rounded-xl shadow-lg
                     bg-gradient-to-br to-button-second
                     group-hover:scale-110 transition-transform duration-300">
-          <img [src]="getIconPath().path" class="w-8 h-8 sm:w-10 sm:h-10 drop-shadow-lg" alt="weather" />
+          <img [src]="getIconPath().path" class="w-12 h-12 sm:w-14 sm:h-14 drop-shadow-lg" alt="weather" />
         </div>
         <h3 class="text-2xl sm:text-4xl font-bold text-primary">Clima agora</h3>
       </div>
-      @if (current()?.fromCache) {
-        <span class="text-xs text-neutral-secondary px-3 py-1 rounded-full
-                     bg-neutral-primary border border-primary/40 font-bold">
-          Cache
-        </span>
-      }
+
+      <div class="flex items-center gap-3">
+        @if (current()?.fromCache) {
+          <span class="text-xs text-neutral-secondary px-3 py-1 rounded-full
+                       bg-neutral-primary border border-primary/40 font-bold">
+            Cache
+          </span>
+        }
+        @if (isDashboard()) {
+          <app-button-pages
+            [text]="'Ver mais'"
+            [icon]="icons.CHEVRON_RIGHT"
+            [width]="'full'"
+            (action)="goToWeather()" />
+        }
+      </div>
     </div>
 
     @if (current(); as w) {
-
-      <div class="flex items-center gap-8 mb-8">
-        <div class="relative">
-          <img [src]="getIconPath().path"
-               class="w-16 h-16 sm:w-32 sm:h-32 drop-shadow-lg transition-all duration-700"
-               alt="Weather icon" />
-          <div class="absolute inset-0 blur-xl -z-10 opacity-60 rounded-full"
-               [style.background]="getIconPath().color"></div>
-        </div>
-        <div>
-          <p class="text-5xl font-extrabold text-neutral-tertiary leading-none">
-            {{ w.temperature | number:'1.0-0' }}°C
-          </p>
-          <p class="text-neutral-secondary text-lg sm:text-xl mt-1 font-medium">
-            {{ w.weatherDescription }}
-          </p>
-          <p class="mt-2 text-neutral-secondary/85 text-sm sm:text-base">
-            Sensação : {{ w.feelsLike | number:'1.0-0' }}°C
-          </p>
+      <div class="flex flex-row items-center justify-between gap-8 mb-8">
+        <div class="flex items-center gap-8">
+          <div class="relative">
+            <img [src]="getIconPath().path"
+                class="w-16 h-16 sm:w-32 sm:h-32 drop-shadow-lg transition-all duration-700"
+                alt="Weather icon" />
+            <div class="absolute inset-0 blur-xl -z-10 opacity-60 rounded-full"
+                [style.background]="getIconPath().color"></div>
+          </div>
+          <div>
+            <p class="text-5xl font-extrabold text-neutral-tertiary leading-none">
+              {{ w.temperature | number:'1.0-0' }}°C
+            </p>
+            <p class="text-neutral-secondary text-lg sm:text-xl mt-1 font-medium">
+              {{ w.weatherDescription }}
+            </p>
+            <p class="mt-2 text-neutral-secondary/85 text-sm sm:text-base">
+              Sensação : {{ w.feelsLike | number:'1.0-0' }}°C
+            </p>
+          </div>
         </div>
       </div>
 
-      <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-6 mt-2 border-t border-primary/90">
-        @for (stat of [
+      <div [class]="'grid gap-3 pt-6 mt-2 border-t border-primary/90 ' + 
+             (isDashboard() ? 'grid-cols-2 sm:grid-cols-3' : 'grid-cols-2')">        @for (stat of [
           { label: 'Umidade',    value: w.humidity + '%',                          icon: icons.DROPLET,    color: 'text-blue-400'   },
           { label: 'Vento',      value: (w.windSpeed | number:'1.0-0') + ' km/h', icon: icons.WIND,       color: 'text-white'      },
           { label: 'Pressão',    value: (w.pressure | number:'1.0-0') + ' hPa',   icon: icons.GAUGE_HIGH, color: 'text-cyan-400'   },

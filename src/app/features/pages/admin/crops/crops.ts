@@ -4,7 +4,7 @@ import {
 import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ReactiveFormsModule } from '@angular/forms';
-import { debounceTime, distinctUntilChanged, Subject, switchMap } from 'rxjs';
+import { debounceTime, distinctUntilChanged, Subject, switchMap, tap } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CropService } from '@core/services/crop.service';
 import { ButtonPages } from '@shared/components/buttons/button-pages/button-pages';
@@ -68,16 +68,21 @@ export class Crops implements OnInit {
     this.search$.pipe(
       debounceTime(400),
       distinctUntilChanged(),
+      tap(() => this.loading.set(true)),
       switchMap(term =>
         term.trim()
           ? this.cropService.search(term, 0, this.PAGE_SIZE)
           : this.cropService.list(0, this.PAGE_SIZE)
       ),
       takeUntilDestroyed(this.destroyRef)
-    ).subscribe(page => {
-      this.crops.set(page.content!);
-      this.totalElements.set(page.totalElements);
-      this.currentPage.set(0);
+    ).subscribe({
+      next: page => {
+        this.crops.set(page.content || []);
+        this.totalElements.set(page.totalElements);
+        this.currentPage.set(0);
+        this.loading.set(false);
+      },
+      error: () => this.loading.set(false)
     });
   }
 
@@ -94,12 +99,15 @@ export class Crops implements OnInit {
   
     obs.subscribe({
       next: res => {
-        this.crops.set(res.content!);
+        this.crops.set(res.content || []);
         this.totalElements.set(res.totalElements);
         this.currentPage.set(page);
         this.loading.set(false);
       },
-      error: () => this.loading.set(false),
+      error: () => {
+        this.crops.set([]);
+        this.loading.set(false);
+      }
     });
   }
 

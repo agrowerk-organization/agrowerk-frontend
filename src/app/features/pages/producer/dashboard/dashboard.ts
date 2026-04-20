@@ -12,9 +12,8 @@ import { WeatherDashboard } from '@core/types/weather/weather-dashboard';
 import { SeasonResponse } from '@core/types/season/season-response';
 import { WelcomeBanner } from './dashboard-components/welcome-banner/welcome-banner';
 import { PropertySelector } from './dashboard-components/property-selector/property-selector';
-import { WeatherCard } from './dashboard-components/weather-card/weather-card';
+import { WeatherCard } from '../weather/weather-components/weather-card/weather-card';
 import { SeasonCard } from './dashboard-components/season-card/season-card';
-import { ForecastCard } from './dashboard-components/forecast-card/forecast-card';
 import { AlertsCard } from './dashboard-components/alerts-card/alerts-card';
 import { OnboardingCard } from './dashboard-components/onboarding-card/onboarding-card';
 import { LayoutStateService } from '@core/services/layout-state.service';
@@ -22,7 +21,6 @@ import { Page } from '@core/types/page/page';
 import { SeasonStatus } from '@core/enums/season-status';
 import { Cycle } from '@core/ui/types/cycle/cycle';
 import { CycleDiagram } from '@shared/components/cycle-diagram/cycle-diagram';
-import { StatisticsCard } from './dashboard-components/statistics-card/statistics-card';
 import { UpdateBranding } from "./dashboard-components/update-branding/update-branding";
 import  CYCLE_NODES_DATA  from '@assets/files/producer/dashboard-producer.json';
 import { MarketData } from "./dashboard-components/market-data/market-data";
@@ -41,10 +39,8 @@ import { ICONS_DASHBOARD } from '@core/ui/icons/icons-producer/icons-dashboard/i
     PropertySelector,
     WeatherCard,
     SeasonCard,
-    ForecastCard,
     AlertsCard,
     OnboardingCard,
-    StatisticsCard,
     CycleDiagram,
     UpdateBranding,
     MarketData,

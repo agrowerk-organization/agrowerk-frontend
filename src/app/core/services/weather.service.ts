@@ -2,9 +2,9 @@ import { Injectable, inject } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { environment } from "@environments/environment";
+import { Alert } from "@core/types/weather/alert";
 import { WeatherDashboard } from "../types/weather/weather-dashboard";
 import { WeatherForecast } from "../types/weather/weather-forecast";
-import { WeatherAlert } from "../types/weather/weather-alert";
 import { WeatherCurrent } from "../types/weather/weather-current";
 import { WeatherLocation } from "../types/weather/weather-location";
 @Injectable({ providedIn: 'root' })
@@ -34,8 +34,8 @@ export class WeatherService {
     );
   }
 
-  getAlerts(locationId: string): Observable<WeatherAlert[]> {
-    return this.http.get<WeatherAlert[]>(
+  getAlerts(locationId: string): Observable<Alert[]> {
+    return this.http.get<Alert[]>(
       `${this.base}/get-alerts/${locationId}`,    
       { withCredentials: true }
     );

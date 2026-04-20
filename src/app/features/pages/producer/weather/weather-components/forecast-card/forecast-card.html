@@ -1,0 +1,101 @@
+@if (hasForecast()) {
+  <div class="group relative overflow-hidden rounded-3xl
+              bg-neutral-primary border-3 border-primary/70
+              transition-all duration-300 hover:border-primary
+              hover:shadow-xl animate-fadeInUp shadow-xl shadow-primary/30
+              flex flex-col">
+
+    <div class="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
+      <div class="absolute bottom-0 left-0 w-64 h-64 bg-primary/10 rounded-full blur-3xl"></div>
+    </div>
+
+    <div class="relative z-10 p-6 flex-1 flex flex-col">
+
+      <div class="flex items-center gap-4 mb-10">
+        <div class="flex items-center justify-center w-16 h-16 rounded-2xl shadow-lg
+                    bg-gradient-to-br to-button-second
+                    group-hover:scale-110 transition-transform duration-300">
+          <img [src]="getIconPath().path" class="w-12 h-12 sm:w-14 sm:h-14 drop-shadow-lg" alt="forecast" />
+        </div>
+        <h3 class="text-3xl sm:text-4xl font-bold text-primary tracking-tight">Previsão 7 dias</h3>
+      </div>
+
+      <div class="grid grid-cols-7 gap-3 mb-8">
+        @for (day of days(); track day.id) {
+          <button
+            class="flex flex-col items-center gap-2 py-5 px-2 rounded-2xl transition-all duration-300 shadow-xl cursor-pointer"
+            [class.border-3]="selectedDay()?.id === day.id"
+            [class.border-primary]="selectedDay()?.id === day.id"
+            [class.bg-primary/20]="selectedDay()?.id === day.id"
+            [class.scale-105]="selectedDay()?.id === day.id"
+            [class.shadow-primary/50]="selectedDay()?.id === day.id"
+            [class.border-2]="selectedDay()?.id !== day.id"
+            [class.border-primary/30]="selectedDay()?.id !== day.id"
+            [class.hover:border-primary/90]="selectedDay()?.id !== day.id"
+          
+          (click)="selectDay(day)">
+            <p class="text-xl sm:text-2xl text-neutral-secondary uppercase tracking-widest font-bold">
+              {{ day.forecastDate | date:'EEE':'':'pt-BR' }}
+            </p>
+            <img [src]="getWeatherByCode(day.weatherCode).path"
+                 class="w-12 h-12 sm:w-16 sm:h-16 drop-shadow-lg my-1" alt="icon" />
+            <div class="text-center">
+              <p class="font-black text-secondary text-xl sm:text-2xl leading-tight">
+                {{ day.temperatureMax | number:'1.0-0' }}°
+              </p>
+              <p class="font-bold text-primary/70 text-xl sm:text-2xl leading-tight">
+                {{ day.temperatureMin | number:'1.0-0' }}°
+              </p>
+            </div>
+          </button>
+        }
+      </div>
+
+      @if (selectedDay(); as s) {
+        <div class="flex-1 rounded-3xl border-2 border-primary bg-neutral-primary/40 p-6 shadow-2xl shadow-primary/30 backdrop-blur-sm">
+          <div class="flex items-center justify-between mb-8">
+            <div class="flex items-center gap-4">
+              <img [src]="getWeatherByCode(s.weatherCode).path" class="w-16 h-16 drop-shadow-2xl" alt="icon" />
+              <div>
+                <p class="font-black text-primary text-2xl sm:text-4xl leading-tight">
+                  {{ s.forecastDate | date:'EEEE, dd/MM':'':'pt-BR' | titlecase }}
+                </p>
+                <p class="text-neutral-secondary text-xl sm:text-3xl font-medium">{{ s.weatherDescription }}</p>
+              </div>
+            </div>
+            <div class="text-right">
+                <p class="text-4xl sm:text-6xl font-black text-neutral-tertiary tracking-tighter">
+                  {{ s.temperatureAvg | number:'1.0-0' }}°C
+                </p>
+                <p class="text-sm uppercase text-primary font-bold tracking-widest">Média Diária</p>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+            @for (stat of [
+              { label: 'Vento Máx', value: (s.windSpeedMax | number:'1.0-0') + ' km/h',  icon: icons.WIND,          color: 'text-white'      },
+              { label: 'Chuva Esp.', value: (s.rainfallAmount | number:'1.1-1') + ' mm',  icon: icons.CLOUD_RAIN,    color: 'text-blue-500'   },
+              { label: 'Índice UV',  value: s.uvIndexMax | number:'1.0-0',                icon: icons.SUN,           color: 'text-yellow-400' },
+              { label: 'Evaporação', value: (s.evapotranspiration | number:'1.1-1') + ' mm', icon: icons.ARROWS_UP_DOWN, color: 'text-cyan-400'},
+              { label: 'Temp. Mín',  value: (s.temperatureMin | number:'1.0-0') + '°C',  icon: icons.TEMPERATURE_LOW,  color: 'text-blue-300' },
+              { label: 'Temp. Máx',  value: (s.temperatureMax | number:'1.0-0') + '°C',  icon: icons.TEMPERATURE_HIGH, color: 'text-orange-400'},
+            ]; track stat.label) {
+              <div class="flex items-center gap-4 p-5 rounded-2xl
+                          bg-neutral-primary/80 border-2 border-primary hover:border-primary 
+                          transition-all duration-300 shadow-xl shadow-primary/30">
+                <fa-icon [icon]="stat.icon" [class]="'text-2xl ' + stat.color" />
+                <div class="min-w-0">
+                  <p class="text-xs text-neutral-secondary/80 uppercase tracking-widest font-bold leading-none">
+                    {{ stat.label }}
+                  </p>
+                  <p class="font-black text-primary text-2xl sm:text-3xl mt-1 leading-none">{{ stat.value }}</p>
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+      }
+
+    </div>
+  </div>
+}

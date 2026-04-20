@@ -10,6 +10,8 @@ import { AuthSocialForm } from './auth-social-form/auth-social-form';
 import { AuthSocial } from '@core/ui/types/auth-social/auth-social';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs';
+import { AccessProfile } from '@core/enums/access-profile';
+import { LoginRequest } from '@core/types/auth/login.request';
 
 const REGISTER_ROUTES: Record<string, string> = {
   producer:      '/register/producer',
@@ -74,16 +76,34 @@ export class LoginForm {
     },
   ];
 
+  private readonly ROLE_PARAM_MAP: Record<string, AccessProfile> = {
+    producer: AccessProfile.PRODUCER,
+    supplier_admin: AccessProfile.SUPPLIER_ADMIN,
+    system_admin: AccessProfile.SYSTEM_ADMIN
+  };
+
   onSubmit(): void {
     if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
       return;
     }
 
+    const roleType = this.ROLE_PARAM_MAP[this.role() ?? ''];
+
+    if (!roleType) {
+      this.errorMessage.set('Perfil de acesso inválido.');
+      return;
+    }
+
     this.isLoading.set(true);
     this.errorMessage.set(null);
 
-    this.authService.login(this.loginForm.getRawValue()).subscribe({
+    const payload: LoginRequest = {
+      ...this.loginForm.getRawValue(),
+      roleType,
+    };
+
+    this.authService.login(payload).subscribe({
       next: (response) => this.authService.redirectByRole(response.role),
       error: (error: HttpErrorResponse) => {
         this.isLoading.set(false);

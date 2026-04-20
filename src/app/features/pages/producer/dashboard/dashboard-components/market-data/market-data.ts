@@ -1,10 +1,11 @@
 import { CommonModule, DecimalPipe } from '@angular/common';
-import { Component, input, computed } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Component, inject, input, computed } from '@angular/core';
+import { RouterModule, Router } from '@angular/router';
 import { CommodityDashboardResponse } from '@core/types/market/commodity-dashboard.response';
 import { ICONS_DASHBOARD } from '@core/ui/icons/icons-producer/icons-dashboard/icons-dashboard';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { ButtonPages } from '@shared/components/buttons/button-pages/button-pages';
 
 @Component({
   selector: 'app-market-data',
@@ -13,11 +14,14 @@ import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
     CommonModule,
     RouterModule,
     FontAwesomeModule,
-    DecimalPipe
+    DecimalPipe,
+    ButtonPages
   ],
   templateUrl: './market-data.html'
 })
 export class MarketData {
+  private router = inject(Router);
+
   dashboard = input<CommodityDashboardResponse | null>(null);
 
   icons = ICONS_DASHBOARD;
@@ -41,6 +45,10 @@ export class MarketData {
     'ACUCAR': 'Açúcar',
     'BOI_GORDO': 'Boi Gordo'
   };
+
+  goToMarket() {
+    this.router.navigate(['producer/market']);
+  }
 
   formatName(commodity: string): string {
     return this.nameMap[commodity] ?? commodity;

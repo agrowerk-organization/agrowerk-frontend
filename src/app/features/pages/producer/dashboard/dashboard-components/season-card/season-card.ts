@@ -1,6 +1,6 @@
-import { Component, computed, input } from '@angular/core';
+import { Component, computed, inject, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { ICONS_DASHBOARD } from '@core/ui/icons/icons-producer/icons-dashboard/icons-dashboard';
@@ -9,11 +9,13 @@ import { ButtonPages } from "@shared/components/buttons/button-pages/button-page
 @Component({
   selector: 'app-season-card',
   standalone: true,
-  imports: [CommonModule, RouterLink, FontAwesomeModule, ButtonPages],
+  imports: [CommonModule, FontAwesomeModule, ButtonPages],
   templateUrl: './season-card.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SeasonCard {
+  private router = inject(Router);
+
   season = input<SeasonResponse | null>(null);
   icons = ICONS_DASHBOARD;
 
@@ -32,5 +34,9 @@ export class SeasonCard {
 
   importData() {
     return
+  }
+
+  goToSeason() {
+    this.router.navigate([`/producer/season/${this.season()?.id}`]);
   }
 }

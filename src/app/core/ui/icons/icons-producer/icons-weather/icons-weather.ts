@@ -1,0 +1,43 @@
+import {
+    faSnowflake,
+    faSun,
+    faCloudRain,
+    faCloudSunRain,
+    faCloudShowersHeavy,
+    faWind,
+    faTemperatureHigh,
+    faTemperatureLow,
+    faClock,
+    faTriangleExclamation,
+    faCheck,
+    faCircleInfo,
+    faArrowLeft,
+    faChartLine,
+    faChevronRight,
+    faArrowsUpDown,
+    faDroplet,
+    faCircleXmark,
+    faSpinner
+} from '@fortawesome/free-solid-svg-icons';
+
+export const ICONS_WEATHER = {
+    SNOWFLAKE: faSnowflake,
+    SUN: faSun,
+    CLOUD_RAIN: faCloudRain,
+    CLOUD_SUN_RAIN: faCloudSunRain,
+    CLOUD_SHOWERS_HEAVY: faCloudShowersHeavy,
+    WIND: faWind,
+    TEMPERATURE_HIGH: faTemperatureHigh,
+    TEMPERATURE_LOW: faTemperatureLow,
+    CLOCK: faClock,
+    TRIANGLE_EXCLAMATION: faTriangleExclamation,
+    CHECK: faCheck,
+    CIRCLE_INFO: faCircleInfo,
+    ARROW_LEFT: faArrowLeft,
+    CHART_LINE: faChartLine,
+    CHEVRON_RIGHT: faChevronRight,
+    ARROWS_UP_DOWN: faArrowsUpDown,
+    DROPLET: faDroplet,
+    CIRCLE_XMARK: faCircleXmark,
+    SPINNER: faSpinner
+}

@@ -1,19 +1,24 @@
-import { Component, computed, input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, computed, input, signal, ChangeDetectionStrategy, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { WeatherForecast } from '@core/types/weather/weather-forecast';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ICONS_WEATHER } from '@core/ui/icons/icons-producer/icons-weather/icons-weather';
 
 @Component({
   selector: 'app-forecast-card',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FontAwesomeModule],
   templateUrl: './forecast-card.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ForecastCard {
   forecast = input<WeatherForecast[]>([]);
-
-  days = computed(() => this.forecast().slice(0, 7));
+  readonly selectedDay = signal<WeatherForecast | null>(null);
+  readonly days = computed(() => this.forecast() ?? []);
+  
   hasForecast = computed(() => this.forecast().length > 0);
+
+  icons = ICONS_WEATHER;
 
   getIconPath = computed(() => {
     const code = this.forecast()?.[0]?.weatherCode ?? -1;
@@ -22,6 +27,17 @@ export class ForecastCard {
 
   getWeatherByCode(code: number) {
     return this.getWeatherConfig(code);
+  }
+
+  constructor() {
+    effect(() => {
+      const first = this.days()[0] ?? null;
+      this.selectedDay.set(first);
+    })
+  } 
+  
+  selectDay(day: WeatherForecast): void {
+    this.selectedDay.set(day);
   }
 
   private getWeatherConfig(code: number) {

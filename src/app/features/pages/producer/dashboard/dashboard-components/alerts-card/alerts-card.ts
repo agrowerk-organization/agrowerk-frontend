@@ -2,8 +2,8 @@ import { Component, computed, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ChangeDetectionStrategy } from '@angular/core';
+import { Alert } from '@core/types/weather/alert';
 import { ICONS_DASHBOARD } from '@core/ui/icons/icons-producer/icons-dashboard/icons-dashboard';
-import { WeatherAlert } from '@core/types/weather/weather-alert';
 @Component({
   selector: 'app-alerts-card',
   standalone: true,
@@ -12,7 +12,7 @@ import { WeatherAlert } from '@core/types/weather/weather-alert';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AlertsCard {
-  alerts = input<WeatherAlert[]>([]);
+  alerts = input<Alert[]>([]);
   icons = ICONS_DASHBOARD;
 
   hasAlerts = computed(() => this.alerts().length > 0);

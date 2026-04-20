@@ -2,14 +2,14 @@ export interface WeatherForecast {
     id: string;
     locationId: string;
     forecastDate: string;
-    forecastHour: number;
+    forecastHour: number; 
     temperatureMin: number;
     temperatureMax: number;
     temperatureAvg: number;
     humidityAvg: number;
     rainfallProbability: number;
     rainfallAmount: number;
-    windSpeedMax: number;
+    windSpeedMax: number; 
     weatherCondition: string;
     weatherDescription: string;
     weatherCode: number;
@@ -17,4 +17,6 @@ export interface WeatherForecast {
     uvIndexMax: number;
     evapotranspiration: number;
     fetchedAt: string;
+    soilMoisture?: number; 
+    soilTemperature?: number;
 }

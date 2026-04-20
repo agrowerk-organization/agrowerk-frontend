@@ -1,7 +1,7 @@
-import { WeatherAlert } from "./weather-alert";
 import { WeatherCurrent } from "./weather-current";
 import { WeatherForecast } from "./weather-forecast";
 import { WeatherStatistics } from "./weather-statistics";
+import { Alert } from "./alert";
 export interface WeatherDashboard {
     locationId: string;
     locationName: string;
@@ -10,7 +10,7 @@ export interface WeatherDashboard {
     current: WeatherCurrent;
     hourlyForecast: WeatherForecast[];
     dailyForecast: WeatherForecast[];
-    activeAlerts: WeatherAlert[];
+    activeAlerts?: Alert[];
     statistics: WeatherStatistics;
     lastUpdate: string;
 }

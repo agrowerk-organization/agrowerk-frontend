@@ -1,17 +1,23 @@
-import { Component, computed, input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, computed, inject, input, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { map } from 'rxjs';
 import { ICONS_DASHBOARD } from '@core/ui/icons/icons-producer/icons-dashboard/icons-dashboard';
 import { WeatherCurrent } from '@core/types/weather/weather-current';
+import { ButtonPages } from "@shared/components/buttons/button-pages/button-pages";
+import { Router } from '@angular/router';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-weather-card',
   standalone: true,
-  imports: [CommonModule, FontAwesomeModule],
+  imports: [CommonModule, FontAwesomeModule, ButtonPages],
   templateUrl: './weather-card.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WeatherCard {
+  private router = inject(Router);
+
   current = input<WeatherCurrent | null>(null);
   icons = ICONS_DASHBOARD;
 
@@ -25,4 +31,14 @@ export class WeatherCard {
     if (code <= 82)  return { path: 'assets/svgs/showers.svg',      color: '#818CF8' };
     return             { path: 'assets/svgs/thunderstorm.svg',      color: '#C084FC' };
   });
+
+  goToWeather() {
+    this.router.navigate(['producer/weather']);
+  }
+
+  readonly isDashboard = toSignal(
+    this.router.events.pipe(
+      map(() => this.router.url === '/producer/dashboard')),
+      { initialValue: this.router.url === '/producer/dashboard' }
+  );
 }
