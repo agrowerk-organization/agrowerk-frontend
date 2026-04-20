@@ -1,0 +1,46 @@
+<div class="relative">
+    <button
+      (click)="toggleDropdown()"
+      [attr.aria-expanded]="showUserDropdown()"
+      class="w-15 h-15 rounded-full overflow-hidden ring-2 ring-primary/40 hover:ring-primary transition-all duration-200 hover:scale-105 cursor-pointer flex items-center justify-center">
+  
+      @if (profile()?.avatarUrl) {
+        <img [src]="profile()?.avatarUrl" 
+             [alt]="user()?.name" 
+             class="w-full h-full object-cover" />
+      } @else {
+        <div class="w-full h-full bg-emerald-700 flex items-center justify-center text-white font-bold text-2xl uppercase">
+          {{ (user()?.name?.charAt(0) ?? 'U') }}
+        </div>
+      }
+    </button>
+  
+    @if (showUserDropdown()) {
+      <ul class="absolute top-[calc(100%+0.75rem)] right-0 min-w-[220px]
+                 bg-neutral-primary/95 backdrop-blur-md rounded-xl shadow-2xl py-2 z-[1010]
+                 border-2 border-primary/90 animate-in fade-in slide-in-from-top-2 duration-150">
+  
+        <li class="px-4 py-2 border-b border-white/10 mb-1">
+          <p class="text-xl sm:text-2xl font-semibold text-neutral-secondary truncate">{{ user()?.name }}</p>
+          <p class="text-sm sm:text-base text-neutral-secondary/40 truncate">{{ user()?.email }}</p>
+        </li>
+  
+        <li>
+          <a [routerLink]="profileLink()"
+             (click)="showUserDropdown.set(false)"
+             class="flex items-center gap-3 px-4 py-3 text-lg sm:text-xl font-medium text-neutral-secondary/80 hover:bg-primary/20 hover:text-white transition-all cursor-pointer">
+            <fa-icon [icon]="icons().USER" class="text-primary w-5 text-center" />
+            <span>Meu perfil</span>
+          </a>
+        </li>
+  
+        <li>
+          <button (click)="onLogout()"
+                  class="w-full flex items-center gap-3 px-4 py-3 text-lg sm:text-xl font-medium text-red-400 hover:bg-red-500/10 transition-all cursor-pointer text-left">
+            <fa-icon [icon]="icons().RIGHT_TO_BRACKET" class="w-5 h-5 sm:w-8 sm:h-8 text-center" />
+            <span>Sair</span>
+          </button>
+        </li>
+      </ul>
+    }
+</div>

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FaqSection } from './faq.section';
+import { UserMenu } from './user-menu';
 
-describe('FaqSection', () => {
-  let component: FaqSection;
-  let fixture: ComponentFixture<FaqSection>;
+describe('UserMenu', () => {
+  let component: UserMenu;
+  let fixture: ComponentFixture<UserMenu>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FaqSection]
+      imports: [UserMenu]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(FaqSection);
+    fixture = TestBed.createComponent(UserMenu);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

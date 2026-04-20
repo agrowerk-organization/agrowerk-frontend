@@ -196,6 +196,11 @@ export const routes: Routes = [
           .then(page => page.Dashboard)
       },
       {
+        path: 'profile',
+        loadComponent: () => import('./shared/layouts-components/user-profile/user-profile')
+          .then(page => page.UserProfile)
+      },
+      {
         path: 'users',
         loadComponent: () => import('./features/pages/admin/users/users')
           .then(page => page.Users)
@@ -225,6 +230,11 @@ export const routes: Routes = [
         loadComponent: () => import('./features/pages/admin/assets-approval/assets-approval')
           .then(page => page.AssetsApproval)
       },
+      {
+        path: 'support',
+        loadComponent: () => import('./features/pages/admin/support/support')
+          .then(page => page.Support)
+      }
     ]
   },
 
@@ -244,6 +254,11 @@ export const routes: Routes = [
         path: 'dashboard',
         loadComponent: () => import('./features/pages/supplier/dashboard/dashboard')
           .then(page => page.SupplierDashboard)
+      },
+      {
+        path: 'profile',
+        loadComponent: () => import('./shared/layouts-components/user-profile/user-profile')
+          .then(page => page.UserProfile)
       },
       {
         path: 'batches',

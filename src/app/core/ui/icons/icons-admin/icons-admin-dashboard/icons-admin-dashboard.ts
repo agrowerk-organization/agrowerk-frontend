@@ -4,7 +4,8 @@ import {
     faFlask,
     faClock,
     faUsers,
-    faArrowRight
+    faArrowRight,
+    faBullhorn
 } from '@fortawesome/free-solid-svg-icons';
 
 export const ICONS_ADMIN_DASHBOARD = {
@@ -13,5 +14,6 @@ export const ICONS_ADMIN_DASHBOARD = {
     FLASK: faFlask,
     CLOCK: faClock,
     USERS: faUsers,
-    ARROW_RIGHT: faArrowRight
+    ARROW_RIGHT: faArrowRight,
+    BULLHORN: faBullhorn
 }

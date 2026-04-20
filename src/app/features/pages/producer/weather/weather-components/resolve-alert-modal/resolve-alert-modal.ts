@@ -1,14 +1,13 @@
 import { Component, inject, input, output, signal, ChangeDetectionStrategy } from '@angular/core';
 import { ReactiveFormsModule, FormControl } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { FormButton } from '@shared/components/buttons/form-button/form-button';
 import { WeatherAlertService } from '@core/services/weather-alert.service';
 import { ICONS_WEATHER } from '@core/ui/icons/icons-producer/icons-weather/icons-weather';
 import { ButtonPages } from '@shared/components/buttons/button-pages/button-pages';
 @Component({
   selector: 'app-resolve-alert-modal',
   standalone: true,
-  imports: [ReactiveFormsModule, FormButton, ButtonPages, FontAwesomeModule],
+  imports: [ReactiveFormsModule, ButtonPages, FontAwesomeModule],
   templateUrl: './resolve-alert-modal.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
