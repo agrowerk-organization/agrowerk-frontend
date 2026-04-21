@@ -60,7 +60,7 @@ export class HelpAndSupport implements OnInit {
 
   ngOnInit() {
     this.faqService.list(undefined, 0, 100).subscribe({
-      next: res => { this.allFaqs.set(res.content.flat() as FaqResponse[]); this.loading.set(false); },
+      next: res => { this.allFaqs.set(res.flat() as FaqResponse[]); this.loading.set(false); },
       error: ()  => this.loading.set(false),
     });
   }

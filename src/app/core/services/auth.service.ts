@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { catchError, switchMap, tap } from 'rxjs';
+import { catchError, tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { LoginRequest } from '../types/auth/login.request';
 import { environment } from '@environments/environment';
@@ -54,10 +54,12 @@ private readonly base = `${environment.apiUrl}/auth`;
       {},
       { withCredentials: true }
     ).pipe(
-      tap(() => {
-        this.handleLogoutState();
-        this.router.navigate(['/']);
-      })
+      tap(() => this.router.navigate(['/'])),
+      catchError((err) => {
+        console.error('Erro ao fazer logout no servidor', err);
+        return of(void 0);
+      }),
+      tap(() => this.handleLogoutState()) 
     );
   }
 
@@ -78,17 +80,12 @@ private readonly base = `${environment.apiUrl}/auth`;
   }
 
   checkAuthStatus(): Observable<UserInfo | null> {
+    if (this.isLoggedSubject.value === false) {
+      return of(null);
+    }
+  
     return this.getCurrentUser().pipe(
-      catchError((error: HttpErrorResponse) => {
-        if (error.status === 401 || error.status === 403) {
-          return this.refreshToken().pipe(
-            switchMap(() => this.getCurrentUser()),
-            catchError(() => {
-              this.handleLogoutState();
-              return of(null);
-            })
-          );
-        }
+      catchError(() => {
         this.handleLogoutState();
         return of(null);
       })

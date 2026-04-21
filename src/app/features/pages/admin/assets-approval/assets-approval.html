@@ -1,1 +1,77 @@
-<p>assets-approval works!</p>
+<div class="p-6 lg:p-10 space-y-8 max-w-9xl mx-auto">
+
+    <div>
+      <app-title firstSegment="Aprovação" secondSegment="de Ativos" />
+      <app-subtitle [text]="pending().length + ' solicitação(ões) pendente(s)'" />
+    </div>
+  
+    @if (loading()) {
+      <div class="flex items-center justify-center h-64">
+        <div class="animate-spin w-12 h-12 rounded-full border-4 border-button-main border-t-transparent"></div>
+      </div>
+    } @else if (pending().length === 0) {
+      <div class="flex flex-col items-center justify-center h-64 gap-4">
+        <fa-icon [icon]="icons.CIRCLE_CHECK" class="text-6xl text-primary/20" />
+        <p class="text-xl font-medium text-neutral-secondary/50">Nenhuma solicitação pendente</p>
+      </div>
+    } @else {
+      <div class="flex flex-col gap-4">
+        @for (item of pending(); track item.id) {
+          <div class="group relative overflow-hidden rounded-3xl bg-neutral-primary
+                      border-3 border-primary/50 hover:border-primary
+                      transition-all duration-300 shadow-xl shadow-primary/20 p-6">
+  
+            <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
+              <div class="flex-1">
+                <div class="flex items-center gap-3 mb-2">
+                  <span class="px-3 py-1 rounded-full text-xs font-black uppercase tracking-widest
+                               bg-yellow-500/20 border-2 border-yellow-500/60 text-yellow-400">
+                    Pendente
+                  </span>
+                  <span class="text-neutral-secondary/60 text-sm">{{ item.inputCategory }}</span>
+                </div>
+  
+                <h3 class="text-primary font-black text-2xl uppercase tracking-tight leading-none mb-1">
+                  {{ item.inputName }}
+                </h3>
+                <p class="text-neutral-secondary text-lg mb-4">
+                  Cultura: <span class="font-bold text-primary">{{ item.cropName }}</span>
+                </p>
+  
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  <div class="flex flex-col gap-1 p-3 rounded-xl bg-black/20 border-2 border-primary/90">
+                    <span class="text-xs font-black uppercase text-neutral-secondary tracking-tighter">Dose Recomendada</span>
+                    <span class="text-lg font-bold text-primary">
+                      {{ item.recommendedDosePerHectare }} {{ item.doseUnit }}/ha
+                    </span>
+                  </div>
+                  <div class="sm:col-span-2 flex flex-col gap-1 p-3 rounded-xl bg-black/20 border-2 border-primary/90">
+                    <span class="text-xs font-black uppercase text-neutral-secondary tracking-tighter">Recomendação de Uso</span>
+                    <span class="text-base text-primary">{{ item.usageRecommendation }}</span>
+                  </div>
+                </div>
+  
+                <p class="text-neutral-secondary/50 text-sm mt-3">
+                  Solicitado em {{ item.createdAt | date:'dd/MM/yyyy HH:mm':'':'pt-BR' }}
+                </p>
+              </div>
+  
+              <div class="flex sm:flex-col gap-3 shrink-0">
+                <app-button-pages
+                  text="Aprovar"
+                  [icon]="icons.CHECK"
+                  width="fit-content"
+                  (action)="onApprove(item.id)" />
+                <app-button-pages
+                  text="Rejeitar"
+                  [icon]="icons.CIRCLE_XMARK"
+                  width="fit-content"
+                  (action)="onReject(item.id)" />
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    }
+  
+</div>

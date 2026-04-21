@@ -1,1 +1,51 @@
-<p>input-categories works!</p>
+<div class="p-6 lg:p-10 space-y-8 max-w-9xl mx-auto">
+  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+    
+    <div class="flex items-center gap-4">
+      <app-back-button link="/admin/inputs" />
+      <div>
+        <app-title firstSegment="Categorias" secondSegment="de Insumos" />
+        <app-subtitle [text]="totalElements() + ' categoria(s) cadastrada(s)'" />
+      </div>
+    </div>
+
+      <app-button-pages
+        text="Nova Categoria"
+        [icon]="icons.PLUS"
+        width="fit-content"
+        (action)="openCreate()" />
+    </div>
+  
+    @if (loading()) {
+      <div class="flex items-center justify-center h-64">
+        <div class="animate-spin w-12 h-12 rounded-full border-4 border-button-main border-t-transparent"></div>
+      </div>
+    } @else if (categories().length === 0) {
+      <div class="flex flex-col items-center justify-center h-64 gap-4">
+        <fa-icon [icon]="icons.TAG" class="text-6xl text-primary/20" />
+        <p class="text-xl font-medium text-neutral-secondary/50">Nenhuma categoria encontrada</p>
+      </div>
+    } @else {
+      <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5">
+        @for (cat of categories(); track cat.id) {
+          <app-input-category-card
+            [category]="cat"
+            (edit)="openEdit($event)"
+            (deactivate)="onDeactivate($event)" />
+        }
+      </div>
+      <p class="text-neutral-secondary/50 text-sm text-center">
+        Exibindo estrutura completa — categorias filhas aparecem dentro de seus pais
+      </p>
+    }
+  
+</div>
+  
+@if (modalOpen()) {
+    <app-input-category-form
+        [categoryData]="editingCategory()"
+        [saving]="saving()"
+        [parentOptions]="parentOptions()"
+        (save)="handleSave($event)"
+        (toCancel)="closeModal()" />
+}

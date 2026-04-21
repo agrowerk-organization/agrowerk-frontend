@@ -16,6 +16,7 @@ import { WeatherAlertsCard } from './weather-components/weather-alerts-card/weat
 import { PropertySelector } from '../dashboard/dashboard-components/property-selector/property-selector';
 import { Alert } from '@core/types/weather/alert';
 import { ResolveAlertModal } from './weather-components/resolve-alert-modal/resolve-alert-modal';
+import { BackButton } from "@shared/components/back-button/back-button";
 
 @Component({
   selector: 'app-weather',
@@ -30,8 +31,9 @@ import { ResolveAlertModal } from './weather-components/resolve-alert-modal/reso
     StatisticsCard,
     WeatherAlertsCard,
     ResolveAlertModal,
-    PropertySelector
-  ],
+    PropertySelector,
+    BackButton
+],
   templateUrl: './weather.html'
 })
 export class Weather implements OnInit {

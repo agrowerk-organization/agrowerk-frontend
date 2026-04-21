@@ -20,6 +20,7 @@ import { SearchBar } from '@shared/components/search-filter/search-bar';
 import { Title } from "@shared/components/title/title";
 import { Subtitle } from '@shared/components/subtitle/subtitle';
 import { Paginator } from '@shared/components/paginator/paginator';
+import { BackButton } from '@shared/components/back-button/back-button';
 @Component({
   selector: 'app-admin-crops',
   standalone: true,
@@ -33,7 +34,8 @@ import { Paginator } from '@shared/components/paginator/paginator';
     SearchBar,
     Title,
     Subtitle,
-    Paginator
+    Paginator,
+    BackButton
 ],
   templateUrl: './crops.html',
 })

@@ -9,7 +9,7 @@
     "src/**/*.ts",
     "src/**/*.json",
     "src/app/core/ui/types/login/pillar"
-, "src/app/core/ui/icons/icons-admin/icons-admin-crops"  ],
+, "src/app/core/ui/icons/icons-admin/icons-admin-crops", "src/app/core/types/input/update-input-request.ts"  ],
   "exclude": [
     "src/**/*.spec.ts"
   ]

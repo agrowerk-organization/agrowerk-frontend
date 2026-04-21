@@ -9,6 +9,7 @@ import { PropertyHero } from './components/property-hero/property-hero';
 import { PropertyAreas } from './components/property-areas/property-areas';
 import { PropertyAddress } from './components/property-address/property-address';
 import { PropertyRecords } from './components/property-records/property-records';
+import { BackButton } from "@shared/components/back-button/back-button";
 
 @Component({
   selector: 'app-property-detail',
@@ -21,7 +22,8 @@ import { PropertyRecords } from './components/property-records/property-records'
     PropertyAreas,
     PropertyAddress,
     PropertyRecords,
-  ],
+    BackButton
+],
   templateUrl: './property-detail.html',
 })
 export class PropertyDetail implements OnInit {

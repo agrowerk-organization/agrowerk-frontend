@@ -1,0 +1,72 @@
+<div class="p-6 lg:p-10 space-y-8 max-w-9xl mx-auto">
+
+  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+    
+    <div class="flex items-center gap-4">
+      
+      <app-back-button link="/admin/dashboard" />
+
+      <div>
+        <app-title firstSegment="Insumos" secondSegment="Cadastrados" />
+        <app-subtitle [text]="totalElements() + ' insumo(s) cadastrado(s)'" />
+      </div>
+    </div>
+
+    <div class="flex items-center gap-3">
+      <app-button-pages
+        text="Categorias"
+        [icon]="icons.TAG"
+        width="fit-content"
+        (action)="openCategories()"
+       />
+
+      <app-button-pages
+        text="Novo Insumo"
+        [icon]="icons.PLUS"
+        width="fit-content"
+        (action)="openCreate()" />
+    </div>
+  </div>
+  
+    <app-search-bar
+      placeholder="Buscar insumo por nome..."
+      allLabel="Todos"
+      filterMode="buttons"
+      [filters]="categoryFilters()"
+      (searchChange)="onSearch($event)"
+      (filterChange)="onFilterChange($event)" />
+  
+    @if (loading()) {
+      <div class="flex items-center justify-center h-64">
+        <div class="animate-spin w-12 h-12 rounded-full border-4 border-button-main border-t-transparent"></div>
+      </div>
+    } @else if (inputs().length === 0) {
+      <div class="flex flex-col items-center justify-center h-64 gap-4">
+        <fa-icon [icon]="icons.FLASK" class="text-6xl text-primary/20" />
+        <p class="text-xl font-medium text-neutral-secondary/50">Nenhum insumo encontrado</p>
+      </div>
+    } @else {
+      <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5">
+        @for (input of inputs(); track input.id) {
+          <app-input-card
+            [input]="input"
+            (edit)="openEdit($event)"
+            (deactivate)="onDeactivate($event)" />
+        }
+      </div>
+    }
+  
+    <app-paginator
+      [currentPage]="currentPage()"
+      [totalPages]="totalPages()"
+      (pageChange)="loadPage($event)" />
+  </div>
+  
+  @if (modalOpen()) {
+    <app-input-form
+      [inputData]="editingInput()"
+      [saving]="saving()"
+      [categoryOptions]="categoryOptions()"
+      (save)="handleSave($event)"
+      (toCancel)="closeModal()" />
+}

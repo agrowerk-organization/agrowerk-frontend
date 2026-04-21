@@ -1,10 +1,13 @@
 <div class="p-6 lg:p-10 space-y-8 max-w-9xl mx-auto">
-
-    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+    
+    <div class="flex items-center gap-4">
+      <app-back-button link="/admin/dashboard" />
       <div>
         <app-title firstSegment="Culturas" secondSegment="Cadastradas"></app-title>
         <app-subtitle text=" {{ totalElements() }} cultura(s) cadastrada(s)"></app-subtitle>
       </div>
+    </div>
   
       <app-button-pages
         text="Nova Cultura"

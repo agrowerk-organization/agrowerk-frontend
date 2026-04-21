@@ -18,10 +18,8 @@
     <div class="p-8 space-y-8 pb-32 lg:pb-6 max-w-none mx-auto px-4 sm:px-10">
   
       <div class="flex items-center gap-4">
-        <a routerLink="/producer/dashboard"
-           class="flex items-center justify-center w-10 h-10 sm:w-14 sm:h-14 rounded-xl border-2 border-primary/50 hover:border-primary text-primary transition-all duration-300">
-          <fa-icon [icon]="icons.ARROW_LEFT" class="text-lg sm:text-2xl" />
-        </a>
+        <app-back-button
+          [link]="'/producer/dashboard'"/>
         <div>
           <h1 class="text-3xl sm:text-4xl font-bold text-primary">Clima & Monitoramento</h1>
           <p class="text-secondary text-xl sm:text-2xl mt-0.5">Previsões e alertas para sua propriedade</p>

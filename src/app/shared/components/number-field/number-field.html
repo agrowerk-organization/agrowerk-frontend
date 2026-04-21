@@ -1,6 +1,6 @@
 <div class="w-full">
     <label [for]="fieldId()"
-           class="text-xl sm:text-2xl text-neutral-secondary font-bold mb-1 block">
+           class="text-lg sm:text-xl text-neutral-secondary font-bold mb-1 block">
       {{ label() }}
     </label>
   
@@ -31,7 +31,7 @@
              [disabled]="isDisabled()"
              [value]="value() ?? ''"
              (input)="onInput($event)"
-             class="flex-1 min-w-0 bg-transparent text-primary text-center text-xl
+             class="flex-1 min-w-0 bg-transparent text-lg sm:text-xl text-neutral-secondary text-center text-xl
                     outline-none placeholder:text-neutral-secondary/40
                     disabled:opacity-50
                     [appearance:textfield]

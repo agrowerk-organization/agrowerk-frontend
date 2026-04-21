@@ -207,11 +207,11 @@ export const routes: Routes = [
       },
       {
         path: 'inputs',
-        loadComponent: () => import('./features/pages/admin/inputs/list-inputs/list-inputs')
-          .then(page => page.ListInputs)
+        loadComponent: () => import('./features/pages/admin/inputs/inputs')
+          .then(page => page.AdminInputs)
       },
       {
-        path: 'input-categories',
+        path: 'input/categories',
         loadComponent: () => import('./features/pages/admin/inputs/input-categories/input-categories')
           .then(page => page.InputCategories)
       },

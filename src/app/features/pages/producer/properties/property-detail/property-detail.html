@@ -8,10 +8,19 @@
 @else if (property(); as p) {
   <div class="p-6 space-y-6 pb-32 lg:pb-6 max-w-9xl mx-auto px-4 sm:px-10">
 
-    <app-property-header
-      [name]="p.name"
-      [stateName]="p.stateName"
-      (edit)="showModal.set(true)" />
+    <div class="flex items-center gap-4">
+      
+      <app-back-button 
+        [link]="'/producer/properties'"/>
+
+        <div class="flex-1">
+          <app-property-header
+            [name]="p.name"
+            [stateName]="p.stateName"
+            (edit)="showModal.set(true)" />
+        </div>  
+
+    </div>
 
     <app-property-hero
       [property]="p"

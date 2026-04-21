@@ -1,0 +1,97 @@
+<div class="fixed inset-0 z-[2000] flex items-center justify-center p-4">
+    <div class="absolute inset-0 bg-black/60 backdrop-blur-sm"
+         (click)="toCancel.emit()" tabindex="-1" role="presentation"></div>
+  
+    <div class="relative z-10 w-full mt-8 max-w-xl max-h-[75vh] flex flex-col rounded-3xl
+                bg-neutral-primary border-3 border-primary/70 shadow-2xl shadow-primary/30 overflow-hidden">
+  
+      <div class="flex items-center justify-between p-6 border-b border-primary/30">
+        <div>
+          <h2 class="text-xl sm:text-2xl font-black text-primary uppercase tracking-tight">
+            {{ categoryData() ? 'Editar Categoria' : 'Nova Categoria' }}
+          </h2>
+          @if (categoryData()) {
+            <p class="text-neutral-secondary/90 text-lg italic">{{ categoryData()!.name }}</p>
+          }
+        </div>
+        <button type="button" (click)="toCancel.emit()"
+                class="w-12 h-12 flex items-center justify-center rounded-xl border-2
+                       border-primary/30 text-primary hover:border-primary transition-all cursor-pointer">
+          <fa-icon [icon]="icons.CIRCLE_XMARK" class="text-2xl" />
+        </button>
+      </div>
+  
+      <div class="overflow-y-auto flex-1">
+        <form class="p-6 space-y-5" [formGroup]="form" (ngSubmit)="submit()">
+  
+          <div>
+            <label for="cat-name" class="text-xl text-neutral-secondary font-bold mb-1 block">Nome *</label>
+            <input id="cat-name" formControlName="name" type="text" placeholder="Ex: Herbicidas"
+                   class="w-full px-4 py-4 rounded-2xl border-2 border-primary/90
+                          bg-transparent text-lg text-neutral-secondary focus:border-primary outline-none transition-all" />
+          </div>
+  
+          <div>
+            <label for="cat-description" class="text-xl text-neutral-secondary font-bold mb-1 block">Descrição</label>
+            <textarea id="cat-description" formControlName="description" rows="3"
+                      class="w-full px-4 py-3 rounded-2xl border-2 border-primary/90
+                             bg-transparent text-lg text-neutral-secondary focus:border-primary outline-none transition-all resize-none"></textarea>
+          </div>
+  
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <app-select-field
+              label="Unidade de Medida *"
+              fieldId="cat-unit"
+              [options]="unitOptions"
+              formControlName="unitOfMeasure" />
+  
+            <app-select-field
+              label="Nível de Perigo *"
+              fieldId="cat-hazard"
+              [options]="hazardOptions"
+              formControlName="hazardLevel" />
+          </div>
+  
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label for="cat-icon" class="text-xl text-neutral-secondary font-bold mb-1 block">Ícone</label>
+              <input id="cat-icon" formControlName="icon" type="text" placeholder="Ex: leaf"
+                     class="w-full px-4 py-3 rounded-2xl border-2 border-primary/90
+                            bg-transparent text-lg text-neutral-secondary focus:border-primary outline-none transition-all" />
+            </div>
+            <div>
+              <label for="cat-color-hex" class="text-xl text-neutral-secondary font-bold mb-1 block">Cor (hex)</label>
+              <div class="flex items-center gap-3">
+                <input formControlName="color" type="color"
+                       class="w-14 h-12 rounded-xl border-2 border-primary/90 bg-transparent cursor-pointer" />
+                <input id="cat-color-hex" formControlName="color" type="text" placeholder="#4CAF50"
+                       class="flex-1 px-4 py-3 rounded-2xl border-2 border-primary/90
+                              bg-transparent text-lg text-neutral-secondary focus:border-primary outline-none transition-all" />
+              </div>
+            </div>
+          </div>
+  
+          <app-select-field
+            label="Categoria Pai"
+            fieldId="cat-parent"
+            [options]="parentOptions()"
+            formControlName="parentId" />
+  
+        </form>
+      </div>
+  
+      <div class="flex justify-center p-6 border-t border-primary/30 flex flex-col sm:flex-row gap-3">
+        <app-button-pages
+          text="Cancelar"
+          [icon]="icons.CIRCLE_XMARK"
+          width="100%"
+          (action)="toCancel.emit()" />
+        <app-button-pages
+          [text]="saving() ? 'Salvando...' : (categoryData() ? 'Salvar Alterações' : 'Confirmar Criação')"
+          [icon]="saving() ? icons.SPINNER : (categoryData() ? icons.PEN : icons.PLUS)"
+          [disabled]="saving() || form.invalid"
+          width="100%"
+          (action)="submit()" />
+      </div>
+    </div>
+</div>

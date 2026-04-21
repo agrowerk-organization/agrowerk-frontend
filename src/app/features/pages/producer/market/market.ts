@@ -23,6 +23,7 @@ import { MarketAlerts } from './market-components/market-alerts/market-alerts';
 import { MarketReports } from './market-components/market-reports/market-reports';
 import { MarketPrices } from './market-components/market-prices/market-prices';
 import { MarketChart } from './market-components/market-chart/market-chart';
+import { BackButton } from "@shared/components/back-button/back-button";
 
 @Component({
   selector: 'app-market',
@@ -37,7 +38,8 @@ import { MarketChart } from './market-components/market-chart/market-chart';
     MarketReports,
     MarketPrices,
     MarketChart,
-  ],
+    BackButton
+],
   templateUrl: './market.html'
 })
 export class Market implements OnInit {

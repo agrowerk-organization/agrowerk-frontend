@@ -1,7 +1,7 @@
 <div class="relative w-full">
 
     <label [for]="fieldId()"
-           class="text-xl sm:text-2xl text-neutral-secondary font-bold mb-1 block">
+           class="text-lg sm:text-xl text-neutral-secondary font-bold mb-1 block">
       {{ label() }}
     </label>
   
@@ -36,11 +36,11 @@
           <button type="button"
                   (click)="select(option)"
                   class="w-full flex items-center justify-between
-                         px-4 py-3 text-left text-xl sm:text-2xl text-primary
+                         px-4 py-3 text-left text-xl sm:text-2xl text-neutral-secondary
                          hover:bg-primary/10 transition-colors duration-150
                          border-b border-primary/20 last:border-0 cursor-pointer">
   
-            <span class="text-lg sm:text-xl text-primary transition-colors">{{ option.label }}</span>
+            <span class="text-lg sm:text-xl text-neutral-secondary transition-colors">{{ option.label }}</span>
   
             @if (selectedValue() === option.value) {
               <fa-icon [icon]="icons.check" class="text-neutral-secondary text-xl" />

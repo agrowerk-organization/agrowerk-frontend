@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ListInputs } from './list-inputs';
+import { BackButton } from './back-button';
 
-describe('ListInputs', () => {
-  let component: ListInputs;
-  let fixture: ComponentFixture<ListInputs>;
+describe('BackButton', () => {
+  let component: BackButton;
+  let fixture: ComponentFixture<BackButton>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ListInputs]
+      imports: [BackButton]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ListInputs);
+    fixture = TestBed.createComponent(BackButton);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

@@ -1,0 +1,153 @@
+<div class="fixed inset-0 z-[2000] flex items-center justify-center p-4">
+    <div class="absolute inset-0 bg-black/60 backdrop-blur-sm"
+         (click)="toCancel.emit()"
+         tabindex="-1" role="presentation"></div>
+  
+    <div class="relative z-10 w-full mt-8 max-w-2xl max-h-[75vh] flex flex-col rounded-3xl
+                bg-neutral-primary border-3 border-primary/70 shadow-2xl shadow-primary/30 overflow-hidden">
+  
+      <div class="flex items-center justify-between p-6 border-b border-primary/30">
+        <div>
+          <h2 class="text-xl sm:text-2xl font-black text-primary uppercase tracking-tight">
+            {{ inputData() ? 'Editar Insumo' : 'Novo Insumo' }}
+          </h2>
+          @if (inputData()) {
+            <p class="text-neutral-secondary/90 text-lg italic">{{ inputData()!.name }}</p>
+          }
+        </div>
+        <button type="button" (click)="toCancel.emit()"
+                class="w-12 h-12 flex items-center justify-center rounded-xl border-2
+                       border-primary/30 text-primary hover:border-primary transition-all cursor-pointer">
+          <fa-icon [icon]="icons.CIRCLE_XMARK" class="text-2xl" />
+        </button>
+      </div>
+  
+      <div class="overflow-y-auto flex-1">
+        <form class="p-6 space-y-5" [formGroup]="form" (ngSubmit)="submit()">
+            <div>
+                <label for="name" class="text-xl text-neutral-secondary font-bold mb-1 block">Nome *</label>
+                <input id="name" formControlName="name" type="text" placeholder="Ex: Roundup"
+                       class="w-full px-4 py-4 rounded-2xl border-2 border-primary/90
+                              bg-transparent text-lg text-neutral-secondary focus:border-primary outline-none transition-all" />
+              </div>
+              
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label for="internalCode" class="text-xl text-neutral-secondary font-bold mb-1 block">Código Interno</label>
+                  <input id="internalCode" formControlName="internalCode" type="text" placeholder="Ex: INS-001"
+                         class="w-full px-4 py-3 rounded-2xl border-2 border-primary/90
+                                bg-transparent text-lg text-neutral-secondary focus:border-primary outline-none transition-all" />
+                </div>
+                <div>
+                  <label for="manufacturerCode" class="text-xl text-neutral-secondary font-bold mb-1 block">Código Fabricante</label>
+                  <input id="manufacturerCode" formControlName="manufacturerCode" type="text"
+                         class="w-full px-4 py-3 rounded-2xl border-2 border-primary/90
+                                bg-transparent text-lg text-neutral-secondary focus:border-primary outline-none transition-all" />
+                </div>
+              </div>
+              
+              <div>
+                <label for="description" class="text-xl text-neutral-secondary font-bold mb-1 block">Descrição</label>
+                <textarea id="description" formControlName="description" rows="3"
+                          class="w-full px-4 py-3 rounded-2xl border-2 border-primary/90
+                                 bg-transparent text-lg text-neutral-secondary focus:border-primary outline-none transition-all resize-none">
+                </textarea>
+              </div>
+              
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <app-select-field
+                  label="Unidade de Medida *"
+                  fieldId="unitOfMeasure"
+                  [options]="unitOptions"
+                  formControlName="unitOfMeasure" />
+              
+                <app-select-field
+                  label="Categoria *"
+                  fieldId="categoryId"
+                  [options]="categoryOptions()"
+                  formControlName="categoryId" />
+              </div>
+              
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label for="activeIngredient" class="text-xl text-neutral-secondary font-bold mb-1 block">Princípio Ativo</label>
+                  <input id="activeIngredient" formControlName="activeIngredient" type="text"
+                         class="w-full px-4 py-3 rounded-2xl border-2 border-primary/90
+                                bg-transparent text-lg text-neutral-secondary focus:border-primary outline-none transition-all" />
+                </div>
+                <div>
+                  <label for="formulation" class="text-xl text-neutral-secondary font-bold mb-1 block">Formulação</label>
+                  <input id="formulation" formControlName="formulation" type="text"
+                         class="w-full px-4 py-3 rounded-2xl border-2 border-primary/90
+                                bg-transparent text-lg text-neutral-secondary focus:border-primary outline-none transition-all" />
+                </div>
+              </div>
+              
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div>
+                  <label for="concentration" class="text-xl text-neutral-secondary font-bold mb-1 block">Concentração</label>
+                  <input id="concentration" formControlName="concentration" type="text" placeholder="Ex: 480 g/L"
+                         class="w-full px-4 py-3 rounded-2xl border-2 border-primary/90
+                                bg-transparent text-lg text-neutral-secondary focus:border-primary outline-none transition-all" />
+                </div>
+                <div>
+                  <label for="mapaRegistration" class="text-xl text-neutral-secondary font-bold mb-1 block">Reg. MAPA</label>
+                  <input id="mapaRegistration" formControlName="mapaRegistration" type="text"
+                         class="w-full px-4 py-3 rounded-2xl border-2 border-primary/90
+                                bg-transparent text-lg text-neutral-secondary focus:border-primary outline-none transition-all" />
+                </div>
+
+                <app-number-field
+                label="Carência (dias)"
+                fieldId="grace-period"
+                [min]="0"
+                formControlName="gracePeriod" />
+            </div>
+  
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <app-select-field
+              label="Classe Toxicológica"
+              fieldId="tox-class"
+              [options]="toxOptions"
+              formControlName="toxicologicalClass" />
+  
+            <div class="flex items-center gap-3 mt-6">
+              <input id="controlled" type="checkbox" formControlName="controlled"
+                     class="w-5 h-5 accent-primary cursor-pointer" />
+              <label for="controlled" class="text-xl text-neutral-secondary font-bold cursor-pointer">
+                Produto Controlado
+              </label>
+            </div>
+          </div>
+  
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <app-number-field
+              label="Estoque Mínimo"
+              fieldId="min-stock"
+              [min]="0"
+              formControlName="minimumStock" />
+            <app-number-field
+              label="Estoque Máximo"
+              fieldId="max-stock"
+              [min]="0"
+              formControlName="maximumStock" />
+          </div>
+  
+        </form>
+      </div>
+  
+      <div class="flex justify-center p-6 border-t border-primary/30 flex flex-col sm:flex-row gap-3">
+        <app-button-pages
+          text="Cancelar"
+          [icon]="icons.CIRCLE_XMARK"
+          width="100%"
+          (action)="toCancel.emit()" />
+        <app-button-pages
+          [text]="saving() ? 'Salvando...' : (inputData() ? 'Salvar Alterações' : 'Confirmar Criação')"
+          [icon]="saving() ? icons.SPINNER : (inputData() ? icons.PEN : icons.PLUS)"
+          [disabled]="saving() || form.invalid"
+          width="100%"
+          (action)="submit()" />
+      </div>
+    </div>
+</div>

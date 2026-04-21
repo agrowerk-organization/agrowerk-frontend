@@ -1,0 +1,68 @@
+<div class="group relative overflow-hidden rounded-3xl bg-neutral-primary
+            border-3 border-primary/90 hover:border-primary
+            transition-all duration-300 hover:-translate-y-2
+            shadow-xl shadow-primary/20 hover:shadow-primary/40 flex flex-col h-full">
+
+  <div class="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-3xl pointer-events-none"></div>
+
+  <div class="flex flex-col gap-4 p-6 flex-1 relative z-10">
+    <div class="flex items-start justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <div class="w-12 h-12 rounded-xl flex items-center justify-center shrink-0"
+             [style.backgroundColor]="category().color + '33'"
+             [style.borderColor]="category().color"
+             style="border-width: 2px">
+          <fa-icon [icon]="icons.TAG" [style.color]="category().color" class="text-xl" />
+        </div>
+        <div>
+          <h2 class="text-primary font-black text-xl sm:text-2xl uppercase tracking-tight leading-none">
+            {{ category().name }}
+          </h2>
+          @if (category().parentId) {
+            <p class="text-neutral-secondary/60 text-sm sm:text-lg mt-0.5">Subcategoria</p>
+          } @else {
+            <p class="text-neutral-secondary/60 text-sm sm:text-lg mt-0.5">Categoria raiz</p>
+          }
+        </div>
+      </div>
+      <span class="shrink-0 px-3 py-1 rounded-full text-xl sm:text-2xl font-black uppercase tracking-widest
+                   bg-neutral-primary border-2 border-primary text-primary shadow-lg shadow-primary/50">
+        {{ formattedHazard() }}
+      </span>
+    </div>
+
+    @if (category().description) {
+      <p class="text-neutral-secondary text-xl sm:text-xl line-clamp-2">{{ category().description }}</p>
+    }
+
+    <div class="grid grid-cols-2 gap-3">
+      <div class="flex flex-col gap-1 p-3 rounded-xl bg-black/20 border-2 border-primary/90">
+        <span class="text-xl sm:text-2xl font-black uppercase text-neutral-secondary tracking-tighter">Unidade</span>
+        <span class="text-lg sm:text-xl font-bold text-primary">{{ formattedUnit() }}</span>
+      </div>
+      <div class="flex flex-col gap-1 p-3 rounded-xl bg-black/20 border-2 border-primary/90">
+        <span class="text-xl sm:text-2xl font-black uppercase text-neutral-secondary tracking-tighter">Nível</span>
+        <span class="text-lg sm:text-xl font-bold text-primary">{{ category().level }}</span>
+      </div>
+    </div>
+
+    @if ((category().children?.length ?? 0) > 0) {
+      <p class="text-neutral-secondary/60 text-sm">
+        {{ category().children?.length }} subcategoria(s)
+      </p>
+    }
+
+    <div class="flex justify-center umt-auto pt-4 border-t-2 border-primary/20 mt-auto gap-3">
+      <app-button-pages
+        text="Editar"
+        [icon]="icons.PEN"
+        width="full"
+        (action)="edit.emit(category())" />
+      <app-button-pages
+        text="Desativar"
+        [icon]="icons.TRASH"
+        width="full"
+        (action)="deactivate.emit(category().id)" />
+    </div>
+  </div>
+</div>
