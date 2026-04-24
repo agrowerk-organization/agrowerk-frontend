@@ -1,5 +1,5 @@
 import { Component, computed, input, output } from '@angular/core';
-import { CurrencyPipe, DatePipe } from '@angular/common';
+import { CurrencyPipe } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { UnitOfMeasure } from '@core/enums/unit-of-measure';
 import { ToxicologicalClass } from '@core/enums/toxicological-class';
@@ -14,7 +14,6 @@ import { Badge } from '@shared/components/badge/badge';
   standalone: true,
   imports: [
     CurrencyPipe, 
-    DatePipe, 
     FontAwesomeModule, 
     ButtonPages,
     Badge

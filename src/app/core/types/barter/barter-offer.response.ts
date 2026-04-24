@@ -1,0 +1,29 @@
+import { BarterOfferItemResponse } from "./barter-offer-item.response";
+import { OfferType } from "@core/enums/offer-type";
+import { OfferStatus } from "@core/enums/offer-status";
+export interface BarterOfferResponse {
+    id: string;
+    title: string;
+    description?: string;
+    ownerId: string;
+    ownerName: string;
+    propertyId?: string;
+    propertyName?: string;
+    propertyLocal?: string;
+    offerType: OfferType;
+    harvestForecastId?: string;  
+    offeredCropName?: string;
+    offeredCropQuantity?: number;
+    estimatedHarvestDate?: string;
+    offeredAssetId?: string;
+    offeredAssetName?: string;
+    offeredAssetQuantity?: number;
+    requestedType: OfferType;
+    requestedDescription?: string;
+    requestedValue?: number;
+    status: OfferStatus;
+    expiresAt: string;
+    viewCount: number;
+    requestedItems: BarterOfferItemResponse[];
+    createdAt: string;
+  }

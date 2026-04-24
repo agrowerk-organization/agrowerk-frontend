@@ -174,6 +174,21 @@ export const routes: Routes = [
         path: 'market',
         loadComponent: () => import('./features/pages/producer/market/market')
           .then(page => page.Market)
+      },
+      {
+        path: 'barter',
+        loadComponent: () => import('./features/pages/common/barter/barter-catalog/barter-catalog')
+            .then(page => page.BarterCatalog)
+      },
+      {
+        path: 'my-offers',
+        loadComponent: () => import('./features/pages/common/barter/barter-components/my-offers/my-offers')
+            .then(page => page.MyOffers)
+      },
+      {
+        path: 'my-transactions',
+        loadComponent: () => import('./features/pages/common/barter/my-transactions/my-transactions')
+            .then(page => page.MyTransactions)
       }
     ]
   },
@@ -234,6 +249,11 @@ export const routes: Routes = [
         path: 'support',
         loadComponent: () => import('./features/pages/admin/support/support')
           .then(page => page.Support)
+      },
+      {
+        path: 'barter',
+        loadComponent: () => import('./features/pages/common/barter/barter-catalog/barter-catalog')
+            .then(page => page.BarterCatalog)
       }
     ]
   },
@@ -275,6 +295,11 @@ export const routes: Routes = [
         loadComponent: () => import('./features/pages/supplier/profile/profile')
           .then(page => page.SupplierProfile)
       },
+      {
+        path: 'barter',
+        loadComponent: () => import('./features/pages/common/barter/barter-catalog/barter-catalog')
+            .then(page => page.BarterCatalog)
+      }
     ]
   },
 

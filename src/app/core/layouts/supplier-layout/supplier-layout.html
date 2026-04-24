@@ -7,16 +7,16 @@
   
     <header
       class="fixed top-0 left-0 right-0 z-[1050] w-full h-[90px] lg:h-[100px]
-             flex items-center justify-between px-6 lg:px-12
-             bg-neutral-primary/80 backdrop-blur-md
-             shadow-[0_2px_15px_rgba(0,0,0,0.4)]
-             border-b border-white/5">
-  
+      flex items-center justify-between px-6 lg:px-12
+      bg-neutral-primary/80 backdrop-blur-md
+      shadow-[0_2px_15px_rgba(0,0,0,0.4)]
+      border-b border-white/5">
+
       <div class="absolute inset-0 z-[998] pointer-events-none">
-        <div class="absolute inset-0 bg-gradient-to-br from-blue-900/40 via-indigo-900/30 to-transparent"></div>
-        <div class="absolute -top-20 -right-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
+      <div class="absolute inset-0 bg-gradient-to-br from-emerald-900/40 via-green-900/30 to-transparent"></div>
+      <div class="absolute -top-20 -right-0 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl"></div>
       </div>
-  
+        
       <div class="flex items-center z-[1001]">
         <a routerLink="/supplier/dashboard" class="block">
           <img
@@ -45,12 +45,12 @@
           <button
             (click)="layoutState.toggle()"
             class="hidden lg:flex items-center gap-2 px-8 py-3
-                   rounded-xl text-xl sm:text-2xl font-bold
-                   border border-blue-400/40 text-blue-300
-                   bg-gradient-to-br from-blue-900/60 to-indigo-950/60
-                   hover:from-blue-800/80 hover:to-indigo-900/80
-                   hover:border-blue-400 hover:shadow-[0_0_16px_rgba(96,165,250,0.3)]
-                   transition-all duration-300 hover:scale-[1.03] active:scale-95 cursor-pointer">
+            rounded-xl text-xl sm:text-2xl font-bold
+            border border-primary/40 text-primary
+            bg-gradient-to-br from-emerald-900/60 to-green-950/60
+            hover:from-emerald-800/80 hover:to-green-900/80
+            hover:border-primary hover:shadow-[0_0_16px_rgba(76,175,80,0.3)]
+            transition-all duration-300 hover:scale-[1.03] active:scale-95 cursor-pointer">
             @if (layoutState.showCycle()) {
               <fa-icon [icon]="icons.EYE_SLASH" class="text-xl" />
               Ocultar ciclo
@@ -65,8 +65,8 @@
           routerLink="/supplier/help-and-support"
           title="Ajuda e suporte"
           class="w-10 h-10 rounded-full flex items-center justify-center
-                 text-white/60 hover:text-white hover:bg-white/10
-                 transition-all duration-200 cursor-pointer">
+                text-white/60 hover:text-white hover:bg-white/10
+                transition-all duration-200 cursor-pointer">
           <fa-icon [icon]="icons.CIRCLE_QUESTION" class="text-5xl text-blue-400" />
         </a>
   

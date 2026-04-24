@@ -1,0 +1,128 @@
+<div class="group relative overflow-hidden rounded-3xl bg-neutral-primary
+            mt-4 border-3 transition-all duration-300
+            shadow-xl flex flex-col h-full"
+     [class]="borderClass()">
+
+  <div class="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-3xl pointer-events-none"></div>
+
+  <div class="flex flex-col gap-4 p-6 flex-1 relative z-10">
+
+    <div class="flex items-start justify-between gap-3">
+      <div class="flex-1 min-w-0">
+        <div class="flex flex-wrap items-center gap-2 mb-1">
+          <h2 class="text-primary font-black text-xl uppercase tracking-tight leading-none">
+            {{ transaction().offerTitle }}
+          </h2>
+          <span class="text-xs font-black uppercase px-2 py-0.5 rounded-full"
+                [class]="statusBadgeClass()">
+            {{ statusLabel() }}
+          </span>
+          <span class="text-xs font-black uppercase px-2 py-0.5 rounded-full bg-black/30 border border-white/10 text-neutral-secondary">
+            {{ roleLabel() }}
+          </span>
+        </div>
+        <p class="text-neutral-secondary text-base italic border-l-2 border-primary/30 pl-3">
+          {{ isOfferor() ? 'Aceitante: ' + transaction().acceptorName : 'Ofertante: ' + transaction().offerorName }}
+        </p>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-2 gap-3">
+      <div class="flex flex-col gap-1 p-3 rounded-xl bg-black/20 border-2 border-primary/90 shadow-lg shadow-primary/30">
+        <span class="text-base font-black uppercase text-neutral-secondary tracking-tighter">Você entrega</span>
+        <span class="text-base font-bold text-primary">
+          @if (isOfferor()) {
+            @if (transaction().offerorGives === 'CROP') {
+              {{ transaction().offerorCropQuantity }} sc · {{ transaction().offerorCropName }}
+            } @else {
+              {{ transaction().offerorAssetName }}
+            }
+          } @else {
+            @if (transaction().acceptorGives === 'CROP') {
+              {{ transaction().acceptorCropQuantity }} sc · {{ transaction().acceptorCropName }}
+            } @else {
+              Insumos acordados
+            }
+          }
+        </span>
+        <span class="text-xs text-neutral-secondary">{{ transaction().offerorDeliveryDate | date:'dd/MM/yyyy' }}</span>
+      </div>
+
+      <div class="flex flex-col gap-1 p-3 rounded-xl bg-black/20 border-2 border-primary/90 shadow-lg shadow-primary/30">
+        <span class="text-base font-black uppercase text-neutral-secondary tracking-tighter">Você recebe</span>
+        <span class="text-base font-bold text-primary">
+          @if (isOfferor()) {
+            @if (transaction().acceptorGives === 'CROP') {
+              {{ transaction().acceptorCropQuantity }} sc · {{ transaction().acceptorCropName }}
+            } @else {
+              Insumos acordados
+            }
+          } @else {
+            @if (transaction().offerorGives === 'CROP') {
+              {{ transaction().offerorCropQuantity }} sc · {{ transaction().offerorCropName }}
+            } @else {
+              {{ transaction().offerorAssetName }}
+            }
+          }
+        </span>
+        <span class="text-xs text-neutral-secondary">{{ transaction().acceptorDeliveryDate | date:'dd/MM/yyyy' }}</span>
+      </div>
+    </div>
+
+    @if (transaction().contractSignatureStatus) {
+      <div class="flex items-center gap-3 px-4 py-3 rounded-2xl bg-black/20 border border-white/10">
+        <fa-icon [icon]="icons.FILE_CONTRACT" class="text-neutral-secondary" />
+        <div class="flex flex-col">
+          <span class="text-xs font-black uppercase text-neutral-secondary tracking-tighter">Contrato</span>
+          <span class="text-sm text-white">
+            Ofertante: {{ transaction().contractSignatureStatus!.offerorSigned ? '✓' : '⏳' }} ·
+            Aceitante: {{ transaction().contractSignatureStatus!.acceptorSigned ? '✓' : '⏳' }}
+          </span>
+        </div>
+      </div>
+    }
+
+    <div class="flex flex-wrap items-center justify-center gap-2 mt-auto pt-4 border-t-2 border-primary/20">
+
+      @if (transaction().status === 'PENDING' && !isOfferor()) {
+        <app-button-pages
+          text="Aceitar"
+          [icon]="icons.CHECK"
+          width="auto"
+          (action)="accept.emit(transaction())" />
+        <app-button-pages
+          text="Recusar"
+          [icon]="icons.CIRCLE_XMARK"
+          width="auto"
+          (action)="decline.emit(transaction().id)" />
+      }
+
+      @if (transaction().contractId &&
+           (transaction().status === 'CONFIRMED' || transaction().status === 'IN_PROGRESS')) {
+        <app-button-pages
+          text="Ver Contrato"
+          [icon]="icons.FILE_CONTRACT"
+          width="auto"
+          (action)="viewContract.emit(transaction().id)" />
+
+        @if (!alreadySigned()) {
+          <app-button-pages
+            text="Assinar"
+            [icon]="icons.PEN"
+            width="auto"
+            (action)="sign.emit(transaction())" />
+        }
+      }
+
+      @if (transaction().status !== 'COMPLETED' && transaction().status !== 'CANCELLED') {
+        <app-button-pages
+          text="Cancelar"
+          [icon]="icons.TRASH"
+          width="auto"
+          (action)="toCancel.emit(transaction().id)" />
+      }
+
+    </div>
+
+  </div>
+</div>

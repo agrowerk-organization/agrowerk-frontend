@@ -1,0 +1,32 @@
+<div class="fixed bottom-6 right-6 z-[9999] flex flex-col gap-3 pointer-events-none">
+
+    @for (toast of toastService.toasts(); track toast.id) {
+  
+      <div class="pointer-events-auto flex items-start gap-3 px-5 py-4
+                  rounded-2xl border-2 shadow-2xl min-w-[280px] max-w-[380px]
+                  animate-slide-in"
+           [class]="toast.type === 'success'
+             ? 'bg-neutral-primary border-primary/60 shadow-primary/20'
+             : 'bg-neutral-primary border-red-500/60 shadow-red-500/20'">
+  
+        <fa-icon
+          [icon]="toast.type === 'success' ? icons.SUCCESS : icons.ERROR"
+          class="text-xl mt-0.5 flex-shrink-0"
+          [class]="toast.type === 'success' ? 'text-primary' : 'text-red-400'" />
+  
+        <p class="flex-1 text-base font-medium text-neutral-secondary leading-snug">
+          {{ toast.message }}
+        </p>
+  
+        <button type="button"
+                (click)="toastService.dismiss(toast.id)"
+                class="flex-shrink-0 text-neutral-secondary/50 hover:text-neutral-secondary
+                       transition-colors cursor-pointer mt-0.5">
+          <fa-icon [icon]="icons.CLOSE" class="text-base" />
+        </button>
+  
+      </div>
+  
+    }
+  
+  </div>

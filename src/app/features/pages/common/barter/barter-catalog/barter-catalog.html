@@ -1,0 +1,53 @@
+<div class="p-6 lg:p-10 space-y-8 max-w-9xl mx-auto">
+
+  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+    
+    <div class="flex items-center gap-4">
+      
+      <app-back-button link="/admin/dashboard" />
+
+      <div>
+        <app-title firstSegment="Catálogo de" secondSegment="Barter" />
+        <app-subtitle [text]="'' + offers().length + ' oferta(s) ativa(s) disponível(is)'" />
+      </div>
+    </div>
+
+    <div class="flex items-center gap-3">
+      <app-button-pages
+        text="Minhas Ofertas"
+        [icon]="icons.LIST"
+        width="fit-content"
+        (action)="goToMyOffers()" 
+       />
+    </div>
+  </div>
+
+  @if (loading()) {
+    <div class="flex justify-center py-20">
+      <fa-icon [icon]="icons.SPINNER" class="text-primary text-4xl animate-spin" />
+    </div>
+  } @else if (offers().length === 0) {
+    <div class="bg-surface border border-dashed border-neutral-tertiary rounded-xl p-20 text-center">
+      <p class="text-neutral-secondary text-lg">
+        Nenhuma oferta ativa no momento.
+      </p>
+    </div>
+  } @else {
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+      @for (offer of offers(); track offer.id) {
+        <app-barter-offer-card
+          [offer]="offer"
+          [currentUserId]="currentUserId()"
+          (propose)="openPropose($event)"
+          (toCancel)="cancelOffer($event)" />
+      }
+    </div>
+  }
+</div>
+
+@if (selectedOffer()) {
+    <app-propose-transaction-modal
+        [offer]="selectedOffer()!"
+        (toCancel)="closeModal()"
+        (proposed)="onProposed()" />
+}

@@ -1,0 +1,90 @@
+<div class="p-6 lg:p-10 space-y-8 max-w-9xl mx-auto">
+
+  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+    <div class="flex items-center gap-4">
+      
+      <app-back-button link="/admin/dashboard" />
+
+      <div>
+        <app-title firstSegment="Minhas" secondSegment="Transações" />
+        <app-subtitle [text]="transactions().length + ' negociação(ões) encontrada(s)'" />
+      </div>
+    </div>
+
+    <div class="flex items-center gap-3">
+       </div>
+  </div>
+
+  <div class="flex flex-wrap gap-2">
+    @for (filter of statusFilters; track filter.value) {
+      <button type="button"
+              (click)="setFilter(filter.value)"
+              class="px-4 py-2 rounded-xl text-sm font-black uppercase tracking-tight
+                     border-2 transition-all cursor-pointer"
+              [class]="activeFilter() === filter.value
+                ? 'border-primary bg-primary/10 text-primary'
+                : 'border-white/10 bg-black/20 text-neutral-secondary hover:border-primary/50'">
+        {{ filter.label }}
+      </button>
+    }
+  </div>
+
+  @if (loading()) {
+    <div class="flex justify-center py-20">
+      <fa-icon [icon]="icons.SPINNER" class="text-primary text-4xl animate-spin" />
+    </div>
+  } @else if (filtered().length === 0) {
+    <div class="bg-surface border border-dashed border-neutral-tertiary rounded-xl py-20 flex flex-col items-center gap-4">
+      <fa-icon [icon]="icons.FILE_CONTRACT" class="text-neutral-secondary/30 text-6xl" />
+      <p class="text-neutral-secondary text-lg font-medium">
+        Nenhuma transação encontrada para este filtro.
+      </p>
+    </div>
+  } @else {
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+      @for (tx of filtered(); track tx.id) {
+        <app-transaction-card
+          [transaction]="tx"
+          [currentUserId]="currentUserId()"
+          (accept)="openAccept($event)"
+          (decline)="onDecline($event)"
+          (toCancel)="onCancel($event)"
+          (sign)="openSign($event)"
+          (viewContract)="onViewContract($event)" />
+      }
+    </div>
+
+    @if (!isLastPage()) {
+      <div class="flex justify-center mt-8">
+        <button type="button"
+                (click)="loadMore()"
+                [disabled]="loadingMore()"
+                class="px-8 py-3 rounded-2xl border-2 border-primary/50 text-primary
+                       font-black uppercase tracking-tight hover:border-primary
+                       transition-all cursor-pointer disabled:opacity-50">
+          @if (loadingMore()) {
+            <fa-icon [icon]="icons.SPINNER" class="animate-spin mr-2" />
+          }
+          Carregar mais
+        </button>
+      </div>
+    }
+  }
+
+</div>
+
+@if (transactionToAccept() && offerToAccept()) {
+  <app-accept-transaction-modal
+    [transaction]="transactionToAccept()!"
+    [offer]="offerToAccept()!"
+    (toCancel)="closeModals()"
+    (accepted)="onAccepted($event)"
+    (decline)="onDeclined()" />
+}
+
+@if (contractToSign()) {
+  <app-sign-contract-modal
+      [contract]="contractToSign()!"
+      (toCancel)="closeModals()"
+      (signed)="onSigned()" />
+}

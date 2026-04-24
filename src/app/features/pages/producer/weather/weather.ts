@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject, signal, ChangeDetectionStrategy } from '@angular/core';
-import { RouterLink } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { catchError, of } from 'rxjs';
 import { WeatherService } from '@core/services/weather.service';
@@ -24,7 +23,6 @@ import { BackButton } from "@shared/components/back-button/back-button";
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     CommonModule,
-    RouterLink,
     FontAwesomeModule,
     WeatherCard,
     ForecastCard,

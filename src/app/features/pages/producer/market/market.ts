@@ -3,7 +3,6 @@ import {
   Component, computed, inject, signal, OnInit,
   ChangeDetectionStrategy
 } from '@angular/core';
-import { RouterLink } from '@angular/router';
 import { ICONS_MARKET } from '@core/ui/icons/icons-producer/icons-market/icons-market';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
@@ -31,7 +30,6 @@ import { BackButton } from "@shared/components/back-button/back-button";
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     CommonModule,
-    RouterLink,
     FontAwesomeModule,
     MarketLoading,
     MarketAlerts,

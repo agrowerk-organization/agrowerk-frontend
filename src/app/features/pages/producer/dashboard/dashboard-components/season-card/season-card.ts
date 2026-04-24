@@ -32,10 +32,6 @@ export class SeasonCard {
     return
   } 
 
-  importData() {
-    return
-  }
-
   goToSeason() {
     this.router.navigate([`/producer/season/${this.season()?.id}`]);
   }

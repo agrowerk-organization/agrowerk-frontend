@@ -1,0 +1,127 @@
+<div class="group relative overflow-hidden rounded-3xl bg-neutral-primary
+            mt-4 border-3 border-primary/50 hover:border-primary
+            transition-all duration-300 hover:-translate-y-2
+            shadow-xl shadow-primary/20 hover:shadow-primary/40 flex flex-col h-full">
+
+  <div class="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-3xl pointer-events-none"></div>
+
+  <div class="flex flex-col gap-4 p-6 flex-1 relative z-10">
+
+    <div class="flex items-start justify-between gap-3">
+      <div class="flex-1 min-w-0">
+        <div class="flex flex-wrap items-center gap-2 mb-1">
+          <h2 class="text-primary font-black text-2xl uppercase tracking-tight leading-none">
+            {{ offer().title }}
+          </h2>
+          <span class="text-xs font-black uppercase px-2 py-0.5 rounded-full"
+                [class]="statusBadgeClass()">
+            {{ statusLabel() }}
+          </span>
+          <span class="text-xs font-black uppercase px-2 py-0.5 rounded-full"
+                [class]="offerTypeBadgeClass()">
+            {{ offerTypeLabel() }}
+          </span>
+        </div>
+        <div class="flex flex-row justify-between gap-2">
+          <p class="text-neutral-secondary text-lg italic font-medium border-l-2 border-primary/30 pl-3">
+            {{ offer().ownerName }}
+          </p>
+          <p class="text-primary text-lg italic font-medium border-l-2 border-primary/30 pl-3">
+            {{ offer().propertyLocal }}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-2 gap-3">
+      @if (offer().offerType === type.CROP && offer().offeredCropName) {
+        <div class="flex flex-col gap-1 p-3 rounded-xl bg-black/20 border-2 border-primary/90 shadow-lg shadow-primary/30">
+          <span class="text-xl font-black uppercase text-neutral-secondary tracking-tighter">Oferece</span>
+          <span class="text-lg font-bold text-primary">{{ offer().offeredCropName }}</span>
+          <span class="text-base text-neutral-secondary">{{ offer().offeredCropQuantity }} sacas</span>
+        </div>
+        @if (offer().estimatedHarvestDate) {
+          <div class="flex flex-col gap-1 p-3 rounded-xl bg-black/20 border-2 border-primary/90 shadow-lg shadow-primary/30">
+            <span class="text-xl font-black uppercase text-neutral-secondary tracking-tighter">Colheita Prev.</span>
+            <span class="text-lg font-bold text-primary">{{ offer().estimatedHarvestDate | date:'dd/MM/yyyy' }}</span>
+          </div>
+        }
+      }
+
+      @if (offer().offerType === 'ASSET' && offer().offeredAssetName) {
+        <div class="flex flex-col gap-1 p-3 rounded-xl bg-black/20 border-2 border-primary/90 shadow-lg shadow-primary/30 col-span-2">
+          <span class="text-xl font-black uppercase text-neutral-secondary tracking-tighter">Ativo Oferecido</span>
+          <span class="text-lg font-bold text-primary">{{ offer().offeredAssetName }}</span>
+          @if (offer().offeredAssetQuantity) {
+            <span class="text-base text-neutral-secondary">Qtd: {{ offer().offeredAssetQuantity }}</span>
+          }
+        </div>
+      }
+    </div>
+
+    @if (offer().requestedItems.length) {
+      <div class="flex flex-col gap-2">
+        <span class="text-xl font-black uppercase text-neutral-secondary tracking-tighter">Solicita em troca</span>
+        <div class="flex flex-col gap-1">
+          @for (item of offer().requestedItems; track item.id) {
+            <div class="flex items-center justify-between px-3 py-2 rounded-xl bg-black/30 border border-primary/90">
+              <span class="text-xl sm:text-2xl font-bold text-neutral-secondary">{{ item.inputName }}</span>
+              <span class="text-xl sm:text-2xl text-neutral-secondary">
+                {{ item.quantity }} {{ getUnitAbbreviation(item.unit) }} ·
+                {{ item.totalPriceBrl | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}
+              </span>
+            </div>
+          }
+        </div>
+      </div>
+    } @else if (offer().description) {
+      
+    }
+    
+    @else if (offer().requestedDescription) {
+      <div class="flex flex-col gap-1 p-3 rounded-xl bg-black/30 border border-primary/90">
+        <span class="text-xl font-black uppercase text-neutral-secondary tracking-tighter">Solicita</span>
+        <span class="text-base text-neutral-secondary">{{ offer().requestedDescription }}</span>
+      </div>
+    }
+
+    <div class="flex items-center gap-2 px-3 py-2 rounded-xl bg-black/30 border border-secondary/80">
+      <fa-icon [icon]="icons.CLOCK" class="text-neutral-secondary shadow-2xl shadow-secondary"/>
+      <span class="text-base text-neutral-secondary">
+        Válida até <strong class="text-white">{{ offer().expiresAt | date:'dd/MM/yyyy' }}</strong>
+      </span>
+      <span class="ml-auto text-sm text-neutral-secondary">
+        {{ offer().viewCount }} visualizações
+      </span>
+    </div>
+
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-3 mt-auto pt-4 border-t-2 border-primary/20">
+      @if (isOwner()) {
+        @if(offer().status !== status.CANCELLED) {
+          <app-button-pages
+            text="Cancelar Oferta"
+            [icon]="icons.TRASH"
+            width="auto"
+            (action)="toCancel.emit(offer().id)" />
+        }
+        <app-button-pages
+          text="Editar Oferta"
+          [icon]="icons.PENCIL"
+          width="auto"
+          (action)="openEdit()" />
+      } @else {
+        <app-button-pages
+          text="Ver Detalhes"
+          [icon]="icons.EYE"
+          width="auto"
+          (action)="viewDetail.emit(offer())" />
+        <app-button-pages
+          text="Propor Troca"
+          [icon]="icons.HANDSHAKE"
+          width="auto"
+          (action)="propose.emit(offer())" />
+      }
+    </div>
+
+  </div>
+</div>

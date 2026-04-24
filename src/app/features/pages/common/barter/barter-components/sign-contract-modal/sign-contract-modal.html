@@ -1,0 +1,94 @@
+<div class="fixed inset-0 z-[2000] flex items-center justify-center p-4">
+    <div class="absolute inset-0 bg-black/60 backdrop-blur-sm"
+         (click)="toCancel.emit()" tabindex="-1" role="presentation"></div>
+  
+    <div class="relative z-10 w-full mt-8 max-w-lg flex flex-col rounded-3xl
+                bg-neutral-primary border-3 border-primary/70 shadow-2xl shadow-primary/30 overflow-hidden">
+  
+      <div class="flex items-center justify-between p-6 border-b border-primary/30">
+        <div>
+          <h2 class="text-xl sm:text-2xl font-black text-primary uppercase tracking-tight">
+            Assinar Contrato
+          </h2>
+          <p class="text-neutral-secondary/90 text-lg italic">Nº {{ contract().contractNumber }}</p>
+        </div>
+        <button type="button" (click)="toCancel.emit()"
+                class="w-12 h-12 flex items-center justify-center rounded-xl border-2
+                       border-primary/30 text-primary hover:border-primary transition-all cursor-pointer">
+          <fa-icon [icon]="icons.CIRCLE_XMARK" class="text-2xl" />
+        </button>
+      </div>
+  
+      <div class="p-6 space-y-5">
+  
+        <div class="grid grid-cols-2 gap-3">
+          <div class="flex flex-col gap-1 p-3 rounded-xl border-2"
+               [class]="contract().offerorSigned
+                 ? 'bg-primary/10 border-primary/50'
+                 : 'bg-black/20 border-white/10'">
+            <span class="text-base font-black uppercase text-neutral-secondary tracking-tighter">Ofertante</span>
+            @if (contract().offerorSigned) {
+              <span class="text-base font-bold text-primary">✓ Assinado</span>
+              <span class="text-xs text-neutral-secondary">{{ contract().offerorSignedAt | date:'dd/MM/yyyy HH:mm' }}</span>
+            } @else {
+              <span class="text-base text-neutral-secondary">Aguardando</span>
+            }
+          </div>
+          <div class="flex flex-col gap-1 p-3 rounded-xl border-2"
+               [class]="contract().acceptorSigned
+                 ? 'bg-primary/10 border-primary/50'
+                 : 'bg-black/20 border-white/10'">
+            <span class="text-base font-black uppercase text-neutral-secondary tracking-tighter">Aceitante</span>
+            @if (contract().acceptorSigned) {
+              <span class="text-base font-bold text-primary">✓ Assinado</span>
+              <span class="text-xs text-neutral-secondary">{{ contract().acceptorSignedAt | date:'dd/MM/yyyy HH:mm' }}</span>
+            } @else {
+              <span class="text-base text-neutral-secondary">Aguardando</span>
+            }
+          </div>
+        </div>
+  
+        <div class="flex items-center gap-3 px-4 py-3 rounded-2xl bg-black/20 border border-white/10">
+          <fa-icon [icon]="icons.CALENDAR" class="text-primary" />
+          <span class="text-base text-neutral-secondary">
+            Vigência: <strong class="text-white">
+              {{ contract().startDate | date:'dd/MM/yyyy' }} até {{ contract().endDate | date:'dd/MM/yyyy' }}
+            </strong>
+          </span>
+        </div>
+  
+        @if (contract().termsAndConditions) {
+          <div class="p-4 rounded-2xl bg-black/20 border border-white/10 max-h-40 overflow-y-auto">
+            <p class="text-sm text-neutral-secondary leading-relaxed whitespace-pre-line">
+              {{ contract().termsAndConditions }}
+            </p>
+          </div>
+        }
+  
+        <div class="flex items-start gap-3 p-4 rounded-2xl bg-primary/5 border border-primary/20">
+          <input id="accepted" type="checkbox" [(ngModel)]="accepted"
+                 class="w-5 h-5 mt-0.5 accent-primary cursor-pointer flex-shrink-0" />
+          <label for="accepted" class="text-base text-neutral-secondary leading-relaxed cursor-pointer">
+            Li e concordo com os termos e condições do contrato de barter acima, e confirmo que
+            as informações da transação estão corretas.
+          </label>
+        </div>
+  
+      </div>
+  
+      <div class="flex justify-center p-6 border-t border-primary/30 flex-col sm:flex-row gap-3">
+        <app-button-pages
+          text="Cancelar"
+          [icon]="icons.CIRCLE_XMARK"
+          width="100%"
+          (action)="toCancel.emit()" />
+        <app-button-pages
+          [text]="saving() ? 'Assinando...' : 'Assinar Contrato'"
+          [icon]="saving() ? icons.SPINNER : icons.PEN"
+          [disabled]="saving() || !accepted"
+          width="100%"
+          (action)="sign()" />
+      </div>
+  
+    </div>
+</div>
