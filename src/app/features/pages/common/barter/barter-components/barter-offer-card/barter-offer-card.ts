@@ -2,6 +2,7 @@ import { Component, computed, input, output, signal } from '@angular/core';
 import { CommonModule, CurrencyPipe, DatePipe } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BarterOfferResponse } from '@core/types/barter/barter-offer.response';
+import { BarterOfferItemResponse } from '@core/types/barter/barter-offer-item.response';
 import { ButtonPages } from '@shared/components/buttons/button-pages/button-pages';
 import { ICONS_BARTER } from '@core/ui/icons/icons-common/icons-barter/icons-barter';
 import { OfferStatus } from '@core/enums/offer-status';
@@ -25,13 +26,13 @@ export class BarterOfferCard {
   offer        = input.required<BarterOfferResponse>();
   currentUserId = input.required<string>();
 
-  viewDetail = output<BarterOfferResponse>();
+  showActions = input<boolean>(true);
   propose    = output<BarterOfferResponse>();
   toCancel     = output<string>();
   edit        = output<BarterOfferResponse>();
   modalOpen   = signal<boolean>(false);
 
-  showEditButton = input<boolean>(false);
+  showEditButton = input<boolean>();
 
   readonly icons = ICONS_BARTER;
   readonly status = OfferStatus;
@@ -40,6 +41,18 @@ export class BarterOfferCard {
   OfferType = signal<OfferType>(OfferType.CROP);
 
   isOwner = computed(() => this.offer().ownerId === this.currentUserId());
+
+  offerDelta = computed(() => {
+    const suggested = this.offer().suggestedQuantity;
+    const offered   = this.offer().offeredCropQuantity;
+    if (!suggested || !offered) return null;
+    const diff = offered - suggested;
+    if (Math.abs(diff) < 0.1) return null;
+    return {
+      value: Math.abs(diff).toFixed(1),
+      direction: diff > 0 ? 'acima' : 'abaixo'
+    };
+  });
 
   statusLabel = computed(() => {
     const map: Record<string, string> = {
@@ -76,6 +89,12 @@ export class BarterOfferCard {
   totalRequestedValue = computed(() =>
     this.offer().requestedItems?.reduce((sum, i) => sum + i.totalPriceBrl, 0) ?? 0
   );
+
+  priceVariance(item: BarterOfferItemResponse): 'up' | 'down' | 'equal' {
+    if (item.currentAveragePriceBrl > item.unitPriceBrl) return 'up';
+    if (item.currentAveragePriceBrl < item.unitPriceBrl) return 'down';
+    return 'equal';
+  }
 
   openEdit(): void {
     this.edit.emit(this.offer());

@@ -3,7 +3,11 @@ import {
     faHandshake,
     faFileContract,
     faArrowsRotate,
-    faArrowRight
+    faArrowRight,
+    faBuilding,
+    faTriangleExclamation,
+    faFlask,
+    faCircleQuestion
 } from '@fortawesome/free-solid-svg-icons';
 
 export const ICONS_DASHBOARD = {
@@ -11,5 +15,9 @@ export const ICONS_DASHBOARD = {
     HANDSHAKE: faHandshake,
     FILE_CONTRACT: faFileContract,
     ARROWS_ROTATE: faArrowsRotate,
-    ARROW_RIGHT: faArrowRight
+    ARROW_RIGHT: faArrowRight,
+    BUILDING: faBuilding,
+    TRIANGLE_EXCLAMATION: faTriangleExclamation,
+    FLASK: faFlask,
+    CIRCLE_QUESTION: faCircleQuestion
 }

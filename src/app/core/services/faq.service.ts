@@ -2,6 +2,7 @@ import { Injectable, inject } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { environment } from "@environments/environment";
+import { Page } from "@core/types/page/page";
 import { FaqResponse } from "@core/types/faq/faq-response";
 import { FaqCategory } from "@core/types/faq/faq-category";
 import { FaqRequest } from "@core/types/faq/faq-request";
@@ -12,14 +13,14 @@ export class FaqService {
     private http = inject(HttpClient);
 
 
-    list(category?: FaqCategory, page = 0, size = 10): Observable<FaqResponse[]> {
+    list(category?: FaqCategory, page = 0, size = 10): Observable<Page<FaqResponse>> {
         const params: Record<string, string | number> = { page, size };
         
         if (category) {
             params['category'] = category;
         }
 
-        return this.http.get<FaqResponse[]>(
+        return this.http.get<Page<FaqResponse>>(
             `${this.base}/list-active`, { params } 
         );
     }

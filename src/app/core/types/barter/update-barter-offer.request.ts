@@ -3,4 +3,6 @@ export interface UpdateBarterOfferRequest {
     description?: string;
     requestedDescription?: string;
     expiresAt?: string;
+    offeredCropQuantity?: number;
+    offeredAssetQuantity?: number;
 }

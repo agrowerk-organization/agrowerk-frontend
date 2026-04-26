@@ -8,5 +8,7 @@ export interface BarterOfferItemResponse {
     unit: UnitOfMeasureKey;
     unitPriceBrl: number;
     totalPriceBrl: number;
+    currentAveragePriceBrl: number;
     notes?: string;
+    updatedAt: string;
 }

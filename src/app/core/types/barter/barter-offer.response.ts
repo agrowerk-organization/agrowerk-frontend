@@ -25,5 +25,8 @@ export interface BarterOfferResponse {
     expiresAt: string;
     viewCount: number;
     requestedItems: BarterOfferItemResponse[];
+    suggestedQuantity?: number;
+    referencePrice?: number;
+    referencePriceDate?: string;
     createdAt: string;
   }

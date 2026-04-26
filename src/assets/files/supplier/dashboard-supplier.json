@@ -1,0 +1,32 @@
+[
+    {
+      "label": "Lotes",
+      "description": "Gerencie seus lotes de insumos, acompanhe validades e status de entrega",
+      "route": "/supplier/batches",
+      "icon": "BOXES_STACKED"
+    },
+    {
+      "label": "Insumos",
+      "description": "Consulte o catálogo de insumos vinculados ao seu fornecimento",
+      "route": "/supplier/inputs",
+      "icon": "FLASK"
+    },
+    {
+      "label": "Barter",
+      "description": "Visualize ofertas de produtores e negocie trocas por insumos",
+      "route": "/supplier/barter",
+      "icon": "HANDSHAKE"
+    },
+    {
+      "label": "Perfil",
+      "description": "Mantenha os dados do seu fornecedor atualizados na plataforma",
+      "route": "/supplier/profile",
+      "icon": "BUILDING"
+    },
+    {
+      "label": "Ajuda e Suporte",
+      "description": "Acesse o suporte e tire dúvidas sobre a plataforma",
+      "route": "/supplier/help-and-support",
+      "icon": "CIRCLE_QUESTION"
+    }
+]

@@ -299,6 +299,11 @@ export const routes: Routes = [
         path: 'barter',
         loadComponent: () => import('./features/pages/common/barter/barter-catalog/barter-catalog')
             .then(page => page.BarterCatalog)
+      },
+      {
+        path: 'help-and-support',
+        loadComponent: () => import('./features/pages/common/help-and-support/help-and-support')
+          .then(page => page.HelpAndSupport)
       }
     ]
   },

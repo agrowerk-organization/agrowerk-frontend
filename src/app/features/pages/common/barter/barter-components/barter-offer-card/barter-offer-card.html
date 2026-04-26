@@ -59,29 +59,111 @@
       }
     </div>
 
+    @if (offer().offerType === type.CROP && offerDelta()) {
+      <div class="flex items-center gap-2 px-3 py-2 rounded-xl"
+           [class]="offerDelta()!.direction === 'acima' 
+             ? 'bg-amber-500/10 border border-amber-500/30' 
+             : 'bg-red-500/10 border border-red-500/30'">
+        <fa-icon [icon]="icons.TRIANGLE_EXCLAMATION"
+                 [class]="offerDelta()!.direction === 'acima' 
+                   ? 'text-amber-400 text-sm shrink-0' 
+                   : 'text-red-400 text-sm shrink-0'" />
+        <span class="textlg italic"
+              [class]="offerDelta()!.direction === 'acima' ? 'text-amber-300/90' : 'text-red-300/90'">
+          {{ offerDelta()!.direction === 'acima'
+             ? '↓ ' + offerDelta()!.value + ' sacas acima do necessário — considere reduzir'
+             : '↑ ' + offerDelta()!.value + ' sacas abaixo do necessário — considere aumentar' }}
+          <span class="text-neutral-secondary text-sm">
+            (ref. {{ offer().referencePrice | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}/saca
+            em {{ offer().referencePriceDate | date:'dd/MM/yyyy' }})
+          </span>
+        </span>
+      </div>
+    }
+
     @if (offer().requestedItems.length) {
       <div class="flex flex-col gap-2">
-        <span class="text-xl font-black uppercase text-neutral-secondary tracking-tighter">Solicita em troca</span>
+        <span class="text-xl font-black uppercase text-neutral-secondary tracking-tighter">
+          Solicita em troca
+        </span>
+    
         <div class="flex flex-col gap-1">
           @for (item of offer().requestedItems; track item.id) {
-            <div class="flex items-center justify-between px-3 py-2 rounded-xl bg-black/30 border border-primary/90">
-              <span class="text-xl sm:text-2xl font-bold text-neutral-secondary">{{ item.inputName }}</span>
-              <span class="text-xl sm:text-2xl text-neutral-secondary">
-                {{ item.quantity }} {{ getUnitAbbreviation(item.unit) }} ·
-                {{ item.totalPriceBrl | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}
-              </span>
+            <div class="flex flex-col gap-2 px-3 py-3 rounded-xl bg-black/30 border-2 border-primary/90">
+          
+              <div class="flex items-start justify-between gap-2">
+                <span class="text-lg sm:text-xl font-bold text-neutral-secondary leading-tight">
+                  {{ item.inputName }}
+                </span>
+                <div class="flex flex-col items-end shrink-0">
+                  <span class="text-lg sm:text-xl font-semibold text-neutral-secondary">
+                    {{ item.totalPriceBrl | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}
+                  </span>
+                  <span class="text-sm text-secondary">
+                    {{ item.quantity }} {{ getUnitAbbreviation(item.unit) }}
+                  </span>
+                </div>
+              </div>
+          
+              <div class="border-t border-primary/90"></div>
+          
+              <div class="flex justify-between items-center gap-3">
+                <div class="flex flex-col gap-0.5">
+                  <span class="text-lg sm:text-xl uppercase tracking-wide text-secondary font-medium">Oferta</span>
+                  <span class="text-sm sm:text-base font-semibold text-neutral-300">
+                    {{ item.unitPriceBrl | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}
+                  </span>
+                </div>
+          
+                <span class="text-secondary text-2xl">vs</span>
+          
+                <div class="flex flex-col gap-0.5">
+                  <span class="text-lg sm:text-xl uppercase tracking-wide text-secondary font-medium">Atual</span>
+                  <span
+                    class="text-sm sm:text-base font-semibold"
+                    [class]="priceVariance(item) === 'up'
+                      ? 'text-red-400'
+                      : priceVariance(item) === 'down'
+                        ? 'text-green-400'
+                        : 'text-neutral-300'"
+                  >
+                    {{ item.currentAveragePriceBrl | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}
+                  </span>
+                </div>
+          
+                @if (priceVariance(item) !== 'equal') {
+                  <div class="flex flex-col items-end ml-auto">
+                    <span
+                      class="text-xs sm:text-sm font-semibold px-2 py-0.5 rounded-full"
+                      [class]="priceVariance(item) === 'up'
+                        ? 'bg-red-500/20 text-red-400'
+                        : 'bg-green-500/20 text-green-400'"
+                    >
+                      {{ priceVariance(item) === 'up' ? '↑ acima do mercado' : '↓ abaixo do mercado' }}
+                    </span>
+                    
+                    <span class="text-xs text-primary font-bold mt-1 uppercase tracking-tighter">
+                      Atualizado em {{ item.updatedAt | date:'dd/MM HH:mm' }}
+                    </span>
+                  </div>
+                }
+              </div>
+          
             </div>
           }
+          
+          <p class="flex items-center gap-1.5 text-sm text-neutral-secondary/50 italic px-1">
+            <fa-icon [icon]="icons.TRIANGLE_EXCLAMATION" class="text-lg text-amber-500/70 text-[10px]" />
+            Valores calculados no momento da oferta. Preços de insumos podem variar — avalie antes de aceitar.
+          </p>
         </div>
       </div>
-    } @else if (offer().description) {
-      
     }
     
-    @else if (offer().requestedDescription) {
+    @else if (offer().description) {
       <div class="flex flex-col gap-1 p-3 rounded-xl bg-black/30 border border-primary/90">
         <span class="text-xl font-black uppercase text-neutral-secondary tracking-tighter">Solicita</span>
-        <span class="text-base text-neutral-secondary">{{ offer().requestedDescription }}</span>
+        <span class="text-base text-neutral-secondary">{{ offer().description }}</span>
       </div>
     }
 
@@ -96,30 +178,27 @@
     </div>
 
     <div class="flex flex-col sm:flex-row items-center justify-center gap-3 mt-auto pt-4 border-t-2 border-primary/20">
-      @if (isOwner()) {
-        @if(offer().status !== status.CANCELLED) {
-          <app-button-pages
-            text="Cancelar Oferta"
-            [icon]="icons.TRASH"
-            width="auto"
-            (action)="toCancel.emit(offer().id)" />
-        }
-        <app-button-pages
-          text="Editar Oferta"
-          [icon]="icons.PENCIL"
-          width="auto"
-          (action)="openEdit()" />
-      } @else {
-        <app-button-pages
-          text="Ver Detalhes"
-          [icon]="icons.EYE"
-          width="auto"
-          (action)="viewDetail.emit(offer())" />
-        <app-button-pages
-          text="Propor Troca"
-          [icon]="icons.HANDSHAKE"
-          width="auto"
-          (action)="propose.emit(offer())" />
+      @if (showActions()) {
+          @if (isOwner()) {
+            @if (offer().status !== status.CANCELLED) {
+              <app-button-pages
+                text="Cancelar Oferta"
+                [icon]="icons.TRASH"
+                width="auto"
+                (action)="toCancel.emit(offer().id)" />
+            }
+            <app-button-pages
+              text="Editar Oferta"
+              [icon]="icons.PENCIL"
+              width="auto"
+              (action)="openEdit()" />
+          } @else {
+            <app-button-pages
+              text="Propor Troca"
+              [icon]="icons.HANDSHAKE"
+              width="auto"
+              (action)="propose.emit(offer())" />
+          }
       }
     </div>
 

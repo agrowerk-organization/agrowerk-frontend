@@ -59,6 +59,23 @@ export class BarterOfferService {
     });
   }
 
+  getLatestCommodityPrice(cropName: string): Observable<{ price: number; referenceDate: string } | null> {
+    return this.http.get<{ price: number; referenceDate: string } | null>(
+      `${this.base}/commodity-price/latest?commodity=${cropName}` 
+    );
+  }
+
+  listForSupplier(page = 0, size = 10): Observable<Page<BarterOfferResponse>> {
+    const params = new HttpParams()
+      .set('page', page.toString())
+      .set('size', size.toString());
+
+    return this.http.get<Page<BarterOfferResponse>>(`${this.base}/list-for-supplier`, { 
+      params,
+      withCredentials: true 
+    });
+  }
+
   findById(id: string): Observable<BarterOfferResponse> {
     return this.http.get<BarterOfferResponse>(`${this.base}/find-by-id/${id}`, {
       withCredentials: true

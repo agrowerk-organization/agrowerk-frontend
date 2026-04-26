@@ -1,6 +1,8 @@
-import { Component, inject, signal, OnInit } from "@angular/core";
+import { Component, computed, inject, signal, OnInit } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { Router } from "@angular/router";
+import { toSignal } from "@angular/core/rxjs-interop";
+import { filter, map, startWith } from "rxjs";
+import { NavigationEnd, Router } from "@angular/router";
 import { BarterOfferResponse } from "@core/types/barter/barter-offer.response";
 import { BarterOfferService } from "@core/services/barter-offer.service";
 import { AuthService } from "@core/services/auth.service";
@@ -36,7 +38,7 @@ export class BarterCatalog implements OnInit {
   private authService  = inject(AuthService);
   private toastService = inject(ToastService);
 
-  private router = inject(Router);
+  readonly router = inject(Router);
 
   offers        = signal<BarterOfferResponse[]>([]);
   loading       = signal(false);
@@ -46,6 +48,44 @@ export class BarterCatalog implements OnInit {
 
   icons = ICONS_BARTER;
 
+  currentUrl = toSignal(
+    this.router.events.pipe(
+      filter(e => e instanceof NavigationEnd),
+      map(() => this.router.url),
+      startWith(this.router.url)   
+    ),
+    { initialValue: this.router.url }
+  );
+
+  baseRoute = computed(() => this.currentUrl().startsWith('/supplier') ? 'supplier' : 'producer');
+
+  isCatalog = computed(() =>
+    (this.currentUrl().includes('/producer/barter') || this.router.url.includes('/supplier/barter')) 
+    && !this.currentUrl().includes('my-offers') 
+  );
+  
+  isProducer = computed(() => this.baseRoute() === 'producer');
+  
+  myAreaLabel = computed(() =>
+    this.isProducer() ? 'Minhas Ofertas' : 'Minhas Transações'
+  );
+  
+  myAreaRoute = computed(() =>
+    this.isProducer() ? '/producer/my-offers' : '/supplier/my-transactions'
+  );
+
+  backLink = computed(() =>
+    this.isProducer() ? '/producer/dashboard' : '/supplier/dashboard'
+  );
+
+  showActions = computed(() => {
+    if (this.currentUrl().includes('my-offers')) return true;
+    
+    if (this.isProducer()) return !this.isCatalog(); 
+    
+    return true; 
+  });
+  
   ngOnInit(): void {
     this.currentUserId.set(this.authService.getUser()?.id ?? '');
     this.loadOffers();
@@ -53,9 +93,13 @@ export class BarterCatalog implements OnInit {
 
   loadOffers(): void {
     this.loading.set(true);
-    this.offerService.listActive().subscribe({
-      next: page => {
-        this.offers.set(page.content ?? []);
+    const request$ = this.isProducer()
+      ? this.offerService.listActive(0, 10)
+      : this.offerService.listForSupplier(0, 10);
+  
+    request$.subscribe({
+      next: res => {
+        this.offers.set(res.content ?? []);
         this.loading.set(false);
       },
       error: () => this.loading.set(false),

@@ -41,12 +41,35 @@
                 <span class="text-base font-bold text-primary">{{ statusLabel() }}</span>
               </div>
             
-              @if (offer().offerType === 'CROP' && offer().offeredCropName) {
+              @if (offer().offerType === type.CROP && offer().offeredCropName) {
                 <div class="flex flex-col gap-1 p-3 rounded-xl bg-black/20 border border-primary/90 col-span-2">
-                  <span class="text-base font-black uppercase text-neutral-secondary tracking-tighter">Cultura oferecida</span>
+                  <span class="text-base font-black uppercase text-neutral-secondary tracking-tighter">
+                    Cultura oferecida
+                  </span>
                   <span class="text-base font-bold text-white">
                     {{ offer().offeredCropName }} · {{ offer().offeredCropQuantity }} sacas
                   </span>
+              
+                  @if (offerDelta()) {
+                    <div class="flex items-center gap-1.5 mt-1">
+                      <fa-icon [icon]="icons.TRIANGLE_EXCLAMATION"
+                               [class]="offerDelta()!.direction === 'acima' 
+                                 ? 'text-amber-400 text-lg' 
+                                 : 'text-red-400 text-sm'" />
+                      <span class="text-lg italic"
+                            [class]="offerDelta()!.direction === 'acima' 
+                              ? 'text-amber-300/90' 
+                              : 'text-red-300/90'">
+                        {{ offerDelta()!.direction === 'acima'
+                           ? '↓ ' + offerDelta()!.value + ' sacas acima do necessário — considere reduzir'
+                           : '↑ ' + offerDelta()!.value + ' sacas abaixo do necessário — considere aumentar' }}
+                        <span class="text-neutral-secondary">
+                          (ref. {{ offer().referencePrice | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}/saca
+                          em {{ offer().referencePriceDate | date:'dd/MM/yyyy' }})
+                        </span>
+                      </span>
+                    </div>
+                  }
                 </div>
               }
             
@@ -94,10 +117,35 @@
                     formControlName="expiresAt"
                     label="Válida até"
                     fieldId="expiresAt"
-                
                     [disablePast]="true" />
                 </div>
+              
+                @if (offer().offerType === type.CROP) {
+                  <div>
+                    <app-number-field
+                      label="Quantidade oferecida (sacas)"
+                      fieldId="offeredCropQuantity"
+                      [min]="1"
+                      formControlName="offeredCropQuantity" />
+                    @if (offer().suggestedQuantity) {
+                      <span class="text-lg text-secondary italic px-1">
+                        Sugestão atual: {{ offer().suggestedQuantity }} sacas
+                      </span>
+                    }
+                  </div>
+                }
+              
+                @if (offer().offerType === type.ASSET) {
+                  <div>
+                    <app-number-field
+                      label="Quantidade do ativo"]
+                      fieldId="offeredAssetQuantity"
+                      [min]="1"
+                      formControlName="offeredAssetQuantity" />
+                  </div>
+                }
               </div>
+              
             </div>
           </div>
   

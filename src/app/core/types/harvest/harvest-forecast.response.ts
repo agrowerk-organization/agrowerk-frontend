@@ -7,6 +7,7 @@ export interface HarvestForecastResponse {
     seasonName:          string;
     propertyName:        string;
     estimatedQuantity:   number;
+    availableQuantity:   number;
     forecastDate:        string;
     confidenceLevel:     string;
     plantedArea?:        number;

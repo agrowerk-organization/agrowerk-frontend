@@ -3,13 +3,13 @@ import { AddressResponse } from "../address/address.response";
 export interface SupplierResponse {
     id: string;
     corporateReason: string;
-    fantasyName: string;
-    cnpj: string;
+    fantasyName?: string;
+    cnpj?: string;
     stateRegistration: string;
     email: string;
     telephone: string;
     nameContact: string;
-    address: AddressResponse;
+    address?: AddressResponse;
     observations: string;
     acceptsBarterDeals: boolean;
     barterTerms: string;

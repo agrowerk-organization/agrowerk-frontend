@@ -1,12 +1,6 @@
-import { OfferType } from "@core/enums/offer-type";
-
 export interface ProposeTransactionRequest {
     offerId: string;
-    offerorGives: OfferType;
-    offerorCropId?: string;
-    offerorCropQuantity?: number;
-    offerorAssetId?: string;
-    offerorAssetQuantity?: number;
+    batchId?: string;
     offerorDeliveryDate: string;
     acceptorDeliveryDate: string;
     notes?: string;

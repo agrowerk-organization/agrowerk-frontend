@@ -52,6 +52,11 @@ export class CreateOfferModal implements OnInit {
   saving  = signal(false);
   loading = signal(false);
   requestedTotal = signal<number>(0);
+  referencePrice = signal<number | null>(null);
+  referencePriceDate = signal<string | null>(null);
+
+  readonly type = OfferType;
+  OfferType = signal<OfferType>(OfferType.CROP);
 
   properties   = signal<PropertyResponse[]>([]);
   forecasts    = signal<HarvestForecastResponse[]>([]);
@@ -68,9 +73,16 @@ export class CreateOfferModal implements OnInit {
   forecastOptions = computed(() =>
     this.forecasts().map(f => ({
       value: f.id,
-      label: `${f.cropName} · ${f.estimatedQuantity} sc`
+      label: `${f.cropName} · ${f.availableQuantity} sc disponíveis`
     }))
   );
+
+  suggestedQuantity = computed(() => {
+    const total = this.requestedTotal();
+    const price = this.referencePrice();
+    if (!price || !total || price === 0) return null;
+    return (total / price).toFixed(2);
+  });
 
   readonly icons = ICONS_BARTER;
 
@@ -93,7 +105,7 @@ export class CreateOfferModal implements OnInit {
     title:                ['', [Validators.required, Validators.maxLength(255)]],
     description:          [''],
     propertyId:           ['', Validators.required],
-    offerType:            ['CROP', Validators.required],
+    offerType:            [this.type.CROP, Validators.required],
     forecastId:           [null as string | null],
     offeredCropQuantity:  [null as number | null],
     estimatedHarvestDate: [null as string | null],
@@ -119,7 +131,6 @@ export class CreateOfferModal implements OnInit {
       notes:         [''],
     });
   }
-
   addItem(): void {
     const group = this.newItemGroup();
   
@@ -128,7 +139,12 @@ export class CreateOfferModal implements OnInit {
       const input = this.inputs().find(i => i.id === id);
       if (input?.averagePurchasePrice) {
         group.get('unitPriceBrl')!.setValue(input.averagePurchasePrice);
+        this.requestedTotal.set(this.calcTotal()); // <- força recálculo aqui
       }
+    });
+  
+    group.get('quantity')!.valueChanges.subscribe(() => {
+      this.requestedTotal.set(this.calcTotal());
     });
   
     this.itemsArray.push(group);
@@ -149,20 +165,26 @@ export class CreateOfferModal implements OnInit {
     });
     this.form.get('forecastId')!.valueChanges.subscribe(id => {
       const dateControl = this.form.get('estimatedHarvestDate')!;
-      
+    
       if (!id) {
         dateControl.reset(null);
-        dateControl.enable(); 
+        dateControl.enable();
+        this.referencePrice.set(null);     
+        this.referencePriceDate.set(null);
         return;
       }
     
       const forecast = this.forecasts().find(f => f.id === id);
       if (forecast) {
         this.form.patchValue({
-          offeredCropQuantity:  forecast.estimatedQuantity,
-          estimatedHarvestDate: forecast.forecastDate,
+          estimatedHarvestDate: forecast.forecastDate, 
         });
-        dateControl.disable(); 
+        dateControl.disable();
+
+        this.offerService.getLatestCommodityPrice(forecast.cropName).subscribe(ref => {
+          this.referencePrice.set(ref?.price ?? null);
+          this.referencePriceDate.set(ref?.referenceDate ?? null);
+        });
       }
     });
 
@@ -183,11 +205,12 @@ export class CreateOfferModal implements OnInit {
       description:          v.description ?? undefined,
       propertyId:           v.propertyId!,
       offerType,
-      harvestForecastId:    offerType === 'CROP' ? v.forecastId ?? undefined : undefined,
-      offeredCropQuantity:  offerType === 'CROP' ? v.offeredCropQuantity ?? undefined : undefined,
-      estimatedHarvestDate: offerType === 'CROP' ? v.estimatedHarvestDate ?? undefined : undefined,
-      offeredAssetId:       offerType === 'ASSET' ? v.offeredAssetId ?? undefined : undefined,
-      offeredAssetQuantity: offerType === 'ASSET' ? v.offeredAssetQuantity ?? undefined : undefined,
+      harvestForecastId:    offerType === this.type.CROP ? v.forecastId ?? undefined : undefined,
+      offeredCropQuantity: offerType === this.type.CROP 
+        ? Number(this.suggestedQuantity()) || undefined 
+        : undefined,      estimatedHarvestDate: offerType === this.type.CROP ? v.estimatedHarvestDate ?? undefined : undefined,
+      offeredAssetId:       offerType === this.type.ASSET ? v.offeredAssetId ?? undefined : undefined,
+      offeredAssetQuantity: offerType === this.type.ASSET ? v.offeredAssetQuantity ?? undefined : undefined,
       requestedType:        v.requestedType as OfferType,
       requestedDescription: v.requestedDescription ?? undefined,
       requestedValue:       this.requestedTotal() > 0 ? this.requestedTotal() : undefined,
@@ -257,9 +280,12 @@ export class CreateOfferModal implements OnInit {
 
   private calcTotal(): number {
     return this.itemsArray.controls.reduce((sum, group) => {
-      const quantity = group.get('quantity')?.value;
-      const unitPriceBrl = group.get('unitPriceBrl')?.value;
-      return sum + (quantity ?? 0) * (unitPriceBrl ?? 0);
+      const raw = (group as FormGroup).getRawValue();
+      return sum + (raw.quantity ?? 0) * (raw.unitPriceBrl ?? 0);
     }, 0);
+  }
+
+  getItemRawValue(index: number) {
+    return (this.itemsArray.at(index) as FormGroup).getRawValue();
   }
 }

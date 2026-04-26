@@ -59,10 +59,29 @@
           }
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <app-number-field
-              label="Quantidade (sacas) *"
-              fieldId="offeredCropQuantity"
-              formControlName="offeredCropQuantity" />
+
+              <div class="flex flex-col gap-1">
+                <label for="suggestedQuantity" class="text-xl text-neutral-secondary font-bold mb-1 block">
+                  Quantidade sugerida (sacas)
+                </label>
+                <div class="w-full px-4 py-4 rounded-2xl border-2 border-primary/90
+                            bg-neutral-primary/50 flex items-center gap-3 transition-all">
+                  <fa-icon [icon]="icons.WHEAT" class="text-primary text-xl" />
+                  <span class="text-lg font-black"
+                        [class]="suggestedQuantity() ? 'text-primary' : 'text-neutral-secondary/50'">
+                    {{ suggestedQuantity() ? suggestedQuantity() + ' sacas' : 'Adicione insumos...' }}
+                  </span>
+                  <span class="ml-auto text-sm uppercase font-black bg-primary/20 text-primary px-2 py-1 rounded-lg">
+                    Calculado
+                  </span>
+                </div>
+                @if (referencePriceDate()) {
+                  <span class="text-xs text-neutral-secondary/50 italic px-1">
+                    Ref. {{ referencePrice() | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}/saca
+                    em {{ referencePriceDate() | date:'dd/MM/yyyy' }}
+                  </span>
+                }
+              </div>
 
               <div class="flex flex-col gap-1">
                 <label for="estimatedHarvestDate" class="text-xl text-neutral-secondary font-bold mb-1 block">
@@ -74,7 +93,7 @@
                   
                   <fa-icon [icon]="icons.CALENDAR" class="text-primary text-xl" />
                   
-                  <span class="text-lg text-neutral-secondary font-medium">
+                  <span class="text-lg text-neutral-secondary/50 font-medium">
                     {{ form.get('estimatedHarvestDate')?.value 
                        ? (form.get('estimatedHarvestDate')?.value | date:'dd/MM/yyyy':'UTC') 
                        : 'Selecione uma colheita...' }}
@@ -197,9 +216,9 @@
               Preço unit (R$):
             </span>
             <span class="text-primary font-black text-xl ml-3">
-              {{ itemsArray.controls[0].get('unitPriceBrl')?.value 
-                 ? (itemsArray.controls[0].get('unitPriceBrl')?.value | currency:'BRL':'symbol':'1.2-2':'pt-BR')
-                 : '---' }}
+              {{ getItemRawValue(0).unitPriceBrl
+                ? (getItemRawValue(0).unitPriceBrl | currency:'BRL':'symbol':'1.2-2':'pt-BR')
+                : '---' }}
             </span>
           </div>
       

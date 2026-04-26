@@ -4,7 +4,7 @@
     
     <div class="flex items-center gap-4">
       
-      <app-back-button link="/admin/dashboard" />
+      <app-back-button [link]="backLink()" />
 
       <div>
         <app-title firstSegment="Catálogo de" secondSegment="Barter" />
@@ -14,10 +14,10 @@
 
     <div class="flex items-center gap-3">
       <app-button-pages
-        text="Minhas Ofertas"
+        [text]="myAreaLabel()"
         [icon]="icons.LIST"
         width="fit-content"
-        (action)="goToMyOffers()" 
+        (action)="router.navigate([myAreaRoute()])" 
        />
     </div>
   </div>
@@ -38,6 +38,7 @@
         <app-barter-offer-card
           [offer]="offer"
           [currentUserId]="currentUserId()"
+          [showActions]="showActions()"
           (propose)="openPropose($event)"
           (toCancel)="cancelOffer($event)" />
       }

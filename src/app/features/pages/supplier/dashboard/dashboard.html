@@ -1,47 +1,69 @@
-<div class="min-h-full">
+<div class="p-6 lg:p-10 space-y-10 max-w-9xl mx-auto">
 
-    @if (isLoading()) {
-      <div class="p-6 max-w-5xl mx-auto space-y-4 animate-pulse">
-        <div class="h-10 bg-white/5 rounded-2xl w-1/3 mx-auto"></div>
-        <div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
-          @for (i of [1,2,3,4]; track i) {
-            <div class="h-40 bg-white/5 rounded-3xl"></div>
+  <div class="text-center mb-12">
+    <app-title [firstSegment]="'Painel do'" [secondSegment]="'Fornecedor'" />
+    <app-subtitle [text]="'Gerencie seus lotes, insumos e negociações de barter'" />
+  </div>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 mb-12">
+    @for (card of cards; track card.route) {
+      <a [routerLink]="card.route"
+         class="group relative overflow-hidden rounded-3xl bg-neutral-primary
+                border-3 border-primary/50 hover:border-primary
+                transition-all duration-300 hover:-translate-y-2
+                shadow-2xl shadow-primary/40 p-8">
+
+        <div class="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="relative z-10">
+          <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-button-main to-button-second
+                      flex items-center justify-center mb-5
+                      group-hover:scale-110 transition-transform duration-300
+                      border-2 border-primary/80">
+            <fa-icon [icon]="card.icon" class="text-2xl text-neutral-primary" />
+          </div>
+          <h2 class="font-bold text-primary text-2xl mb-2">
+            {{ card.label }}
+          </h2>
+          <p class="text-neutral-secondary/90 text-lg sm:text-xl leading-relaxed">
+            {{ card.description }}
+          </p>
+        </div>
+
+      </a>
+    }
+  </div>
+
+  @if (supplier()) {
+    <div class="group relative overflow-hidden rounded-3xl bg-neutral-primary
+                border-3 border-primary/50 hover:border-primary
+                transition-all duration-300 shadow-2xl shadow-primary/60 p-8">
+
+      <div class="absolute top-0 right-0 w-48 h-48 bg-primary/10 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="relative z-10 flex items-center justify-between gap-6 flex-wrap">
+        <div>
+          <p class="text-2xl sm:text-3xl font-bold text-neutral-secondary mb-1">
+            {{ supplier()!.fantasyName ?? supplier()!.corporateReason }}
+          </p>
+          <p class="text-lg sm:text-xl text-neutral-secondary/60">
+            CNPJ: {{ supplier()!.cnpj }} · {{ supplier()!.address?.municipality }}
+          </p>
+          @if (!supplier()!.acceptsBarterDeals) {
+            <p class="text-sm text-amber-400/80 italic mt-1">
+              <fa-icon [icon]="icons.TRIANGLE_EXCLAMATION" class="mr-1" />
+              Barter não habilitado — ative no perfil para receber ofertas
+            </p>
           }
         </div>
-        <div class="h-24 bg-white/5 rounded-3xl"></div>
+        <app-button-pages
+          text="Ver Perfil"
+          [icon]="icons.BUILDING"
+          width="auto"
+          (action)="goToRegister()" />
       </div>
-    }
-  
-    @else if (!hasSupplier()) {
-      <app-onboarding-card (register)="goToRegister()" />
-    }
-  
-    @else {
-      <div class="p-6 max-w-7xl mx-auto space-y-6">
-  
-        @if (layoutState.showCycle()) {
-          <section class="grid grid-cols-2 lg:grid-cols-4 gap-3">
-            <!-- Os quatro cards do ciclo virão aqui como componentes dedicados -->
-            <!-- ex: <app-cycle-inventory-card /> -->
-            <!-- ex: <app-cycle-negotiation-card /> -->
-            <!-- ex: <app-cycle-contract-card /> -->
-            <!-- ex: <app-cycle-barter-card /> -->
-          </section>
-        }
-  
-        <!-- Linha: alertas + atividade recente -->
-        <section class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-          <!-- <app-supplier-alerts-card /> -->
-          <!-- <app-supplier-activity-card /> -->
-        </section>
-  
-        <!-- Gráfico de performance -->
-        <!-- <app-supplier-statistics-card /> -->
-  
-        <!-- Produtores conectados -->
-        <!-- <app-supplier-producers-card /> -->
-  
-      </div>
-    }
-  
+
+    </div>
+  }
+
 </div>
