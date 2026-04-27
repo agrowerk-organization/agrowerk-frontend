@@ -4,7 +4,7 @@ import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CropResponse } from '@core/types/crop/crop.response';
 import { ICONS_ADMIN_CROPS } from '@core/ui/icons/icons-admin/icons-admin-crops/icons-admin-crops';
-import { CROP_CATEGORIES } from '@core/types/crop/crop-categories';
+import { CROP_CATEGORIES } from '@core/enums/crop-categories';
 import { CreateCropRequest } from '@core/types/crop/create-crop.request';
 import { ButtonPages } from '@shared/components/buttons/button-pages/button-pages';
 import { NumberField } from '@shared/components/number-field/number-field';

@@ -95,6 +95,7 @@ export class DateField implements ControlValueAccessor, OnInit, AfterViewInit {
       maxDate: this.maxDate() ?? undefined,
       allowInput: false,
       appendTo: document.body,
+      disableMobile: true,
       onChange: (dates) => {
         const date = dates[0] ?? null;
         this.innerControl.setValue(date);

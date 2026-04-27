@@ -1,4 +1,4 @@
-import { Commodity } from "./commodity";
+import { Commodity } from "../../enums/commodity";
 import { ReportPayload } from "./report-payload";
 import { ReportStatus } from "./report-status";
 import { ReportType } from "./report-type";

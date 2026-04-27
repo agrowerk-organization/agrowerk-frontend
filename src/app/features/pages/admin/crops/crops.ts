@@ -11,7 +11,7 @@ import { ButtonPages } from '@shared/components/buttons/button-pages/button-page
 import { CropCard } from './crops-components/crop-card/crop-card';
 import { CropForm } from './crops-components/crop-form/crop-form';
 import { ICONS_ADMIN_CROPS } from '@core/ui/icons/icons-admin/icons-admin-crops/icons-admin-crops';
-import { CROP_CATEGORIES } from '@core/types/crop/crop-categories';
+import { CROP_CATEGORIES } from '@core/enums/crop-categories';
 import { CreateCropRequest } from '@core/types/crop/create-crop.request';
 import { UpdateCropRequest } from '@core/types/crop/update-crop.request';
 import { CropResponse } from '@core/types/crop/crop.response';

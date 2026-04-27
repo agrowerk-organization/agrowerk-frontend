@@ -1,5 +1,8 @@
 import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { filter, map, startWith } from 'rxjs';
+import { Router, NavigationEnd } from '@angular/router';
 import { Title } from "../../../../shared/components/title/title";
 import { Subtitle } from "../../../../shared/components/subtitle/subtitle";
 import { MeshGradient } from "../../../../shared/components/mesh-gradient/mesh-gradient";
@@ -30,6 +33,20 @@ import { SearchBar } from '@shared/components/search-filter/search-bar';
 })
 export class HelpAndSupport implements OnInit {
   private faqService = inject(FaqService);
+  private router = inject(Router);
+
+  currentUrl = toSignal(
+    this.router.events.pipe(
+      filter(e => e instanceof NavigationEnd),
+      map(() => this.router.url),
+      startWith(this.router.url)   
+    ),
+    { initialValue: this.router.url }
+  );
+
+  showBreadcrumb = computed(() =>
+    !(this.currentUrl().includes('/producer') && !this.currentUrl().includes('/supplier'))
+  );
 
   icons = ICONS_HELP_AND_SUPPORT;
 

@@ -1,47 +1,45 @@
 import { Component, computed, inject, input, output, signal, OnInit } from '@angular/core';
 import { CommonModule, CurrencyPipe, DatePipe } from '@angular/common';
-import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
+import { ReactiveFormsModule, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ButtonPages } from '@shared/components/buttons/button-pages/button-pages';
-import { SelectField } from '@shared/components/select-field/select-field';
-import { NumberField } from '@shared/components/number-field/number-field';
-import { SelectOption } from '@core/ui/types/select-option/select-option';
 import { BarterOfferResponse } from '@core/types/barter/barter-offer.response';
 import { AcceptTransactionRequest } from '@core/types/barter/accept-transaction.request';
 import { BarterTransactionResponse } from '@core/types/barter/barter-transaction.response';
 import { BarterTransactionService } from '@core/services/barter-transaction.service';
 import { CommodityPriceService } from '@core/services/commodity-price.service';
-import { Commodity } from '@core/types/market/commodity';
 import { ICONS_BARTER } from '@core/ui/icons/icons-common/icons-barter/icons-barter';
 import { CommodityPriceResponse } from '@core/types/market/commodity-price.response';
 import { BarterPricePreview } from '@core/ui/types/barter/price-preview';
+import { Commodity } from '@core/enums/commodity';
+import { NumberField } from "@shared/components/number-field/number-field";
 
 @Component({
   selector: 'app-accept-transaction-modal',
   standalone: true,
   imports: [
-    CommonModule, 
-    ReactiveFormsModule, 
+    CommonModule,
     FontAwesomeModule,
-    ButtonPages, 
-    SelectField, 
-    NumberField,
-    CurrencyPipe, 
-    DatePipe
-  ],
+    ButtonPages,
+    CurrencyPipe,
+    DatePipe,
+    ReactiveFormsModule,
+    NumberField
+],
   templateUrl: './accept-transaction-modal.html'
 })
 export class AcceptTransactionModal implements OnInit {
+  private fb = inject(FormBuilder);
+  form!: FormGroup;
 
   transaction = input.required<BarterTransactionResponse>();
-  offer = input.required<BarterOfferResponse>();
+  offer       = input.required<BarterOfferResponse>();
 
   toCancel  = output<void>();
   accepted  = output<BarterTransactionResponse>();
   declined  = output<void>();
 
-  private fb           = inject(FormBuilder);
-  private txService    = inject(BarterTransactionService);
+  private txService             = inject(BarterTransactionService);
   private commodityPriceService = inject(CommodityPriceService);
 
   saving       = signal(false);
@@ -50,16 +48,15 @@ export class AcceptTransactionModal implements OnInit {
 
   readonly icons = ICONS_BARTER;
 
-  readonly commodityOptions: SelectOption[] = [
-    { value: 'SOYBEAN', label: 'Soja' },
-    { value: 'CORN',    label: 'Milho' },
-    { value: 'COTTON',  label: 'Algodão' },
-    { value: 'WHEAT',   label: 'Trigo' },
-  ];
-
-  form = this.fb.group({
-    commodity: ['SOYBEAN', Validators.required],
-    basisUsd:  [0, [Validators.required]],
+  private commodity = computed<string>(() => {
+    const name = this.offer().offeredCropName?.toUpperCase() ?? '';
+    if (name.includes('MILHO'))                        return 'MILHO';
+    if (name.includes('ALGOD'))                        return 'ALGODAO';
+    if (name.includes('TRIGO'))                        return 'TRIGO';
+    if (name.includes('CAF'))                          return 'CAFE';
+    if (name.includes('BOI') || name.includes('BOVI')) return 'BOI_GORDO';
+    if (name.includes('A') && name.includes('CAR'))    return 'ACUCAR';
+    return 'SOJA';
   });
 
   totalInputsBrl = computed(() =>
@@ -67,20 +64,19 @@ export class AcceptTransactionModal implements OnInit {
   );
 
   ngOnInit(): void {
-    this.fetchPricing();
-  }
-
-  recalculate(): void {
+    this.form = this.fb.group({
+      commodity: this.commodity(),
+      basisUsd: this.fb.control(0, { validators: [Validators.required], nonNullable: true }),
+    })
     this.fetchPricing();
   }
 
   accept(): void {
-    if (this.form.invalid || this.saving()) return;
+    if (this.saving()) return;
 
-    const v = this.form.getRawValue();
     const request: AcceptTransactionRequest = {
-      commodity: v.commodity!,
-      basisUsd:  v.basisUsd!,
+      commodity: this.commodity(),
+      basisUsd: this.form.getRawValue().basisUsd ?? 0,
     };
 
     this.saving.set(true);
@@ -99,37 +95,22 @@ export class AcceptTransactionModal implements OnInit {
     });
   }
 
-
-private fetchPricing(): void {
-  const { commodity, basisUsd } = this.form.getRawValue();
-  const commodityEnum = commodity as Commodity;
-
-  if (!commodityEnum) return;
-
-  this.loadingPrice.set(true);
-
-  this.commodityPriceService.getLatest(commodityEnum).subscribe({
-    next: (res: CommodityPriceResponse) => {
-      const adjustedPriceUsd = res.priceUsd + (basisUsd ?? 0);
-      const bagPriceBrl = adjustedPriceUsd * res.ptaxRate;
-
-      const totalBagsDue = this.totalInputsBrl() > 0 
-        ? Math.ceil(this.totalInputsBrl() / bagPriceBrl) 
-        : 0;
-
-      const preview: BarterPricePreview = {
-        ...res,
-        bagPriceBrl,
-        totalBagsDue
-      };
-
-      this.pricing.set(preview);
-      this.loadingPrice.set(false);
-    },
-    error: () => {
-      this.loadingPrice.set(false);
-      this.pricing.set(null);
-    }
-  });
-}
+ fetchPricing(): void {
+    this.loadingPrice.set(true);
+    this.commodityPriceService.getLatest(this.commodity() as Commodity).subscribe({
+      next: (res: CommodityPriceResponse) => {
+        const basisUsd = this.form.getRawValue().basisUsd ?? 0;
+        const bagPriceBrl = (res.priceUsd + basisUsd) * res.ptaxRate;
+        const totalBagsDue = this.totalInputsBrl() > 0
+          ? Math.ceil(this.totalInputsBrl() / bagPriceBrl)
+          : 0;
+        this.pricing.set({ ...res, bagPriceBrl, totalBagsDue });
+        this.loadingPrice.set(false);
+      },
+      error: () => {
+        this.loadingPrice.set(false);
+        this.pricing.set(null);
+      }
+    });
+  }
 }

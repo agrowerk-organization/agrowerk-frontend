@@ -7,6 +7,7 @@ import { EditOfferModal } from '../edit-offer-modal/edit-offer-modal';
 import { BarterOfferService } from '@core/services/barter-offer.service';
 import { ToastService } from '@core/services/toast.service';
 import { AuthService } from '@core/services/auth.service';
+import { BarterTransactionService } from '@core/services/barter-transaction.service';
 import { BarterOfferResponse } from '@core/types/barter/barter-offer.response';
 import { BarterTransactionResponse } from '@core/types/barter/barter-transaction.response';
 import { OfferStatus, OfferStatusDesc } from '@core/enums/offer-status';
@@ -15,6 +16,9 @@ import { BackButton } from '@shared/components/back-button/back-button';
 import { Title } from '@shared/components/title/title';
 import { Subtitle } from '@shared/components/subtitle/subtitle';
 import { ICONS_BARTER } from '@core/ui/icons/icons-common/icons-barter/icons-barter';
+import { AcceptTransactionModal } from '../accept-transaction-modal/accept-transaction-modal';
+
+
 type FilterValue = 'ALL' | OfferStatus;
 
 @Component({
@@ -26,6 +30,7 @@ type FilterValue = 'ALL' | OfferStatus;
     BarterOfferCard,
     CreateOfferModal,
     EditOfferModal,
+    AcceptTransactionModal,
     ButtonPages,
     Title,
     Subtitle,
@@ -36,6 +41,7 @@ type FilterValue = 'ALL' | OfferStatus;
 export class MyOffers implements OnInit {
 
   private offerService = inject(BarterOfferService);
+  private transactionService = inject(BarterTransactionService);
   private toast        = inject(ToastService);
   private authService  = inject(AuthService);
 
@@ -70,9 +76,49 @@ export class MyOffers implements OnInit {
     { value: OfferStatus.EXPIRED,     label: OfferStatusDesc[OfferStatus.EXPIRED] },
     { value: OfferStatus.CANCELLED,   label: OfferStatusDesc[OfferStatus.CANCELLED] },
   ];
+
+  pendingByOfferId = computed(() => {
+    const map = new Map<string, BarterTransactionResponse>();
+    this.transactions().forEach(t => {
+      if (t.status === 'PENDING')
+        map.set(t.offerId, t);
+    });
+    return map;
+  });
+
+  selectedTransaction = signal<BarterTransactionResponse | null>(null);
+
   ngOnInit(): void {
     this.currentUserId.set(this.authService.getUser()?.id ?? '');
     this.loadOffers();
+    this.loadTransactions(); 
+  }
+
+  getOfferById(offerId: string): BarterOfferResponse | undefined {
+    return this.offers().find(o => o.id === offerId);
+  }
+
+  private loadTransactions(): void {
+    this.transactionService.listMine(0, 50).subscribe({
+      next: page => this.transactions.set(page.content ?? []),
+      error: () => void this.toast.error('Erro ao carregar transações.')
+    });
+  }
+
+  onViewProposal(offerId: string): void {
+    const tx = this.pendingByOfferId().get(offerId);
+    if (tx) this.selectedTransaction.set(tx);
+  }
+
+  onAccepted(): void {
+    this.selectedTransaction.set(null);
+    this.toast.success('Proposta aceita!');
+    this.loadOffers();
+  }
+
+  onDeclined(): void {
+    this.selectedTransaction.set(null);
+    this.loadTransactions();
   }
 
   setFilter(value: FilterValue): void {
@@ -116,6 +162,7 @@ export class MyOffers implements OnInit {
     this.showCreate.set(false);
     this.toast.success('Oferta criada com sucesso!');
     this.offers.update(list => [offer, ...list]);
+    this.loadOffers();
   }
 
   onUpdated(offer: BarterOfferResponse): void {

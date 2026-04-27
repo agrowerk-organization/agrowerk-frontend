@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '@environments/environment';
-import { Commodity } from '@core/types/market/commodity';
+import { Commodity } from '@core/enums/commodity';
 import { CommodityDashboardResponse } from '@core/types/market/commodity-dashboard.response';
 import { CommodityPriceResponse } from '@core/types/market/commodity-price.response';
 import { CommodityHistoryResponse } from '@core/types/market/commodity-history.response';

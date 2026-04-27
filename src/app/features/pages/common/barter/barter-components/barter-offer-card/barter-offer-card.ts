@@ -3,6 +3,7 @@ import { CommonModule, CurrencyPipe, DatePipe } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BarterOfferResponse } from '@core/types/barter/barter-offer.response';
 import { BarterOfferItemResponse } from '@core/types/barter/barter-offer-item.response';
+import { BarterTransactionResponse } from '@core/types/barter/barter-transaction.response';
 import { ButtonPages } from '@shared/components/buttons/button-pages/button-pages';
 import { ICONS_BARTER } from '@core/ui/icons/icons-common/icons-barter/icons-barter';
 import { OfferStatus } from '@core/enums/offer-status';
@@ -25,6 +26,8 @@ export class BarterOfferCard {
 
   offer        = input.required<BarterOfferResponse>();
   currentUserId = input.required<string>();
+  pendingTransaction = input<BarterTransactionResponse | null>(null);
+  viewProposal       = output<string>();
 
   showActions = input<boolean>(true);
   propose    = output<BarterOfferResponse>();

@@ -185,11 +185,6 @@ export const routes: Routes = [
         loadComponent: () => import('./features/pages/common/barter/barter-components/my-offers/my-offers')
             .then(page => page.MyOffers)
       },
-      {
-        path: 'my-transactions',
-        loadComponent: () => import('./features/pages/common/barter/my-transactions/my-transactions')
-            .then(page => page.MyTransactions)
-      }
     ]
   },
 
@@ -299,6 +294,11 @@ export const routes: Routes = [
         path: 'barter',
         loadComponent: () => import('./features/pages/common/barter/barter-catalog/barter-catalog')
             .then(page => page.BarterCatalog)
+      },
+      {
+        path: 'my-transactions',
+        loadComponent: () => import('./features/pages/common/barter/my-transactions/my-transactions')
+            .then(page => page.MyTransactions)
       },
       {
         path: 'help-and-support',

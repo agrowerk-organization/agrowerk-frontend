@@ -4,7 +4,7 @@ import { NgxEchartsDirective } from 'ngx-echarts';
 import { EChartsOption } from 'echarts/types/dist/shared';
 import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { ICONS_MARKET } from '@core/ui/icons/icons-producer/icons-market/icons-market';
-import { Commodity } from '@core/types/market/commodity';
+import { Commodity } from '@core/enums/commodity';
 
 @Component({
   selector: 'app-market-chart',

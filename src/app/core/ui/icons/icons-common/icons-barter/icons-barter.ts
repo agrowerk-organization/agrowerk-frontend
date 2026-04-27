@@ -15,7 +15,11 @@ import {
     faTag,
     faPencil,
     faTriangleExclamation,
-    faWheatAlt
+    faWheatAlt,
+    faChevronDown,
+    faArrowUp,
+    faArrowDown,
+    faBoxesStacked
 } from '@fortawesome/free-solid-svg-icons';
 
 export const ICONS_BARTER = {
@@ -35,5 +39,9 @@ export const ICONS_BARTER = {
     TAG: faTag,
     PENCIL: faPencil,
     TRIANGLE_EXCLAMATION: faTriangleExclamation,
-    WHEAT: faWheatAlt
+    WHEAT: faWheatAlt,
+    CHEVRON_DOWN: faChevronDown,
+    ARROW_UP: faArrowUp,
+    ARROW_DOWN: faArrowDown,
+    BOXES_STACKED: faBoxesStacked
 }

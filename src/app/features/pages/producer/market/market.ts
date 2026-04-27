@@ -8,7 +8,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { EChartsOption } from 'echarts/types/dist/shared';
 import { CallbackDataParams } from 'echarts/types/dist/shared';
-import { Commodity } from '@core/types/market/commodity';
+import { Commodity } from '@core/enums/commodity';
 import { CommodityDashboardResponse } from '@core/types/market/commodity-dashboard.response';
 import { ReportType } from '@core/types/market/report-type';
 import { MarketAlert } from '@core/types/market/market-alert';

@@ -1,6 +1,7 @@
 import { OfferType } from "@core/enums/offer-type";
 import { TransactionStatus } from "@core/enums/transaction-status";
 import { ContractSignatureStatus } from "./contract-signature-status";
+import { AddressResponse } from "../address/address.response";
 
 export interface BarterTransactionResponse {
     id: string;
@@ -17,6 +18,8 @@ export interface BarterTransactionResponse {
     offerorAssetId?: string;
     offerorAssetName?: string;
     offerorAssetQuantity?: number;
+    offerorBatchNumber?: string;
+    offerorInputName ?: string;
     acceptorGives: OfferType;
     acceptorCropId?: string;
     acceptorCropName?: string;
@@ -28,4 +31,5 @@ export interface BarterTransactionResponse {
     contractId?: string;
     contractSignatureStatus?: ContractSignatureStatus;
     createdAt: string;
+    offerorAddress?: AddressResponse;
 }

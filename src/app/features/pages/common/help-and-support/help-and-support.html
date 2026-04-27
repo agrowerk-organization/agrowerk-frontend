@@ -6,7 +6,9 @@
   <section class="relative py-10">
     <div class="container mx-auto px-4 lg:px-8">
       <div class="max-w-4xl mx-auto text-center">
-        <app-breadcrumb main="Agrowerk" pageName="Ajuda e Suporte" subPageName="" />
+        @if (showBreadcrumb()) {
+                  <app-breadcrumb main="Agrowerk" pageName="Ajuda e Suporte" subPageName="" />
+        }
         <app-title
           [firstSegment]="'Resolva suas Dúvidas'"
           [secondSegment]="'Conosco de Forma Prática'" />

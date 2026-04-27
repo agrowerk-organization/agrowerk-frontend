@@ -1,4 +1,4 @@
-import { Commodity } from "./commodity";
+import { Commodity } from "../../enums/commodity";
 import { CommodityPriceResponse } from "./commodity-price.response";
 
 export interface CommodityHistoryResponse {

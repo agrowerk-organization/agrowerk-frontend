@@ -87,7 +87,7 @@ export class BarterCatalog implements OnInit {
   });
   
   ngOnInit(): void {
-    this.currentUserId.set(this.authService.getUser()?.id ?? '');
+    this.currentUserId.set(this.authService.getUser()?.id ?? '');    
     this.loadOffers();
   }
 
@@ -116,6 +116,9 @@ export class BarterCatalog implements OnInit {
 
   onProposed(): void {
     this.closeModal();
+    this.offers.update(list => 
+      list.filter(o => o.id !== this.selectedOffer()!.id)
+    )
     this.toastService.success('Transação foi proposta com sucesso!');
   }
 

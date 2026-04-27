@@ -2,7 +2,7 @@
 
   <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
     <div class="flex items-center gap-4">
-      <app-back-button link="/producer/dashboard" />
+      <app-back-button link="/producer/barter" />
       <div>
         <app-title firstSegment="Minhas" secondSegment="Ofertas" />
         <app-subtitle [text]="offers().length + ' oferta(s) cadastrada(s)'" />
@@ -58,11 +58,15 @@
         <app-barter-offer-card
           [offer]="offer"
           [currentUserId]="currentUserId()"
-          [showEditButton]="true"
+          [showActions]="true"
+          [pendingTransaction]="pendingByOfferId().get(offer.id) ?? null"
+          (toCancel)="onCancel($event)"
           (edit)="onEdit($event)"
-          (toCancel)="onCancel($event)" />
+          (viewProposal)="onViewProposal($event)" />
       }
     </div>
+
+
 
     @if (!isLastPage()) {
       <div class="flex justify-center mt-8">
@@ -94,4 +98,12 @@
     [offer]="offerToEdit()!"
     (toCancel)="closeModals()"
     (updated)="onUpdated($event)" />
+}    
+
+@if (selectedTransaction()) {
+  <app-accept-transaction-modal
+    [transaction]="selectedTransaction()!"
+    [offer]="getOfferById(selectedTransaction()!.offerId)!"  
+    (toCancel)="onDeclined()"
+    (accepted)="onAccepted()" />
 }
