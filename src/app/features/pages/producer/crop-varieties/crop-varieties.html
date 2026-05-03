@@ -1,0 +1,137 @@
+<div class="p-6 space-y-6 pb-32 lg:pb-6 max-w-9xl mx-auto px-4 sm:px-10">
+
+    <div class="flex items-center gap-4">
+      <app-back-button [link]="backLink" />
+  
+      <div class="flex-1 flex items-center justify-between gap-4">
+        <div>
+          <h1 class="text-2xl sm:text-3xl font-black text-primary uppercase tracking-tight leading-none">
+            Variedades
+          </h1>
+          <p class="text-secondary/80 text-lg italic mt-1">{{ fieldName() }} · {{ propertyName() }}</p>
+        </div>
+  
+        @if (selectedCrop()) {
+          <app-button-pages
+            text="Nova Variedade"
+            [icon]="icons.PLUS"
+            (action)="openCreate()" />
+        }
+      </div>
+    </div>
+  
+    <div class="space-y-3">
+      <p class="text-xl font-black text-neutral-secondary uppercase tracking-wide">
+        Selecione uma Cultura
+      </p>
+  
+      @if (loadingCrops()) {
+        <div class="flex items-center justify-center h-32">
+          <div class="animate-spin w-8 h-8 rounded-full border-4 border-button-main border-t-transparent"></div>
+        </div>
+      } @else {
+        <div class="grid grid-cols-3 sm:grid-cols-5 lg:grid-cols-8 gap-3">
+          @for (crop of crops(); track crop.id) {
+            <button type="button"
+                    (click)="selectCrop(crop)"
+                    class="flex flex-col items-center gap-2 p-3 rounded-2xl border-2 transition-all cursor-pointer"
+                    [class]="selectedCrop()?.id === crop.id
+                      ? 'border-primary bg-primary/10 shadow-lg shadow-primary/20'
+                      : 'border-primary/20 hover:border-primary/60 bg-black/10 hover:-translate-y-1'">
+              @if (crop.originalUrl) {
+                <img [src]="crop.originalUrl" [alt]="crop.name"
+                     class="w-14 h-14 rounded-xl object-cover" />
+              } @else {
+                <div class="w-14 h-14 rounded-xl bg-black/30 flex items-center justify-center">
+                  <fa-icon [icon]="icons.SEEDLING" class="text-2xl text-primary/30" />
+                </div>
+              }
+              <span class="text-xs font-black text-secondary uppercase tracking-tight text-center leading-tight">
+                {{ crop.name }}
+              </span>
+            </button>
+          }
+        </div>
+      }
+    </div>
+  
+    <div class="border-t-2 border-primary/20"></div>
+  
+    @if (!selectedCrop()) {
+      <div class="flex flex-col items-center justify-center py-16 gap-4">
+        <div class="w-20 h-20 rounded-3xl bg-black/20 border-2 border-primary/20
+                    flex items-center justify-center">
+          <fa-icon [icon]="icons.LEAF" class="text-4xl text-primary/20" />
+        </div>
+        <p class="text-primary/40 font-black text-lg uppercase tracking-widest text-center">
+          Selecione uma cultura acima<br/>para ver as variedades
+        </p>
+      </div>
+  
+    } @else if (loading()) {
+      <div class="flex items-center justify-center h-48">
+        <div class="animate-spin w-10 h-10 rounded-full border-4
+                    border-button-main border-t-transparent"></div>
+      </div>
+  
+    } @else if (hasItems()) {
+      <div class="space-y-6">
+        <div class="flex items-center gap-3">
+          @if (selectedCrop()!.originalUrl) {
+            <img [src]="selectedCrop()!.originalUrl" [alt]="selectedCrop()!.name"
+                 class="w-10 h-10 rounded-xl object-cover border border-primary/30" />
+          }
+          <h2 class="text-xl font-black text-primary uppercase tracking-tight">
+            {{ selectedCrop()!.name }}
+            <span class="text-secondary/50 font-medium normal-case tracking-normal text-base ml-2">
+              — {{ varieties().length }} variedade(s)
+            </span>
+          </h2>
+        </div>
+  
+        <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+          @for (variety of varieties(); track variety.id) {
+            <app-crop-variety-card
+              [variety]="variety"
+              (edit)="openEdit($event)"
+              (planting)="goToPlanting($event)" />
+          }
+        </div>
+  
+        @if (total() > 1) {
+          <app-paginator
+            [currentPage]="currentPage()"
+            [totalPages]="total()"
+            (pageChange)="onPageChange($event)" />
+        }
+      </div>
+  
+    } @else {
+      <div class="flex flex-col items-center justify-center py-16 gap-6">
+        <div class="w-20 h-20 rounded-3xl bg-black/20 border-2 border-primary/30
+                    flex items-center justify-center">
+          <fa-icon [icon]="icons.LEAF" class="text-4xl text-primary/20" />
+        </div>
+        <div class="text-center">
+          <p class="text-primary/60 font-black text-xl uppercase tracking-widest">
+            Nenhuma variedade cadastrada
+          </p>
+          <p class="text-secondary/50 text-base mt-2">
+            Cadastre a primeira variedade para <strong>{{ selectedCrop()!.name }}</strong>.
+          </p>
+        </div>
+        <app-button-pages
+          text="Cadastrar Variedade"
+          [icon]="icons.PLUS"
+          (action)="openCreate()" />
+      </div>
+    }
+  
+</div>
+  
+@if (showForm()) {
+    <app-crop-variety-form
+      [varietyData]="editTarget()"
+      (saved)="onSaved($event)"
+      (toCancel)="closeForm()" />
+}

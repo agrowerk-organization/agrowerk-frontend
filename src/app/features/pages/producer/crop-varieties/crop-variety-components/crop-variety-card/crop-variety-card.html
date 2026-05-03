@@ -1,0 +1,55 @@
+<div class="group relative overflow-hidden rounded-3xl bg-neutral-primary
+            border-3 border-primary/50 hover:border-primary
+            transition-all duration-300 hover:-translate-y-2
+            shadow-xl shadow-primary/20 hover:shadow-primary/40 flex flex-col h-full">
+
+  <div class="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-3xl pointer-events-none"></div>
+
+  <div class="relative p-6 border-b-3 border-primary/30 flex items-start justify-between gap-3">
+    <div class="flex items-center gap-3">
+      <div class="w-14 h-14 rounded-2xl bg-black/20 border-2 border-primary/50 flex items-center justify-center shrink-0">
+        <fa-icon [icon]="icons.LEAF" class="text-2xl text-primary/60" />
+      </div>
+      <div>
+        <p class="text-secondary/50 text-xs font-black uppercase tracking-widest">{{ variety().cropName }}</p>
+        <h2 class="text-primary font-black text-xl uppercase tracking-tight leading-none mt-0.5">
+          {{ variety().name }}
+        </h2>
+      </div>
+    </div>
+
+    @if (variety().region) {
+      <span class="px-3 py-1 rounded-full text-xs font-black uppercase tracking-widest
+                   border-2 border-primary/50 text-primary/70 shrink-0">
+        <fa-icon [icon]="icons.MAP_PIN" class="mr-1 text-xs" />{{ regionLabel() }}
+      </span>
+    }
+  </div>
+
+  <div class="flex flex-col gap-3 p-6 flex-1 relative z-10">
+
+    @if (variety().description) {
+      <p class="text-secondary/60 text-sm italic border-l-2 border-primary/20 pl-3">
+        {{ variety().description }}
+      </p>
+    }
+
+    <p class="text-xs text-secondary/40 mt-auto">
+      Cadastrada por <span class="font-semibold text-secondary/60">{{ variety().userName }}</span>
+    </p>
+
+    <div class="pt-4 border-t-2 border-primary/20 grid grid-cols-2 gap-3">
+      <app-button-pages
+        text="Editar"
+        [icon]="icons.PEN"
+        width="full"
+        (action)="edit.emit(variety())" />
+
+      <app-button-pages
+        text="Plantio"
+        [icon]="icons.SEEDLING"
+        width="full"
+        (action)="planting.emit(variety())" />
+    </div>
+  </div>
+</div>

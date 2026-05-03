@@ -1,0 +1,137 @@
+<div class="fixed inset-0 z-[2000] flex items-center justify-center p-4">
+    <div class="absolute inset-0 bg-black/60 backdrop-blur-sm"
+         (click)="toCancel.emit()"
+         (keydown.escape)="toCancel.emit()"
+         tabindex="-1"
+         role="presentation"></div>
+  
+    <div class="relative z-10 w-full mt-8 max-w-xl max-h-[85vh] flex flex-col rounded-3xl
+                bg-neutral-primary border-3 border-primary/70 shadow-2xl shadow-primary/30 overflow-hidden">
+  
+      <div class="flex items-center justify-between p-6 border-b border-primary/30">
+        <div>
+          <h2 class="text-xl sm:text-2xl font-black text-primary uppercase tracking-tight">
+            {{ isEdit() ? 'Editar Variedade' : 'Nova Variedade' }}
+          </h2>
+          @if (isEdit()) {
+            <p class="text-secondary/80 text-lg italic">{{ varietyData()!.name }}</p>
+          }
+        </div>
+        <button type="button" (click)="toCancel.emit()"
+                class="w-12 h-12 flex items-center justify-center rounded-xl border-2 border-primary/30
+                       text-primary hover:border-primary transition-all cursor-pointer">
+          <fa-icon [icon]="icons.CIRCLE_XMARK" class="text-2xl" />
+        </button>
+      </div>
+  
+      <div class="overflow-y-auto flex-1">
+        <form id="varietyForm" class="p-6 space-y-5" [formGroup]="form" (ngSubmit)="submit()">
+  
+          @if (!isEdit()) {
+            <div>
+              <label for="crop" class="text-xl sm:text-2xl text-neutral-secondary font-bold mb-2 block">
+                Cultura *
+              </label>
+  
+              <button type="button"
+                      (click)="cropPickerOpen.set(!cropPickerOpen())"
+                      class="w-full flex items-center justify-between gap-3 px-4 py-4 rounded-2xl
+                             border-2 border-primary/90 bg-transparent text-neutral-secondary
+                             hover:border-primary transition-all cursor-pointer">
+                @if (selectedCrop(); as crop) {
+                  <div class="flex items-center gap-3">
+                    @if (crop.originalUrl) {
+                      <img [src]="crop.originalUrl" [alt]="crop.name"
+                           class="w-10 h-10 rounded-xl object-cover border border-primary/30" />
+                    } @else {
+                      <div class="w-10 h-10 rounded-xl bg-black/20 border border-primary/30
+                                  flex items-center justify-center">
+                        <fa-icon [icon]="icons.SEEDLING" class="text-primary/40" />
+                      </div>
+                    }
+                    <span class="text-lg font-bold">{{ crop.name }}</span>
+                  </div>
+                } @else {
+                  <span class="text-secondary/40 text-lg">Selecione uma cultura...</span>
+                }
+                <fa-icon [icon]="icons.CHEVRON_DOWN" class="text-primary/60 text-sm transition-transform"
+                         [class.rotate-180]="cropPickerOpen()" />
+              </button>
+  
+              @if (cropPickerOpen()) {
+                <div class="mt-2 rounded-2xl border-2 border-primary/30 bg-black/20 max-h-52 overflow-y-auto p-3">
+                  <div class="grid grid-cols-3 gap-2">
+                    @for (crop of crops(); track crop.id) {
+                      <button type="button"
+                              (click)="selectCrop(crop)"
+                              class="flex flex-col items-center gap-2 p-3 rounded-xl border-2 transition-all cursor-pointer"
+                              [class]="selectedCrop()?.id === crop.id
+                                ? 'border-primary bg-primary/10'
+                                : 'border-primary/20 hover:border-primary/60 bg-black/10'">
+                        @if (crop.originalUrl) {
+                          <img [src]="crop.originalUrl" [alt]="crop.name"
+                               class="w-12 h-12 rounded-xl object-cover" />
+                        } @else {
+                          <div class="w-12 h-12 rounded-xl bg-black/30 flex items-center justify-center">
+                            <fa-icon [icon]="icons.SEEDLING" class="text-xl text-primary/30" />
+                          </div>
+                        }
+                        <span class="text-xs font-black text-secondary uppercase tracking-tight text-center leading-tight">
+                          {{ crop.name }}
+                        </span>
+                      </button>
+                    }
+                  </div>
+                </div>
+              }
+            </div>
+          }
+  
+          <div>
+            <label for="variety-name" class="text-xl sm:text-2xl text-neutral-secondary font-bold mb-1 block">
+              Nome da Variedade *
+            </label>
+            <input id="variety-name" formControlName="name" type="text"
+                   placeholder="Ex: BRS 1010 IPRO"
+                   class="w-full px-4 py-4 rounded-2xl border-2 border-primary/90
+                          bg-transparent text-lg sm:text-xl text-neutral-secondary
+                          focus:border-primary outline-none transition-all" />
+          </div>
+  
+          <app-select-field
+            label="Região"
+            fieldId="region"
+            [options]="regionOptions"
+            formControlName="region" />
+  
+          <div>
+            <label for="variety-desc" class="text-xl sm:text-2xl text-neutral-secondary font-bold mb-1 block">
+              Descrição
+            </label>
+            <textarea id="variety-desc" formControlName="description" rows="3"
+                      placeholder="Características, ciclo, resistências..."
+                      class="w-full px-4 py-3 rounded-2xl border-2 border-primary/90
+                             bg-transparent text-lg text-neutral-secondary
+                             focus:border-primary outline-none transition-all resize-none"></textarea>
+          </div>
+  
+        </form>
+      </div>
+  
+      <div class="p-6 border-t border-primary/30 flex flex-col sm:flex-row gap-3">
+        <app-button-pages
+          text="Cancelar"
+          [icon]="icons.CIRCLE_XMARK"
+          width="100%"
+          (action)="toCancel.emit()" />
+  
+        <app-button-pages
+          [text]="saving() ? 'Salvando...' : (isEdit() ? 'Salvar Alterações' : 'Confirmar Criação')"
+          [icon]="saving() ? icons.SPINNER : (isEdit() ? icons.PEN : icons.PLUS)"
+          [disabled]="saving() || form.invalid"
+          width="100%"
+          (action)="submit()" />
+      </div>
+  
+    </div>
+</div>

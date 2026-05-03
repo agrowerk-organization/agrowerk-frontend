@@ -1,0 +1,137 @@
+<div class="fixed inset-0 z-[2000] flex items-center justify-center p-4">
+    <div class="absolute inset-0 bg-black/60 backdrop-blur-sm"
+         (click)="toCancel.emit()"
+         (keydown.escape)="toCancel.emit()"
+         tabindex="-1"
+         role="presentation"></div>
+  
+    <div class="relative z-10 w-full mt-8 max-w-2xl max-h-[85vh] flex flex-col rounded-3xl
+                bg-neutral-primary border-3 border-primary/70 shadow-2xl shadow-primary/30 overflow-hidden">
+  
+      <div class="flex items-center justify-between p-6 border-b border-primary/30 bg-neutral-primary">
+        <div>
+          <h2 class="text-xl sm:text-2xl font-black text-primary uppercase tracking-tight">
+            {{ isEdit() ? 'Editar Talhão' : 'Novo Talhão' }}
+          </h2>
+          @if (isEdit()) {
+            <p class="text-secondary/90 text-lg sm:text-xl italic">{{ fieldData()!.name }}</p>
+          }
+        </div>
+        <button type="button" (click)="toCancel.emit()"
+                class="w-12 h-12 flex items-center justify-center rounded-xl border-2 border-primary/30
+                       text-primary hover:border-primary transition-all cursor-pointer">
+          <fa-icon [icon]="icons.CIRCLE_XMARK" class="text-2xl" />
+        </button>
+      </div>
+  
+      <div class="overflow-y-auto flex-1">
+        <form id="fieldForm" class="p-6 space-y-5" [formGroup]="form" (ngSubmit)="submit()">
+  
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div class="sm:col-span-2">
+              <label for="field-name" class="text-xl sm:text-2xl text-neutral-secondary font-bold mb-1 block">
+                Nome do Talhão *
+              </label>
+              <input id="field-name" formControlName="name" type="text" placeholder="Ex: Talhão Norte"
+                     class="w-full px-4 py-4 rounded-2xl border-2 border-primary/90
+                            bg-transparent text-lg sm:text-xl text-neutral-secondary
+                            focus:border-primary outline-none transition-all" />
+            </div>
+            <div>
+              <label for="field-code" class="text-xl sm:text-2xl text-neutral-secondary font-bold mb-1 block">
+                Código
+              </label>
+              <input id="field-code" formControlName="code" type="text" placeholder="Ex: TN-01"
+                     class="w-full px-4 py-4 rounded-2xl border-2 border-primary/90
+                            bg-transparent text-lg sm:text-xl text-neutral-secondary
+                            focus:border-primary outline-none transition-all disabled:opacity-40" />
+            </div>
+          </div>
+  
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <app-number-field
+              label="Área (Hectares) *"
+              fieldId="area-ha"
+              [min]="0.01"
+              [step]="0.1"
+              formControlName="areaHectares" />
+  
+            <app-number-field
+              label="Declividade (%)"
+              fieldId="slope"
+              [min]="0"
+              [max]="100"
+              [step]="0.1"
+              formControlName="slopePercentage" />
+          </div>
+  
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <app-select-field
+              label="Tipo de Solo *"
+              fieldId="soil-type"
+              [options]="soilOptions"
+              formControlName="soilType" />
+  
+            <app-select-field
+              label="Status do Talhão *"
+              fieldId="field-status"
+              [options]="statusOptions"
+              formControlName="fieldStatus" />
+          </div>
+  
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <app-number-field
+              label="Latitude"
+              fieldId="latitude"
+              [step]="0.0001"
+              formControlName="latitude" />
+  
+            <app-number-field
+              label="Longitude"
+              fieldId="longitude"
+              [step]="0.0001"
+              formControlName="longitude" />
+          </div>
+  
+          <div>
+            <label for="field-desc" class="text-xl sm:text-2xl text-neutral-secondary font-bold mb-1 block">
+              Descrição
+            </label>
+            <textarea id="field-desc" formControlName="description" rows="3"
+                      placeholder="Descreva características do talhão..."
+                      class="w-full px-4 py-3 rounded-2xl border-2 border-primary/90
+                             bg-transparent text-lg text-neutral-secondary
+                             focus:border-primary outline-none transition-all resize-none"></textarea>
+          </div>
+  
+          <div>
+            <label for="field-notes" class="text-xl sm:text-2xl text-neutral-secondary font-bold mb-1 block">
+              Observações
+            </label>
+            <textarea id="field-notes" formControlName="notes" rows="2"
+                      placeholder="Observações técnicas ou agronômicas..."
+                      class="w-full px-4 py-3 rounded-2xl border-2 border-primary/90
+                             bg-transparent text-lg text-neutral-secondary
+                             focus:border-primary outline-none transition-all resize-none"></textarea>
+          </div>
+  
+        </form>
+      </div>
+  
+      <div class="p-6 border-t border-primary/30 bg-neutral-primary flex flex-col sm:flex-row gap-3">
+        <app-button-pages
+          text="Cancelar"
+          [icon]="icons.CIRCLE_XMARK"
+          width="100%"
+          (action)="toCancel.emit()" />
+  
+        <app-button-pages
+          [text]="saving() ? 'Salvando...' : (isEdit() ? 'Salvar Alterações' : 'Confirmar Criação')"
+          [icon]="saving() ? icons.SPINNER : (isEdit() ? icons.PEN : icons.PLUS)"
+          [disabled]="saving() || form.invalid"
+          width="100%"
+          (action)="submit()" />
+      </div>
+  
+    </div>
+</div>

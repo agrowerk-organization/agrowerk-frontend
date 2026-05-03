@@ -1,0 +1,66 @@
+<div class="group relative overflow-hidden rounded-3xl bg-neutral-primary
+            border-3 border-primary/50 hover:border-primary
+            transition-all duration-300 hover:-translate-y-2
+            shadow-xl shadow-primary/20 hover:shadow-primary/40 flex flex-col h-full">
+
+  <div class="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-3xl pointer-events-none"></div>
+
+  <div class="relative p-6 border-b-3 border-primary/30 flex items-start justify-between gap-3">
+    <div class="flex items-center gap-3">
+      <div class="w-14 h-14 rounded-2xl bg-black/20 border-2 border-primary/50 flex items-center justify-center shrink-0">
+        <fa-icon [icon]="icons.LEAF" class="text-2xl text-primary/60" />
+      </div>
+      <div>
+        <h2 class="text-primary font-black text-xl uppercase tracking-tight leading-none">
+          {{ season().name }}
+        </h2>
+        <p class="text-secondary/60 text-sm mt-1 italic">{{ season().propertyName }}</p>
+      </div>
+    </div>
+
+    <span class="px-3 py-1 rounded-full text-xs font-black uppercase tracking-widest border-2 shrink-0"
+          [class]="statusColor()">
+      {{ statusLabel() }}
+    </span>
+  </div>
+
+  <div class="flex flex-col gap-3 p-6 flex-1 relative z-10">
+
+    <div class="grid grid-cols-2 gap-3">
+      <div class="p-3 rounded-xl bg-black/20 border border-primary/30">
+        <p class="text-xs font-black uppercase text-secondary/60 tracking-wider mb-1">Início</p>
+        <div class="flex items-center gap-2">
+          <fa-icon [icon]="icons.CALENDAR_DAYS" class="text-primary text-sm" />
+          <p class="text-sm font-bold text-secondary">{{ season().startDate | date:'dd/MM/yyyy' }}</p>
+        </div>
+      </div>
+
+      <div class="p-3 rounded-xl bg-black/20 border border-primary/30">
+        <p class="text-xs font-black uppercase text-secondary/60 tracking-wider mb-1">Término</p>
+        <div class="flex items-center gap-2">
+          <fa-icon [icon]="icons.CALENDAR_DAYS" class="text-primary text-sm" />
+          <p class="text-sm font-bold text-secondary">{{ season().endDate | date:'dd/MM/yyyy' }}</p>
+        </div>
+      </div>
+    </div>
+
+    @if (canActivate() || canFinish()) {
+      <div class="mt-auto pt-4 border-t-2 border-primary/20 flex gap-3">
+        @if (canActivate()) {
+          <app-button-pages
+            text="Iniciar Safra"
+            [icon]="icons.PLAY"
+            width="full"
+            (action)="activate.emit(season())" />
+        }
+        @if (canFinish()) {
+          <app-button-pages
+            text="Finalizar Safra"
+            [icon]="icons.FLAG_CHECKERED"
+            width="full"
+            (action)="toFinish.emit(season())" />
+        }
+      </div>
+    }
+  </div>
+</div>

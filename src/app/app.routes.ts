@@ -121,7 +121,7 @@ export const routes: Routes = [
           .then(page => page.Seasons)
       },
       {
-        path: 'fields',
+        path: 'fields:id',
         loadComponent: () => import('./features/pages/producer/fields/fields')
           .then(page => page.Fields)
       },

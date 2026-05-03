@@ -10,7 +10,8 @@ import { PropertyAreas } from './components/property-areas/property-areas';
 import { PropertyAddress } from './components/property-address/property-address';
 import { PropertyRecords } from './components/property-records/property-records';
 import { BackButton } from "@shared/components/back-button/back-button";
-
+import { ButtonPages } from "@shared/components/buttons/button-pages/button-pages";
+import { ICONS_PROPERTY } from "@core/ui/icons/icons-producer/icons-property/icons-property";
 @Component({
   selector: 'app-property-detail',
   standalone: true,
@@ -22,7 +23,8 @@ import { BackButton } from "@shared/components/back-button/back-button";
     PropertyAreas,
     PropertyAddress,
     PropertyRecords,
-    BackButton
+    BackButton,
+    ButtonPages
 ],
   templateUrl: './property-detail.html',
 })
@@ -36,6 +38,8 @@ export class PropertyDetail implements OnInit {
   uploading = signal(false);
   showModal = signal(false);
   avatarPreview = signal<string | null>(null);
+
+  readonly icons = ICONS_PROPERTY;
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
@@ -63,6 +67,12 @@ export class PropertyDetail implements OnInit {
         this.uploading.set(false);
       },
       error: () => { this.avatarPreview.set(null); this.uploading.set(false); }
+    });
+  }
+
+  goToFields(propertyId: string, propertyName: string): void {
+    this.router.navigate(['/producer/fields', propertyId], {
+      queryParams: { propertyName }
     });
   }
 }

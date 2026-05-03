@@ -1,0 +1,123 @@
+<div class="fixed inset-0 z-[2000] flex items-center justify-center p-4">
+    <div class="absolute inset-0 bg-black/60 backdrop-blur-sm"
+         (click)="toCancel.emit()"
+         (keydown.escape)="toCancel.emit()"
+         tabindex="-1"
+         role="presentation"></div>
+  
+    <div class="relative z-10 w-full mt-8 max-w-xl max-h-[85vh] flex flex-col rounded-3xl
+                bg-neutral-primary border-3 border-primary/70 shadow-2xl shadow-primary/30 overflow-hidden">
+  
+      <div class="flex items-center justify-between p-6 border-b border-primary/30">
+        <div>
+          <h2 class="text-xl sm:text-2xl font-black text-primary uppercase tracking-tight">
+            {{ isEdit() ? 'Editar Plantio' : 'Novo Plantio' }}
+          </h2>
+          @if (cropVarietyName()) {
+            <p class="text-secondary/80 text-lg italic mt-0.5">
+              {{ cropName() }} — {{ cropVarietyName() }}
+            </p>
+          }
+        </div>
+        <button type="button" (click)="toCancel.emit()"
+                class="w-12 h-12 flex items-center justify-center rounded-xl border-2 border-primary/30
+                       text-primary hover:border-primary transition-all cursor-pointer">
+          <fa-icon [icon]="icons.CIRCLE_XMARK" class="text-2xl" />
+        </button>
+      </div>
+  
+      <div class="overflow-y-auto flex-1">
+        <form id="plantingForm" class="p-6 space-y-5" [formGroup]="form" (ngSubmit)="submit()">
+  
+          <!-- Safra ativa -->
+          @if (!isEdit()) {
+            @if (seasonLoading()) {
+              <div class="flex items-center gap-3 p-4 rounded-2xl border-2 border-primary/20 bg-black/10">
+                <div class="animate-spin w-5 h-5 rounded-full border-2 border-primary border-t-transparent shrink-0"></div>
+                <p class="text-secondary/60 text-sm">Buscando safra ativa...</p>
+              </div>
+  
+            } @else if (seasonError() || !activeSeason()) {
+              <div class="flex items-start gap-3 p-4 rounded-2xl border-2 border-red-400/50 bg-red-400/5">
+                <fa-icon [icon]="icons.TRIANGLE_EXCLAMATION" class="text-red-400 text-lg mt-0.5 shrink-0" />
+                <p class="text-sm text-secondary/80 leading-relaxed">
+                  <span class="font-black text-red-400 uppercase tracking-wide">Atenção: </span>
+                  Nenhuma safra ativa encontrada para esta propriedade.
+                  Inicie uma safra antes de registrar um plantio.
+                </p>
+              </div>
+  
+            } @else {
+              <div class="flex items-center gap-3 p-4 rounded-2xl border-2 border-emerald-400/50 bg-emerald-400/5">
+                <fa-icon [icon]="icons.CHECK_CIRCLE" class="text-emerald-400 text-lg shrink-0" />
+                <div>
+                  <p class="text-xs font-black uppercase tracking-wider text-emerald-400/80">Safra Ativa</p>
+                  <p class="text-base font-bold text-secondary">{{ activeSeason()!.name }}</p>
+                  <p class="text-xs text-secondary/50">
+                    {{ activeSeason()!.startDate | date:'dd/MM/yyyy' }} →
+                    {{ activeSeason()!.endDate   | date:'dd/MM/yyyy' }}
+                  </p>
+                </div>
+              </div>
+            }
+          }
+  
+          @if (fieldName()) {
+            <div class="flex items-center gap-3 p-4 rounded-2xl border border-primary/20 bg-black/10">
+              <fa-icon [icon]="icons.LEAF" class="text-primary/50 shrink-0" />
+              <div>
+                <p class="text-xs font-black uppercase tracking-wider text-secondary/50">Talhão</p>
+                <p class="text-base font-bold text-secondary">{{ fieldName() }}</p>
+              </div>
+            </div>
+          }
+  
+          <app-number-field
+            label="Área de Plantio (Hectares) *"
+            fieldId="planting-area"
+            [min]="0.01"
+            [step]="0.1"
+            formControlName="areaHectares" />
+  
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label for="planting-date" class="text-xl sm:text-2xl text-neutral-secondary font-bold mb-1 block">
+                Data de Plantio *
+              </label>
+              <input id="planting-date" formControlName="plantingDate" type="date"
+                     class="w-full px-4 py-4 rounded-2xl border-2 border-primary/90
+                            bg-transparent text-lg text-neutral-secondary
+                            focus:border-primary outline-none transition-all" />
+            </div>
+  
+            <div>
+              <label for="harvest-date" class="text-xl sm:text-2xl text-neutral-secondary font-bold mb-1 block">
+                Previsão de Colheita *
+              </label>
+              <input id="harvest-date" formControlName="expectedHarvestDate" type="date"
+                     class="w-full px-4 py-4 rounded-2xl border-2 border-primary/90
+                            bg-transparent text-lg text-neutral-secondary
+                            focus:border-primary outline-none transition-all" />
+            </div>
+          </div>
+  
+        </form>
+      </div>
+  
+      <div class="p-6 border-t border-primary/30 flex flex-col sm:flex-row gap-3">
+        <app-button-pages
+          text="Cancelar"
+          [icon]="icons.CIRCLE_XMARK"
+          width="100%"
+          (action)="toCancel.emit()" />
+  
+        <app-button-pages
+          [text]="saving() ? 'Salvando...' : (isEdit() ? 'Salvar Alterações' : 'Confirmar Plantio')"
+          [icon]="saving() ? icons.SPINNER : (isEdit() ? icons.PEN : icons.PLUS)"
+          [disabled]="saving() || form.invalid || (!isEdit() && (!activeSeason() || seasonLoading()))"
+          width="100%"
+          (action)="submit()" />
+      </div>
+  
+    </div>
+</div>

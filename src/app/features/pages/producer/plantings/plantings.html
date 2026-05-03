@@ -7,18 +7,18 @@
     <div class="p-6 space-y-6 pb-32 lg:pb-6 max-w-9xl mx-auto px-4 sm:px-10">
   
       <div class="flex items-center gap-4">
-        <app-back-button [link]="'/producer/properties/' + propertyId()" />
+        <app-back-button [link]="backLink" />
   
         <div class="flex-1 flex items-center justify-between gap-4">
           <div>
             <h1 class="text-2xl sm:text-3xl font-black text-primary uppercase tracking-tight leading-none">
-              Talhões
+              Plantios
             </h1>
             <p class="text-secondary/80 text-lg italic mt-1">{{ propertyName() }}</p>
           </div>
   
           <app-button-pages
-            text="Novo Talhão"
+            text="Novo Plantio"
             [icon]="icons.PLUS"
             (action)="openCreate()" />
         </div>
@@ -26,10 +26,12 @@
   
       @if (hasItems()) {
         <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
-          @for (field of fields(); track field.id) {
-            <app-field-card
-              [field]="field"
-              (edit)="openEdit($event)" />
+          @for (planting of plantings(); track planting.id) {
+            <app-planting-card
+              [planting]="planting"
+              (edit)="openEdit($event)"
+              (toCancel)="onCancel($event)"
+              (inputs)="goToInputs($event)" />
           }
         </div>
   
@@ -44,18 +46,18 @@
         <div class="flex flex-col items-center justify-center py-24 gap-6">
           <div class="w-24 h-24 rounded-3xl bg-black/20 border-2 border-primary/30
                       flex items-center justify-center">
-            <fa-icon [icon]="icons.LAYER_GROUP" class="text-5xl text-primary/20" />
+            <fa-icon [icon]="icons.WHEAT_AWN" class="text-5xl text-primary/20" />
           </div>
           <div class="text-center">
             <p class="text-primary/60 font-black text-xl uppercase tracking-widest">
-              Nenhum talhão cadastrado
+              Nenhum plantio registrado
             </p>
             <p class="text-secondary/50 text-base mt-2">
-              Cadastre o primeiro talhão desta propriedade.
+              Registre o primeiro plantio desta propriedade.
             </p>
           </div>
           <app-button-pages
-            text="Cadastrar Talhão"
+            text="Registrar Plantio"
             [icon]="icons.PLUS"
             (action)="openCreate()" />
         </div>
@@ -65,9 +67,14 @@
 }
   
 @if (showForm()) {
-    <app-field-form
+    <app-planting-form
       [propertyId]="propertyId()"
-      [fieldData]="editTarget()"
+      [fieldId]="formFieldId()"
+      [fieldName]="formFieldName()"
+      [cropVarietyId]="formCropVarietyId()"
+      [cropVarietyName]="formCropVarietyName()"
+      [cropName]="formCropName()"
+      [plantingData]="editTarget()"
       (saved)="onSaved($event)"
       (toCancel)="closeForm()" />
 }
