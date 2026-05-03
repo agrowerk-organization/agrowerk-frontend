@@ -97,6 +97,18 @@ export class Plantings implements OnInit {
     this.showForm.set(true);
   }
 
+  goToForecast(planting: PlantingResponse): void {
+    this.router.navigate(['/producer/harvest-forecasts', planting.id], {
+      queryParams: {
+        cropVarietyName: planting.cropVarietyName,
+        cropName:        planting.cropName,
+        fieldName:       planting.fieldName,
+        propertyName:    this.propertyName(),
+      },
+    });
+  }
+
+
   goToInputs(planting: PlantingResponse): void {
     this.router.navigate(['/producer/planting-inputs', planting.id], {
       queryParams: {

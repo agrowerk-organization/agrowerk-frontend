@@ -57,7 +57,6 @@
         </p>
       </div>
 
-      <!-- Previsão de colheita -->
       <div class="p-3 rounded-xl bg-black/20 border border-primary/30">
         <div class="flex items-center gap-1 mb-1">
           <fa-icon [icon]="icons.CALENDAR" class="text-primary text-xs" />
@@ -70,11 +69,19 @@
     </div>
 
     <div class="mt-auto pt-4 border-t-2 border-primary/20 space-y-2">
-      <app-button-pages
-        text="Insumos"
-        [icon]="icons.FLASK"
-        width="full"
-        (action)="inputs.emit(planting())" />
+      <div class="grid grid-cols-2 gap-3">
+        <app-button-pages
+          text="Insumos"
+          [icon]="icons.FLASK"
+          width="full"
+          (action)="inputs.emit(planting())" />
+
+        <app-button-pages
+          text="Previsão"
+          [icon]="icons.CHART_LINE"
+          width="full"
+          (action)="forecast.emit(planting())" />
+      </div>
 
       @if (canEdit() || canCancel()) {
         <div class="flex gap-3">

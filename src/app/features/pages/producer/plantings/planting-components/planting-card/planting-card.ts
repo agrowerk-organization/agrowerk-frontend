@@ -17,6 +17,7 @@ export class PlantingCard {
   edit     = output<PlantingResponse>();
   toCancel   = output<PlantingResponse>();
   inputs   = output<PlantingResponse>();
+  forecast = output<PlantingResponse>();
 
   readonly icons = ICONS_PLANTINGS;
 
