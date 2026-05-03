@@ -1,7 +1,7 @@
 
 export interface CreateBatchRequest {
     batchNumber: string;
-    invoiceNumber: string;
+    invoiceNumber?: string;
     inputId: string;
     supplierId: string;
     initialQuantity: number;

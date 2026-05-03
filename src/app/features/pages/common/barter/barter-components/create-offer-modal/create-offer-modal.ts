@@ -15,7 +15,7 @@ import { InventoryAssetService } from '@core/services/inventory-assets.service';
 import { InputService } from '@core/services/input.service';
 import { SeasonService } from '@core/services/season.service';
 import { BarterOfferResponse } from '@core/types/barter/barter-offer.response';
-import { HarvestForecastResponse } from '@core/types/harvest/harvest-forecast.response';
+import { HarvestForecastResponse } from '@core/types/harvest-forecast/harvest-forecast.response';
 import { PropertyResponse } from '@core/types/property/property.response';
 import { OfferType } from '@core/enums/offer-type';
 import { CreateBarterOfferRequest } from '@core/types/barter/create-barter-offer.request';

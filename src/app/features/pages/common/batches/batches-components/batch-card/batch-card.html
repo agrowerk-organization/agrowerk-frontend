@@ -1,0 +1,126 @@
+<div class="group relative overflow-hidden rounded-3xl bg-neutral-primary
+            border-3 border-primary/50 hover:border-primary
+            transition-all duration-300 hover:-translate-y-2
+            shadow-xl shadow-primary/20 hover:shadow-primary/40 flex flex-col h-full">
+
+  <div class="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-3xl pointer-events-none"></div>
+
+  @if (batch().expired) {
+    <div class="px-4 py-2 bg-red-400/10 border-b border-red-400/30 flex items-center gap-2">
+      <fa-icon [icon]="icons.TRIANGLE_EXCLAMATION" class="text-red-400 text-sm" />
+      <span class="text-xs font-black uppercase tracking-wider text-red-400">Lote Expirado</span>
+    </div>
+  } @else if (batch().nearExpiration) {
+    <div class="px-4 py-2 bg-amber-400/10 border-b border-amber-400/30 flex items-center gap-2">
+      <fa-icon [icon]="icons.TRIANGLE_EXCLAMATION" class="text-amber-400 text-sm" />
+      <span class="text-xs font-black uppercase tracking-wider text-amber-400">Próximo ao Vencimento</span>
+    </div>
+  }
+
+  <!-- Header -->
+  <div class="relative p-6 border-b-3 border-primary/30 flex items-start justify-between gap-3">
+    <div class="flex items-center gap-3">
+      <div class="w-14 h-14 rounded-2xl bg-black/20 border-2 border-primary/50
+                  flex items-center justify-center shrink-0">
+        <fa-icon [icon]="icons.BOXES" class="text-2xl text-primary/60" />
+      </div>
+      <div>
+        <p class="text-secondary/50 text-xs font-black uppercase tracking-widest">{{ batch().inputName }}</p>
+        <h2 class="text-primary font-black text-xl uppercase tracking-tight leading-none mt-0.5">
+          {{ batch().batchNumber }}
+        </h2>
+        @if (batch().supplierName) {
+          <p class="text-secondary/50 text-xs mt-1 italic">{{ batch().supplierName }}</p>
+        }
+      </div>
+    </div>
+
+    <div class="flex flex-col items-end gap-1.5 shrink-0">
+      <span class="px-3 py-1 rounded-full text-xs font-black uppercase tracking-widest border-2"
+            [class]="statusColor()">
+        {{ statusLabel() }}
+      </span>
+      <span class="px-3 py-1 rounded-full text-xs font-black uppercase tracking-widest border-2"
+            [class]="receiptColor()">
+        {{ receiptLabel() }}
+      </span>
+    </div>
+  </div>
+
+  <div class="flex flex-col gap-3 p-6 flex-1 relative z-10">
+
+    <div class="p-3 rounded-xl bg-black/20 border-2 border-primary/90 shadow-lg shadow-primary/30">
+      <div class="flex items-center justify-between mb-2">
+        <div class="flex items-center gap-2">
+          <fa-icon [icon]="icons.WEIGHT_HANGING" class="text-primary" />
+          <span class="text-sm font-black uppercase text-secondary tracking-tighter">Quantidade</span>
+        </div>
+        <span class="text-lg font-bold text-primary">
+          {{ batch().currentQuantity | number:'1.1-2' }}
+          <small class="text-xs text-secondary/60">/ {{ batch().initialQuantity | number:'1.1-2' }}</small>
+        </span>
+      </div>
+      <div class="w-full h-1.5 bg-black/30 rounded-full overflow-hidden">
+        <div class="h-full bg-primary rounded-full transition-all duration-500"
+             [style.width.%]="quantityRatio"></div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-2 gap-3">
+      <div class="p-3 rounded-xl bg-black/20 border border-primary/30">
+        <p class="text-xs font-black uppercase text-secondary/60 tracking-wider mb-1">Preço Unit.</p>
+        <p class="text-sm font-bold text-primary">R$ {{ batch().unitPrice | number:'1.2-2' }}</p>
+      </div>
+
+      <!-- Valor total -->
+      <div class="p-3 rounded-xl bg-black/20 border border-primary/30">
+        <p class="text-xs font-black uppercase text-secondary/60 tracking-wider mb-1">Total</p>
+        <p class="text-sm font-bold text-primary">R$ {{ batch().totalValue | number:'1.2-2' }}</p>
+      </div>
+
+      <div class="p-3 rounded-xl bg-black/20 border border-primary/30">
+        <div class="flex items-center gap-1 mb-1">
+          <fa-icon [icon]="icons.CALENDAR_DAYS" class="text-primary text-xs" />
+          <p class="text-xs font-black uppercase text-secondary/60 tracking-wider">Fabricação</p>
+        </div>
+        <p class="text-sm font-bold text-secondary">{{ batch().manufacturingDate | date:'dd/MM/yyyy' }}</p>
+      </div>
+
+      <div class="p-3 rounded-xl bg-black/20 border border-primary/30">
+        <div class="flex items-center gap-1 mb-1">
+          <fa-icon [icon]="icons.CALENDAR_DAYS" class="text-primary text-xs" />
+          <p class="text-xs font-black uppercase text-secondary/60 tracking-wider">Validade</p>
+        </div>
+        <p class="text-sm font-bold"
+           [class]="batch().expired ? 'text-red-400' : batch().nearExpiration ? 'text-amber-400' : 'text-secondary'">
+          {{ batch().expirationDate | date:'dd/MM/yyyy' }}
+        </p>
+      </div>
+    </div>
+
+    @if (batch().notes) {
+      <p class="text-secondary/50 text-xs italic border-l-2 border-primary/20 pl-3">
+        {{ batch().notes }}
+      </p>
+    }
+
+    @if (canCancel() || canReceive()) {
+      <div class="mt-auto pt-4 border-t-2 border-primary/20">
+        @if (canReceive()) {
+          <app-button-pages
+            text="Receber Lote"
+            [icon]="icons.INBOX"
+            width="full"
+            (action)="receive.emit(batch())" />
+        }
+        @if (canCancel()) {
+          <app-button-pages
+            text="Cancelar Lote"
+            [icon]="icons.BAN"
+            width="full"
+            (action)="toCancel.emit(batch())" />
+        }
+      </div>
+    }
+  </div>
+</div>

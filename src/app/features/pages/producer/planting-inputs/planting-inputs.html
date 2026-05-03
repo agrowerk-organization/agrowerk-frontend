@@ -1,6 +1,7 @@
 @if (loading()) {
     <div class="flex items-center justify-center h-[calc(100vh-100px)]">
-      <div class="animate-spin w-10 h-10 rounded-full border-4 border-button-main border-t-transparent"></div>
+      <div class="animate-spin w-10 h-10 rounded-full border-4
+                  border-button-main border-t-transparent"></div>
     </div>
   } @else {
     <div class="p-6 space-y-6 pb-32 lg:pb-6 max-w-9xl mx-auto px-4 sm:px-10">
@@ -11,23 +12,22 @@
         <div class="flex-1 flex items-center justify-between gap-4">
           <div>
             <h1 class="text-2xl sm:text-3xl font-black text-primary uppercase tracking-tight leading-none">
-              Previsões de Safra
+              Insumos do Plantio
             </h1>
             <p class="text-secondary/80 text-base italic mt-1">{{ subtitle }}</p>
           </div>
+  
           <app-button-pages
-            text="Nova Previsão"
+            text="Registrar Insumo"
             [icon]="icons.PLUS"
-            (action)="openCreate()" />
+            (action)="showForm.set(true)" />
         </div>
       </div>
   
       @if (hasItems()) {
         <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
-          @for (forecast of forecasts(); track forecast.id) {
-            <app-harvest-forecast-card
-              [forecast]="forecast"
-              (edit)="openEdit($event)" />
+          @for (input of inputs(); track input.id) {
+            <app-planting-input-card [plantingInput]="input" />
           }
         </div>
   
@@ -42,20 +42,20 @@
         <div class="flex flex-col items-center justify-center py-24 gap-6">
           <div class="w-24 h-24 rounded-3xl bg-black/20 border-2 border-primary/30
                       flex items-center justify-center">
-            <fa-icon [icon]="icons.CHART_LINE" class="text-5xl text-primary/20" />
+            <fa-icon [icon]="icons.FLASK" class="text-5xl text-primary/20" />
           </div>
           <div class="text-center">
             <p class="text-primary/60 font-black text-xl uppercase tracking-widest">
-              Nenhuma previsão cadastrada
+              Nenhum insumo registrado
             </p>
             <p class="text-secondary/50 text-base mt-2">
-              Registre a primeira previsão de colheita para este plantio.
+              Registre os insumos utilizados neste plantio.
             </p>
           </div>
           <app-button-pages
-            text="Criar Previsão"
+            text="Registrar Insumo"
             [icon]="icons.PLUS"
-            (action)="openCreate()" />
+            (action)="showForm.set(true)" />
         </div>
       }
   
@@ -63,11 +63,8 @@
 }
   
 @if (showForm()) {
-    <app-harvest-forecast-form
+    <app-planting-input-form
       [plantingId]="plantingId()"
-      [forecastData]="editTarget()"
-      [cropVarietyName]="cropVarietyName()"
-      [cropName]="cropName()"
       (saved)="onSaved($event)"
-      (toCancel)="closeForm()" />
+      (toCancel)="showForm.set(false)" />
 }

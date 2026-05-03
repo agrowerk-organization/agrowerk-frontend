@@ -1,0 +1,48 @@
+<div class="group relative overflow-hidden rounded-3xl bg-neutral-primary
+            border-3 border-primary/50 hover:border-primary
+            transition-all duration-300
+            shadow-xl shadow-primary/20 hover:shadow-primary/40 flex flex-col h-full">
+
+  <div class="absolute top-0 right-0 w-24 h-24 bg-primary/10 rounded-full blur-3xl pointer-events-none"></div>
+
+  <div class="relative p-5 border-b-3 border-primary/30 flex items-center gap-3">
+    <div class="w-12 h-12 rounded-2xl bg-black/20 border-2 border-primary/50
+                flex items-center justify-center shrink-0">
+      <fa-icon [icon]="icons.FLASK" class="text-xl text-primary/60" />
+    </div>
+    <h2 class="text-primary font-black text-lg uppercase tracking-tight leading-none">
+      {{ plantingInput().inputName }}
+    </h2>
+  </div>
+
+  <div class="flex flex-col gap-3 p-5 flex-1 relative z-10">
+
+    <div class="flex items-center justify-between p-3 rounded-xl
+                bg-black/20 border-2 border-primary/90 shadow-lg shadow-primary/30">
+      <div class="flex items-center gap-2">
+        <fa-icon [icon]="icons.WEIGHT_HANGING" class="text-primary" />
+        <span class="text-sm font-black uppercase text-secondary tracking-tighter">Quantidade</span>
+      </div>
+      <span class="text-xl font-bold text-primary">
+        {{ plantingInput().quantity | number:'1.1-2' }}
+        <small class="text-xs">{{ unitInfo.abbreviation }}</small>
+      </span>
+    </div>
+
+    <div class="p-3 rounded-xl bg-black/20 border border-primary/30">
+      <p class="text-xs font-black uppercase text-secondary/60 tracking-wider mb-1">Unidade de Medida</p>
+      <p class="text-sm font-bold text-secondary">{{ unitInfo.description }}</p>
+    </div>
+
+    <div class="p-3 rounded-xl bg-black/20 border border-primary/30">
+      <div class="flex items-center gap-1 mb-1">
+        <fa-icon [icon]="icons.CALENDAR_DAYS" class="text-primary text-xs" />
+        <p class="text-xs font-black uppercase text-secondary/60 tracking-wider">Aplicação</p>
+      </div>
+      <p class="text-sm font-bold text-secondary">
+        {{ plantingInput().applicationDate | date:'dd/MM/yyyy' }}
+      </p>
+    </div>
+
+  </div>
+</div>
