@@ -1,0 +1,186 @@
+<div class="fixed inset-0 z-[2000] flex items-center justify-center p-4">
+    <div class="absolute inset-0 bg-black/60 backdrop-blur-sm"
+         (click)="toCancel.emit()"
+         (keydown.escape)="toCancel.emit()"
+         tabindex="-1" role="presentation"></div>
+  
+    <div class="relative z-10 w-full mt-8 max-w-2xl max-h-[90vh] flex flex-col rounded-3xl
+                bg-neutral-primary border-3 border-primary/70 shadow-2xl shadow-primary/30 overflow-hidden">
+  
+      <div class="flex items-center justify-between p-6 border-b border-primary/30">
+        <div>
+          <h2 class="text-xl sm:text-2xl font-black text-primary uppercase tracking-tight">
+            Nova Receita Agronômica
+          </h2>
+          @if (cropVarietyName()) {
+            <p class="text-secondary/80 text-lg italic mt-0.5">{{ cropName() }} — {{ cropVarietyName() }}</p>
+          }
+        </div>
+        <button type="button" (click)="toCancel.emit()"
+                class="w-12 h-12 flex items-center justify-center rounded-xl border-2 border-primary/30
+                       text-primary hover:border-primary transition-all cursor-pointer">
+          <fa-icon [icon]="icons.CIRCLE_XMARK" class="text-2xl" />
+        </button>
+      </div>
+  
+      <div class="overflow-y-auto flex-1">
+        <form id="prescriptionForm" class="p-6 space-y-6" [formGroup]="form" (ngSubmit)="submit()">
+  
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label for="agro-name" class="text-xl sm:text-2xl text-neutral-secondary font-bold mb-1 block">
+                Nome do Agrônomo *
+              </label>
+              <input id="agro-name" formControlName="agronomistName" type="text"
+                     placeholder="Ex: Dr. João Silva"
+                     class="w-full px-4 py-4 rounded-2xl border-2 border-primary/90
+                            bg-transparent text-lg text-neutral-secondary
+                            focus:border-primary outline-none transition-all" />
+            </div>
+            <div>
+              <label for="agro-crea" class="text-xl sm:text-2xl text-neutral-secondary font-bold mb-1 block">
+                CREA *
+              </label>
+              <input id="agro-crea" formControlName="agronomistCrea" type="text"
+                     placeholder="Ex: CE-012345"
+                     class="w-full px-4 py-4 rounded-2xl border-2 border-primary/90
+                            bg-transparent text-lg text-neutral-secondary font-mono
+                            focus:border-primary outline-none transition-all" />
+            </div>
+          </div>
+  
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label for="issued-at" class="text-xl sm:text-2xl text-neutral-secondary font-bold mb-1 block">
+                Data de Emissão *
+              </label>
+              <input id="issued-at" formControlName="issuedAt" type="date"
+                     class="w-full px-4 py-4 rounded-2xl border-2 border-primary/90
+                            bg-transparent text-lg text-neutral-secondary
+                            focus:border-primary outline-none transition-all" />
+            </div>
+            <div>
+              <label for="valid-until" class="text-xl sm:text-2xl text-neutral-secondary font-bold mb-1 block">
+                Válida Até *
+              </label>
+              <input id="valid-until" formControlName="validUntil" type="date"
+                     class="w-full px-4 py-4 rounded-2xl border-2 border-primary/90
+                            bg-transparent text-lg text-neutral-secondary
+                            focus:border-primary outline-none transition-all" />
+            </div>
+          </div>
+  
+          <div>
+            <label for="prescription-doc" class="text-xl sm:text-2xl text-neutral-secondary font-bold mb-2 block">
+              Documento da Receita *
+            </label>
+            <label for="prescription-doc"
+                   class="flex items-center gap-3 px-4 py-4 rounded-2xl border-2 cursor-pointer transition-all"
+                   [class]="documentFile()
+                     ? 'border-emerald-400/70 bg-emerald-400/5'
+                     : 'border-primary/90 hover:border-primary bg-transparent'">
+              <fa-icon [icon]="documentFile() ? icons.FILE : icons.UPLOAD"
+                       class="text-xl shrink-0"
+                       [class]="documentFile() ? 'text-emerald-400' : 'text-primary/60'" />
+              <span class="text-base truncate"
+                    [class]="documentFile() ? 'text-emerald-400 font-bold' : 'text-secondary/50'">
+                {{ docFileName() || 'Selecionar PDF ou imagem...' }}
+              </span>
+              <input id="prescription-doc" type="file" accept=".pdf,image/*"
+                     class="hidden" (change)="onDocumentChange($event)" />
+            </label>
+          </div>
+  
+          <div class="space-y-4" formArrayName="items">
+            <div class="flex items-center justify-between">
+              <p class="text-xl sm:text-2xl text-neutral-secondary font-bold">Insumos Prescritos *</p>
+              <button type="button" (click)="addItem()"
+                      class="flex items-center gap-2 px-4 py-2 rounded-xl border-2 border-primary/50
+                             text-primary text-sm font-black uppercase tracking-wide
+                             hover:border-primary transition-all cursor-pointer">
+                <fa-icon [icon]="icons.PLUS" />
+                Adicionar
+              </button>
+            </div>
+  
+            @for (item of itemGroups; track $index) {
+              <div [formGroupName]="$index"
+                   class="p-4 rounded-2xl border-2 border-primary/20 bg-black/10 space-y-3">
+  
+                <div class="flex items-center justify-between">
+                  <p class="text-sm font-black uppercase text-secondary/60 tracking-wider">
+                    Insumo {{ $index + 1 }}
+                  </p>
+                  @if (itemGroups.length > 1) {
+                    <button type="button" (click)="removeItem($index)"
+                            class="w-8 h-8 flex items-center justify-center rounded-xl
+                                   border border-red-400/30 text-red-400/70 hover:text-red-400
+                                   hover:border-red-400 transition-all cursor-pointer">
+                      <fa-icon [icon]="icons.TRASH" class="text-xs" />
+                    </button>
+                  }
+                </div>
+  
+                <div>
+                  <label for="input" class="text-lg text-neutral-secondary font-bold mb-1 block">Insumo *</label>
+                  <select formControlName="inputId"
+                          class="w-full px-4 py-3 rounded-2xl border-2 border-primary/90
+                                 bg-transparent text-base text-neutral-secondary
+                                 focus:border-primary outline-none transition-all cursor-pointer">
+                    <option value="" disabled>Selecione um insumo...</option>
+                    @for (inp of inputs(); track inp.id) {
+                      <option [value]="inp.id">{{ inp.name }}</option>
+                    }
+                  </select>
+                </div>
+  
+                <!-- Quantidade + Unidade -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <app-number-field
+                    label="Quantidade Autorizada *"
+                    [fieldId]="'qty-' + $index"
+                    [min]="0.001"
+                    [step]="0.1"
+                    formControlName="authorizedQuantity" />
+  
+                  <app-select-field
+                    label="Unidade *"
+                    [fieldId]="'unit-' + $index"
+                    [options]="unitOptions"
+                    formControlName="unit" />
+                </div>
+  
+                <div>
+                  <label for="usage-instructions" class="text-lg text-neutral-secondary font-bold mb-1 block">
+                    Instruções de Uso
+                  </label>
+                  <input type="text" formControlName="usageInstructions"
+                         placeholder="Ex: Aplicar em 200L de água por hectare"
+                         class="w-full px-4 py-3 rounded-2xl border-2 border-primary/90
+                                bg-transparent text-base text-neutral-secondary
+                                focus:border-primary outline-none transition-all" />
+                </div>
+  
+              </div>
+            }
+          </div>
+  
+        </form>
+      </div>
+  
+      <div class="p-6 border-t border-primary/30 flex flex-col sm:flex-row gap-3">
+        <app-button-pages
+          text="Cancelar"
+          [icon]="icons.CIRCLE_XMARK"
+          width="100%"
+          (action)="toCancel.emit()" />
+        <app-button-pages
+          [text]="saving() ? 'Salvando...' : 'Criar Receita'"
+          [icon]="saving() ? icons.SPINNER : icons.PLUS"
+          [disabled]="saving() || form.invalid || !documentFile()"
+          width="100%"
+          (action)="submit()" />
+      </div>
+  
+    </div>
+</div>

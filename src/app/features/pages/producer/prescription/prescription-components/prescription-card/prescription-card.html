@@ -1,0 +1,105 @@
+<div class="group relative overflow-hidden rounded-3xl bg-neutral-primary
+            border-3 border-primary/50 hover:border-primary
+            transition-all duration-300 hover:-translate-y-2
+            shadow-xl shadow-primary/20 hover:shadow-primary/40 flex flex-col h-full">
+
+  <div class="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-3xl pointer-events-none"></div>
+
+  @if (prescription().expired) {
+    <div class="px-4 py-2 bg-red-400/10 border-b border-red-400/30 flex items-center gap-2">
+      <fa-icon [icon]="icons.TRIANGLE_EXCLAMATION" class="text-red-400 text-sm" />
+      <span class="text-xs font-black uppercase tracking-wider text-red-400">Receita Expirada</span>
+    </div>
+  }
+
+  <div class="relative p-6 border-b-3 border-primary/30 flex items-start justify-between gap-3">
+    <div class="flex items-center gap-3">
+      <div class="w-14 h-14 rounded-2xl bg-black/20 border-2 border-primary/50
+                  flex items-center justify-center shrink-0">
+        <fa-icon [icon]="icons.FILE" class="text-2xl text-primary/60" />
+      </div>
+      <div>
+        <p class="text-secondary/50 text-xs font-black uppercase tracking-widest">
+          {{ prescription().cropName }} · {{ prescription().fieldName }}
+        </p>
+        <div class="flex items-center gap-2 mt-0.5">
+          <fa-icon [icon]="icons.USER_TIE" class="text-primary/60 text-sm" />
+          <h2 class="text-primary font-black text-lg uppercase tracking-tight leading-none">
+            {{ prescription().agronomistName }}
+          </h2>
+        </div>
+        <p class="text-secondary/50 text-xs mt-0.5 font-mono">CREA: {{ prescription().agronomistCrea }}</p>
+      </div>
+    </div>
+
+    <span class="px-3 py-1 rounded-full text-xs font-black uppercase tracking-widest border-2 shrink-0"
+          [class]="prescription().active && !prescription().expired
+            ? 'text-emerald-400 border-emerald-400'
+            : 'text-neutral-400 border-neutral-400'">
+      {{ prescription().active && !prescription().expired ? 'Ativa' : (prescription().expired ? 'Expirada' : 'Inativa') }}
+    </span>
+  </div>
+
+  <div class="flex flex-col gap-3 p-6 flex-1 relative z-10">
+
+    <div class="grid grid-cols-2 gap-3">
+      <div class="p-3 rounded-xl bg-black/20 border border-primary/30">
+        <div class="flex items-center gap-1 mb-1">
+          <fa-icon [icon]="icons.CALENDAR_DAYS" class="text-primary text-xs" />
+          <p class="text-xs font-black uppercase text-secondary/60 tracking-wider">Emissão</p>
+        </div>
+        <p class="text-sm font-bold text-secondary">{{ prescription().issuedAt | date:'dd/MM/yyyy' }}</p>
+      </div>
+
+      <div class="p-3 rounded-xl bg-black/20 border border-primary/30">
+        <div class="flex items-center gap-1 mb-1">
+          <fa-icon [icon]="icons.CALENDAR_DAYS" class="text-primary text-xs" />
+          <p class="text-xs font-black uppercase text-secondary/60 tracking-wider">Validade</p>
+        </div>
+        <p class="text-sm font-bold"
+           [class]="prescription().expired ? 'text-red-400' : 'text-secondary'">
+          {{ prescription().validUntil | date:'dd/MM/yyyy' }}
+        </p>
+      </div>
+    </div>
+
+    <div class="space-y-2">
+      <p class="text-xs font-black uppercase text-secondary/60 tracking-wider">Insumos Prescritos</p>
+      @for (item of prescription().items; track item.id) {
+        <div class="flex items-center justify-between p-3 rounded-xl bg-black/20 border border-primary/20">
+          <div class="flex items-center gap-2">
+            <fa-icon [icon]="icons.FLASK" class="text-primary/50 text-sm" />
+            <div>
+              <p class="text-sm font-bold text-secondary">{{ item.inputName }}</p>
+              @if (item.usageInstructions) {
+                <p class="text-xs text-secondary/50 italic">{{ item.usageInstructions }}</p>
+              }
+            </div>
+          </div>
+          <span class="text-sm font-bold text-primary shrink-0 ml-2">
+            {{ item.authorizedQuantity | number:'1.1-2' }}
+            <small class="text-xs text-secondary/60">{{ unitLabel(item.unitOfMeasure) }}</small>
+          </span>
+        </div>
+      }
+    </div>
+
+    @if (prescription().documentUrl) {
+      <a [href]="prescription().documentUrl" target="_blank" rel="noopener"
+         class="flex items-center gap-2 text-primary/70 hover:text-primary text-sm font-bold transition-colors">
+        <fa-icon [icon]="icons.EXTERNAL_LINK_ALT" class="text-xs" />
+        Ver Documento Original
+      </a>
+    }
+
+    @if (canDeactivate()) {
+      <div class="mt-auto pt-4 border-t-2 border-primary/20">
+        <app-button-pages
+          text="Desativar Receita"
+          [icon]="icons.BAN"
+          width="full"
+          (action)="deactivate.emit(prescription())" />
+      </div>
+    }
+  </div>
+</div>
