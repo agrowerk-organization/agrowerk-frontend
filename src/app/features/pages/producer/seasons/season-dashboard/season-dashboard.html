@@ -1,0 +1,124 @@
+@if (loading()) {
+  <div class="flex items-center justify-center h-32">
+    <div class="animate-spin w-8 h-8 rounded-full border-4 border-button-main border-t-transparent"></div>
+  </div>
+
+} @else if (hasData()) {
+  <div class="space-y-6">
+
+    @for (season of seasons(); track season.seasonId) {
+      <div class="group relative overflow-hidden rounded-3xl
+                  bg-neutral-primary border-3 border-primary/70
+                  shadow-xl shadow-primary/30 p-6">
+
+        <div class="absolute inset-0 -z-10 pointer-events-none overflow-hidden">
+          <div class="absolute top-0 left-0 w-48 h-48 bg-primary/20 rounded-full blur-3xl"></div>
+        </div>
+
+        <div class="flex items-center justify-between mb-6 flex-wrap gap-2">
+          <h2 class="text-2xl sm:text-3xl font-bold text-primary flex items-center gap-3">
+            <fa-icon [icon]="icons.CHART_BAR" class="text-2xl sm:text-4xl" />
+            {{ season.seasonName }}
+          </h2>
+
+          <div class="flex items-center gap-3 flex-wrap">
+            <span class="text-sm bg-primary/10 text-primary px-4 py-1 rounded-full
+                         border border-primary/30 font-bold">
+              {{ season.totalPlantings }} plantio(s)
+            </span>
+            <span class="text-sm bg-primary/10 text-primary px-4 py-1 rounded-full
+                         border border-primary/30 font-bold">
+              {{ season.totalArea | number:'1.1-2' }} ha total
+            </span>
+          </div>
+        </div>
+
+        <p class="text-xl text-primary/90 font-medium leading-relaxed mb-8 border-l-4 border-primary/40 pl-4">
+          {{ season.totalProduced > 0
+            ? (season.totalProduced | number:'1.0-0') + ' kg produzidos em ' + (season.totalArea | number:'1.1-2') + ' ha cultivados com ' + season.items.length + ' cultura(s).'
+            : 'Safra em andamento — produção ainda não registrada.' }}
+        </p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+          @for (row of season.items; track row.cropName) {
+            <div class="flex flex-col gap-3 p-5 rounded-2xl border-2 border-primary/50
+                        bg-neutral-primary shadow-lg shadow-primary/30
+                        transition-all duration-300 hover:border-primary">
+
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <fa-icon [icon]="icons.WHEAT_AWN" class="text-xl text-primary" />
+                  <span class="text-lg font-black uppercase tracking-widest text-neutral-secondary">
+                    {{ row.cropName }}
+                  </span>
+                </div>
+
+                @if (row.warning) {
+                  <span class="flex items-center gap-1 text-xs font-bold text-amber-400
+                               bg-amber-400/10 border border-amber-400/30 px-2 py-1 rounded-lg">
+                    <fa-icon [icon]="icons.TRIANGLE_EXCLAMATION" class="text-xs" />
+                    Alerta
+                  </span>
+                }
+              </div>
+
+              <!-- Produção total -->
+              <div class="space-y-0.5">
+                <p class="text-sm text-neutral-secondary/70 uppercase font-black tracking-tighter">Produzido</p>
+                <p class="text-3xl font-black text-primary leading-none">
+                  {{ row.totalProducedKg > 0 ? (row.totalProducedKg | number:'1.0-0') + ' kg' : '—' }}
+                </p>
+              </div>
+
+              <div class="pt-2 border-t border-primary/20 space-y-1">
+                <p class="text-sm text-neutral-secondary font-medium flex items-center gap-1">
+                  <fa-icon [icon]="icons.RULER" class="text-xs text-primary/60" />
+                  Área:
+                  <span class="text-base text-primary font-bold">
+                    {{ row.totalArea | number:'1.1-2' }} ha
+                  </span>
+                </p>
+                @if (row.avgProductivity) {
+                  <p class="text-sm text-neutral-secondary font-medium flex items-center gap-1">
+                    <fa-icon [icon]="icons.GAUGE_HIGH" class="text-xs text-primary/60" />
+                    Produtividade:
+                    <span class="text-base text-primary font-bold">
+                      {{ row.avgProductivity | number:'1.0-0' }} kg/ha
+                    </span>
+                  </p>
+                }
+              </div>
+
+              @if (row.warning) {
+                <p class="text-xs text-amber-400/80 italic border-l-2 border-amber-400/40 pl-2">
+                  {{ row.warning }}
+                </p>
+              }
+
+            </div>
+          }
+        </div>
+
+        <div class="pt-6 border-t-2 border-primary/80 flex flex-col sm:flex-row
+                    items-center justify-between gap-4">
+          <div class="flex flex-col sm:flex-row items-center gap-4">
+            <div class="flex items-center gap-3 bg-primary/20 px-4 py-2 rounded-xl border border-primary/80">
+              <fa-icon [icon]="icons.WEIGHT_HANGING" class="text-primary" />
+              <span class="text-neutral-secondary font-medium">Total produzido:</span>
+              <span class="text-2xl font-bold text-primary">
+                {{ season.totalProduced | number:'1.0-0' }} kg
+              </span>
+            </div>
+          </div>
+
+          <button (click)="load()"
+                  class="text-xl sm:text-2xl text-primary hover:text-secondary
+                         transition-colors font-bold flex items-center gap-2 cursor-pointer">
+            <fa-icon [icon]="icons.ARROWS_ROTATE" /> Atualizar
+          </button>
+        </div>
+
+      </div>
+    }
+  </div>
+}

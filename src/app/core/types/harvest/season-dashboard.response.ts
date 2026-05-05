@@ -7,6 +7,6 @@ export interface SeasonDashboardResponse {
     totalPlantings: number;
     totalArea: number;
     totalProducedKg: number;
-    avgProductionKg: number;
+    avgProductivity: number;
     warning: string;
 }

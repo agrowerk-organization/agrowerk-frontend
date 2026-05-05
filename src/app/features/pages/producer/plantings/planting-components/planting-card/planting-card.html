@@ -83,6 +83,18 @@
           (action)="forecast.emit(planting())" />
       </div>
 
+      <app-button-pages
+        text="Receitas"
+        [icon]="icons.FILE_CONTRACT"
+        width="full"
+        (action)="prescription.emit(planting())" />
+      <app-button-pages
+        text="Colheita"
+        [icon]="icons.FLAG_CHECKERED"
+        width="full"
+        (action)="harvest.emit(planting())" />
+
+
       @if (canEdit() || canCancel()) {
         <div class="flex gap-3">
           @if (canEdit()) {

@@ -1,0 +1,71 @@
+<div class="fixed inset-0 z-[2000] flex items-center justify-center p-4">
+    <div class="absolute inset-0 bg-black/60 backdrop-blur-sm"
+         (click)="toCancel.emit()"
+         (keydown.escape)="toCancel.emit()"
+         tabindex="-1" role="presentation"></div>
+  
+    <div class="relative z-10 w-full mt-8 max-w-lg flex flex-col rounded-3xl
+                bg-neutral-primary border-3 border-primary/70 shadow-2xl shadow-primary/30 overflow-hidden">
+  
+      <div class="flex items-center justify-between p-6 border-b border-primary/30">
+        <div>
+          <h2 class="text-xl sm:text-2xl font-black text-primary uppercase tracking-tight">
+            Registrar Colheita
+          </h2>
+          @if (cropVarietyName()) {
+            <p class="text-secondary/80 text-lg italic mt-0.5">{{ cropName() }} — {{ cropVarietyName() }}</p>
+          }
+        </div>
+        <button type="button" (click)="toCancel.emit()"
+                class="w-12 h-12 flex items-center justify-center rounded-xl border-2 border-primary/30
+                       text-primary hover:border-primary transition-all cursor-pointer">
+          <fa-icon [icon]="icons.CIRCLE_XMARK" class="text-2xl" />
+        </button>
+      </div>
+  
+      <form id="harvestForm" class="p-6 space-y-5" [formGroup]="form" (ngSubmit)="submit()">
+  
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <app-number-field
+            label="Quantidade (kg) *"
+            fieldId="qty-kg"
+            [min]="0.001"
+            [step]="1"
+            formControlName="quantityKg" />
+  
+          <div>
+            <label for="harvest-date" class="text-xl sm:text-2xl text-neutral-secondary font-bold mb-1 block">
+              Data da Colheita *
+            </label>
+            <input id="harvest-date" formControlName="harvestDate" type="date"
+                   class="w-full px-4 py-4 rounded-2xl border-2 border-primary/90
+                          bg-transparent text-lg text-neutral-secondary
+                          focus:border-primary outline-none transition-all" />
+          </div>
+        </div>
+  
+        <div>
+          <label for="quality-grade" class="text-xl sm:text-2xl text-neutral-secondary font-bold mb-1 block">
+            Grau de Qualidade
+          </label>
+          <input id="quality-grade" formControlName="qualityGrade" type="text"
+                 placeholder="Ex: A, B, Premium, Tipo 1..."
+                 class="w-full px-4 py-4 rounded-2xl border-2 border-primary/90
+                        bg-transparent text-lg text-neutral-secondary
+                        focus:border-primary outline-none transition-all" />
+        </div>
+  
+      </form>
+  
+      <div class="p-6 border-t border-primary/30 flex flex-col sm:flex-row gap-3">
+        <app-button-pages text="Cancelar" [icon]="icons.CIRCLE_XMARK" width="100%" (action)="toCancel.emit()" />
+        <app-button-pages
+          [text]="saving() ? 'Salvando...' : 'Registrar Colheita'"
+          [icon]="saving() ? icons.SPINNER : icons.WHEAT_AWN"
+          [disabled]="saving() || form.invalid"
+          width="100%"
+          (action)="submit()" />
+      </div>
+  
+    </div>
+</div>

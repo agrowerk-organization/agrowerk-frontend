@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HarvestDetail } from './harvest-detail';
+import { HarvestForm } from './harvest-form';
 
-describe('HarvestDetail', () => {
-  let component: HarvestDetail;
-  let fixture: ComponentFixture<HarvestDetail>;
+describe('HarvestForm', () => {
+  let component: HarvestForm;
+  let fixture: ComponentFixture<HarvestForm>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HarvestDetail]
+      imports: [HarvestForm]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(HarvestDetail);
+    fixture = TestBed.createComponent(HarvestForm);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

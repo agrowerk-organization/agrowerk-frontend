@@ -1,0 +1,65 @@
+@if (loading()) {
+    <div class="flex items-center justify-center h-[calc(100vh-100px)]">
+      <div class="animate-spin w-10 h-10 rounded-full border-4 border-button-main border-t-transparent"></div>
+    </div>
+  } @else {
+    <div class="p-6 space-y-6 pb-32 lg:pb-6 max-w-9xl mx-auto px-4 sm:px-10">
+  
+      <div class="flex items-center gap-4">
+        <app-back-button [link]="'/producer/plantings/' + propertyId()" />
+  
+        <div class="flex-1 flex items-center justify-between gap-4">
+          <div>
+            <h1 class="text-2xl sm:text-3xl font-black text-primary uppercase tracking-tight leading-none">
+              Colheitas
+            </h1>
+            <p class="text-secondary/80 text-lg italic mt-1">{{ propertyName() }}</p>
+          </div>
+          <app-button-pages
+            text="Registrar Colheita"
+            [icon]="icons.PLUS"
+            (action)="showForm.set(true)" />
+        </div>
+      </div>
+  
+      @if (hasItems()) {
+        <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+          @for (harvest of harvests(); track harvest.id) {
+            <app-harvest-card
+              [harvest]="harvest"
+              (finalize)="onFinalize($event)" />
+          }
+        </div>
+  
+        @if (total() > 1) {
+          <app-paginator
+            [currentPage]="currentPage()"
+            [totalPages]="total()"
+            (pageChange)="onPageChange($event)" />
+        }
+  
+      } @else {
+        <div class="flex flex-col items-center justify-center py-24 gap-6">
+          <div class="w-24 h-24 rounded-3xl bg-black/20 border-2 border-primary/30
+                      flex items-center justify-center">
+            <fa-icon [icon]="icons.WHEAT" class="text-5xl text-primary/20" />
+          </div>
+          <div class="text-center">
+            <p class="text-primary/60 font-black text-xl uppercase tracking-widest">Nenhuma colheita registrada</p>
+            <p class="text-secondary/50 text-base mt-2">Registre a primeira colheita desta propriedade.</p>
+          </div>
+          <app-button-pages text="Registrar Colheita" [icon]="icons.PLUS" (action)="showForm.set(true)" />
+        </div>
+      }
+  
+    </div>
+}
+  
+@if (showForm()) {
+    <app-harvest-form
+      [plantingId]="plantingId()"
+      [cropVarietyName]="cropVarietyName()"
+      [cropName]="cropName()"
+      (saved)="onSaved($event)"
+      (toCancel)="showForm.set(false)" />
+}

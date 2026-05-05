@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ListHarvests } from './list-harvests';
+import { Harvests } from './harvests';
 
-describe('ListHarvests', () => {
-  let component: ListHarvests;
-  let fixture: ComponentFixture<ListHarvests>;
+describe('Harvests', () => {
+  let component: Harvests;
+  let fixture: ComponentFixture<Harvests>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ListHarvests]
+      imports: [Harvests]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ListHarvests);
+    fixture = TestBed.createComponent(Harvests);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

@@ -6,7 +6,14 @@ import {
     faTriangleExclamation,
     faPlay,
     faCalendarDays,
-    faFlagCheckered
+    faFlagCheckered,
+    faChartBar,
+    faSeedling,
+    faRulerCombined,
+    faWeightHanging,
+    faArrowsRotate,
+    faGaugeHigh,
+    faWheatAwn
 } from '@fortawesome/free-solid-svg-icons';
 
 export const ICONS_PRODUCER_SEASONS = {
@@ -17,6 +24,13 @@ export const ICONS_PRODUCER_SEASONS = {
     TRIANGLE_EXCLAMATION: faTriangleExclamation,
     PLAY: faPlay,
     CALENDAR_DAYS: faCalendarDays,
-    FLAG_CHECKERED: faFlagCheckered
+    FLAG_CHECKERED: faFlagCheckered,
+    CHART_BAR: faChartBar,
+    SEEDLING: faSeedling,
+    RULER: faRulerCombined,
+    WEIGHT_HANGING: faWeightHanging,
+    ARROWS_ROTATE: faArrowsRotate,
+    GAUGE_HIGH: faGaugeHigh,
+    WHEAT_AWN: faWheatAwn
 }
 
