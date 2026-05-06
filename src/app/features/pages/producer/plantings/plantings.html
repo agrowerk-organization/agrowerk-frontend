@@ -28,11 +28,15 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
           @for (planting of plantings(); track planting.id) {
             <app-planting-card
-              [planting]="planting"
-              (edit)="openEdit($event)"
-              (toCancel)="onCancel($event)"
-              (inputs)="goToInputs($event)" 
-              (forecast)="goToForecast($event)" />
+            [planting]="planting"
+            (edit)="openEdit($event)"
+            (toCancel)="onCancel($event)"
+            (inputs)="goToInputs($event)"
+            (forecast)="goToForecast($event)"
+            (prescription)="goToPrescription($event)"
+            (harvest)="goToHarvest($event)"
+            (warehouse)="goToWarehouse($event)"
+            (activity)="goToActivity($event)" />
           }
         </div>
   

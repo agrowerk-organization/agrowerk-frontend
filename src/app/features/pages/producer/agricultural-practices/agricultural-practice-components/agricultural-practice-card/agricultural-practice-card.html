@@ -1,0 +1,79 @@
+<div class="group relative overflow-hidden rounded-3xl bg-neutral-primary
+            border-3 border-primary/50 hover:border-primary
+            transition-all duration-300 hover:-translate-y-2
+            shadow-xl shadow-primary/20 hover:shadow-primary/40 flex flex-col h-full">
+
+  <div class="absolute top-0 right-0 w-24 h-24 bg-primary/10 rounded-full blur-3xl pointer-events-none"></div>
+
+  <div class="relative p-5 border-b-3 border-primary/30 flex items-start justify-between gap-3">
+    <div class="flex items-center gap-3">
+      <div class="w-12 h-12 rounded-2xl bg-black/20 border-2 border-primary/50
+                  flex items-center justify-center shrink-0">
+        <fa-icon [icon]="icons.SPROUT" class="text-xl text-primary/60" />
+      </div>
+      <div>
+        <p class="text-secondary/50 text-xs italic">{{ practice().cropName }} · {{ practice().fieldName }}</p>
+        <h2 class="text-primary font-black text-lg uppercase tracking-tight leading-none mt-0.5">
+          {{ typeLabel() }}
+        </h2>
+      </div>
+    </div>
+
+    <span class="px-3 py-1 rounded-full text-xs font-black uppercase tracking-widest border-2 shrink-0"
+          [class]="typeColor()">
+      {{ practice().applicationDate | date:'dd/MM' }}
+    </span>
+  </div>
+
+  <div class="flex flex-col gap-3 p-5 flex-1 relative z-10">
+
+    @if (practice().productUsed) {
+      <div class="p-3 rounded-xl bg-black/20 border border-primary/30">
+        <div class="flex items-center gap-1 mb-1">
+          <fa-icon [icon]="icons.FLASK" class="text-primary text-xs" />
+          <p class="text-xs font-black uppercase text-secondary/60 tracking-wider">Produto</p>
+        </div>
+        <p class="text-sm font-bold text-secondary">{{ practice().productUsed }}</p>
+        @if (practice().quantityUsed) {
+          <p class="text-xs text-secondary/50 mt-0.5">
+            {{ practice().quantityUsed | number:'1.1-2' }} {{ unitLabel() }}
+          </p>
+        }
+      </div>
+    }
+
+    <div class="grid grid-cols-2 gap-3">
+      <div class="p-3 rounded-xl bg-black/20 border border-primary/30">
+        <div class="flex items-center gap-1 mb-1">
+          <fa-icon [icon]="icons.CALENDAR_DAYS" class="text-primary text-xs" />
+          <p class="text-xs font-black uppercase text-secondary/60 tracking-wider">Aplicação</p>
+        </div>
+        <p class="text-sm font-bold text-secondary">
+          {{ practice().applicationDate | date:'dd/MM/yyyy' }}
+        </p>
+      </div>
+
+      @if (practice().costAmount) {
+        <div class="p-3 rounded-xl bg-black/20 border border-primary/30">
+          <div class="flex items-center gap-1 mb-1">
+            <fa-icon [icon]="icons.SACK_DOLLAR" class="text-primary text-xs" />
+            <p class="text-xs font-black uppercase text-secondary/60 tracking-wider">Custo</p>
+          </div>
+          <p class="text-sm font-bold text-primary">R$ {{ practice().costAmount | number:'1.2-2' }}</p>
+        </div>
+      }
+    </div>
+
+    @if (practice().observations) {
+      <p class="text-secondary/50 text-xs italic border-l-2 border-primary/20 pl-3">
+        {{ practice().observations }}
+      </p>
+    }
+
+    <div class="mt-auto pt-3 border-t border-primary/10 flex items-center gap-2">
+      <fa-icon [icon]="icons.USER" class="text-primary/30 text-xs" />
+      <p class="text-xs text-secondary/40">{{ practice().responsibleUserName }}</p>
+    </div>
+
+  </div>
+</div>

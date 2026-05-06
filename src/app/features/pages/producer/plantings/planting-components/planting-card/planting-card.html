@@ -94,6 +94,18 @@
         width="full"
         (action)="harvest.emit(planting())" />
 
+        <app-button-pages
+        text="Armazéns"
+        [icon]="icons.WAREHOUSE"
+        width="full"
+        (action)="warehouse.emit(planting())" />
+      <app-button-pages
+        text="Atividades"
+        [icon]="icons.SPROUT"
+        width="full"
+        (action)="activity.emit(planting())" />
+
+
 
       @if (canEdit() || canCancel()) {
         <div class="flex gap-3">

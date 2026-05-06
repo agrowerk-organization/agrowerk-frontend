@@ -1,0 +1,98 @@
+<div class="group relative overflow-hidden rounded-3xl bg-neutral-primary
+            border-3 border-primary/50 hover:border-primary
+            transition-all duration-300 hover:-translate-y-2
+            shadow-xl shadow-primary/20 hover:shadow-primary/40 flex flex-col h-full"
+     [class.opacity-60]="!warehouse().isActive">
+
+  <div class="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-3xl pointer-events-none"></div>
+
+  <div class="relative p-6 border-b-3 border-primary/30 flex items-start justify-between gap-3">
+    <div class="flex items-center gap-3">
+      <div class="w-14 h-14 rounded-2xl bg-black/20 border-2 border-primary/50
+                  flex items-center justify-center shrink-0">
+        <fa-icon [icon]="icons.WAREHOUSE" class="text-2xl text-primary/60" />
+      </div>
+      <div>
+        <h2 class="text-primary font-black text-xl uppercase tracking-tight leading-none">
+          {{ warehouse().name }}
+        </h2>
+        @if (warehouse().code) {
+          <p class="text-secondary/50 text-xs font-mono mt-0.5">
+            <fa-icon [icon]="icons.CODE_BRANCH" class="mr-1 text-xs" />{{ warehouse().code }}
+          </p>
+        }
+        <p class="text-secondary/50 text-xs mt-1">{{ typeLabel() }}</p>
+      </div>
+    </div>
+
+    <span class="px-3 py-1 rounded-full text-xs font-black uppercase tracking-widest border-2 shrink-0"
+          [class]="warehouse().isActive
+            ? 'text-emerald-400 border-emerald-400'
+            : 'text-neutral-400 border-neutral-400'">
+      {{ warehouse().isActive ? 'Ativo' : 'Inativo' }}
+    </span>
+  </div>
+
+  <div class="flex flex-col gap-3 p-6 flex-1 relative z-10">
+
+    @if (warehouse().capacityKg) {
+      <div class="p-3 rounded-xl bg-black/20 border-2 border-primary/90 shadow-lg shadow-primary/30">
+        <div class="flex items-center justify-between mb-2">
+          <div class="flex items-center gap-2">
+            <fa-icon [icon]="icons.WEIGHT_HANGING" class="text-primary" />
+            <span class="text-sm font-black uppercase text-secondary tracking-tighter">Ocupação</span>
+          </div>
+          <span class="text-lg font-bold text-primary">
+            {{ warehouse().currentOccupancyKg | number:'1.0-0' }}
+            <small class="text-xs text-secondary/60">/ {{ warehouse().capacityKg | number:'1.0-0' }} kg</small>
+          </span>
+        </div>
+        <div class="w-full h-1.5 bg-black/30 rounded-full overflow-hidden">
+          <div class="h-full rounded-full transition-all duration-500"
+               [class]="occupancyColor()"
+               [style.width.%]="occupancyRatio()"></div>
+        </div>
+        <div class="flex justify-between mt-1">
+          <span class="text-xs text-secondary/50">
+            Disponível: <span class="text-primary font-bold">{{ warehouse().availableCapacityKg | number:'1.0-0' }} kg</span>
+          </span>
+          <span class="text-xs font-bold"
+                [class]="occupancyRatio() >= 90 ? 'text-red-400' : occupancyRatio() >= 70 ? 'text-amber-400' : 'text-secondary/50'">
+            {{ occupancyRatio() | number:'1.0-0' }}%
+          </span>
+        </div>
+      </div>
+    }
+
+    @if (warehouse().location) {
+      <div class="p-3 rounded-xl bg-black/20 border border-primary/30">
+        <div class="flex items-center gap-1 mb-1">
+          <fa-icon [icon]="icons.LOCATION_DOT" class="text-primary text-xs" />
+          <p class="text-xs font-black uppercase text-secondary/60 tracking-wider">Localização</p>
+        </div>
+        <p class="text-sm font-semibold text-secondary">{{ warehouse().location }}</p>
+      </div>
+    }
+
+    @if (warehouse().description) {
+      <p class="text-secondary/50 text-xs italic border-l-2 border-primary/20 pl-3">
+        {{ warehouse().description }}
+      </p>
+    }
+
+    @if (warehouse().isActive) {
+      <div class="mt-auto pt-4 border-t-2 border-primary/20 flex gap-3">
+        <app-button-pages
+          text="Editar"
+          [icon]="icons.PEN"
+          width="full"
+          (action)="edit.emit(warehouse())" />
+        <app-button-pages
+          text="Desativar"
+          [icon]="icons.BAN"
+          width="full"
+          (action)="deactivate.emit(warehouse())" />
+      </div>
+    }
+  </div>
+</div>

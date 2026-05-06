@@ -1,0 +1,53 @@
+@if (loading()) {
+    <div class="flex items-center justify-center h-[calc(100vh-100px)]">
+      <div class="animate-spin w-10 h-10 rounded-full border-4 border-button-main border-t-transparent"></div>
+    </div>
+  } @else {
+    <div class="p-6 space-y-6 pb-32 lg:pb-6 max-w-9xl mx-auto px-4 sm:px-10">
+  
+      <div class="flex items-center gap-4">
+        <app-back-button [link]="'/producer/plantings/' + propertyId()" />
+        <div class="flex-1 flex items-center justify-between gap-4">
+          <div>
+            <h1 class="text-2xl sm:text-3xl font-black text-primary uppercase tracking-tight leading-none">
+              Armazéns
+            </h1>
+            <p class="text-secondary/80 text-lg italic mt-1">{{ propertyName() }}</p>
+          </div>
+          <app-button-pages text="Novo Armazém" [icon]="icons.PLUS" (action)="openCreate()" />
+        </div>
+      </div>
+  
+      @if (hasItems()) {
+        <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+          @for (w of warehouses(); track w.id) {
+            <app-warehouse-card
+              [warehouse]="w"
+              (edit)="openEdit($event)"
+              (deactivate)="onDeactivate($event)" />
+          }
+        </div>
+      } @else {
+        <div class="flex flex-col items-center justify-center py-24 gap-6">
+          <div class="w-24 h-24 rounded-3xl bg-black/20 border-2 border-primary/30
+                      flex items-center justify-center">
+            <fa-icon [icon]="icons.WAREHOUSE" class="text-5xl text-primary/20" />
+          </div>
+          <div class="text-center">
+            <p class="text-primary/60 font-black text-xl uppercase tracking-widest">Nenhum armazém cadastrado</p>
+            <p class="text-secondary/50 text-base mt-2">Cadastre o primeiro armazém desta propriedade.</p>
+          </div>
+          <app-button-pages text="Criar Armazém" [icon]="icons.PLUS" (action)="openCreate()" />
+        </div>
+      }
+  
+    </div>
+}
+  
+@if (showForm()) {
+    <app-warehouse-form
+      [propertyId]="propertyId()"
+      [warehouseData]="editTarget()"
+      (saved)="onSaved($event)"
+      (toCancel)="closeForm()" />
+}

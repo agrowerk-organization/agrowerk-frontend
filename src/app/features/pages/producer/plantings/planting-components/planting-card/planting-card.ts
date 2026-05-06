@@ -20,7 +20,8 @@ export class PlantingCard {
   forecast = output<PlantingResponse>();
   prescription = output<PlantingResponse>();
   harvest      = output<PlantingResponse>();
-
+  warehouse = output<PlantingResponse>();
+  activity = output<PlantingResponse>();
 
   readonly icons = ICONS_PLANTINGS;
 

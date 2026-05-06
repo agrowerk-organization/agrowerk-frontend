@@ -1,0 +1,91 @@
+@if (loading()) {
+    <div class="flex items-center justify-center h-[calc(100vh-100px)]">
+      <div class="animate-spin w-10 h-10 rounded-full border-4 border-button-main border-t-transparent"></div>
+    </div>
+  } @else {
+    <div class="p-6 space-y-6 pb-32 lg:pb-6 max-w-9xl mx-auto px-4 sm:px-10">
+  
+      <div class="flex items-center gap-4">
+        <app-back-button [link]="'/producer/plantings'" />
+  
+        <div class="flex-1 flex items-center justify-between gap-4">
+          <div>
+            <h1 class="text-2xl sm:text-3xl font-black text-primary uppercase tracking-tight leading-none">
+              Atividades Agrícolas
+            </h1>
+            <p class="text-secondary/80 text-base italic mt-1">{{ subtitle }}</p>
+          </div>
+          <app-button-pages
+            text="Registrar Atividade"
+            [icon]="icons.PLUS"
+            (action)="showForm.set(true)" />
+        </div>
+      </div>
+  
+      @if (totalCost() > 0) {
+        <div class="flex items-center gap-3 p-4 rounded-2xl border-2 border-primary/30 bg-black/10">
+          <p class="text-secondary/70 text-sm font-black uppercase tracking-wider">Custo Total do Plantio:</p>
+          <p class="text-2xl font-black text-primary">R$ {{ totalCost() | number:'1.2-2' }}</p>
+        </div>
+      }
+  
+      <div class="flex items-center gap-2 flex-wrap">
+        @for (f of typeFilters; track f.label) {
+          <button type="button"
+                  (click)="selectFilter(f.value)"
+                  class="px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-wider
+                         border-2 transition-all cursor-pointer"
+                  [class]="activeFilter() === f.value
+                    ? 'border-primary bg-primary/10 text-primary'
+                    : 'border-primary/20 text-secondary/60 hover:border-primary/50'">
+            {{ f.label }}
+          </button>
+        }
+      </div>
+  
+      @if (hasItems()) {
+        <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+          @for (practice of practices(); track practice.id) {
+            <app-agricultural-practice-card [practice]="practice" />
+          }
+        </div>
+  
+        @if (total() > 1) {
+          <app-paginator
+            [currentPage]="currentPage()"
+            [totalPages]="total()"
+            (pageChange)="onPageChange($event)" />
+        }
+  
+      } @else {
+        <div class="flex flex-col items-center justify-center py-24 gap-6">
+          <div class="w-24 h-24 rounded-3xl bg-black/20 border-2 border-primary/30
+                      flex items-center justify-center">
+            <fa-icon [icon]="icons.SPROUT" class="text-5xl text-primary/20" />
+          </div>
+          <div class="text-center">
+            <p class="text-primary/60 font-black text-xl uppercase tracking-widest">
+              Nenhuma atividade registrada
+            </p>
+            <p class="text-secondary/50 text-base mt-2">
+              Registre as atividades realizadas neste plantio.
+            </p>
+          </div>
+          <app-button-pages
+            text="Registrar Atividade"
+            [icon]="icons.PLUS"
+            (action)="showForm.set(true)" />
+        </div>
+      }
+  
+    </div>
+}
+  
+@if (showForm()) {
+    <app-agricultural-practice-form
+      [plantingId]="plantingId()"
+      [cropVarietyName]="cropVarietyName()"
+      [cropName]="cropName()"
+      (saved)="onSaved($event)"
+      (toCancel)="showForm.set(false)" />
+}

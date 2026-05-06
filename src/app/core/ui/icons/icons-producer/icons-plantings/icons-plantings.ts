@@ -14,7 +14,9 @@ import {
     faCheckCircle,
     faChartLine,
     faFileContract,
-    faFlagCheckered
+    faFlagCheckered,
+    faSprout,
+    faWarehouse
 } from '@fortawesome/free-solid-svg-icons';
 
 export const ICONS_PLANTINGS = {
@@ -33,5 +35,7 @@ export const ICONS_PLANTINGS = {
     CHECK_CIRCLE: faCheckCircle,
     CHART_LINE: faChartLine,
     FILE_CONTRACT: faFileContract,
-    FLAG_CHECKERED: faFlagCheckered
+    FLAG_CHECKERED: faFlagCheckered,
+    SPROUT: faSprout,
+    WAREHOUSE: faWarehouse
 }
