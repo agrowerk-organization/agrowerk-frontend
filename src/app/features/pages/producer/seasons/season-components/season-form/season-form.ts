@@ -8,6 +8,7 @@ import { SeasonService } from '@core/services/season.service';
 import { SeasonResponse } from '@core/types/season/season-response';
 import { ButtonPages } from '@shared/components/buttons/button-pages/button-pages';
 import { ICONS_PRODUCER_SEASONS } from '@core/ui/icons/icons-producer/icons-seasons/icons-seasons';
+import { DateField } from '@shared/components/date-field/date-field';
 @Component({
   selector: 'app-season-form',
   standalone: true,
@@ -16,7 +17,8 @@ import { ICONS_PRODUCER_SEASONS } from '@core/ui/icons/icons-producer/icons-seas
     CommonModule, 
     ReactiveFormsModule, 
     FontAwesomeModule, 
-    ButtonPages
+    ButtonPages,
+    DateField
   ],
   templateUrl: './season-form.html',
 })

@@ -116,7 +116,7 @@ export const routes: Routes = [
           .then(page => page.PropertyDetail)
       },
       {
-        path: 'seasons',
+        path: 'properties/:propertyId/seasons', 
         loadComponent: () => import('./features/pages/producer/seasons/seasons')
           .then(page => page.Seasons)
       },
@@ -127,23 +127,13 @@ export const routes: Routes = [
       },
       {
         path: 'plantings',
-        loadComponent: () => import('./features/pages/producer/plantings/list-plantings/list-plantings')
-          .then(page => page.ListPlantings)
-      },
-      {
-        path: 'plantings/:id',
-        loadComponent: () => import('./features/pages/producer/plantings/planting-detail/planting-detail')
-          .then(page => page.PlantingDetail)
+        loadComponent: () => import('./features/pages/producer/plantings/plantings')
+          .then(page => page.Plantings)
       },
       {
         path: 'harvests',
-        loadComponent: () => import('./features/pages/producer/harvests/list-harvests/list-harvests')
-          .then(page => page.ListHarvests)
-      },
-      {
-        path: 'harvests/:id',
-        loadComponent: () => import('./features/pages/producer/harvests/harvest-detail/harvest-detail')
-          .then(page => page.HarvestDetail)
+        loadComponent: () => import('./features/pages/producer/harvests/harvests')
+          .then(page => page.Harvests)
       },
       {
         path: 'stock',

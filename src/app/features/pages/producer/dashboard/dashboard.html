@@ -80,7 +80,8 @@
             <app-weather-card
               [current]="weatherDashboard()?.current ?? null" />
             <app-season-card
-              [season]="activeSeason()" />
+              [season]="activeSeason()"
+              [propertyId]="property.id" />
            
           </div>
 

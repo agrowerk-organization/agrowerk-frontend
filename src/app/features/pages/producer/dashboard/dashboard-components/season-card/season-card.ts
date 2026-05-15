@@ -17,6 +17,8 @@ export class SeasonCard {
   private router = inject(Router);
 
   season = input<SeasonResponse | null>(null);
+  propertyId = input<string | null>(null);
+
   icons = ICONS_DASHBOARD;
 
   hasSeason = computed(() => this.season() !== null);
@@ -28,8 +30,10 @@ export class SeasonCard {
   report() {
     return
   }
-  createSeason() {
-    return
+ createSeason() {
+    if (this.propertyId()) {
+      this.router.navigate([`/producer/properties/${this.propertyId()}/seasons`]);
+    }
   } 
 
   goToSeason() {

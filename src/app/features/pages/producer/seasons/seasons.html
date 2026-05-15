@@ -6,7 +6,6 @@
   } @else {
     <div class="p-6 space-y-6 pb-32 lg:pb-6 max-w-9xl mx-auto px-4 sm:px-10">
   
-      <!-- Cabeçalho -->
       <div class="flex items-center gap-4">
         <app-back-button [link]="'/producer/properties/' + propertyId()" />
   
@@ -66,9 +65,9 @@
     </div>
 }
   
-@if (showForm()) {
-    <app-season-form
-      [propertyId]="propertyId()"
-      (saved)="onSaved($event)"
-      (toCancel)="showForm.set(false)" />
+@if (showForm()) { 
+  <app-season-form
+    [propertyId]="propertyId()!" 
+    (saved)="onSaved($event)"
+    (toCancel)="showForm.set(false)" />
 }

@@ -25,13 +25,12 @@
           <div class="flex items-start gap-3 p-4 rounded-2xl border-2 border-amber-400/50 bg-amber-400/5">
             <fa-icon [icon]="icons.TRIANGLE_EXCLAMATION" class="text-amber-400 text-lg mt-0.5 shrink-0" />
             <p class="text-sm text-secondary/80 leading-relaxed">
-              <span class="font-black text-amber-400 uppercase tracking-wide">Atenção: </span>
-              os dados da safra <span class="font-bold">não poderão ser alterados</span> após a criação.
+              <span class="text-lg font-black text-amber-400 uppercase tracking-wide">Atenção: </span>
+              os dados da safra <span class="text-sm font-bold">não poderão ser alterados</span> após a criação.
               Verifique as informações antes de confirmar.
             </p>
           </div>
   
-          <!-- Nome -->
           <div>
             <label for="season-name" class="text-xl sm:text-2xl text-neutral-secondary font-bold mb-1 block">
               Nome da Safra *
@@ -44,25 +43,15 @@
           </div>
   
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label for="start-date" class="text-xl sm:text-2xl text-neutral-secondary font-bold mb-1 block">
-                Data de Início *
-              </label>
-              <input id="start-date" formControlName="startDate" type="date"
-                     class="w-full px-4 py-4 rounded-2xl border-2 border-primary/90
-                            bg-transparent text-lg text-neutral-secondary
-                            focus:border-primary outline-none transition-all" />
-            </div>
-  
-            <div>
-              <label for="end-date" class="text-xl sm:text-2xl text-neutral-secondary font-bold mb-1 block">
-                Data de Término *
-              </label>
-              <input id="end-date" formControlName="endDate" type="date"
-                     class="w-full px-4 py-4 rounded-2xl border-2 border-primary/90
-                            bg-transparent text-lg text-neutral-secondary
-                            focus:border-primary outline-none transition-all" />
-            </div>
+            <app-date-field
+              label="Data de Início *"
+              fieldId="start-date"
+              formControlName="startDate" />
+          
+            <app-date-field
+              label="Data de Término *"
+              fieldId="end-date"
+              formControlName="endDate" />
           </div>
   
         </form>
