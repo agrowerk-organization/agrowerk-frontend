@@ -4,7 +4,7 @@ import {
 import { CommonModule }            from '@angular/common';
 import { FontAwesomeModule }       from '@fortawesome/angular-fontawesome';
 import { SeasonDashboardService } from '@core/services/season-dashboard.service';
-import { SeasonDashboardResponse } from '@core/types/harvest/season-dashboard.response';
+import { SeasonDashboardResponse } from '@core/types/season/season-dashboard.response';
 import { SeasonGroup } from '@core/ui/types/season/season-group';
 import { ICONS_PRODUCER_SEASONS } from '@core/ui/icons/icons-producer/icons-seasons/icons-seasons';
 

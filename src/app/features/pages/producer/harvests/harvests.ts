@@ -53,11 +53,26 @@ export class Harvests implements OnInit {
 
   ngOnInit(): void {
     const snap = this.route.snapshot;
-    this.propertyId.set(snap.paramMap.get('propertyId') ?? '');
-    this.propertyName.set(snap.queryParamMap.get('propertyName') ?? '');
-    this.plantingId.set(snap.queryParamMap.get('plantingId') ?? '');
-    this.cropVarietyName.set(snap.queryParamMap.get('cropVarietyName') ?? '');
-    this.cropName.set(snap.queryParamMap.get('cropName') ?? '');
+    const parentSnap = this.route.parent?.snapshot;
+
+    const pId = snap.paramMap.get('propertyId') ?? parentSnap?.paramMap.get('propertyId') ?? '';
+    const plId = snap.paramMap.get('plantingId') ?? parentSnap?.paramMap.get('plantingId') ?? '';
+    this.propertyId.set(pId);
+    this.plantingId.set(plId);
+
+    const queryMap = snap.queryParamMap;
+    const parentQueryMap = parentSnap?.queryParamMap;
+
+    this.cropVarietyName.set(queryMap.get('cropVarietyName') ?? parentQueryMap?.get('cropVarietyName') ?? '');
+    this.cropName.set(queryMap.get('cropName') ?? parentQueryMap?.get('cropName') ?? '');
+    
+    this.propertyName.set(
+      queryMap.get('propertyName') ?? 
+      parentQueryMap?.get('propertyName') ?? 
+      this.route.root.snapshot.queryParamMap.get('propertyName') ?? 
+      'Propriedade'
+    );
+
     this.load();
   }
 
@@ -92,5 +107,9 @@ export class Harvests implements OnInit {
   onPageChange(p: number): void {
     this.currentPage.set(p);
     this.load();
+  }
+
+  get backLink(): string {
+    return `/producer/properties/${this.propertyId()}/plantings`;
   }
 }

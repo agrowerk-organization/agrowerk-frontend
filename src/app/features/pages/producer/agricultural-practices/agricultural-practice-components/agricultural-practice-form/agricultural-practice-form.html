@@ -4,7 +4,7 @@
          (keydown.escape)="toCancel.emit()"
          tabindex="-1" role="presentation"></div>
   
-    <div class="relative z-10 w-full mt-8 max-w-xl max-h-[85vh] flex flex-col rounded-3xl
+    <div class="relative z-10 w-full mt-8 max-w-xl max-h-[75vh] flex flex-col rounded-3xl
                 bg-neutral-primary border-3 border-primary/70 shadow-2xl shadow-primary/30 overflow-hidden">
   
       <div class="flex items-center justify-between p-6 border-b border-primary/30">
@@ -34,13 +34,11 @@
               formControlName="practipeType" />
   
             <div>
-              <label for="app-date" class="text-xl sm:text-2xl text-neutral-secondary font-bold mb-1 block">
-                Data de Aplicação *
-              </label>
-              <input id="app-date" formControlName="applicationDate" type="date"
-                     class="w-full px-4 py-4 rounded-2xl border-2 border-primary/90
-                            bg-transparent text-lg text-neutral-secondary
-                            focus:border-primary outline-none transition-all" />
+              <app-date-field
+                label="Data de Início *"
+                fieldId="application-date"
+                formControlName="applicationDate"
+                [disablePast]="true" />
             </div>
           </div>
   

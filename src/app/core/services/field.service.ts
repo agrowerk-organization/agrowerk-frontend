@@ -18,7 +18,7 @@ export class FieldService {
   }
 
   updateField(fieldId: string, request: UpdateFieldRequest): Observable<FieldResponse> {
-    return this.http.put<FieldResponse>(`${this.base}/update-field/${fieldId}`, request, { withCredentials: true });
+    return this.http.patch<FieldResponse>(`${this.base}/update-field/${fieldId}`, request, { withCredentials: true });
   }
 
   findByProperty(propertyId: string, pageable?: Partial<PageRequest>): Observable<Page<FieldResponse>> {

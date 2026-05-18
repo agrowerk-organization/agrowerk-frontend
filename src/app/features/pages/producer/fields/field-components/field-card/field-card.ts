@@ -17,6 +17,7 @@ import { ICONS_PRODUCER_FIELDS } from '@core/ui/icons/icons-producer/icons-field
 export class FieldCard {
   field = input.required<FieldResponse>();
   edit  = output<FieldResponse>();
+  newPlanting = output<FieldResponse>();
 
   readonly icons = ICONS_PRODUCER_FIELDS;
 

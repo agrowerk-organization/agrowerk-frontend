@@ -8,7 +8,7 @@
           <h1 class="text-2xl sm:text-3xl font-black text-primary uppercase tracking-tight leading-none">
             Variedades
           </h1>
-          <p class="text-secondary/80 text-lg italic mt-1">{{ fieldName() }} · {{ propertyName() }}</p>
+          <p class="text-secondary text-xl sm:text-2xl italic mt-1">{{ fieldName() }} · {{ propertyName() }}</p>
         </div>
   
         @if (selectedCrop()) {
@@ -21,10 +21,10 @@
     </div>
   
     <div class="space-y-3">
-      <p class="text-xl font-black text-neutral-secondary uppercase tracking-wide">
-        Selecione uma Cultura
-      </p>
-  
+      <div class="flex justify-center items-center gap-3 mb-3">
+        <app-title [firstSegment]="'Selecione uma'" [secondSegment]="'Cultura'"></app-title>
+    </div>
+    
       @if (loadingCrops()) {
         <div class="flex items-center justify-center h-32">
           <div class="animate-spin w-8 h-8 rounded-full border-4 border-button-main border-t-transparent"></div>
@@ -34,19 +34,39 @@
           @for (crop of crops(); track crop.id) {
             <button type="button"
                     (click)="selectCrop(crop)"
-                    class="flex flex-col items-center gap-2 p-3 rounded-2xl border-2 transition-all cursor-pointer"
+                    class="group relative overflow-hidden flex flex-col items-center gap-2
+                           p-3 rounded-[20px] cursor-pointer transition-all duration-300"
                     [class]="selectedCrop()?.id === crop.id
-                      ? 'border-primary bg-primary/10 shadow-lg shadow-primary/20'
-                      : 'border-primary/20 hover:border-primary/60 bg-black/10 hover:-translate-y-1'">
-              @if (crop.originalUrl) {
-                <img [src]="crop.originalUrl" [alt]="crop.name"
-                     class="w-14 h-14 rounded-xl object-cover" />
-              } @else {
-                <div class="w-14 h-14 rounded-xl bg-black/30 flex items-center justify-center">
-                  <fa-icon [icon]="icons.SEEDLING" class="text-2xl text-primary/30" />
-                </div>
+                      ? 'border-3 border-primary bg-primary/90 shadow-xl shadow-primary/25 -translate-y-1'
+                      : 'border-2 border-primary/95 bg-primary/20 shadow-2xl shadow-primary/80 hover:border-primary/90 hover:-translate-y-2 hover:shadow-xl hover:shadow-primary/95'">
+    
+              <div class="absolute inset-0 bg-gradient-to-br from-primary/6 to-transparent
+                          pointer-events-none transition-opacity duration-300"
+                   [class]="selectedCrop()?.id === crop.id ? 'opacity-100' : 'opacity-0'"></div>
+    
+              @if (selectedCrop()?.id === crop.id) {
+                <span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-primary
+                             shadow-lg shadow-primary/50 animate-pulse"></span>
               }
-              <span class="text-xs font-black text-secondary uppercase tracking-tight text-center leading-tight">
+    
+              <div class="w-20 h-20 sm:w-40 sm:h-40 rounded-[14px] overflow-hidden relative z-10
+                          transition-shadow duration-300"
+                   [class]="selectedCrop()?.id === crop.id ? 'shadow-lg shadow-primary/30' : ''">
+                @if (crop.originalUrl) {
+                  <img [src]="crop.originalUrl" [alt]="crop.name"
+                       class="w-full h-full object-cover transition-transform duration-500
+                              group-hover:scale-110" />
+                } @else {
+                  <div class="w-full h-full bg-gradient-to-br from-emerald-950 to-neutral-primary
+                              flex items-center justify-center">
+                    <fa-icon [icon]="icons.SEEDLING" class="text-2xl text-primary/25" />
+                  </div>
+                }
+              </div>
+    
+              <span class="relative z-10 text-xl sm:text-2xl font-black uppercase tracking-tight
+                           text-center leading-tight transition-colors duration-200"
+                    [class]="selectedCrop()?.id === crop.id ? 'text-primary' : 'text-secondary'">
                 {{ crop.name }}
               </span>
             </button>
@@ -55,15 +75,15 @@
       }
     </div>
   
-    <div class="border-t-2 border-primary/20"></div>
-  
+    <div #cropVarietiesRef class="border-t-2 border-primary/90"></div>  
+    
     @if (!selectedCrop()) {
       <div class="flex flex-col items-center justify-center py-16 gap-4">
-        <div class="w-20 h-20 rounded-3xl bg-black/20 border-2 border-primary/20
+        <div class="w-20 h-20 rounded-3xl bg-black/20 border-2 border-primary/90
                     flex items-center justify-center">
-          <fa-icon [icon]="icons.LEAF" class="text-4xl text-primary/20" />
+          <fa-icon [icon]="icons.LEAF" class="text-4xl text-primary/90" />
         </div>
-        <p class="text-primary/40 font-black text-lg uppercase tracking-widest text-center">
+        <p class="text-primary/90 font-black text-xl sm:text-2xl uppercase tracking-widest text-center">
           Selecione uma cultura acima<br/>para ver as variedades
         </p>
       </div>
@@ -76,14 +96,14 @@
   
     } @else if (hasItems()) {
       <div class="space-y-6">
-        <div class="flex items-center gap-3">
+        <div class="flex items-center gap-3 border-2 bg-secondary/10 border-secondary/90 p-3 rounded-3xl">
           @if (selectedCrop()!.originalUrl) {
             <img [src]="selectedCrop()!.originalUrl" [alt]="selectedCrop()!.name"
-                 class="w-10 h-10 rounded-xl object-cover border border-primary/30" />
+                 class="w-20 h-20 sm:w-32 sm:h-32 rounded-xl object-cover border border-primary/30" />
           }
-          <h2 class="text-xl font-black text-primary uppercase tracking-tight">
+          <h2 class="text-3xl sm:text-5xl font-black text-primary uppercase tracking-tight">
             {{ selectedCrop()!.name }}
-            <span class="text-secondary/50 font-medium normal-case tracking-normal text-base ml-2">
+            <span class="text-secondary font-medium normal-case tracking-normal text-3xl sm:text-5xl ml-2">
               — {{ varieties().length }} variedade(s)
             </span>
           </h2>

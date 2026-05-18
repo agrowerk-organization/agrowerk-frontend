@@ -6,14 +6,14 @@
     <div class="p-6 space-y-6 pb-32 lg:pb-6 max-w-9xl mx-auto px-4 sm:px-10">
   
       <div class="flex items-center gap-4">
-        <app-back-button [link]="'/producer/plantings/' + propertyId()" />
+        <app-back-button [link]="backLink" />
   
         <div class="flex-1 flex items-center justify-between gap-4">
           <div>
             <h1 class="text-2xl sm:text-3xl font-black text-primary uppercase tracking-tight leading-none">
               Colheitas
             </h1>
-            <p class="text-secondary/80 text-lg italic mt-1">{{ propertyName() }}</p>
+            <p class="text-secondary text-xl sm:text-2xl italic mt-1">{{ propertyName() }}</p>
           </div>
           <app-button-pages
             text="Registrar Colheita"
@@ -40,13 +40,13 @@
   
       } @else {
         <div class="flex flex-col items-center justify-center py-24 gap-6">
-          <div class="w-24 h-24 rounded-3xl bg-black/20 border-2 border-primary/30
+          <div class="w-24 h-24 rounded-3xl bg-black/20 border-2 border-primary/90
                       flex items-center justify-center">
-            <fa-icon [icon]="icons.WHEAT" class="text-5xl text-primary/20" />
+            <fa-icon [icon]="icons.WHEAT" class="text-5xl text-primary/90" />
           </div>
           <div class="text-center">
-            <p class="text-primary/60 font-black text-xl uppercase tracking-widest">Nenhuma colheita registrada</p>
-            <p class="text-secondary/50 text-base mt-2">Registre a primeira colheita desta propriedade.</p>
+            <p class="text-primary/90 font-black text-xl uppercase tracking-widest">Nenhuma colheita registrada</p>
+            <p class="text-secondary/90 text-xl sm:text-2xl mt-2">Registre a primeira colheita desta propriedade.</p>
           </div>
           <app-button-pages text="Registrar Colheita" [icon]="icons.PLUS" (action)="showForm.set(true)" />
         </div>

@@ -1,5 +1,6 @@
-import { Component, input, output, computed, ChangeDetectionStrategy } from '@angular/core';
+import { Component, inject, input, output, computed, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule }      from '@angular/common';
+import { Router } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SeasonResponse } from '@core/types/season/season-response';
 import { SeasonStatus, SeasonStatusDesc, SeasonStatusColor } from '@core/enums/season-status';
@@ -17,7 +18,10 @@ import { ICONS_PRODUCER_SEASONS } from '@core/ui/icons/icons-producer/icons-seas
   templateUrl: './season-card.html',
 })
 export class SeasonCard {
+  private router = inject(Router);
   season   = input.required<SeasonResponse>();
+  propertyId = input.required<string>();
+  propertyName = input.required<string>();
   activate = output<SeasonResponse>();
   toFinish   = output<SeasonResponse>();
 
@@ -33,4 +37,9 @@ export class SeasonCard {
 
   canActivate = computed(() => this.season().seasonStatus === SeasonStatus.PLANNED);
   canFinish   = computed(() => this.season().seasonStatus === SeasonStatus.IN_PROGRESS);
+
+  goToFields(): void {
+    this.router.navigate([`/producer/properties/${this.propertyId()}/fields`],
+    { queryParams: { propertyName: this.propertyName(), seasonName: this.season().name } } );
+  }
 }

@@ -12,6 +12,7 @@ import { SeasonResponse } from '@core/types/season/season-response';
 import { ButtonPages } from '@shared/components/buttons/button-pages/button-pages';
 import { NumberField } from '@shared/components/number-field/number-field';
 import { ICONS_PLANTINGS } from '@core/ui/icons/icons-producer/icons-plantings/icons-plantings';
+import { DateField } from '@shared/components/date-field/date-field';
 
 @Component({
   selector: 'app-planting-form',
@@ -22,7 +23,8 @@ import { ICONS_PLANTINGS } from '@core/ui/icons/icons-producer/icons-plantings/i
     ReactiveFormsModule, 
     FontAwesomeModule,
     ButtonPages,
-    NumberField
+    NumberField,
+    DateField
   ],
   templateUrl: './planting-form.html',
 })

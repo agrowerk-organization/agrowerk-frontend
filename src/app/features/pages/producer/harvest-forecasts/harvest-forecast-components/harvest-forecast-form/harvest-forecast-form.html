@@ -4,10 +4,9 @@
          (keydown.escape)="toCancel.emit()"
          tabindex="-1" role="presentation"></div>
   
-    <div class="relative z-10 w-full mt-8 max-w-xl max-h-[85vh] flex flex-col rounded-3xl
+    <div class="relative z-10 w-full max-w-2xl mt-8 max-h-[85vh] flex flex-col rounded-3xl
                 bg-neutral-primary border-3 border-primary/70 shadow-2xl shadow-primary/30 overflow-hidden">
-  
-      <!-- Cabeçalho -->
+
       <div class="flex items-center justify-between p-6 border-b border-primary/30">
         <div>
           <h2 class="text-xl sm:text-2xl font-black text-primary uppercase tracking-tight">
@@ -46,15 +45,11 @@
           </div>
   
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label for="forecast-date" class="text-xl sm:text-2xl text-neutral-secondary font-bold mb-1 block">
-                Data da Previsão *
-              </label>
-              <input id="forecast-date" formControlName="forecastDate" type="date"
-                     class="w-full px-4 py-4 rounded-2xl border-2 border-primary/90
-                            bg-transparent text-lg text-neutral-secondary
-                            focus:border-primary outline-none transition-all" />
-            </div>
+            <app-date-field
+              label="Data da Previsão *"
+              fieldId="forecast-date"
+              formControlName="forecastDate" 
+              [disablePast]="true" />
   
             <app-select-field
               label="Nível de Confiança *"
@@ -77,7 +72,7 @@
         </form>
       </div>
   
-      <div class="p-6 border-t border-primary/30 flex flex-col sm:flex-row gap-3">
+      <div class="p-6 border-t border-primary/30 flex flex-col sm:flex-row items-center justify-center gap-3">
         <app-button-pages
           text="Cancelar"
           [icon]="icons.CIRCLE_XMARK"

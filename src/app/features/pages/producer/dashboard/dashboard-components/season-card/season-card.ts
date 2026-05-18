@@ -22,21 +22,10 @@ export class SeasonCard {
   icons = ICONS_DASHBOARD;
 
   hasSeason = computed(() => this.season() !== null);
-
-  addHarvest() {
-    return
-  }
-
-  report() {
-    return
-  }
- createSeason() {
+  
+ navigateToSeasons() {
     if (this.propertyId()) {
       this.router.navigate([`/producer/properties/${this.propertyId()}/seasons`]);
     }
   } 
-
-  goToSeason() {
-    this.router.navigate([`/producer/season/${this.season()?.id}`]);
-  }
 }

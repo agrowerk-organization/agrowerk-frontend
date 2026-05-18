@@ -7,7 +7,10 @@ import {
     faLocationDot,
     faCodeBranch,
     faCircleXmark,
-    faSpinner
+    faSpinner,
+    faArrowTrendUp,
+    faClipboard,
+    faCircleInfo
 } from '@fortawesome/free-solid-svg-icons';
 
 export const ICONS_PRODUCER_FIELDS = {
@@ -19,5 +22,8 @@ export const ICONS_PRODUCER_FIELDS = {
     LOCATION_DOT: faLocationDot,
     CODE_BRANCH: faCodeBranch,
     CIRCLE_XMARK: faCircleXmark,
-    SPINNER: faSpinner
+    SPINNER: faSpinner,
+    ARROW_TREND_UP: faArrowTrendUp,
+    CLIPBOARD: faClipboard,
+    CIRCLE_INFO: faCircleInfo
 }

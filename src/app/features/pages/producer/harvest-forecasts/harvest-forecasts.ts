@@ -51,14 +51,28 @@ export class HarvestForecasts implements OnInit {
     forecasts = computed(() => this.page()?.content ?? []);
     hasItems  = computed(() => this.forecasts().length > 0);
     total     = computed(() => this.page()?.totalPages ?? 0);
-  
+
     ngOnInit(): void {
       const snap = this.route.snapshot;
-      this.plantingId.set(snap.paramMap.get('plantingId') ?? '');
-      this.cropVarietyName.set(snap.queryParamMap.get('cropVarietyName') ?? '');
-      this.cropName.set(snap.queryParamMap.get('cropName') ?? '');
-      this.fieldName.set(snap.queryParamMap.get('fieldName') ?? '');
-      this.propertyName.set(snap.queryParamMap.get('propertyName') ?? '');
+      const parentSnap = this.route.parent?.snapshot;
+    
+      const id = snap.paramMap.get('plantingId') ?? parentSnap?.paramMap.get('plantingId') ?? '';
+      this.plantingId.set(id);
+    
+      const queryMap = snap.queryParamMap;
+      const parentQueryMap = parentSnap?.queryParamMap;
+  
+      this.cropVarietyName.set(queryMap.get('cropVarietyName') ?? parentQueryMap?.get('cropVarietyName') ?? '');
+      this.cropName.set(queryMap.get('cropName') ?? parentQueryMap?.get('cropName') ?? '');
+      this.fieldName.set(queryMap.get('fieldName') ?? parentQueryMap?.get('fieldName') ?? '');
+      
+      this.propertyName.set(
+        queryMap.get('propertyName') ?? 
+        parentQueryMap?.get('propertyName') ?? 
+        this.route.root.snapshot.queryParamMap.get('propertyName') ?? 
+        'Propriedade'
+      );
+      
       this.load();
     }
   
@@ -105,6 +119,11 @@ export class HarvestForecasts implements OnInit {
     get subtitle(): string {
       return [this.cropName(), this.cropVarietyName(), this.fieldName(), this.propertyName()]
         .filter(Boolean).join(' · ');
+    }
+
+    get backLink(): string {
+      const propertyId = this.route.snapshot.paramMap.get('propertyId') ?? this.route.parent?.snapshot.paramMap.get('propertyId') ?? '';
+      return `/producer/properties/${propertyId}/plantings`;
     }
 
 }

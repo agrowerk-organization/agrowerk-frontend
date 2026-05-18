@@ -29,6 +29,12 @@ export class PlantingService {
     return this.http.get<Page<PlantingResponse>>(`${this.base}/find-by-property/${propertyId}`, { params, withCredentials: true });
   }
 
+  findByField(fieldId: string, page: number, size: number): Observable<Page<PlantingResponse>> {
+    return this.http.get<Page<PlantingResponse>>(`${this.base}/find-by-field/${fieldId}`, {
+      params: { page, size }
+    });
+  }
+
   findById(plantingId: string): Observable<PlantingResponse> {
     return this.http.get<PlantingResponse>(`${this.base}/find-by-id/${plantingId}`, { withCredentials: true });
   }

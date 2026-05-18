@@ -14,7 +14,8 @@ import { Paginator } from '@shared/components/paginator/paginator';
 import { AgriculturalPracticeCard } from './agricultural-practice-components/agricultural-practice-card/agricultural-practice-card';
 import { AgriculturalPracticeForm } from './agricultural-practice-components/agricultural-practice-form/agricultural-practice-form';
 import { ICONS_AGRICULTURAL_PRACTICES } from '@core/ui/icons/icons-producer/icons-agricultural-practices/icons-agricultural-practices';
-
+import { SearchBar } from '@shared/components/search-filter/search-bar';
+import { SearchFilter } from '@core/ui/types/search-filter/search-filter';
 @Component({
   selector: 'app-agricultural-practices',
   standalone: true,
@@ -25,12 +26,13 @@ import { ICONS_AGRICULTURAL_PRACTICES } from '@core/ui/icons/icons-producer/icon
     ButtonPages,
     BackButton,
     Paginator,
+    SearchBar,
     AgriculturalPracticeCard,
     AgriculturalPracticeForm
   ],
   templateUrl: './agricultural-practices.html',
 })
-export class ProducerAgriculturalPracticesComponent implements OnInit {
+export class AgriculturalPractices implements OnInit {
   private readonly route   = inject(ActivatedRoute);
   private readonly service = inject(AgriculturalPracticeService);
 
@@ -54,18 +56,40 @@ export class ProducerAgriculturalPracticesComponent implements OnInit {
   hasItems  = computed(() => this.practices().length > 0);
   total     = computed(() => this.page()?.totalPages ?? 0);
 
-  readonly typeFilters = [
-    { label: 'Todas', value: null },
-    ...Object.values(PracticeType).map(v => ({ label: PracticeTypeDesc[v], value: v })),
-  ];
+  readonly filterItems: SearchFilter[] = Object.values(PracticeType).map(v => ({
+    key: v as string,
+    label: PracticeTypeDesc[v],
+  }));
+  
+  onSearch(term: string): string {
+    return term;
+  }
+
+  onFilterChange(key: string | null): void {
+    this.selectFilter(key as PracticeType | null);
+  }
 
   ngOnInit(): void {
     const snap = this.route.snapshot;
-    this.plantingId.set(snap.paramMap.get('plantingId') ?? '');
-    this.cropVarietyName.set(snap.queryParamMap.get('cropVarietyName') ?? '');
-    this.cropName.set(snap.queryParamMap.get('cropName') ?? '');
-    this.fieldName.set(snap.queryParamMap.get('fieldName') ?? '');
-    this.propertyName.set(snap.queryParamMap.get('propertyName') ?? '');
+    const parentSnap = this.route.parent?.snapshot;
+
+    const id = snap.paramMap.get('plantingId') ?? parentSnap?.paramMap.get('plantingId') ?? '';
+    this.plantingId.set(id);
+
+    const queryMap = snap.queryParamMap;
+    const parentQueryMap = parentSnap?.queryParamMap;
+
+    this.cropVarietyName.set(queryMap.get('cropVarietyName') ?? parentQueryMap?.get('cropVarietyName') ?? '');
+    this.cropName.set(queryMap.get('cropName') ?? parentQueryMap?.get('cropName') ?? '');
+    this.fieldName.set(queryMap.get('fieldName') ?? parentQueryMap?.get('fieldName') ?? '');
+    
+    this.propertyName.set(
+      queryMap.get('propertyName') ?? 
+      parentQueryMap?.get('propertyName') ?? 
+      this.route.root.snapshot.queryParamMap.get('propertyName') ?? 
+      'Propriedade'
+    );
+
     this.load();
     this.loadTotalCost();
   }
@@ -111,5 +135,10 @@ export class ProducerAgriculturalPracticesComponent implements OnInit {
   get subtitle(): string {
     return [this.cropName(), this.cropVarietyName(), this.fieldName(), this.propertyName()]
       .filter(Boolean).join(' · ');
+  }
+
+  get backLink(): string {
+    const propertyId = this.route.snapshot.paramMap.get('propertyId') ?? this.route.parent?.snapshot.paramMap.get('propertyId') ?? '';
+    return `/producer/properties/${propertyId}/plantings`;
   }
 }

@@ -7,14 +7,14 @@
     <div class="p-6 space-y-6 pb-32 lg:pb-6 max-w-9xl mx-auto px-4 sm:px-10">
   
       <div class="flex items-center gap-4">
-        <app-back-button [link]="'/producer/properties/' + propertyId()" />
+        <app-back-button [link]="'/producer/dashboard'" />
   
         <div class="flex-1 flex items-center justify-between gap-4">
           <div>
             <h1 class="text-2xl sm:text-3xl font-black text-primary uppercase tracking-tight leading-none">
               Safras
             </h1>
-            <p class="text-secondary/80 text-lg italic mt-1">{{ propertyName() }}</p>
+            <p class="text-secondary/97 text-xl sm:text-2xl italic mt-1">{{ propertyName() }}</p>
           </div>
   
           <app-button-pages
@@ -29,6 +29,8 @@
           @for (season of seasons(); track season.id) {
             <app-season-card
               [season]="season"
+              [propertyId]="propertyId()"
+              [propertyName]="propertyName()"
               (activate)="onActivate($event)"
               (toFinish)="onFinish($event)" />
           }

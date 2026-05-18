@@ -57,7 +57,7 @@ export class ProducerDashboard implements OnInit {
   private authService = inject(AuthService);
   readonly router = inject(Router);
 
-  layoutState = inject(LayoutStateService);
+  layoutStateService = inject(LayoutStateService);
 
   loading = signal(true);
   currentUser = toSignal(this.authService.currentUser$);
@@ -83,21 +83,40 @@ export class ProducerDashboard implements OnInit {
 
   activeNodeId = computed(() => {
     const url = this.router.url;
+  
+    if (url.includes('/seasons/') && url.includes('/planning')) return 7;
+    if (url.includes('/stocks/')  && url.includes('/stock'))    return 8;
+    if (url.includes('/batches/') && url.includes('/batch'))    return 9;
+  
     const map: Record<string, number> = {
       '/producer/plantings': 1,
-      '/producer/fields': 2,
-      '/producer/harvests': 3,
-      '/producer/stock': 4,
-      '/producer/barter': 5,
-      '/producer/seasons': 6
+      '/producer/fields':    2,
+      '/producer/harvests':  3,
+      '/producer/stock':     4,
+      '/producer/barter':    5,
+      '/producer/seasons':   6,
     };
-    return Object.entries(map)
-      .find(([path]) => url.includes(path))?.[1] ?? null;
+  
+    return Object.entries(map).find(([path]) => url.includes(path))?.[1] ?? null;
   });
   
   onNodeNavigate(route: string): void {
-    this.router.navigate([route]);
+    const property = this.layoutStateService.activeProperty(); // ← ler do service global
+  
+    if (!property) {
+      this.router.navigate([route]);
+      return;
+    }
+  
+    const finalRoute = route.includes(':propertyId')
+      ? route.replace(':propertyId', property.id)
+      : route;
+  
+    this.router.navigate([finalRoute], {
+      queryParams: { propertyName: property.name }
+    });
   }
+  
 
   loadDashboard() {
     this.loading.set(true);
@@ -113,6 +132,7 @@ export class ProducerDashboard implements OnInit {
         }
         const latest = props[props.length - 1];
         this.activeProperty.set(latest);
+        this.layoutStateService.activeProperty.set(latest);
         this.loadPropertyData(latest.id);
       },
       error: () => this.loading.set(false)
@@ -154,14 +174,15 @@ export class ProducerDashboard implements OnInit {
     });
   }
 
-  onPropertyChange(propertyId: string) {
-    const prop = this.properties().find(p => p.id === propertyId);
-    if (prop) {
-      this.activeProperty.set(prop);
-      this.loadPropertyData(propertyId);
-    }
+  // no onPropertyChange também:
+onPropertyChange(propertyId: string) {
+  const prop = this.properties().find(p => p.id === propertyId);
+  if (prop) {
+    this.activeProperty.set(prop);
+    this.layoutStateService.activeProperty.set(prop); 
+    this.loadPropertyData(propertyId);
   }
-
+}
   onWeatherAssociated(): void {
     const prop = this.activeProperty();
     if (prop) this.loadDashboard();

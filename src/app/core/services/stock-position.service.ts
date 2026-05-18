@@ -2,10 +2,10 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '@environments/environment';
-import { StockPositionResponse } from '@core/types/stock-position/stock-position.response';
+import { StockPositionResponse } from '@core/types/stock/stock-position.response';
 
 @Injectable({ providedIn: 'root' })
-export class StockPositionViewService {
+export class StockPositionService {
   private readonly http = inject(HttpClient);
   private readonly base = `${environment.apiUrl}/stock-position-views`;
 

@@ -5,14 +5,16 @@ import { CommonModule }      from '@angular/common';
 import { ActivatedRoute }    from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SeasonService }     from '@core/services/season.service';
-import { SeasonResponse } from '@core/types/season/season-response';
-import { Page }                 from '@core/types/page/page';
+import { SeasonResponse }    from '@core/types/season/season-response';
+import { PropertyService }   from '@core/services/property.service';
+import { Page }              from '@core/types/page/page';
 import { ICONS_PRODUCER_SEASONS } from '@core/ui/icons/icons-producer/icons-seasons/icons-seasons';
-import { ButtonPages } from '@shared/components/buttons/button-pages/button-pages';
-import { BackButton } from '@shared/components/back-button/back-button';
-import { Paginator } from '@shared/components/paginator/paginator';
-import { SeasonForm } from './season-components/season-form/season-form';
-import { SeasonCard } from './season-components/season-card/season-card';
+import { ButtonPages }       from '@shared/components/buttons/button-pages/button-pages';
+import { BackButton }        from '@shared/components/back-button/back-button';
+import { Paginator }         from '@shared/components/paginator/paginator';
+import { SeasonForm }        from './season-components/season-form/season-form';
+import { SeasonCard }        from './season-components/season-card/season-card';
+
 @Component({
   selector: 'app-seasons',
   standalone: true,
@@ -29,8 +31,9 @@ import { SeasonCard } from './season-components/season-card/season-card';
   templateUrl: './seasons.html',
 })
 export class Seasons implements OnInit {
-  private readonly route   = inject(ActivatedRoute);
-  private readonly service = inject(SeasonService);
+  private readonly route           = inject(ActivatedRoute);
+  private readonly seasonService   = inject(SeasonService); // Injetado como seasonService
+  private readonly propertyService = inject(PropertyService);
 
   readonly icons = ICONS_PRODUCER_SEASONS;
 
@@ -48,16 +51,27 @@ export class Seasons implements OnInit {
   total    = computed(() => this.page()?.totalPages ?? 0);
 
   ngOnInit(): void {
-    const id   = this.route.snapshot.paramMap.get('propertyId') ?? '';
-    const name = this.route.snapshot.queryParamMap.get('propertyName') ?? 'Propriedade';
-    this.propertyId.set(id);
-    this.propertyName.set(name);
-    this.load();
+    const id = this.route.snapshot.paramMap.get('propertyId') ?? '';
+
+    if (id) { 
+      this.propertyId.set(id);
+      this.loadPropertyDetails(id);
+      this.loadSeasons(id);
+    }
   }
 
-  private load(): void {
+  private loadPropertyDetails(id: string): void {
     this.loading.set(true);
-    this.service.findMySeasons(this.propertyId(), this.currentPage(), this.pageSize)
+    this.propertyService.findPropertyById(id).subscribe({
+      next:  p  => { this.propertyName.set(p.name); this.loading.set(false); },
+      error: () => this.loading.set(false),
+    });
+  }
+
+  private loadSeasons(id: string): void {
+    this.loading.set(true);
+    // Alterado de this.service para this.seasonService
+    this.seasonService.findMySeasons(id, this.currentPage(), this.pageSize)
       .subscribe({
         next:  p  => { this.page.set(p); this.loading.set(false); },
         error: () => this.loading.set(false),
@@ -67,18 +81,22 @@ export class Seasons implements OnInit {
   onSaved(saved: SeasonResponse): void {
     this.showForm.set(false);
     const current = this.page();
-    if (!current) { this.load(); return; }
+    if (!current) { 
+      this.loadSeasons(this.propertyId()); 
+      return; 
+    }
     this.page.set({ ...current, content: [saved, ...current.content ?? []] });
   }
 
   onActivate(season: SeasonResponse): void {
-    this.service.activateSeason(season.id).subscribe({
+    this.seasonService.activateSeason(season.id).subscribe({
       next: updated => this.updateInList(updated),
     });
   }
 
   onFinish(season: SeasonResponse): void {
-    this.service.finishSeason(season.id).subscribe({
+    // Alterado de this.service para this.seasonService
+    this.seasonService.finishSeason(season.id).subscribe({
       next: updated => this.updateInList(updated),
     });
   }
@@ -94,6 +112,6 @@ export class Seasons implements OnInit {
 
   onPageChange(p: number): void {
     this.currentPage.set(p);
-    this.load();
+    this.loadSeasons(this.propertyId()); 
   }
 }

@@ -43,8 +43,21 @@ export class Warehouse implements OnInit {
 
   ngOnInit(): void {
     const snap = this.route.snapshot;
-    this.propertyId.set(snap.paramMap.get('propertyId') ?? '');
-    this.propertyName.set(snap.queryParamMap.get('propertyName') ?? '');
+    const parentSnap = this.route.parent?.snapshot;
+
+    const pId = snap.paramMap.get('propertyId') ?? parentSnap?.paramMap.get('propertyId') ?? '';
+    this.propertyId.set(pId);
+
+    const queryMap = snap.queryParamMap;
+    const parentQueryMap = parentSnap?.queryParamMap;
+
+    this.propertyName.set(
+      queryMap.get('propertyName') ?? 
+      parentQueryMap?.get('propertyName') ?? 
+      this.route.root.snapshot.queryParamMap.get('propertyName') ?? 
+      'Propriedade'
+    );
+
     this.load();
   }
 
@@ -77,4 +90,8 @@ export class Warehouse implements OnInit {
   }
 
   closeForm(): void { this.showForm.set(false); this.editTarget.set(null); }
+
+  get backLink(): string {
+    return `/producer/properties/${this.propertyId()}/plantings`;
+  }
 }

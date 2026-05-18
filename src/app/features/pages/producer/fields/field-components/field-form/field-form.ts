@@ -11,6 +11,7 @@ import { NumberField } from '@shared/components/number-field/number-field';
 import { FieldService } from '@core/services/field.service';
 import { FieldResponse } from '@core/types/field/field.response';
 import { FieldStatus, FieldStatusDesc } from '@core/enums/field-status';
+import { ToastService } from '@core/services/toast.service';
 import { SoilType, SoilTypeDesc } from '@core/enums/soil-type';
 import { ICONS_PRODUCER_FIELDS } from '@core/ui/icons/icons-producer/icons-field/icons-field';
 
@@ -31,6 +32,7 @@ import { ICONS_PRODUCER_FIELDS } from '@core/ui/icons/icons-producer/icons-field
 export class FieldForm implements OnInit {
   private readonly fb      = inject(FormBuilder);
   private readonly service = inject(FieldService);
+  private readonly toast   = inject(ToastService);
 
   propertyId = input.required<string>();
   fieldData  = input<FieldResponse | null>(null);
@@ -72,6 +74,7 @@ export class FieldForm implements OnInit {
       this.form.patchValue({
         name:            d.name,
         code:            d.code,
+        areaHectares:    d.areaHectares,
         description:     d.description,
         soilType:        d.soilType as SoilType,
         fieldStatus:     d.fieldStatus as FieldStatus,
@@ -80,7 +83,6 @@ export class FieldForm implements OnInit {
         latitude:        d.latitude,
         longitude:       d.longitude,
       });
-      // área não é editável
       this.form.get('areaHectares')?.disable();
       this.form.get('code')?.disable();
     }
@@ -91,6 +93,10 @@ export class FieldForm implements OnInit {
     this.saving.set(true);
 
     const v = this.form.getRawValue();
+
+    if (this.isEdit()) {
+      this.form.get('areaHectares')?.disable();
+    }
 
     const req$ = this.isEdit()
       ? this.service.updateField(this.fieldData()!.id, {
@@ -117,9 +123,20 @@ export class FieldForm implements OnInit {
           longitude:       v.longitude ?? undefined,
         });
 
-    req$.subscribe({
-      next:  res  => { this.saving.set(false); this.saved.emit(res); },
-      error: ()   => this.saving.set(false),
-    });
+        req$.subscribe({
+          next: res => {
+            this.saving.set(false);
+            this.toast.success(
+              this.isEdit() ? 'Talhão atualizado com sucesso!' : 'Talhão criado com sucesso!'
+            );
+            this.saved.emit(res);
+          },
+          error: () => {
+            this.saving.set(false);
+            this.toast.error(
+              this.isEdit() ? 'Erro ao atualizar talhão.' : 'Erro ao criar talhão.'
+            );
+          },
+        });
   }
 }

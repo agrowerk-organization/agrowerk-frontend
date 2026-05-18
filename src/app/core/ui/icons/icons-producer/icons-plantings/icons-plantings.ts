@@ -16,7 +16,8 @@ import {
     faFileContract,
     faFlagCheckered,
     faSprout,
-    faWarehouse
+    faWarehouse,
+    faLayerGroup
 } from '@fortawesome/free-solid-svg-icons';
 
 export const ICONS_PLANTINGS = {
@@ -37,5 +38,6 @@ export const ICONS_PLANTINGS = {
     FILE_CONTRACT: faFileContract,
     FLAG_CHECKERED: faFlagCheckered,
     SPROUT: faSprout,
-    WAREHOUSE: faWarehouse
+    WAREHOUSE: faWarehouse,
+    LAYER_GROUP: faLayerGroup
 }

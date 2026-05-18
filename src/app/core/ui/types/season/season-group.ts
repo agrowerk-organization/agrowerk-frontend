@@ -1,4 +1,4 @@
-import { SeasonDashboardResponse } from "@core/types/harvest/season-dashboard.response";
+import { SeasonDashboardResponse } from "@core/types/season/season-dashboard.response";
 
 export interface SeasonGroup {
     seasonId: string;

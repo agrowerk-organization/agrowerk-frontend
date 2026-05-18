@@ -13,7 +13,8 @@ import {
     faWeightHanging,
     faArrowsRotate,
     faGaugeHigh,
-    faWheatAwn
+    faWheatAwn,
+    faLayerGroup
 } from '@fortawesome/free-solid-svg-icons';
 
 export const ICONS_PRODUCER_SEASONS = {
@@ -31,6 +32,7 @@ export const ICONS_PRODUCER_SEASONS = {
     WEIGHT_HANGING: faWeightHanging,
     ARROWS_ROTATE: faArrowsRotate,
     GAUGE_HIGH: faGaugeHigh,
-    WHEAT_AWN: faWheatAwn
+    WHEAT_AWN: faWheatAwn,
+    LAYER_GROUP: faLayerGroup
 }
 

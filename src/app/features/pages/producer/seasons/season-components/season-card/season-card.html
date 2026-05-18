@@ -14,7 +14,7 @@
         <h2 class="text-primary font-black text-xl uppercase tracking-tight leading-none">
           {{ season().name }}
         </h2>
-        <p class="text-secondary/90 text-sm sm:text-xl mt-1 italic">{{ season().propertyName }}</p>
+        <p class="text-secondary/90 text-lg sm:text-xl mt-1 italic">{{ season().propertyName }}</p>
       </div>
     </div>
 
@@ -55,6 +55,13 @@
             (action)="activate.emit(season())" />
         }
         @if (canFinish()) {
+
+          <app-button-pages
+          text="Talhões"
+          [icon]="icons.LAYER_GROUP"
+          width="fit-content"
+          (action)="goToFields()" />
+
           <app-button-pages
             text="Finalizar Safra"
             [icon]="icons.FLAG_CHECKERED"

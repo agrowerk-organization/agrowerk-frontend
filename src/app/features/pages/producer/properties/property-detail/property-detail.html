@@ -11,19 +11,13 @@
     <div class="flex items-center gap-4">
       
       <app-back-button 
-        [link]="'/producer/properties'"/>
+        [link]="'/producer/dashboard'"/>
 
         <div class="flex-1">
           <app-property-header
             [name]="p.name"
             [stateName]="p.stateName"
             (edit)="showModal.set(true)" />
-
-            <app-button-pages
-              text="Talhões"
-              [icon]="icons.LAYER_GROUP"
-              width="fit-content"
-              (action)="goToFields(p.id, p.name)" />
 
         </div>  
 

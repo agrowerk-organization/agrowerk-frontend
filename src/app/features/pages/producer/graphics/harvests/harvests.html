@@ -1,0 +1,146 @@
+@if (loading()) {
+    <div class="flex items-center justify-center h-[calc(100vh-100px)]">
+      <div class="animate-spin w-10 h-10 rounded-full border-4
+                  border-button-main border-t-transparent"></div>
+    </div>
+  } @else {
+    <div class="p-6 space-y-6 pb-32 lg:pb-6 max-w-9xl mx-auto px-4 sm:px-10">
+  
+      <div class="flex items-center gap-4">
+        <app-back-button [link]="backLink" />
+        <div>
+          <h1 class="text-2xl sm:text-3xl font-black text-primary uppercase tracking-tight leading-none">
+            Colheita
+          </h1>
+          <p class="text-secondary text-xl sm:text-2xl italic mt-1">{{ propertyName() }}</p>
+        </div>
+      </div>
+  
+      <div class="grid grid-cols-2 xl:grid-cols-4 gap-4">
+        <div class="p-5 rounded-2xl border-2 border-primary/90 bg-black/20 space-y-1">
+          <p class="text-xl font-black uppercase tracking-widest text-secondary">Total Colhido</p>
+          <p class="text-3xl font-black text-primary">
+            {{ totalHarvested() | number:'1.0-0' }} <small class="text-xl">kg</small>
+          </p>
+        </div>
+        <div class="p-5 rounded-2xl border-2 border-primary/90 bg-black/20 space-y-1">
+          <p class="text-xl font-black uppercase tracking-widest text-secondary">Total Estimado</p>
+          <p class="text-3xl font-black text-primary">
+            {{ totalEstimated() | number:'1.0-0' }} <small class="text-xl">kg</small>
+          </p>
+        </div>
+        <div class="p-5 rounded-2xl border-2 border-primary/90 bg-black/20 space-y-1">
+          <p class="text-xl font-black uppercase tracking-widest text-secondary">Disponível para Negociação</p>
+          <p class="text-3xl font-black text-primary">
+            {{ totalAvailable() | number:'1.0-0' }} <small class="text-xl">kg</small>
+          </p>
+        </div>
+        <div class="p-5 rounded-2xl border-2 border-primary/90 bg-black/20 space-y-1">
+          <p class="text-xl font-black uppercase tracking-widest text-secondary">Finalizadas</p>
+          <p class="text-3xl font-black text-primary">
+            {{ finalizedCount() }}
+            <small class="text-base">/ {{ data().length }}</small>
+          </p>
+        </div>
+      </div>
+  
+      @if (data().length) {
+  
+        <div class="grid grid-cols-1 xl:grid-cols-2 gap-6">
+          <div class="p-6 rounded-3xl border-2 border-primary/90 bg-black/20 space-y-4">
+            <h2 class="text-lg font-black text-primary uppercase tracking-tight">
+              Colhido vs Estimado por Cultura
+            </h2>
+            <div echarts [options]="barChartOption()" class="w-full h-72"></div>
+          </div>
+  
+          <div class="p-6 rounded-3xl border-2 border-primary/90 bg-black/20 space-y-4">
+            <h2 class="text-lg font-black text-primary uppercase tracking-tight">
+              Taxa de Realização Média
+            </h2>
+            <div echarts [options]="achievementChartOption()" class="w-full h-72"></div>
+          </div>
+        </div>
+  
+        <div class="p-6 rounded-3xl border-2 border-primary/90 bg-black/20 space-y-4">
+          <h2 class="text-lg font-black text-primary uppercase tracking-tight">
+            Detalhamento por Plantio
+          </h2>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="border-b-2 border-primary/20">
+                  <th class="text-left py-3 px-4 font-black uppercase tracking-wider text-secondary/60">Cultura / Variedade</th>
+                  <th class="text-left py-3 px-4 font-black uppercase tracking-wider text-secondary/60">Talhão</th>
+                  <th class="text-left py-3 px-4 font-black uppercase tracking-wider text-secondary/60">Safra</th>
+                  <th class="text-right py-3 px-4 font-black uppercase tracking-wider text-secondary/60">Colhido (kg)</th>
+                  <th class="text-right py-3 px-4 font-black uppercase tracking-wider text-secondary/60">Estimado (kg)</th>
+                  <th class="text-right py-3 px-4 font-black uppercase tracking-wider text-secondary/60">Realização</th>
+                  <th class="text-center py-3 px-4 font-black uppercase tracking-wider text-secondary/60">Confiança</th>
+                  <th class="text-center py-3 px-4 font-black uppercase tracking-wider text-secondary/60">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (row of data(); track row.plantingId) {
+                  <tr class="border-b border-primary/10 hover:bg-primary/5 transition-colors">
+                    <td class="py-3 px-4">
+                      <p class="font-black text-primary">{{ row.cropName }}</p>
+                      <p class="text-xs text-secondary/50">{{ row.varietyName }}</p>
+                    </td>
+                    <td class="py-3 px-4 text-secondary">{{ row.fieldName }}</td>
+                    <td class="py-3 px-4 text-secondary">{{ row.seasonName }}</td>
+                    <td class="py-3 px-4 text-right text-secondary">
+                      {{ row.totalHarvestedKg | number:'1.0-0' }}
+                    </td>
+                    <td class="py-3 px-4 text-right text-secondary">
+                      {{ row.estimatedQuantity | number:'1.0-0' }}
+                    </td>
+                    <td class="py-3 px-4 text-right">
+                      <span [class]="row.achievementRate >= 80 ? 'text-green-400' :
+                                     row.achievementRate >= 50 ? 'text-yellow-400' : 'text-red-400'"
+                            class="font-black">
+                        {{ row.achievementRate | number:'1.1-1' }}%
+                      </span>
+                    </td>
+                    <td class="py-3 px-4 text-center">
+                      <span class="px-2 py-1 rounded-full text-xs font-black uppercase
+                                   tracking-widest border-2"
+                            [class]="confidenceBadge(row.confidenceLevel)">
+                        {{ row.confidenceLevel }}
+                      </span>
+                    </td>
+                    <td class="py-3 px-4 text-center">
+                      <span class="px-2 py-1 rounded-full text-xs font-black uppercase
+                                   tracking-widest border-2"
+                            [class]="row.finalized
+                              ? 'border-green-500/60 text-green-400 bg-green-500/10'
+                              : 'border-yellow-500/60 text-yellow-400 bg-yellow-500/10'">
+                        {{ row.finalized ? 'Finalizada' : 'Em andamento' }}
+                      </span>
+                    </td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        </div>
+  
+      } @else {
+        <div class="flex flex-col items-center justify-center py-24 gap-6">
+          <div class="w-24 h-24 rounded-3xl bg-black/20 border-2 border-primary/90
+                      flex items-center justify-center">
+            <fa-icon [icon]="icons.WHEAT_AWN" class="text-5xl text-primary/90" />
+          </div>
+          <div class="text-center">
+            <p class="text-primary/90 font-black text-xl uppercase tracking-widest">
+              Nenhuma colheita registrada
+            </p>
+            <p class="text-secondary/90 text-xl sm:text-2xl mt-2">
+              Os dados aparecerão conforme as colheitas forem registradas.
+            </p>
+          </div>
+        </div>
+      }
+  
+    </div>
+}

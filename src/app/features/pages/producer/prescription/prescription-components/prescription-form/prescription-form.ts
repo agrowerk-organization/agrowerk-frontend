@@ -15,6 +15,7 @@ import { NumberField } from '@shared/components/number-field/number-field';
 import { SelectField } from '@shared/components/select-field/select-field';
 import { ICONS_PRESCRIPTIONS } from '@core/ui/icons/icons-producer/icons-prescriptions/icons-prescription';
 import { CreatePrescriptionItemRequest } from '@core/types/prescription/create-prescription-item.request';
+import { DateField } from "@shared/components/date-field/date-field";
 
 @Component({
   selector: 'app-prescription-form',
@@ -24,10 +25,11 @@ import { CreatePrescriptionItemRequest } from '@core/types/prescription/create-p
     CommonModule,
     ReactiveFormsModule,
     FontAwesomeModule,
-    ButtonPages, 
+    ButtonPages,
     NumberField,
-    SelectField
-  ],
+    SelectField,
+    DateField
+],
   templateUrl: './prescription-form.html'
 })
 export class PrescriptionForm implements OnInit {

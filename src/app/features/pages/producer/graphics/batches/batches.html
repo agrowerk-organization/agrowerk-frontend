@@ -1,0 +1,155 @@
+@if (loading()) {
+    <div class="flex items-center justify-center h-[calc(100vh-100px)]">
+      <div class="animate-spin w-10 h-10 rounded-full border-4
+                  border-button-main border-t-transparent"></div>
+    </div>
+  } @else {
+    <div class="p-6 space-y-6 pb-32 lg:pb-6 max-w-9xl mx-auto px-4 sm:px-10">
+  
+      <div class="flex items-center gap-4">
+        <app-back-button [link]="backLink" />
+        <div>
+          <h1 class="text-2xl sm:text-3xl font-black text-primary uppercase tracking-tight leading-none">
+            Manejo
+          </h1>
+          <p class="text-secondary text-xl sm:text-2xl italic mt-1">{{ propertyName() }}</p>
+        </div>
+      </div>
+  
+      <div class="grid grid-cols-2 xl:grid-cols-3 gap-4">
+        <div class="p-5 rounded-2xl border-2 border-primary/90 bg-black/20 space-y-1">
+          <p class="text-xl font-black uppercase tracking-widest text-secondary">Total de Atividades</p>
+          <p class="text-3xl font-black text-primary">{{ totalActivities() }}</p>
+        </div>
+        <div class="p-5 rounded-2xl border-2 border-primary/90 bg-black/20 space-y-1">
+          <p class="text-xl font-black uppercase tracking-widest text-secondary">Custo Total</p>
+          <p class="text-3xl font-black text-primary">
+            R$ {{ totalCost() | number:'1.2-2' }}
+          </p>
+        </div>
+        <div class="col-span-2 xl:col-span-1 p-5 rounded-2xl space-y-1"
+             [class]="expiredCount() > 0
+               ? 'border-2 border-red-500/50 bg-red-500/5'
+               : 'border-2 border-yellow-500/50 bg-yellow-500/5'">
+          <p class="text-xl font-black uppercase tracking-widest"
+             [class]="expiredCount() > 0 ? 'text-red-400/70' : 'text-yellow-400/70'">
+            Receitas Vencendo
+          </p>
+          <p class="text-3xl font-black"
+             [class]="expiredCount() > 0 ? 'text-red-400' : 'text-yellow-400'">
+            {{ expiringCount() }}
+            @if (expiredCount() > 0) {
+              <small class="text-base ml-1">({{ expiredCount() }} vencidas)</small>
+            }
+          </p>
+        </div>
+      </div>
+  
+      <div class="grid grid-cols-1 xl:grid-cols-2 gap-6">
+        <div class="p-6 rounded-3xl border-2 border-primary/90 bg-black/20 space-y-4">
+          <h2 class="text-2xl font-black text-primary uppercase tracking-tight">
+            Atividades por Tipo
+          </h2>
+          @if (totalActivities() > 0) {
+            <div echarts [options]="typeChartOption()" class="w-full h-72"></div>
+          } @else {
+            <p class="text-lg text-secondary text-center py-12">Nenhuma atividade registrada</p>
+          }
+        </div>
+  
+        <div class="p-6 rounded-3xl border-2 border-primary/90 bg-black/20 space-y-4">
+          <h2 class="text-2xl font-black text-primary uppercase tracking-tight">
+            Custo por Tipo de Atividade
+          </h2>
+          @if (totalActivities() > 0) {
+            <div echarts [options]="costChartOption()" class="w-full h-72"></div>
+          } @else {
+            <p class="text-lg text-secondary text-center py-12">Nenhum custo registrado</p>
+          }
+        </div>
+      </div>
+  
+      @if (prescriptions().length) {
+        <div class="p-6 rounded-3xl border-2 border-yellow-500/30 bg-yellow-500/5 space-y-4">
+          <h2 class="text-lg font-black text-yellow-400 uppercase tracking-tight">
+            Receitas Agronômicas — Atenção
+          </h2>
+          <div class="space-y-3">
+            @for (p of prescriptions(); track p.id) {
+              <div class="flex items-center justify-between p-4 rounded-2xl
+                          bg-black/20 border border-yellow-500/20">
+                <div class="space-y-0.5">
+                  <p class="font-black text-secondary text-base">
+                    {{ p.cropName }} · {{ p.fieldName }}
+                  </p>
+                  <p class="text-xs text-secondary/50">
+                    Agrônomo: {{ p.agronomistName }}
+                    @if (p.agronomistCrea) { · CREA {{ p.agronomistCrea }} }
+                  </p>
+                  <p class="text-xs text-secondary/50">
+                    Válida até: {{ p.validUntil | date:'dd/MM/yyyy' }}
+                  </p>
+                </div>
+                <div class="flex flex-col items-end gap-2 shrink-0">
+                  <span class="px-3 py-1 rounded-full text-xs font-black uppercase
+                               tracking-widest border-2"
+                        [class]="prescriptionBadge(p)">
+                    {{ p.expired ? 'Vencida' : 'Vencendo' }}
+                  </span>
+                  @if (p.documentUrl) {
+                    <a [href]="p.documentUrl" target="_blank"
+                       class="text-xs text-primary underline hover:text-primary/70 transition-colors">
+                      Ver documento
+                    </a>
+                  }
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+      }
+  
+      @if (practices().length) {
+        <div class="p-6 rounded-3xl border-2 border-primary/90 bg-black/20 space-y-4">
+          <h2 class="text-lg font-black text-primary uppercase tracking-tight">
+            Atividades Registradas
+          </h2>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="border-b-2 border-primary/20">
+                  <th class="text-left py-3 px-4 font-black uppercase tracking-wider text-secondary/60">Tipo</th>
+                  <th class="text-left py-3 px-4 font-black uppercase tracking-wider text-secondary/60">Produto</th>
+                  <th class="text-left py-3 px-4 font-black uppercase tracking-wider text-secondary/60">Responsável</th>
+                  <th class="text-left py-3 px-4 font-black uppercase tracking-wider text-secondary/60">Data</th>
+                  <th class="text-right py-3 px-4 font-black uppercase tracking-wider text-secondary/60">Qtd</th>
+                  <th class="text-right py-3 px-4 font-black uppercase tracking-wider text-secondary/60">Custo</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (a of practices(); track a.id) {
+                  <tr class="border-b border-primary/10 hover:bg-primary/5 transition-colors">
+                    <td class="py-3 px-4 font-bold text-primary">
+                      {{ a.practipeType }}
+                    </td>
+                    <td class="py-3 px-4 text-secondary">{{ a.productUsed }}</td>
+                    <td class="py-3 px-4 text-secondary">{{ a.responsibleUserName }}</td>
+                    <td class="py-3 px-4 text-secondary">
+                      {{ a.applicationDate | date:'dd/MM/yyyy' }}
+                    </td>
+                    <td class="py-3 px-4 text-right text-secondary">
+                      {{ a.quantityUsed }} {{ a.unitOfMeasure }}
+                    </td>
+                    <td class="py-3 px-4 text-right text-secondary">
+                      R$ {{ a.costAmount | number:'1.2-2' }}
+                    </td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        </div>
+      }
+  
+    </div>
+}

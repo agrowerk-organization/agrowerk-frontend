@@ -121,34 +121,84 @@ export const routes: Routes = [
           .then(page => page.Seasons)
       },
       {
-        path: 'fields:id',
+        path: 'properties/:propertyId/fields', 
         loadComponent: () => import('./features/pages/producer/fields/fields')
           .then(page => page.Fields)
       },
       {
-        path: 'plantings',
+        path: 'properties/:propertyId/crop-varieties/:fieldId',
+        loadComponent: () => import('./features/pages/producer/crop-varieties/crop-varieties')
+          .then(page => page.CropVarieties)
+      },
+      {
+        path: 'properties/:propertyId/plantings',
         loadComponent: () => import('./features/pages/producer/plantings/plantings')
           .then(page => page.Plantings)
       },
       {
-        path: 'harvests',
+        path: 'properties/:propertyId/plantings/:plantingId/harvests',
         loadComponent: () => import('./features/pages/producer/harvests/harvests')
           .then(page => page.Harvests)
       },
       {
-        path: 'stock',
+        path: 'properties/:propertyId/plantings/:plantingId/stock',
         loadComponent: () => import('./features/pages/producer/stock/stock')
           .then(page => page.Stock)
       },
       {
-        path: 'batches',
+        path: 'properties/:propertyId/plantings/:plantingId/prescriptions',
+        loadComponent: () => import('./features/pages/producer/prescription/prescription')
+          .then(page => page.Prescription)
+      },
+      {
+        path: 'properties/:propertyId/plantings/:plantingId/batches',
         loadComponent: () => import('./features/pages/producer/batches/batches')
           .then(page => page.Batches)
       },
       {
-        path: 'assets',
-        loadComponent: () => import('./features/pages/producer/assets/assets')
-          .then(page => page.Assets)
+        path: 'properties/:propertyId/plantings/:plantingId/planting-inputs',
+        loadComponent: () => import('./features/pages/producer/planting-inputs/planting-inputs')
+          .then(page => page.PlantingInputs)
+      },
+      {
+        path: 'properties/:propertyId/plantings/:plantingId/forecasts',
+        loadComponent: () => import('./features/pages/producer/harvest-forecasts/harvest-forecasts')
+          .then(page => page.HarvestForecasts)
+      },
+      {
+        path: 'properties/:propertyId/plantings/:plantingId/practices',
+        loadComponent: () => import('./features/pages/producer/agricultural-practices/agricultural-practices')
+          .then(page => page.AgriculturalPractices)
+      },
+      {
+        path: 'properties/:propertyId/plantings/:plantingId/warehouses',
+        loadComponent: () => import('./features/pages/producer/warehouse/warehouse')
+          .then(page => page.Warehouse)
+      },
+      {
+        path: 'properties/:propertyId/batches/:batchId/batch-dashboard',
+        loadComponent: () => import('./features/pages/producer/graphics/batches/batches')
+          .then(page => page.Batches)
+      },
+      {
+        path: 'properties/:propertyId/planning',
+        loadComponent: () => import('./features/pages/producer/graphics/planning/planning')
+          .then(page => page.Planning)
+      },
+      {
+        path: 'properties/:propertyId/stock',
+        loadComponent: () => import('./features/pages/producer/graphics/stock/stock')
+          .then(page => page.Stock)
+      },
+      {
+        path: 'properties/:propertyId/harvests',
+        loadComponent: () => import('./features/pages/producer/graphics/harvests/harvests')
+          .then(page => page.Harvests)
+      },
+      {
+        path: 'properties/:propertyId/planting-dashboard',
+        loadComponent: () => import('./features/pages/producer/graphics/plantings/plantings')
+          .then(page => page.Plantings)
       },
       {
         path: 'profile',

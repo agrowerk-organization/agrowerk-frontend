@@ -5,7 +5,7 @@
          tabindex="-1"
          role="presentation"></div>
   
-    <div class="relative z-10 w-full mt-8 max-w-2xl max-h-[85vh] flex flex-col rounded-3xl
+    <div class="relative z-10 w-full mt-8 max-w-2xl max-h-[75vh] flex flex-col rounded-3xl
                 bg-neutral-primary border-3 border-primary/70 shadow-2xl shadow-primary/30 overflow-hidden">
   
       <div class="flex items-center justify-between p-6 border-b border-primary/30 bg-neutral-primary">
@@ -54,6 +54,7 @@
               fieldId="area-ha"
               [min]="0.01"
               [step]="0.1"
+              [disabled]="isEdit()"
               formControlName="areaHectares" />
   
             <app-number-field
@@ -118,7 +119,7 @@
         </form>
       </div>
   
-      <div class="p-6 border-t border-primary/30 bg-neutral-primary flex flex-col sm:flex-row gap-3">
+      <div class="p-6 border-t border-primary/30 bg-neutral-primary flex flex-col sm:flex-row justify-center gap-3">
         <app-button-pages
           text="Cancelar"
           [icon]="icons.CIRCLE_XMARK"

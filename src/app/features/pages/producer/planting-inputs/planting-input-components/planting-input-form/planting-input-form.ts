@@ -14,6 +14,7 @@ import { InputService } from '@core/services/input.service';
 import { InputResponse }         from '@core/types/input/input.response';
 import { UnitOfMeasure, UnitOfMeasureKey } from '@core/enums/unit-of-measure';
 import { ICONS_PLANTING_INPUTS } from '@core/ui/icons/icons-producer/icons-planting-inputs/icons-planting-inputs';
+import { DateField } from '@shared/components/date-field/date-field';
 
 @Component({
   selector: 'app-planting-input-form',
@@ -26,6 +27,7 @@ import { ICONS_PLANTING_INPUTS } from '@core/ui/icons/icons-producer/icons-plant
     ButtonPages,
     NumberField, 
     SelectField,
+    DateField
   ],
   templateUrl: './planting-input-form.html',
 })

@@ -1,5 +1,6 @@
 import {
-  Component, OnInit, inject, signal, computed, ChangeDetectionStrategy
+  Component, OnInit, inject, signal, computed, ChangeDetectionStrategy,
+  viewChild, ElementRef, afterNextRender, Injector
 } from '@angular/core';
 import { CommonModule }           from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -15,6 +16,7 @@ import { CropVarietyCard } from './crop-variety-components/crop-variety-card/cro
 import { CropVarietyForm } from './crop-variety-components/crop-variety-form/crop-variety-form';
 import { ICONS_CROP_VARIETIES } from '@core/ui/icons/icons-producer/icons-crop-varieties/icons-crop-varieties';
 import { BackButton } from '@shared/components/back-button/back-button';
+import { Title } from '@shared/components/title/title';
 
 @Component({
   selector: 'app-crop-varieties',
@@ -26,6 +28,7 @@ import { BackButton } from '@shared/components/back-button/back-button';
     ButtonPages,
     BackButton,
     Paginator,
+    Title,
     CropVarietyCard,
     CropVarietyForm
   ],
@@ -36,6 +39,9 @@ export class CropVarieties implements OnInit {
   private readonly router      = inject(Router);
   private readonly service     = inject(CropVarietyService);
   private readonly cropService = inject(CropService);
+
+  private readonly injector = inject(Injector);
+  private cropVarietiesRef = viewChild<ElementRef>('cropVarietiesRef');
 
   readonly icons = ICONS_CROP_VARIETIES;
 
@@ -77,6 +83,13 @@ export class CropVarieties implements OnInit {
     this.currentPage.set(0);
     this.page.set(null);
     this.load();
+  
+    afterNextRender(() => {
+      this.cropVarietiesRef()?.nativeElement.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }, { injector: this.injector });
   }
 
   private load(): void {
@@ -101,17 +114,18 @@ export class CropVarieties implements OnInit {
   }
 
   goToPlanting(variety: CropVarietyResponse): void {
-    this.router.navigate(['/producer/plantings', this.propertyId], {
-      queryParams: {
-        fieldId:         this.fieldId(),
-        fieldName:       this.fieldName(),
-        propertyId:      this.propertyId(),
-        propertyName:    this.propertyName(),
-        cropVarietyId:   variety.id,
-        cropVarietyName: variety.name,
-        cropName:        variety.cropName,
-      },
-    });
+    this.router.navigate(
+      [`/producer/properties/${this.propertyId()}/plantings`],  
+      { queryParams: {
+          fieldId:         this.fieldId(),
+          fieldName:       this.fieldName(),
+          propertyName:    this.propertyName(),
+          cropVarietyId:   variety.id,
+          cropVarietyName: variety.name,
+          cropName:        variety.cropName,
+          openForm:        true,
+      }}
+    );
   }
 
   onSaved(saved: CropVarietyResponse): void {
@@ -137,6 +151,6 @@ export class CropVarieties implements OnInit {
   }
 
   get backLink(): string {
-    return `/producer/fields/${this.propertyId()}`;
+    return `/producer/properties/${this.propertyId()}/fields`;
   }
 }

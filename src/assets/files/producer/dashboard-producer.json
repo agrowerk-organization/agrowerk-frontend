@@ -1,50 +1,50 @@
 [
-    {
-      "id": 1,
-      "label": "Plantio",
-      "route": "/producer/plantings",
-      "description": "Registre o início da safra e vincule insumos",
-      "color": "#66BB6A",
-      "angle": 0
-    },
-    {
-      "id": 2,
-      "label": "Manejo",
-      "route": "/producer/fields",
-      "description": "Controle aplicações e monitoramento",
-      "color": "#81C784",
-      "angle": 60
-    },
-    {
-      "id": 3,
-      "label": "Colheita",
-      "route": "/producer/harvests",
-      "description": "Rastreie a produção por lote",
-      "color": "#FFB74D",
-      "angle": 120
-    },
-    {
-      "id": 4,
-      "label": "Estoque",
-      "route": "/producer/stock",
-      "description": "Monitore a produção colhida",
-      "color": "#FF9800",
-      "angle": 180
-    },
-    {
-      "id": 5,
-      "label": "Negociação",
-      "route": "/producer/barter",
-      "description": "Marketplace barter",
-      "color": "#F57C00",
-      "angle": 240
-    },
-    {
-      "id": 6,
-      "label": "Planejamento",
-      "route": "/producer/seasons",
-      "description": "Calendário e metas de produção",
-      "color": "#4CAF50",
-      "angle": 300
-    }
+  {
+    "id": 1,
+    "label": "Plantio",
+    "route": "/producer/properties/:propertyId/planting-dashboard",
+    "description": "Registre o início da safra e vincule insumos",
+    "color": "#66BB6A",
+    "angle": 0
+  },
+  {
+    "id": 2,
+    "label": "Manejo",
+    "route": "/producer/properties/:propertyId/batches/:batchId/batch-dashboard",
+    "description": "Controle aplicações e monitoramento",
+    "color": "#81C784",
+    "angle": 60
+  },
+  {
+    "id": 3,
+    "label": "Colheita",
+    "route": "/producer/properties/:propertyId/harvests",
+    "description": "Rastreie a produção por lote",
+    "color": "#FFB74D",
+    "angle": 120
+  },
+  {
+    "id": 4,
+    "label": "Estoque",
+    "route": "/producer/properties/:propertyId/stock",
+    "description": "Monitore a produção colhida",
+    "color": "#FF9800",
+    "angle": 180
+  },
+  {
+    "id": 5,
+    "label": "Negociação",
+    "route": "/producer/barter",
+    "description": "Marketplace barter",
+    "color": "#F57C00",
+    "angle": 240
+  },
+  {
+    "id": 6,
+    "label": "Planejamento",
+    "route": "/producer/properties/:propertyId/planning",
+    "description": "Calendário e metas de produção",
+    "color": "#4CAF50",
+    "angle": 300
+  }
 ]

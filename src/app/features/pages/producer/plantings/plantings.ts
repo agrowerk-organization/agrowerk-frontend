@@ -64,18 +64,22 @@ export class Plantings implements OnInit {
 
   ngOnInit(): void {
     const snap = this.route.snapshot;
-    this.propertyId.set(snap.paramMap.get('propertyId') ?? '');
+    const parentSnap = this.route.parent?.snapshot;
+  
+    const id = snap.paramMap.get('propertyId') ?? parentSnap?.paramMap.get('propertyId') ?? '';
+    this.propertyId.set(id);
+  
     this.propertyName.set(snap.queryParamMap.get('propertyName') ?? 'Propriedade');
     this.prefillFieldId.set(snap.queryParamMap.get('fieldId') ?? '');
     this.prefillFieldName.set(snap.queryParamMap.get('fieldName') ?? '');
     this.prefillCropVarietyId.set(snap.queryParamMap.get('cropVarietyId') ?? '');
     this.prefillCropVarietyName.set(snap.queryParamMap.get('cropVarietyName') ?? '');
     this.prefillCropName.set(snap.queryParamMap.get('cropName') ?? '');
-
+  
     if (snap.queryParamMap.get('openForm') === 'true') {
       this.showForm.set(true);
     }
-
+  
     this.load();
   }
 
@@ -96,68 +100,75 @@ export class Plantings implements OnInit {
     this.editTarget.set(planting);
     this.showForm.set(true);
   }
-
   goToActivity(planting: PlantingResponse): void {
-    this.router.navigate(['/producer/agricultural-practices', planting.id], {
-      queryParams: {
-        cropVarietyName: planting.cropVarietyName,
-        cropName:        planting.cropName,
-        fieldName:       planting.fieldName,
-        propertyName:    this.propertyName(),
-      },
-    });
+    this.router.navigate(
+      [`/producer/properties/${this.propertyId()}/plantings/${planting.id}/practices`],
+      { queryParams: {
+          cropVarietyName: planting.cropVarietyName,
+          cropName:        planting.cropName,
+          fieldName:       planting.fieldName,
+          propertyName:    this.propertyName(),
+      }}
+    );
   }
- 
+
   goToWarehouse(planting: PlantingResponse): void {
-    this.router.navigate(['/producer/warehouses', planting.propertyId], {
-      queryParams: { propertyName: this.propertyName() },
-    });
+    this.router.navigate(
+      [`/producer/properties/${this.propertyId()}/plantings/${planting.id}/warehouses`],
+      { queryParams: { 
+          propertyName:    this.propertyName(),
+          cropName:        planting.cropName,
+          cropVarietyName: planting.cropVarietyName
+      }}
+    );
   }
  
   goToHarvest(planting: PlantingResponse): void {
-    this.router.navigate(['/producer/harvests', planting.propertyId], {
-      queryParams: {
-        plantingId:      planting.id,
-        cropVarietyName: planting.cropVarietyName,
-        cropName:        planting.cropName,
-        propertyName:    this.propertyName(),
-      },
-    });
+    this.router.navigate(
+      [`/producer/properties/${this.propertyId()}/plantings/${planting.id}/harvests`],
+      { queryParams: {
+          cropVarietyName: planting.cropVarietyName,
+          cropName:        planting.cropName,
+          propertyName:    this.propertyName(),
+      }}
+    );
   }
- 
+  
   goToPrescription(planting: PlantingResponse): void {
-    this.router.navigate(['/producer/prescriptions', planting.id], {
-      queryParams: {
-        cropVarietyName: planting.cropVarietyName,
-        cropName:        planting.cropName,
-        fieldName:       planting.fieldName,
-        propertyName:    this.propertyName(),
-      },
-    });
+    this.router.navigate(
+      [`/producer/properties/${this.propertyId()}/plantings/${planting.id}/prescriptions`],
+      { queryParams: {
+          cropVarietyName: planting.cropVarietyName,
+          cropName:        planting.cropName,
+          fieldName:       planting.fieldName,
+          propertyName:    this.propertyName(),
+      }}
+    );
   }
- 
+  
   goToForecast(planting: PlantingResponse): void {
-    this.router.navigate(['/producer/harvest-forecasts', planting.id], {
-      queryParams: {
-        cropVarietyName: planting.cropVarietyName,
-        cropName:        planting.cropName,
-        fieldName:       planting.fieldName,
-        propertyName:    this.propertyName(),
-      },
-    });
+    this.router.navigate(
+      [`/producer/properties/${this.propertyId()}/plantings/${planting.id}/forecasts`],
+      { queryParams: {
+          cropVarietyName: planting.cropVarietyName,
+          cropName:        planting.cropName,
+          fieldName:       planting.fieldName,
+          propertyName:    this.propertyName(),
+      }}
+    );
   }
- 
+  
   goToInputs(planting: PlantingResponse): void {
-    this.router.navigate(['/producer/planting-inputs', planting.id], {
-      queryParams: {
-        cropVarietyName: planting.cropVarietyName,
-        cropName:        planting.cropName,
-        fieldName:       planting.fieldName,
-        propertyName:    this.propertyName(),
-      },
-    });
+    this.router.navigate(
+      [`/producer/properties/${this.propertyId()}/plantings/${planting.id}/planting-inputs`],
+      { queryParams: {
+          cropVarietyName: planting.cropVarietyName,
+          cropName:        planting.cropName,
+          fieldName:       planting.fieldName,
+          propertyName:    this.propertyName(),
+      }}
+    );
   }
-
 
   onCancel(planting: PlantingResponse): void {
     this.service.cancelPlanting(planting.id).subscribe({
@@ -198,6 +209,6 @@ export class Plantings implements OnInit {
   }
 
   get backLink(): string {
-    return `/producer/properties/${this.propertyId()}`;
+    return `/producer/properties/${this.propertyId()}/fields`;
   }
 }

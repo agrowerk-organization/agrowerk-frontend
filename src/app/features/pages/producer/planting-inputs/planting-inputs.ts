@@ -29,7 +29,7 @@ import { ICONS_PLANTING_INPUTS } from '@core/ui/icons/icons-producer/icons-plant
   ],
   templateUrl: './planting-inputs.html',
 })
-export class ProducerPlantingInputsComponent implements OnInit {
+export class PlantingInputs implements OnInit {
   private readonly route   = inject(ActivatedRoute);
   private readonly service = inject(PlantingInputService);
 
@@ -39,6 +39,7 @@ export class ProducerPlantingInputsComponent implements OnInit {
   cropVarietyName = signal<string>('');
   cropName        = signal<string>('');
   fieldName       = signal<string>('');
+  propertyId      = signal<string>('');
   propertyName    = signal<string>('');
 
   loading     = signal(true);
@@ -53,11 +54,17 @@ export class ProducerPlantingInputsComponent implements OnInit {
 
   ngOnInit(): void {
     const snap = this.route.snapshot;
-    this.plantingId.set(snap.paramMap.get('plantingId') ?? '');
-    this.cropVarietyName.set(snap.queryParamMap.get('cropVarietyName') ?? '');
-    this.cropName.set(snap.queryParamMap.get('cropName') ?? '');
-    this.fieldName.set(snap.queryParamMap.get('fieldName') ?? '');
-    this.propertyName.set(snap.queryParamMap.get('propertyName') ?? '');
+    const parentSnap = this.route.parent?.snapshot;
+  
+    const id = snap.paramMap.get('plantingId') ?? parentSnap?.paramMap.get('plantingId') ?? '';
+    this.plantingId.set(id);
+  
+    this.cropVarietyName.set(snap.queryParamMap.get('cropVarietyName') ?? parentSnap?.queryParamMap.get('cropVarietyName') ?? '');
+    this.cropName.set(snap.queryParamMap.get('cropName') ?? parentSnap?.queryParamMap.get('cropName') ?? '');
+    this.fieldName.set(snap.queryParamMap.get('fieldName') ?? parentSnap?.queryParamMap.get('fieldName') ?? '');
+    this.propertyId.set(snap.queryParamMap.get('propertyId') ?? parentSnap?.queryParamMap.get('propertyId') ?? '');
+    this.propertyName.set(snap.queryParamMap.get('propertyName') ?? parentSnap?.queryParamMap.get('propertyName') ?? '');
+    
     this.load();
   }
 
@@ -84,5 +91,9 @@ export class ProducerPlantingInputsComponent implements OnInit {
   get subtitle(): string {
     const parts = [this.cropName(), this.cropVarietyName(), this.fieldName(), this.propertyName()];
     return parts.filter(Boolean).join(' · ');
+  }
+
+  get backLink(): string {
+    return `/producer/properties/${this.route.snapshot.paramMap.get('propertyId') ?? this.propertyId()}/plantings`;
   }
 }

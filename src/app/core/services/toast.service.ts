@@ -1,6 +1,7 @@
 import { Injectable, signal } from '@angular/core';
 import { ToastType } from '@core/ui/types/toast/toast';
 import { Toast } from '@core/ui/types/toast/toast';
+import { HttpErrorResponse } from '@core/ui/types/error/http-error-response';
 
 @Injectable({ providedIn: 'root' })
 export class ToastService {
@@ -20,6 +21,19 @@ export class ToastService {
 
   dismiss(id: number): void {
     this._toasts.update(list => list.filter(t => t.id !== id));
+  }
+
+  httpError(err: HttpErrorResponse, fallback = 'Erro inesperado'): void {
+    const body = err?.error;
+    if (body?.validationErrors) {
+      const first = Object.values(body.validationErrors)[0];
+      
+      const message = Array.isArray(first) ? first[0] : first;
+      
+      this.error(message ?? fallback);
+    } else {
+      this.error(body?.message ?? fallback);
+    }
   }
 
   private show(type: ToastType, message: string, duration: number): void {

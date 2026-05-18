@@ -1,27 +1,26 @@
 <div class="group relative overflow-hidden rounded-3xl bg-neutral-primary
-            border-3 border-primary/50 hover:border-primary
+            border-3 border-primary/90 hover:border-primary
             transition-all duration-300 hover:-translate-y-2
-            shadow-xl shadow-primary/20 hover:shadow-primary/40 flex flex-col h-full">
+            shadow-xl shadow-primary/80 hover:shadow-primary/90 flex flex-col h-full">
 
   <div class="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-3xl pointer-events-none"></div>
 
   <div class="relative p-6 border-b-3 border-primary/30 flex items-start justify-between gap-3">
     <div class="flex items-center gap-3">
-      <div class="w-14 h-14 rounded-2xl bg-black/20 border-2 border-primary/50 flex items-center justify-center shrink-0">
-        <fa-icon [icon]="icons.LAYER_GROUP" class="text-2xl text-primary/60" />
+      <div class="w-14 h-14 rounded-2xl bg-black/20 border-2 border-primary/90 flex items-center justify-center shrink-0">
+        <fa-icon [icon]="icons.LAYER_GROUP" class="text-2xl text-primary/97" />
       </div>
       <div>
         <h2 class="text-primary font-black text-xl uppercase tracking-tight leading-none">
           {{ field().name }}
         </h2>
         @if (field().code) {
-          <p class="text-secondary/70 text-sm font-mono mt-1">
-            <fa-icon [icon]="icons.CODE_BRANCH" class="mr-1 text-xs" />{{ field().code }}
+          <p class="text-secondary/90 text-lg sm:text-xl font-mono mt-1">
+            <fa-icon [icon]="icons.CODE_BRANCH" class="mr-1 text-lg" />{{ field().code }}
           </p>
         }
       </div>
     </div>
-
     <span class="px-3 py-1 rounded-full text-xs font-black uppercase tracking-widest border-2 shrink-0"
           [class]="statusColor()">
       {{ statusLabel() }}
@@ -31,57 +30,90 @@
   <div class="flex flex-col gap-3 p-6 flex-1 relative z-10">
 
     <div class="grid grid-cols-2 gap-3">
-      <!-- Área -->
-      <div class="flex items-center justify-between p-3 rounded-xl bg-black/20 border-2 border-primary/90 shadow-lg shadow-primary/30 col-span-2">
+
+      <div class="col-span-2 flex items-center justify-between p-3 rounded-xl bg-black/20 border-2 border-primary/90 shadow-lg shadow-primary/30">
         <div class="flex items-center gap-2">
-          <fa-icon [icon]="icons.RULER_COMBINED" class="text-primary" />
-          <span class="text-base font-black uppercase text-secondary tracking-tighter">Área</span>
+          <fa-icon [icon]="icons.RULER_COMBINED" class="text-primary text-2xl" />
+          <span class="text-xl sm:text-2xl font-black uppercase text-primary tracking-tighter">Área</span>
         </div>
-        <span class="text-xl font-bold text-primary">
-          {{ field().areaHectares | number:'1.1-2' }} <small class="text-xs">HA</small>
+        <span class="text-xl sm:text-2xl font-bold text-secondary">
+          {{ field().areaHectares | number:'1.1-2' }} <small class="text-xl">HA</small>
         </span>
       </div>
 
-      <div class="col-span-2 p-3 rounded-xl bg-black/20 border border-primary/30">
+      <div class="col-span-2 p-3 rounded-xl bg-black/20 border-2 border-primary/90">
         <div class="flex items-center gap-2 mb-1">
-          <fa-icon [icon]="icons.DROPLET" class="text-primary text-sm" />
-          <span class="text-xs font-black uppercase text-secondary/70 tracking-wider">Tipo de Solo</span>
+          <fa-icon [icon]="icons.DROPLET" class="text-primary text-2xl" />
+          <span class="text-xl sm:text-2xl font-black uppercase text-primary tracking-wider">Tipo de Solo</span>
         </div>
-        <p class="text-sm font-semibold text-secondary">{{ soilLabel() }}</p>
+        <p class="text-lg sm:text-xl font-semibold text-secondary">{{ soilLabel() }}</p>
       </div>
 
       @if (field().slopePercentage !== null) {
-        <div class="p-3 rounded-xl bg-black/20 border border-primary/30">
-          <p class="text-xs font-black uppercase text-secondary/70 tracking-wider mb-1">Declividade</p>
-          <p class="text-sm font-bold text-primary">{{ field().slopePercentage }}%</p>
+        <div class="col-span-2 p-3 rounded-xl bg-black/20 border-2 border-primary/90">
+          <div class="flex items-center gap-2 mb-1">
+            <fa-icon [icon]="icons.ARROW_TREND_UP" class="text-primary text-2xl" />
+            <span class="text-xl sm:text-2xl font-black uppercase text-primary tracking-wider">Declividade</span>
+          </div>
+          <p class="text-lg sm:text-xl font-semibold text-secondary">{{ field().slopePercentage }}%</p>
         </div>
       }
 
       @if (hasLocation()) {
-        <div class="p-3 rounded-xl bg-black/20 border border-primary/30">
-          <div class="flex items-center gap-1 mb-1">
-            <fa-icon [icon]="icons.LOCATION_DOT" class="text-primary text-xs" />
-            <p class="text-xs font-black uppercase text-secondary/70 tracking-wider">Localização</p>
+        <div class="col-span-2 p-3 rounded-xl bg-black/20 border-2 border-primary/90">
+          <div class="flex items-center gap-2 mb-1">
+            <fa-icon [icon]="icons.LOCATION_DOT" class="text-primary text-2xl" />
+            <p class="text-xl sm:text-2xl font-black uppercase text-primary tracking-wider">Localização</p>
           </div>
-          <p class="text-xs font-mono text-secondary/80">
+          <p class="text-lg sm:text-xl font-mono text-secondary">
             {{ field().latitude | number:'1.4-4' }}, {{ field().longitude | number:'1.4-4' }}
           </p>
         </div>
       }
-    </div>
+
+    </div><!-- /grid -->
 
     @if (field().description) {
-      <p class="text-secondary/60 text-sm italic border-l-2 border-primary/20 pl-3 mt-1">
-        {{ field().description }}
-      </p>
+      <div class="p-4 rounded-xl border-2 border-primary/40
+                  bg-primary/15 backdrop-blur-md
+                  shadow-lg shadow-primary/20">
+        <div class="flex items-center gap-2 mb-2">
+          <fa-icon [icon]="icons.CIRCLE_INFO" class="text-primary text-2xl" />
+          <span class="text-xl sm:text-2xl font-black uppercase text-primary tracking-wider">Descrição</span>
+        </div>
+        <p class="text-neutral-secondary text-sm sm:text-lg italic leading-relaxed">
+          {{ field().description }}
+        </p>
+      </div>
     }
 
-    <div class="mt-auto pt-4 border-t-2 border-primary/20">
+    @if (field().notes) {
+      <div class="p-4 rounded-xl border-2 border-secondary/40
+                  bg-secondary/15 backdrop-blur-md
+                  shadow-lg shadow-secondary/20">
+        <div class="flex items-center gap-2 mb-2">
+          <fa-icon [icon]="icons.CLIPBOARD" class="text-secondary text-2xl" />
+          <span class="text-lg sm:text-xl font-black uppercase text-secondary tracking-wider">Observações</span>
+        </div>
+        <p class="text-neutral-secondary text-sm sm:text-lg italic leading-relaxed">
+          {{ field().notes }}
+        </p>
+      </div>
+    }
+
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-2 mt-auto pt-4 border-t-2 border-primary/20">
       <app-button-pages
         text="Editar Talhão"
         [icon]="icons.PEN"
         width="full"
         (action)="edit.emit(field())" />
+      <app-button-pages
+        text="Plantio"
+        [icon]="icons.PLUS"
+        width="full"
+        (action)="newPlanting.emit(field())" />
     </div>
+
   </div>
+
 </div>

@@ -51,6 +51,10 @@ export class NumberField implements ControlValueAccessor {
     return max === null || val < max;
   });
 
+  setDisabledState(isDisabled: boolean): void {
+    this.isDisabled.set(isDisabled);
+  }
+
   private onChange: (v: number | null) => void = NumberField.noop;
   private onTouched: () => void = NumberField.noop;
 
@@ -88,5 +92,4 @@ export class NumberField implements ControlValueAccessor {
   writeValue(v: number | null): void   { this.value.set(v); }
   registerOnChange(fn: (v: number | null) => void): void { this.onChange = fn; }
   registerOnTouched(fn: () => void): void                { this.onTouched = fn; }
-  setDisabledState(disabled: boolean): void              { this.isDisabled.set(disabled); }
 }

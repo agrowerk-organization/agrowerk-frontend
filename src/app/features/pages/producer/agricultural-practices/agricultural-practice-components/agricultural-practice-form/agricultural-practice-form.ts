@@ -13,19 +13,21 @@ import { ButtonPages } from '@shared/components/buttons/button-pages/button-page
 import { SelectField } from '@shared/components/select-field/select-field';
 import { NumberField } from '@shared/components/number-field/number-field';
 import { ICONS_AGRICULTURAL_PRACTICES } from '@core/ui/icons/icons-producer/icons-agricultural-practices/icons-agricultural-practices';
+import { DateField } from "@shared/components/date-field/date-field";
 
 @Component({
   selector: 'app-agricultural-practice-form',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
-    CommonModule, 
-    ReactiveFormsModule, 
+    CommonModule,
+    ReactiveFormsModule,
     FontAwesomeModule,
     ButtonPages,
     NumberField,
-    SelectField
-  ],
+    SelectField,
+    DateField
+],
   templateUrl: './agricultural-practice-form.html',
 })
 export class AgriculturalPracticeForm {

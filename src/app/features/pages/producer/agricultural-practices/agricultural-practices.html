@@ -6,14 +6,14 @@
     <div class="p-6 space-y-6 pb-32 lg:pb-6 max-w-9xl mx-auto px-4 sm:px-10">
   
       <div class="flex items-center gap-4">
-        <app-back-button [link]="'/producer/plantings'" />
+        <app-back-button [link]="backLink" />
   
         <div class="flex-1 flex items-center justify-between gap-4">
           <div>
             <h1 class="text-2xl sm:text-3xl font-black text-primary uppercase tracking-tight leading-none">
               Atividades Agrícolas
             </h1>
-            <p class="text-secondary/80 text-base italic mt-1">{{ subtitle }}</p>
+            <p class="text-secondary text-xl sm:text-2xl italic mt-1">{{ subtitle }}</p>
           </div>
           <app-button-pages
             text="Registrar Atividade"
@@ -30,17 +30,13 @@
       }
   
       <div class="flex items-center gap-2 flex-wrap">
-        @for (f of typeFilters; track f.label) {
-          <button type="button"
-                  (click)="selectFilter(f.value)"
-                  class="px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-wider
-                         border-2 transition-all cursor-pointer"
-                  [class]="activeFilter() === f.value
-                    ? 'border-primary bg-primary/10 text-primary'
-                    : 'border-primary/20 text-secondary/60 hover:border-primary/50'">
-            {{ f.label }}
-          </button>
-        }
+        <app-search-bar
+        [filters]="filterItems"
+        [filterMode]="'buttons'"
+        [allLabel]="'Todas'"
+        [placeholder]="'Buscar atividade...'"
+        (filterChange)="onFilterChange($event)"
+        (searchChange)="onSearch($event)" />
       </div>
   
       @if (hasItems()) {
@@ -59,15 +55,15 @@
   
       } @else {
         <div class="flex flex-col items-center justify-center py-24 gap-6">
-          <div class="w-24 h-24 rounded-3xl bg-black/20 border-2 border-primary/30
+          <div class="w-24 h-24 rounded-3xl bg-black/20 border-2 border-primary/90
                       flex items-center justify-center">
-            <fa-icon [icon]="icons.SPROUT" class="text-5xl text-primary/20" />
+            <fa-icon [icon]="icons.SPROUT" class="text-5xl text-primary/90" />
           </div>
           <div class="text-center">
-            <p class="text-primary/60 font-black text-xl uppercase tracking-widest">
+            <p class="text-primary/90 font-black text-xl uppercase tracking-widest">
               Nenhuma atividade registrada
             </p>
-            <p class="text-secondary/50 text-base mt-2">
+            <p class="text-secondary/90 text-xl sm:text-2xl mt-2">
               Registre as atividades realizadas neste plantio.
             </p>
           </div>

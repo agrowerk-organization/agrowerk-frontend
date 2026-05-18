@@ -12,6 +12,7 @@ import { HarvestForecastService }     from '@core/services/harvest-forecast.serv
 import { HarvestForecastResponse } from '@core/types/harvest-forecast/harvest-forecast.response';
 import { ConfidenceLevel, ConfidenceLevelDesc } from '@core/enums/confidence-level';
 import { ICONS_HARVEST_FORECASTS } from '@core/ui/icons/icons-producer/icons-harvest-forecasts/icons-harvest-forecasts';
+import { DateField } from "@shared/components/date-field/date-field";
 
 @Component({
   selector: 'app-harvest-forecast-form',
@@ -19,12 +20,13 @@ import { ICONS_HARVEST_FORECASTS } from '@core/ui/icons/icons-producer/icons-har
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     CommonModule,
-    ReactiveFormsModule, 
+    ReactiveFormsModule,
     FontAwesomeModule,
     ButtonPages,
-    NumberField, 
-    SelectField
-  ],
+    NumberField,
+    SelectField,
+    DateField
+],
   templateUrl: './harvest-forecast-form.html',
 })
 export class HarvestForecastForm implements OnInit {
