@@ -52,13 +52,14 @@ export class Stock implements OnInit {
   positionChartOption = computed<EChartsOption>(() => {
     const items = this.positions().slice(0, 10);
     if (!items.length) return {};
-
+  
     const alertColor = (alert: string) => {
-      if (alert === 'CRITICAL') return '#f43f5e';
-      if (alert === 'LOW')      return '#FF9800';
+      const status = alert?.toUpperCase();
+      if (status === 'CRITICAL') return '#f43f5e';
+      if (status === 'LOW' || status === 'BAIXO') return '#FF9800';
       return '#22c55e';
     };
-
+  
     return {
       backgroundColor: 'transparent',
       tooltip: {
@@ -66,42 +67,53 @@ export class Stock implements OnInit {
         backgroundColor: '#171717',
         borderColor: '#22c55e',
         borderWidth: 2,
-        textStyle: { color: '#22c55e', fontSize: 14 },
+        textStyle: { color: '#22c55e', fontSize: 20 },
       },
-      grid: { left: '2%', right: '4%', bottom: '5%', top: '8%', containLabel: true },
+      color: ['#22c55e', '#FF9800', '#f43f5e'],
+      grid: { left: '2%', right: '4%', bottom: '12%', top: '8%', containLabel: true },
       xAxis: {
         type: 'category',
         data: items.map(p => p.inputName),
         axisLabel: {
-          color: '#FF9800', fontSize: 11, fontWeight: 'bold',
-          rotate: items.length > 5 ? 20 : 0,
+          color: '#FF9800', fontSize: 14, fontWeight: 'bold',
+          rotate: items.length > 5 ? 15 : 0,
         },
         axisLine: { show: false }, axisTick: { show: false }
       },
       yAxis: {
         type: 'value',
-        axisLabel: { color: '#4CAF50', fontSize: 12 },
-        splitLine: { lineStyle: { color: 'rgba(0,148,37,0.3)', type: 'dashed' } }
+        axisLabel: { color: '#4CAF50', fontSize: 20 },
+        splitLine: { lineStyle: { color: 'rgba(0,148,37,0.3)', type: 'dashed', width: 2 } }
       },
       series: [{
         type: 'bar',
         data: items.map(p => ({
           value: p.availableQuantity,
-          itemStyle: { color: alertColor(p.stockAlert), borderRadius: [8, 8, 0, 0] }
+          itemStyle: { 
+            color: alertColor(p.stockAlert), 
+            borderRadius: [8, 8, 0, 0] 
+          }
         })),
         barMaxWidth: 50,
+        label: {
+          show: true, 
+          position: 'top',
+          color: '#ffffff', 
+          fontSize: 20,
+          formatter: (params: { value: number | string }) => `${params.value}`
+        }
       }]
-    };
+    } as EChartsOption;
   });
-
+  
   movementChartOption = computed<EChartsOption>(() => {
     const items = this.movements().slice(0, 20).reverse();
     if (!items.length) return {};
-
+  
     const entries = items.map(m => m.movementType === 'ENTRY' ? m.quantity : 0);
     const exits   = items.map(m => m.movementType === 'EXIT'  ? m.quantity : 0);
     const dates   = items.map(m => m.movementDate.slice(0, 10));
-
+  
     return {
       backgroundColor: 'transparent',
       tooltip: {
@@ -109,23 +121,25 @@ export class Stock implements OnInit {
         backgroundColor: '#171717',
         borderColor: '#22c55e',
         borderWidth: 2,
-        textStyle: { color: '#22c55e', fontSize: 14 },
+        textStyle: { color: '#22c55e', fontSize: 20 },
       },
       legend: {
         data: ['Entradas', 'Saídas'],
-        textStyle: { color: '#9ca3af', fontSize: 12 },
+        textStyle: { color: '#9ca3af', fontSize: 20, fontWeight: 'bold' },
         bottom: 0,
       },
       grid: { left: '2%', right: '4%', bottom: '12%', top: '8%', containLabel: true },
       xAxis: {
         type: 'category', data: dates, boundaryGap: false,
-        axisLabel: { color: '#FF9800', fontSize: 11, fontWeight: 'bold' },
+        axisLabel: {
+          color: '#FF9800', fontSize: 20, fontWeight: 'bold',
+        },
         axisLine: { show: false }, axisTick: { show: false }
       },
       yAxis: {
         type: 'value',
-        axisLabel: { color: '#4CAF50', fontSize: 12 },
-        splitLine: { lineStyle: { color: 'rgba(0,148,37,0.3)', type: 'dashed' } }
+        axisLabel: { color: '#4CAF50', fontSize: 20 },
+        splitLine: { lineStyle: { color: 'rgba(0,148,37,0.3)', type: 'dashed', width: 2 } }
       },
       series: [
         {

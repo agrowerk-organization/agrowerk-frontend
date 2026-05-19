@@ -16,7 +16,7 @@ export class WarehouseService {
   }
 
   updateWarehouse(warehouseId: string, request: UpdateWarehouseRequest): Observable<WarehouseResponse> {
-    return this.http.put<WarehouseResponse>(`${this.base}/update-warehouse/${warehouseId}`, request, { withCredentials: true });
+    return this.http.patch<WarehouseResponse>(`${this.base}/update-warehouse/${warehouseId}`, request, { withCredentials: true });
   }
 
   deactivateWarehouse(warehouseId: string): Observable<void> {

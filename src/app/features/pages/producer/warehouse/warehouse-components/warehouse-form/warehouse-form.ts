@@ -1,6 +1,6 @@
 import {
-  Component, input, output, signal, computed,
-  OnInit, inject, ChangeDetectionStrategy
+  Component, effect, input, output, signal, computed,
+  inject, ChangeDetectionStrategy
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
@@ -27,7 +27,7 @@ import { ICONS_WAREHOUSE } from '@core/ui/icons/icons-producer/icons-warehouse/i
   ],
   templateUrl: './warehouse-form.html',
 })
-export class WarehouseForm implements OnInit {
+export class WarehouseForm {
   private readonly fb      = inject(FormBuilder);
   private readonly service = inject(WarehouseService);
 
@@ -55,18 +55,22 @@ export class WarehouseForm implements OnInit {
     description:   [''],
   });
 
-  ngOnInit(): void {
-    const d = this.warehouseData();
-    if (d) {
-      this.form.patchValue({
-        name:          d.name,
-        code:          d.code,
-        warehouseType: d.warehouseType as WarehouseType,
-        capacityKg:    d.capacityKg,
-        location:      d.location,
-        description:   d.description,
-      });
-    }
+  constructor() {
+    effect(() => {
+      const d = this.warehouseData();
+      if (d) {
+        this.form.patchValue({
+          name:          d.name,
+          code:          d.code,
+          warehouseType: d.warehouseType as WarehouseType,
+          capacityKg:    d.capacityKg,
+          location:      d.location,
+          description:   d.description,
+        });
+      } else {
+        this.form.reset();
+      }
+    });
   }
 
   submit(): void {

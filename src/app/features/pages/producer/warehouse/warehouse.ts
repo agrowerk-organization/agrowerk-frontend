@@ -70,7 +70,11 @@ export class Warehouse implements OnInit {
   }
 
   openCreate(): void { this.editTarget.set(null); this.showForm.set(true); }
-  openEdit(w: WarehouseResponse): void { this.editTarget.set(w); this.showForm.set(true); }
+  openEdit(w: WarehouseResponse): void {
+    this.showForm.set(false);        
+    this.editTarget.set(w);
+    setTimeout(() => this.showForm.set(true), 0);  
+  }
 
   onSaved(saved: WarehouseResponse): void {
     this.showForm.set(false);

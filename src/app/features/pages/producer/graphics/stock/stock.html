@@ -39,21 +39,21 @@
   
       <div class="grid grid-cols-1 xl:grid-cols-2 gap-6">
         <div class="p-6 rounded-3xl border-2 border-primary/90 bg-black/20 space-y-4">
-          <h2 class="text-2xl font-black text-primary uppercase tracking-tight">
+          <h2 class="text-4xl font-black text-primary uppercase tracking-tight">
             Posição por Insumo
           </h2>
           @if (positions().length) {
             <div echarts [options]="positionChartOption()" class="w-full h-72"></div>
-            <div class="flex items-center gap-4 text-xs text-secondary/60">
-              <span class="flex items-center gap-1">
-                <span class="w-3 h-3 rounded-full bg-green-500 inline-block"></span> Normal
+            <div class="flex items-center gap-4 text-xl font-bold text-neutral-secondary/90">
+              <span class="flex items-center gap-2">
+                <span class="w-4 h-4 rounded-full bg-green-500 inline-block"></span> Normal
               </span>
-              <span class="flex items-center gap-1">
-                <span class="w-3 h-3 rounded-full bg-orange-400 inline-block"></span> Baixo
+              <span class="flex items-center gap-2">
+                <span class="w-4 h-4 rounded-full bg-orange-400 inline-block"></span> Baixo
               </span>
-              <span class="flex items-center gap-1">
-                <span class="w-3 h-3 rounded-full bg-red-500 inline-block"></span> Crítico
-              </span>
+              <span class="flex items-center gap-2">
+                <span class="w-4 h-4 rounded-full bg-red-500 inline-block"></span> Crítico
+              </span>     
             </div>
           } @else {
             <p class="text-lg text-secondary text-center py-12">Nenhuma posição de estoque</p>
@@ -61,7 +61,7 @@
         </div>
   
         <div class="p-6 rounded-3xl border-2 border-primary/90 bg-black/20 space-y-4">
-          <h2 class="text-2xl font-black text-primary uppercase tracking-tight">
+          <h2 class="text-4xl font-black text-primary uppercase tracking-tight">
             Movimentações Recentes
           </h2>
           @if (movements().length) {
@@ -74,7 +74,7 @@
   
       @if (criticals().length) {
         <div class="p-6 rounded-3xl border-2 border-red-500/30 bg-red-500/5 space-y-4">
-          <h2 class="text-2xl font-black text-red-400 uppercase tracking-tight">
+          <h2 class="text-4xl font-black text-red-400 uppercase tracking-tight">
             Lotes Próximos do Vencimento
           </h2>
           <div class="space-y-3">
@@ -109,34 +109,34 @@
   
       @if (positions().length) {
         <div class="p-6 rounded-3xl border-2 border-primary/90 bg-black/20 space-y-4">
-          <h2 class="text-2xl font-black text-primary uppercase tracking-tight">
+          <h2 class="text-4xl font-black text-primary uppercase tracking-tight">
             Posição Detalhada
           </h2>
           <div class="overflow-x-auto">
             <table class="w-full text-sm">
               <thead>
-                <tr class="border-b-2 border-primary/20">
-                  <th class="text-left py-3 px-4 font-black uppercase tracking-wider text-secondary/60">Insumo</th>
-                  <th class="text-left py-3 px-4 font-black uppercase tracking-wider text-secondary/60">Armazém</th>
-                  <th class="text-right py-3 px-4 font-black uppercase tracking-wider text-secondary/60">Disponível</th>
-                  <th class="text-right py-3 px-4 font-black uppercase tracking-wider text-secondary/60">Reservado</th>
-                  <th class="text-right py-3 px-4 font-black uppercase tracking-wider text-secondary/60">Valor Total</th>
-                  <th class="text-center py-3 px-4 font-black uppercase tracking-wider text-secondary/60">Status</th>
+                <tr class="border-b-2 border-primary/90">
+                  <th class="text-left text-xl py-3 px-4 font-black uppercase tracking-wider text-secondary/90">Insumo</th>
+                  <th class="text-left text-xl py-3 px-4 font-black uppercase tracking-wider text-secondary/90">Armazém</th>
+                  <th class="text-right text-xl py-3 px-4 font-black uppercase tracking-wider text-secondary/90">Disponível</th>
+                  <th class="text-right text-xl py-3 px-4 font-black uppercase tracking-wider text-secondary/90">Reservado</th>
+                  <th class="text-right text-xl py-3 px-4 font-black uppercase tracking-wider text-secondary/90">Valor Total</th>
+                  <th class="text-center text-xl py-3 px-4 font-black uppercase tracking-wider text-secondary/90">Status</th>
                 </tr>
               </thead>
               <tbody>
                 @for (pos of positions(); track pos.stockId) {
-                  <tr class="border-b border-primary/10 hover:bg-primary/5 transition-colors">
-                    <td class="py-3 px-4 font-bold text-primary">
+                  <tr class="border-b border-primary/90 hover:bg-primary/90 transition-colors">
+                    <td class="py-3 px-4 font-bold text-lg text-primary">
                       {{ pos.inputName }}
-                      <span class="text-xs text-secondary/50 font-normal ml-1">{{ pos.categoryName }}</span>
+                      <span class="text-lg text-secondary font-normal ml-1">{{ pos.categoryName }}</span>
                     </td>
-                    <td class="py-3 px-4 text-secondary">{{ pos.warehouseName }}</td>
-                    <td class="py-3 px-4 text-right text-secondary">{{ pos.availableQuantity }}</td>
-                    <td class="py-3 px-4 text-right text-secondary">{{ pos.reservedQuantity }}</td>
-                    <td class="py-3 px-4 text-right text-secondary">R$ {{ pos.totalValue | number:'1.2-2' }}</td>
-                    <td class="py-3 px-4 text-center">
-                      <span class="px-2 py-1 rounded-full text-xs font-black uppercase
+                    <td class="py-3 px-4 text-lg text-secondary">{{ pos.warehouseName }}</td>
+                    <td class="py-3 px-4 text-lg text-right text-secondary">{{ pos.availableQuantity }}</td>
+                    <td class="py-3 px-4 text-lg text-right text-secondary">{{ pos.reservedQuantity }}</td>
+                    <td class="py-3 px-4 text-lg text-right text-secondary">R$ {{ pos.totalValue | number:'1.2-2' }}</td>
+                    <td class="py-3 px-4 text-lg text-center">
+                      <span class="px-2 py-1 rounded-full text-lg font-black uppercase
                                    tracking-widest border-2"
                             [class]="alertBadge(pos.stockAlert)">
                         {{ pos.stockAlert }}

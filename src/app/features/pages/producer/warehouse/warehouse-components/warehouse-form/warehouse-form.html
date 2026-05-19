@@ -87,7 +87,7 @@
         </form>
       </div>
   
-      <div class="p-6 border-t border-primary/30 flex flex-col sm:flex-row gap-3">
+      <div class="p-6 border-t border-primary/30 flex flex-col sm:flex-row items-center justify-center gap-3">
         <app-button-pages text="Cancelar" [icon]="icons.CIRCLE_XMARK" width="100%" (action)="toCancel.emit()" />
         <app-button-pages
           [text]="saving() ? 'Salvando...' : (isEdit() ? 'Salvar Alterações' : 'Criar Armazém')"
