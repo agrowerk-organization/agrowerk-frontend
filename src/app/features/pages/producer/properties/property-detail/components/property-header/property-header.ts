@@ -1,5 +1,4 @@
 import { Component, input, output } from '@angular/core';
-import { RouterLink } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ButtonPages } from '@shared/components/buttons/button-pages/button-pages';
 import { ICONS_PROPERTY } from '@core/ui/icons/icons-producer/icons-property/icons-property';
@@ -7,7 +6,7 @@ import { ICONS_PROPERTY } from '@core/ui/icons/icons-producer/icons-property/ico
 @Component({
   selector: 'app-property-header',
   standalone: true,
-  imports: [RouterLink, FontAwesomeModule, ButtonPages],
+  imports: [FontAwesomeModule, ButtonPages],
   templateUrl: './property-header.html',
 })
 export class PropertyHeader {

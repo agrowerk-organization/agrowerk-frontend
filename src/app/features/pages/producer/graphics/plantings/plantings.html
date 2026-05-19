@@ -18,7 +18,7 @@
   
       <div class="grid grid-cols-2 xl:grid-cols-4 gap-4">
         <div class="p-5 rounded-2xl border-2 border-primary/90 bg-black/20 space-y-1">
-          <p class="text-xl font-black uppercase tracking-widest text-secondary">Plantios Ativos</p>
+          <p class="text-xl font-black uppercase tracking-widest text-secondary">Plantios Ativos/Em Progresso</p>
           <p class="text-3xl font-black text-primary">{{ totalActive() }}</p>
         </div>
         <div class="p-5 rounded-2xl border-2 border-primary/90 bg-black/20 space-y-1">
@@ -29,16 +29,16 @@
         </div>
         <div class="p-5 rounded-2xl border-2 border-primary/90 bg-black/20 space-y-1">
           <p class="text-xl font-black uppercase tracking-widest text-secondary">Culturas</p>
-          <p class="text-3xl font-black text-primary">{{ byCrop() | keyvalue }}</p>
+          <p class="text-3xl font-black text-primary">{{ uniqueCropsNames()}}</p>
         </div>
   
         @if (nextHarvest(); as next) {
           <div class="p-5 rounded-2xl border-2 border-yellow-500/50 bg-yellow-500/5 space-y-1">
-            <p class="text-xs font-black uppercase tracking-widest text-secondary">Próxima Colheita</p>
+            <p class="text-xl font-black uppercase tracking-widest text-secondary">Próxima Colheita</p>
             <p class="text-xl font-black text-yellow-400">
               {{ next.expectedHarvestDate | date:'dd/MM/yyyy' }}
             </p>
-            <p class="text-xs text-secondary/50">
+            <p class="text-lg text-secondary">
               {{ next.cropName }} · em {{ daysUntilHarvest(next.expectedHarvestDate) }} dias
             </p>
           </div>
@@ -51,57 +51,58 @@
       </div>
   
       @if (data().length) {
+        <div class="grid grid-cols-1 xl:grid-cols-12 gap-6">
   
-        <div class="grid grid-cols-1 xl:grid-cols-2 gap-6">
-          <div class="p-6 rounded-3xl border-2 border-primary/90 bg-black/20 space-y-4">
-            <h2 class="text-lg font-black text-primary uppercase tracking-tight">
+          <div class="p-6 rounded-3xl border-2 border-primary/90 bg-black/20 space-y-4 xl:col-span-4">
+            <h2 class="text-4xl font-black text-primary uppercase tracking-tight">
               Área por Cultura
             </h2>
             <div echarts [options]="donutChartOption()" class="w-full h-72"></div>
           </div>
-  
-          <div class="p-6 rounded-3xl border-2 border-primary/90 bg-black/20 space-y-4">
-            <h2 class="text-lg font-black text-primary uppercase tracking-tight">
+        
+          <div class="p-6 rounded-3xl border-2 border-primary/90 bg-black/20 space-y-4 xl:col-span-8">
+            <h2 class="text-4xl font-black text-primary uppercase tracking-tight">
               Área por Plantio
             </h2>
             <div echarts [options]="timelineChartOption()" class="w-full h-72"></div>
           </div>
+        
         </div>
   
         <div class="p-6 rounded-3xl border-2 border-primary/90 bg-black/20 space-y-4">
-          <h2 class="text-lg font-black text-primary uppercase tracking-tight">
+          <h2 class="text-4xl font-black text-primary uppercase tracking-tight">
             Plantios Ativos
           </h2>
           <div class="overflow-x-auto">
             <table class="w-full text-sm">
               <thead>
-                <tr class="border-b-2 border-primary/20">
-                  <th class="text-left py-3 px-4 font-black uppercase tracking-wider text-secondary/60">Cultura</th>
-                  <th class="text-left py-3 px-4 font-black uppercase tracking-wider text-secondary/60">Talhão</th>
-                  <th class="text-left py-3 px-4 font-black uppercase tracking-wider text-secondary/60">Safra</th>
-                  <th class="text-right py-3 px-4 font-black uppercase tracking-wider text-secondary/60">Área (ha)</th>
-                  <th class="text-left py-3 px-4 font-black uppercase tracking-wider text-secondary/60">Plantio</th>
-                  <th class="text-left py-3 px-4 font-black uppercase tracking-wider text-secondary/60">Colheita Prev.</th>
-                  <th class="text-right py-3 px-4 font-black uppercase tracking-wider text-secondary/60">Dias Restantes</th>
-                  <th class="text-center py-3 px-4 font-black uppercase tracking-wider text-secondary/60">Status</th>
+                <tr class="border-b-2 border-primary/90">
+                  <th class="text-2xl text-left py-3 px-4 font-black uppercase tracking-wider text-secondary/90">Cultura</th>
+                  <th class="text-2xl text-left py-3 px-4 font-black uppercase tracking-wider text-secondary/90">Talhão</th>
+                  <th class="text-2xl text-left py-3 px-4 font-black uppercase tracking-wider text-secondary/90">Safra</th>
+                  <th class="text-2xl text-right py-3 px-4 font-black uppercase tracking-wider text-secondary/90">Área (ha)</th>
+                  <th class="text-2xl text-left py-3 px-4 font-black uppercase tracking-wider text-secondary/90">Plantio</th>
+                  <th class="text-2xl text-left py-3 px-4 font-black uppercase tracking-wider text-secondary/90">Colheita Prev.</th>
+                  <th class="text-2xl text-right py-3 px-4 font-black uppercase tracking-wider text-secondary/90">Dias Restantes</th>
+                  <th class="text-2xl text-center py-3 px-4 font-black uppercase tracking-wider text-secondary/90">Status</th>
                 </tr>
               </thead>
               <tbody>
                 @for (row of data(); track row.plantingId) {
-                  <tr class="border-b border-primary/10 hover:bg-primary/5 transition-colors">
-                    <td class="py-3 px-4 font-bold text-primary">{{ row.cropName }}</td>
-                    <td class="py-3 px-4 text-secondary">{{ row.fieldName }}</td>
-                    <td class="py-3 px-4 text-secondary">{{ row.seasonName }}</td>
-                    <td class="py-3 px-4 text-right text-secondary">
+                  <tr class="border-b border-primary/90 hover:bg-primary/5 transition-colors">
+                    <td class="py-3 px-4 font-bold text-lg text-primary">{{ row.cropName }}</td>
+                    <td class="py-3 px-4 text-lg text-secondary">{{ row.fieldName }}</td>
+                    <td class="py-3 px-4 text-lg text-secondary">{{ row.seasonName }}</td>
+                    <td class="py-3 px-4 text-lg text-right text-secondary">
                       {{ row.areaHectares | number:'1.1-2' }}
                     </td>
-                    <td class="py-3 px-4 text-secondary">
+                    <td class="py-3 px-4 text-lg text-secondary">
                       {{ row.plantingDate | date:'dd/MM/yyyy' }}
                     </td>
-                    <td class="py-3 px-4 text-secondary">
+                    <td class="py-3 px-4 text-lg text-secondary">
                       {{ row.expectedHarvestDate | date:'dd/MM/yyyy' }}
                     </td>
-                    <td class="py-3 px-4 text-right">
+                    <td class="py-3 px-4 text-lg text-right">
                       @if (daysUntilHarvest(row.expectedHarvestDate); as days) {
                         <span [class]="days <= 30 ? 'text-yellow-400 font-black' :
                                        days <= 0  ? 'text-red-400 font-black' : 'text-secondary'">
@@ -110,7 +111,7 @@
                       }
                     </td>
                     <td class="py-3 px-4 text-center">
-                      <span class="px-2 py-1 rounded-full text-xs font-black uppercase
+                      <span class="px-2 py-1 rounded-full text-lg font-black uppercase
                                    tracking-widest border-2"
                             [class]="statusBadge(row.plantingStatus)">
                         {{ statusLabel(row.plantingStatus) }}

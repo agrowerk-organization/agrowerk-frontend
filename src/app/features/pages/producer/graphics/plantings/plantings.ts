@@ -58,6 +58,11 @@ export class Plantings implements OnInit {
     return map;
   });
 
+  uniqueCropsNames = computed(() => {
+    const keys = Object.keys(this.byCrop());
+    return keys.length ? keys.join(' / ') : 'Nenhuma';
+  });
+
   donutChartOption = computed<EChartsOption>(() => {
     const entries = Object.entries(this.byCrop());
     if (!entries.length) return {};
@@ -71,12 +76,12 @@ export class Plantings implements OnInit {
         backgroundColor: '#171717',
         borderColor: '#22c55e',
         borderWidth: 2,
-        textStyle: { color: '#22c55e', fontSize: 14 },
+        textStyle: { color: '#22c55e', fontSize: 20 },
         formatter: '{b}: {c} ha ({d}%)'
       },
       legend: {
         bottom: 0,
-        textStyle: { color: '#9ca3af', fontSize: 12 },
+        textStyle: { color: '#ffffff', fontWeight: 'bold', fontSize: 20 },
       },
       series: [{
         type: 'pie',
@@ -112,22 +117,22 @@ export class Plantings implements OnInit {
         backgroundColor: '#171717',
         borderColor: '#22c55e',
         borderWidth: 2,
-        textStyle: { color: '#22c55e', fontSize: 13 },
+        textStyle: { color: '#22c55e', fontSize: 20 },
       },
       grid: { left: '2%', right: '4%', bottom: '5%', top: '8%', containLabel: true },
       xAxis: {
         type: 'category',
-        data: items.map(d => `${d.cropName} · ${d.fieldName}`),
+        data: items.map(d => `${d.cropName}`),
         axisLabel: {
-          color: '#FF9800', fontSize: 11, fontWeight: 'bold',
+          color: '#FF9800', fontSize: 20, fontWeight: 'bold',
           rotate: items.length > 4 ? 15 : 0,
         },
         axisLine: { show: false }, axisTick: { show: false }
       },
       yAxis: {
         type: 'value',
-        axisLabel: { color: '#4CAF50', fontSize: 12 },
-        splitLine: { lineStyle: { color: 'rgba(0,148,37,0.3)', type: 'dashed' } }
+        axisLabel: { color: '#4CAF50', fontSize: 20 },
+        splitLine: { lineStyle: { color: 'rgba(0,148,37,0.3)', type: 'dashed', width: 2 } }
       },
       series: [{
         type: 'bar',
@@ -136,7 +141,7 @@ export class Plantings implements OnInit {
         itemStyle: { color: '#22c55e', borderRadius: [8, 8, 0, 0] },
         label: {
           show: true, position: 'top',
-          color: '#9ca3af', fontSize: 11,
+          color: '#ffffff', fontSize: 20,
           formatter: (p: { value: number }) => `${p.value} ha`
         }
       }]

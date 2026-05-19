@@ -12,18 +12,20 @@ import { InputService }         from '@core/services/input.service';
 import { BatchResponse } from '@core/types/batch/batch.response';
 import { InputResponse }        from '@core/types/input/input.response';
 import { ICONS_BARTER } from '@core/ui/icons/icons-producer/icons-barter/icons-barter';
+import { DateField } from "@shared/components/date-field/date-field";
 
 @Component({
   selector: 'app-create-batch-form',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
-    CommonModule, 
-    ReactiveFormsModule, 
+    CommonModule,
+    ReactiveFormsModule,
     FontAwesomeModule,
-    ButtonPages, 
-    NumberField
-  ],
+    ButtonPages,
+    NumberField,
+    DateField
+],
   templateUrl: './create-batch-form.html',
 })
 export class CreateBatchForm implements OnInit {

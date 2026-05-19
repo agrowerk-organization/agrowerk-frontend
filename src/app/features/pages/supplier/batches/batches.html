@@ -13,7 +13,7 @@
             <h1 class="text-2xl sm:text-3xl font-black text-primary uppercase tracking-tight leading-none">
               Meus Lotes
             </h1>
-            <p class="text-secondary/80 text-lg italic mt-1">{{ supplierName() }}</p>
+            <p class="text-secondary text-xl sm:text-2xl italic mt-1">{{ supplierName() }}</p>
           </div>
           <app-button-pages
             text="Novo Lote"
@@ -41,12 +41,12 @@
   
       } @else {
         <div class="flex flex-col items-center justify-center py-24 gap-6">
-          <div class="w-24 h-24 rounded-3xl bg-black/20 border-2 border-primary/30 flex items-center justify-center">
-            <fa-icon [icon]="icons.BOXES" class="text-5xl text-primary/20" />
+          <div class="w-24 h-24 rounded-3xl bg-black/20 border-2 border-primary/90 flex items-center justify-center">
+            <fa-icon [icon]="icons.BOXES" class="text-5xl text-primary/90" />
           </div>
           <div class="text-center">
-            <p class="text-primary/60 font-black text-xl uppercase tracking-widest">Nenhum lote cadastrado</p>
-            <p class="text-secondary/50 text-base mt-2">Cadastre o primeiro lote de insumos.</p>
+            <p class="text-primary/90 font-black text-xl uppercase tracking-widest">Nenhum lote cadastrado</p>
+            <p class="text-secondary/90 text-xl sm:text-2xl mt-2">Cadastre o primeiro lote de insumos.</p>
           </div>
           <app-button-pages text="Criar Lote" [icon]="icons.PLUS" (action)="showForm.set(true)" />
         </div>

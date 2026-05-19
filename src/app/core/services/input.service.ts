@@ -18,7 +18,7 @@ export class InputService {
   }
 
   updateInput(id: string, request: UpdateInputRequest): Observable<InputResponse> {
-    return this.http.put<InputResponse>(`${this.base}/update-input/${id}`, request, { withCredentials: true });
+    return this.http.patch<InputResponse>(`${this.base}/update-input/${id}`, request, { withCredentials: true });
   }
 
   deactivate(id: string): Observable<void> {

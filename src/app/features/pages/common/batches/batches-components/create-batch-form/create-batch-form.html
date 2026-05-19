@@ -4,7 +4,7 @@
          (keydown.escape)="toCancel.emit()"
          tabindex="-1" role="presentation"></div>
   
-    <div class="relative z-10 w-full mt-8 max-w-2xl max-h-[85vh] flex flex-col rounded-3xl
+    <div class="relative z-10 w-full mt-8 max-w-2xl max-h-[75vh] flex flex-col rounded-3xl
                 bg-neutral-primary border-3 border-primary/70 shadow-2xl shadow-primary/30 overflow-hidden">
   
       <div class="flex items-center justify-between p-6 border-b border-primary/30">
@@ -87,30 +87,26 @@
           </div>
   
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <div>
-              <label for="mfg-date" class="text-xl sm:text-2xl text-neutral-secondary font-bold mb-1 block">
-                Fabricação *
-              </label>
-              <input id="mfg-date" formControlName="manufacturingDate" type="date"
-                     class="w-full px-4 py-4 rounded-2xl border-2 border-primary/90
-                            bg-transparent text-lg text-neutral-secondary focus:border-primary outline-none transition-all" />
-            </div>
-            <div>
-              <label for="exp-date" class="text-xl sm:text-2xl text-neutral-secondary font-bold mb-1 block">
-                Validade *
-              </label>
-              <input id="exp-date" formControlName="expirationDate" type="date"
-                     class="w-full px-4 py-4 rounded-2xl border-2 border-primary/90
-                            bg-transparent text-lg text-neutral-secondary focus:border-primary outline-none transition-all" />
-            </div>
-            <div>
-              <label for="entry-date" class="text-xl sm:text-2xl text-neutral-secondary font-bold mb-1 block">
-                Entrada *
-              </label>
-              <input id="entry-date" formControlName="entryDate" type="date"
-                     class="w-full px-4 py-4 rounded-2xl border-2 border-primary/90
-                            bg-transparent text-lg text-neutral-secondary focus:border-primary outline-none transition-all" />
-            </div>
+            <app-date-field
+              label="Fabricação *"
+              fieldId="mfg-date"
+              formControlName="manufacturingDate" 
+              /> 
+              
+            <app-date-field
+              label="Entrada *"
+              fieldId="entry-date"
+              formControlName="entryDate" 
+             />
+  
+            <app-date-field
+              label="Validade *"
+              fieldId="exp-date"
+              formControlName="expirationDate" 
+              [disablePast]="true"
+              />
+  
+           
           </div>
   
           <div>
@@ -127,7 +123,7 @@
         </form>
       </div>
   
-      <div class="p-6 border-t border-primary/30 flex flex-col sm:flex-row gap-3">
+      <div class="p-6 border-t border-primary/30 flex flex-col sm:flex-row items-center justify-center gap-3">
         <app-button-pages text="Cancelar" [icon]="icons.CIRCLE_XMARK" width="100%" (action)="toCancel.emit()" />
         <app-button-pages
           [text]="saving() ? 'Salvando...' : 'Criar Lote'"
